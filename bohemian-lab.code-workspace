@@ -1,37 +1,115 @@
 {
   "folders": [
-    { "path": "." }
+    { "path": ".", "name": "🔬 Bohemian Lab" }
   ],
   "settings": {
+    // ── Python ──────────────────────────────────────────────
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
     "python.terminal.activateEnvironment": true,
-    "notebook.cellToolbarLocation": { "default": "right" },
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.variableTypes": false,
+
+    // ── Éditeur ─────────────────────────────────────────────
     "editor.rulers": [88],
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+
+    // ── Notebooks ───────────────────────────────────────────
+    "notebook.cellToolbarLocation": { "default": "right" },
+    "notebook.output.textLineLimit": 200,
+    "notebook.formatOnSave.enabled": true,
+
+    // ── Fichiers ────────────────────────────────────────────
     "files.exclude": {
       "**/__pycache__": true,
       "**/*.pyc": true,
-      ".venv": true,
-      "data/*.npy": false
-    }
+      ".venv": true
+    },
+    "files.associations": {
+      "*.qasm": "qasm"
+    },
+
+    // ── Terminal ────────────────────────────────────────────
+    "terminal.integrated.env.linux": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+
+    // ── Copilot ─────────────────────────────────────────────
+    "chat.promptFiles": true,
+    "github.copilot.chat.codeGeneration.instructions": [
+      { "file": ".github/copilot-instructions.md" }
+    ]
   },
   "extensions": {
     "recommendations": [
       "ms-python.python",
       "ms-python.vscode-pylance",
+      "ms-python.black-formatter",
+      "ms-python.isort",
       "ms-toolsai.jupyter",
       "ms-toolsai.jupyter-renderers",
-      "qiskit.qiskit-vscode"
+      "qiskit.qiskit-vscode",
+      "goessner.mdmath"
     ]
   },
   "launch": {
     "configurations": [
       {
-        "name": "Experiment actif",
+        "name": "▶ Expérience active",
         "type": "debugpy",
         "request": "launch",
         "program": "${file}",
         "console": "integratedTerminal",
-        "justMyCode": true
+        "justMyCode": true,
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+        }
+      },
+      {
+        "name": "▶ Expérience 001 – Superposition",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/experiments/001_superposition.py",
+        "console": "integratedTerminal",
+        "justMyCode": true,
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+        }
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "📦 Installer les dépendances",
+        "type": "shell",
+        "command": "${workspaceFolder}/.venv/bin/pip install -r requirements.txt",
+        "problemMatcher": [],
+        "group": "build"
+      },
+      {
+        "label": "🧪 Lancer toutes les expériences",
+        "type": "shell",
+        "command": "for f in ${workspaceFolder}/experiments/*.py; do echo \"\\n══ $(basename $f) ══\"; ${workspaceFolder}/.venv/bin/python \"$f\"; done",
+        "problemMatcher": [],
+        "group": "test"
+      },
+      {
+        "label": "📓 Démarrer JupyterLab",
+        "type": "shell",
+        "command": "${workspaceFolder}/.venv/bin/jupyter lab --notebook-dir=${workspaceFolder}/notebooks",
+        "isBackground": true,
+        "problemMatcher": [],
+        "group": "none"
       }
     ]
   }
