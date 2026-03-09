@@ -34,6 +34,14 @@ quantique qui produirait une force mécanique mesurable.
 
 ## 2.1 L'interprétation de de Broglie–Bohm
 
+> 💡 **En termes simples** — En physique quantique classique, on renonce à
+> dire où se trouve une particule : on ne donne que des probabilités.
+> La théorie de de Broglie–Bohm dit le contraire : la particule **est**
+> quelque part, elle a un chemin précis, mais ce chemin est dicté par
+> une onde qui la guide — exactement comme un bouchon de liège suit
+> le courant d'une rivière. L'onde est partout, le bouchon est à un
+> seul endroit.
+
 ### Historique
 
 - **1924** — [Louis de Broglie](https://fr.wikipedia.org/wiki/Louis_de_Broglie) propose dans sa [thèse de doctorat](https://fr.wikipedia.org/wiki/Th%C3%A8se_de_doctorat_de_Louis_de_Broglie) l'hypothèse
@@ -76,6 +84,22 @@ qui pilote la particule.
 ---
 
 ## 2.2 La Loi de Guidage — Dérivation complète
+
+> 💡 **En termes simples** — Une onde, c'est deux informations : sa
+> **hauteur** (l'amplitude $R$ : « à quel point elle est forte ») et son
+> **rythme** (la phase $S$ : « où elle en est dans son cycle »). Pensez à
+> une vague sur la mer : la hauteur dit si la vague est grosse, la phase
+> dit si on est sur la crête ou dans le creux.
+>
+> La loi de guidage dit simplement : *la particule se déplace dans la
+> direction où la phase change le plus vite*. Si la phase varie plus vite
+> à droite qu'à gauche, la particule va à droite. C'est comme une bille
+> qui roule dans la direction de la plus grande pente.
+>
+> L'équation de Hamilton-Jacobi, quant à elle, est l'équivalent classique
+> (avant la physique quantique) de la description du mouvement par la phase.
+> C'est la même équation qu'utilisait Newton, mais avec un terme en plus :
+> le potentiel quantique $Q$.
 
 ### Décomposition polaire
 
@@ -125,6 +149,24 @@ la décomposition polaire.
 
 ## 2.3 Le Potentiel Quantique
 
+> 💡 **En termes simples** — Imaginez un terrain vallonné invisible.
+> Une bille posée dessus roule vers les creux et évite les bosses —
+> c'est ce que fait un « potentiel » en physique. Le potentiel quantique
+> $Q$ est un terrain de ce type, mais avec des propriétés étranges :
+>
+> - **Il ne dépend pas de la force de l'onde**, seulement de sa forme.
+>   Une toute petite ondulation bien courbée crée un terrain aussi pentu
+>   qu'une grosse vague. C'est comme si la forme des collines comptait
+>   plus que leur taille.
+> - **Il « sait » ce qui se passe partout en même temps** (non-localité).
+>   Modifier l'onde à gauche change instantanément le terrain à droite.
+>   C'est l'origine de l'intrication quantique.
+> - **Il disparaît dans le monde macroscopique** : quand les objets sont
+>   gros, le terrain s'aplatit et on retrouve la physique de Newton.
+>
+> La force que notre expérience cherche à mesurer est simplement :
+> « la bille dévale la pente du terrain quantique ».
+
 ### Définition
 
 Le potentiel quantique est défini par :
@@ -164,6 +206,26 @@ lequel les particules se déplacent.
 ---
 
 ## 2.4 Application aux photons RF
+
+> 💡 **En termes simples** — La théorie de Bohm a été écrite pour des
+> particules qui ont une masse (électrons, atomes…). Les photons, eux,
+> n'ont pas de masse — ils sont de la lumière pure. On ne peut donc pas
+> appliquer la formule directement.
+>
+> Mais l'idée-clé se transpose : dans un milieu comme un plasma, la
+> lumière ne voyage pas à la même vitesse partout. Là où le plasma est
+> plus dense, la lumière ralentit et change de direction — exactement
+> comme un rayon lumineux dévie en entrant dans l'eau (c'est la
+> **réfraction**). L'**indice de réfraction** mesure cet effet.
+>
+> Si le plasma est plus dense d'un côté que de l'autre, la lumière est
+> déviée préférentiellement dans une direction. C'est cet « aiguillage »
+> asymétrique qui, dans notre expérience, pourrait créer la poussée.
+>
+> Un point crucial : la fréquence naturelle de vibration de notre plasma
+> (~ 1-9 GHz) est très proche de la fréquence du magnétron (2,45 GHz).
+> C'est comme accorder un instrument de musique : quand les deux
+> fréquences se rapprochent, l'interaction est maximale.
 
 ### Le problème de la masse
 
@@ -206,6 +268,18 @@ gradient de phase.
 
 ## 2.5 Force de Poussée Totale
 
+> 💡 **En termes simples** — On sait depuis Maxwell (1873) que la lumière
+> exerce une pression quand elle frappe un objet : c'est la **pression de
+> radiation**. C'est elle qui pousse les queues des comètes à l'opposé du
+> Soleil. Mais cette force est minuscule : pour 1 000 watts (la puissance
+> d'un four micro-ondes), elle vaut environ 3 millionièmes de newton — le
+> poids d'un grain de poussière.
+>
+> Notre expérience mesure la force totale exercée. Si on trouve **plus**
+> que ces 3,3 µN, l'excès ne peut pas venir de la pression de radiation
+> classique. C'est cet excès qui serait la signature de la force
+> bohmienne — la « poussée du terrain quantique ».
+
 ### Expression théorique
 
 La force mesurée est la somme de deux contributions :
@@ -234,6 +308,20 @@ poussière). Tout excès mesuré par rapport à cette valeur serait attribuable
 ---
 
 ## 2.6 Lien avec le formalisme quantique computationnel
+
+> 💡 **En termes simples** — Avant de construire l'expérience physique, on
+> la « joue » sur ordinateur. Pour cela, on utilise le langage des
+> **circuits quantiques** — une façon de représenter des opérations
+> quantiques comme des briques qu'on assemble, un peu comme un circuit
+> électronique mais pour l'information quantique.
+>
+> La **sphère de Bloch** est simplement un globe 3D : chaque point sur
+> la surface représente un état possible du qubit (le « bit » quantique).
+> Le pôle Nord = état 0, le pôle Sud = état 1, et tous les points entre
+> les deux = superpositions. Tourner autour de l'axe vertical, c'est
+> changer la phase — exactement le $S$ de notre théorie. Monter ou
+> descendre, c'est changer l'amplitude $R$. On retrouve les mêmes
+> deux ingrédients que dans la loi de guidage.
 
 Les simulations numériques du projet (dossier `experiments/`) utilisent
 **[Qiskit](https://fr.wikipedia.org/wiki/Qiskit)** et **[PennyLane](https://en.wikipedia.org/wiki/PennyLane_(software))** pour modéliser des aspects du guidage bohmien
