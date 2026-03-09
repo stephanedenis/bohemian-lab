@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Bohemian Lab — données générées
+.venv/
+data/*.npy
+data/*.pkl
+data/*.h5
+.ipynb_checkpoints/

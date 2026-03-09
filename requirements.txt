@@ -1,0 +1,19 @@
+# Quantum computing & simulation
+qiskit[all]
+qiskit-aer
+pennylane
+pennylane-qiskit
+
+# Scientific computing
+numpy
+scipy
+sympy
+matplotlib
+ipython
+
+# Notebooks
+jupyter
+jupyterlab
+
+# Visualisation quantique
+pylatexenc   # rendu LaTeX des circuits Qiskit
