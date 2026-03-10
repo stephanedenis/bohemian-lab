@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 220"
+     font-family="'Segoe UI', Arial, sans-serif" font-size="13">
+  <title>Comparaison : Fusée (éjection) vs Expérience (gradient Q)</title>
+  <rect width="620" height="220" fill="#ffffff"/>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- GAUCHE : Fusée (système ouvert)                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <g transform="translate(10, 15)">
+    <!-- Titre -->
+    <text x="125" y="14" text-anchor="middle" font-weight="bold"
+          font-size="14" fill="#b91c1c">Fusée (éjection de masse)</text>
+
+    <!-- Corps fusée -->
+    <rect x="30" y="50" width="80" height="50" rx="6"
+          fill="#cbd5e1" stroke="#334155" stroke-width="1.5"/>
+    <!-- Nez -->
+    <polygon points="110,50 130,75 110,100"
+             fill="#94a3b8" stroke="#334155" stroke-width="1.5"/>
+    <!-- Aileron haut -->
+    <polygon points="30,50 15,35 30,60" fill="#94a3b8" stroke="#334155" stroke-width="1"/>
+    <!-- Aileron bas -->
+    <polygon points="30,100 15,115 30,90" fill="#94a3b8" stroke="#334155" stroke-width="1"/>
+
+    <!-- Flamme / gaz éjectés -->
+    <ellipse cx="-8" cy="75" rx="30" ry="22"
+             fill="#fbbf24" opacity="0.8"/>
+    <ellipse cx="-2" cy="75" rx="20" ry="14"
+             fill="#f97316" opacity="0.9"/>
+    <ellipse cx="5" cy="75" rx="10" ry="8"
+             fill="#ef4444" opacity="0.9"/>
+
+    <!-- Flèche gaz éjectés (← vers la gauche) -->
+    <line x1="-30" y1="75" x2="-55" y2="75"
+          stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+    <text x="-55" y="65" font-size="11" fill="#dc2626"
+          text-anchor="end">gaz éjectés</text>
+
+    <!-- Flèche réaction (→ vers la droite) -->
+    <line x1="135" y1="75" x2="175" y2="75"
+          stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+    <text x="155" y="65" font-size="12" fill="#16a34a"
+          text-anchor="middle" font-weight="bold">F</text>
+
+    <!-- Légendes -->
+    <text x="125" y="130" text-anchor="middle" font-size="11.5"
+          fill="#64748b">Système <tspan font-weight="bold" fill="#b91c1c">ouvert</tspan></text>
+    <text x="125" y="147" text-anchor="middle" font-size="11.5"
+          fill="#64748b">Masse s'échappe</text>
+    <text x="125" y="164" text-anchor="middle" font-size="11.5"
+          fill="#64748b">Newton 3 : action ↔ réaction</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- Séparateur central                                      -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <line x1="280" y1="20" x2="280" y2="200" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="280" y="210" text-anchor="middle" font-size="12"
+        fill="#94a3b8" font-style="italic">≠</text>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- Markers                                                 -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <defs>
+    <marker id="arrowRed" markerWidth="8" markerHeight="6"
+            refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6"
+            refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowIndigo" markerWidth="8" markerHeight="6"
+            refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#4338ca"/>
+    </marker>
+    <!-- Gradient plasma simplifié (haut Q → bas Q) -->
+    <linearGradient id="plasmaLin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="15%"  stop-color="#67e8f9" stop-opacity="0.95"/>
+      <stop offset="40%"  stop-color="#818cf8" stop-opacity="0.85"/>
+      <stop offset="65%"  stop-color="#7c3aed" stop-opacity="0.6"/>
+      <stop offset="85%"  stop-color="#c084fc" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- DROITE : Expérience (gradient Q, système fermé)         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <g transform="translate(310, 15)">
+    <!-- Titre -->
+    <text x="150" y="14" text-anchor="middle" font-weight="bold"
+          font-size="14" fill="#1e40af">Expérience (gradient Q)</text>
+
+    <!-- Chambre hermétique -->
+    <rect x="30" y="40" width="180" height="70" rx="8"
+          fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+
+    <!-- Plasma (gradient gauche→droite = haut Q → bas Q) -->
+    <rect x="32" y="42" width="176" height="66" rx="6"
+          fill="url(#plasmaLin)"/>
+
+    <!-- Magnétron (à gauche = source MW = haut Q) -->
+    <rect x="32" y="55" width="22" height="40" rx="3"
+          fill="#fbbf24" stroke="#92400e" stroke-width="1.5"/>
+    <text x="43" y="72" text-anchor="middle" font-size="8"
+          fill="#92400e" font-weight="bold">MW</text>
+    <text x="43" y="82" text-anchor="middle" font-size="7"
+          fill="#92400e">magn.</text>
+
+    <!-- Annotation haut Q / bas Q -->
+    <text x="60" y="35" font-size="10" fill="#7c3aed"
+          font-weight="bold">haut Q</text>
+    <line x1="95" y1="33" x2="195" y2="33"
+          stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowIndigo)"/>
+    <text x="200" y="35" font-size="10" fill="#4338ca"
+          font-weight="bold">bas Q</text>
+
+    <!-- Flèche F = −∇Q → vers la droite (chambre poussée) -->
+    <line x1="215" y1="75" x2="265" y2="75"
+          stroke="#16a34a" stroke-width="3" marker-end="url(#arrowGreen)"/>
+    <text x="240" y="65" font-size="14" fill="#16a34a"
+          text-anchor="middle" font-weight="bold">F</text>
+    <text x="240" y="98" font-size="10" fill="#16a34a"
+          text-anchor="middle">= −∇Q</text>
+
+    <!-- Cadenas (système fermé) -->
+    <text x="120" y="128" text-anchor="middle" font-size="13">🔒</text>
+
+    <!-- Légendes -->
+    <text x="150" y="147" text-anchor="middle" font-size="11.5"
+          fill="#64748b">Système <tspan font-weight="bold" fill="#1e40af">fermé</tspan></text>
+    <text x="150" y="164" text-anchor="middle" font-size="11.5"
+          fill="#64748b">Rien ne sort !</text>
+    <text x="150" y="181" text-anchor="middle" font-size="11.5"
+          fill="#64748b">Pression de radiation, pas éjection</text>
+  </g>
+</svg>

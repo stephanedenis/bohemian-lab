@@ -964,17 +964,8 @@ où $\kappa$ est la **constante de torsion** du fil (N·m/rad).
 > Sur le schéma, la flèche F part du magnétron (zone de haut $Q$)
 > et pointe vers l'extérieur de la chambre (zone de bas $Q$). C'est
 > la direction où **la chambre se déplace**.
->
-> ```
-> Fusée (éjection)          Expérience (gradient Q)
->
->  🚀 →→→  🔥🔥🔥           ┌──────────────┐
->  avance   gaz éjectés      │  ▒▒ magn.  │  → F
->  ←───── réaction         │  ▒▒▒▒▒plasma│
->                          │  haut Q → bas Q│
->  Masse s'échappe          └──────────────┘
->  (≠ de notre cas)        Rien ne sort !
-> ```
+
+![Comparaison : Fusée (éjection) vs Expérience (gradient Q)](img/fusee_vs_gradient.svg)
 
 <!-- Fallback ASCII
     ① REPOS (θ = 0)        ② HORAIRE (θ > 0)      ③ ANTI-HORAIRE (θ < 0)
