@@ -26,6 +26,11 @@ ils sont réels, immédiats, et potentiellement mortels.
 
 ## 5.1 Risque RF — Rayonnement micro-ondes
 
+> 💡 **Retenez** — Les micro-ondes **cuisent les yeux** (cataracte
+> irréversible) et les tissus. À 1 000 W, c'est un four ouvert
+> pointé sur vous. **La seule protection : le confinement
+> (cage de Faraday). Restez derrière l'acier.**
+
 ### Nature du danger
 
 Les micro-ondes à 2,45 GHz sont absorbées par les tissus biologiques
@@ -122,6 +127,12 @@ magnétron est actif.
 
 ## 5.2 Haute Tension — Danger mortel
 
+> 💡 **Retenez** — Le condensateur du magnétron **tue même éteint**.
+> 4 000 V × 300 mA = arrêt cardiaque instantané. **Toujours
+> décharger avec la perche avant de toucher quoi que ce soit.**
+> Le seuil de fibrillation ventriculaire n'est que de 50–100 mA
+> (IEC 60479-1 [8]).
+
 ### Nature du danger
 
 Le transformateur du magnétron délivre environ **4 000 V DC** à
@@ -192,6 +203,12 @@ $$E = \frac{1}{2} \times 10^{-6} \times (4\,000)^2 = 8 \; \text{J}$$
 
 ## 5.3 Risque d'implosion
 
+> 💡 **Retenez** — La pression atmosphérique pousse **500 kg** sur
+> le couvercle. Si l'acrylique casse, ça explose vers l'extérieur
+> comme un obus. **Ne jamais se placer face au couvercle lorsque
+> la chambre est sous vide.** Le facteur de sécurité est de 2,9×
+> (PMMA, $\sigma_t \approx 70$ MPa, ISO 7823-1 [11]).
+
 ### Nature du danger
 
 La chambre à vide inox est sous **vide partiel** (2–5 mbar en fonctionnement,
@@ -259,6 +276,10 @@ sa tenue face à l'ozone ($\text{O}_3$) produit par le plasma.
 
 ## 5.4 Risque gazeux — Ozone et NOₓ
 
+> 💡 **Retenez** — L'ozone est **inodore après 5 minutes** — votre
+> nez s'adapte et ment. VLEP = 0,1 ppm (INRS ED 6294 [5]).
+> En cas de doute, **éloignez-vous côté au vent**.
+
 ### Nature du danger
 
 Le plasma de vapeur d'eau produit des espèces chimiques toxiques :
@@ -311,6 +332,12 @@ disperser l'ozone et les NOₓ produits par le plasma.
 ---
 
 ## 5.5 Alimentation embarquée — Batterie lithium-ion et onduleur
+
+> 💡 **Retenez** — Une batterie Li-ion en emballement thermique
+> produit du **fluorure d'hydrogène (HF)** — gaz mortel. **Ne pas
+> ouvrir le baril**, ne pas utiliser d'eau. Extincteur CO₂ ou
+> classe D uniquement (NFPA 10 [10]). Exigences de sécurité
+> des batteries Li-ion : IEC 62133 [9].
 
 ### Nature du danger
 
@@ -467,6 +494,24 @@ Avant **chaque session**, vérifier :
 
 7. **Norme NF EN 61010-1** (2010). *Règles de sécurité pour appareils
    électriques de mesurage, de régulation et de laboratoire*.
+
+8. **IEC 60479-1** (2018). *Effects of current on human beings and
+   livestock — Part 1: General aspects*. IEC.
+   (Seuil de fibrillation ventriculaire : 50–100 mA, 50 Hz, trajet
+   main–main ou main–pied.)
+
+9. **IEC 62133-2** (2017). *Secondary cells and batteries containing
+   alkaline or other non-acid electrolytes — Safety requirements for
+   portable sealed secondary lithium cells*. IEC.
+   (Exigences de sécurité BMS, tests d'emballement thermique.)
+
+10. **NFPA 10** (2022). *Standard for Portable Fire Extinguishers*.
+    National Fire Protection Association.
+    (Classe D pour feux de métaux / batteries lithium.)
+
+11. **ISO 7823-1** (2003). *Plastics — Poly(methyl methacrylate)
+    sheets — Types, dimensions and characteristics*. ISO.
+    ($\sigma_t \approx 70$ MPa, $\nu = 0{,}37$ pour le PMMA coulé.)
 
 ---
 

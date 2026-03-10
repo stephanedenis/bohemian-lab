@@ -26,6 +26,15 @@ l'expérience en suivant ces étapes.
 
 ### 4.1.1 Vent ionique
 
+> 💡 **En termes simples** — Imaginez un ventilateur invisible à
+> l'intérieur de la chambre : les ions positifs du plasma sont
+> projetés vers les parois comme de minuscules billes de billard.
+> On appelle cela le « vent ionique ». Mais comme la chambre est
+> **complètement fermée**, ces billes frappent la paroi et rebondissent
+> — la force vers la gauche est exactement annulée par la force
+> vers la droite. Résultat net : zéro. C'est la 3ᵉ loi de Newton
+> à l'intérieur d'une boîte fermée.
+
 #### Le problème
 
 Dans un plasma, les ions positifs sont accélérés par le champ électrique
@@ -57,6 +66,15 @@ Le vent ionique ne peut pas transmettre de force à l'extérieur car :
 ---
 
 ### 4.1.2 Effet thermique
+
+> 💡 **En termes simples** — Quand on chauffe un objet, il rayonne de la
+> chaleur. En 1874, [William Crookes](https://fr.wikipedia.org/wiki/William_Crookes)
+> a inventé le [radiomètre](https://fr.wikipedia.org/wiki/Radiom%C3%A8tre_de_Crookes)
+> — un petit moulin à ailettes qui tourne sous l'effet de la chaleur.
+> Notre chambre pourrait être un radiomètre involontaire : un côté plus
+> chaud que l'autre pousse le gaz résiduel ou émet plus d'infrarouge.
+> Pour distinguer la vraie force du « coup de chaleur », on fait un test
+> avec de l'**eau liquide** (même chaleur, pas de plasma).
 
 #### Le problème
 
@@ -97,6 +115,14 @@ $$F_{\text{plasma}} = F_{\text{mesuré}} - F_{\text{charge fantôme}}$$
 
 ### 4.1.3 Forces électromagnétiques parasites
 
+> 💡 **En termes simples** — Un courant électrique dans un champ
+> magnétique subit une force (c'est le principe du **moteur électrique**).
+> Le magnétron est un puissant aimant, et le plasma contient des
+> courants électriques. Ensemble, ils pourraient créer une force parasite
+> qui mime la poussée recherchée. Pour le vérifier, on **retourne le
+> montage à 180°** : un vrai artefact EM reste dans la même direction,
+> une vraie force de guidage s'inverse.
+
 #### Le problème
 
 Le magnétron crée un champ magnétique intense (~ 0,1 T) et le courant
@@ -131,6 +157,14 @@ quantique.
 
 ## 4.2 Procédure de Test
 
+> 💡 **En termes simples** — La procédure suit la logique d'une
+> [expérience contrôlée](https://fr.wikipedia.org/wiki/Exp%C3%A9rience_contr%C3%B4l%C3%A9e)
+> en 5 étapes : (1) préparer, (2) étalonner l'instrument, (3) mesurer
+> le « bruit » quand il ne se passe rien, (4) faire le vrai test,
+> (5) refaire le test en changeant un paramètre pour s'assurer que
+> ce n'est pas un hasard. Chaque étape est documentée et
+> reproductible par un tiers.
+
 ### Conditions préalables — Météo
 
 L'expérience se déroule **en extérieur**. Avant de commencer :
@@ -140,8 +174,6 @@ L'expérience se déroule **en extérieur**. Avant de commencer :
   est suspendue à l'intérieur du baril fermé, totalement à l'abri.
 - Éviter les heures de grand ensoleillement direct sur le baril
   (dérive thermique, atténuée par l'inertie de l'acier).
-- Le tuyau de la pompe à vide et les câbles sortent par les
-  feedthroughs du baril.
 
 ### Étape 1 — Mise sous vide et préparation
 
@@ -219,6 +251,16 @@ $$f_{\text{pulse}} = \frac{1}{T_0}$$
 
 ## 4.3 Analyse des données
 
+> 💡 **En termes simples** — Le signal qu'on mesure est noyé dans
+> du « bruit » — des vibrations parasites, des fluctuations de
+> température. C'est comme essayer d'entendre quelqu'un chuchoter
+> dans un concert de rock. L'astuce : on sait à quel **rythme**
+> le chuchoteur parle (la fréquence de pulsation du magnétron).
+> On peut donc « filtrer » le bruit et ne garder que le signal
+> qui bat au bon rythme. C'est le principe de la
+> [corrélation croisée](https://fr.wikipedia.org/wiki/Corr%C3%A9lation_crois%C3%A9e),
+> utilisée aussi en radar et en astronomie.
+
 ### Extraction du signal
 
 Le signal brut $\theta(t)$ contient :
@@ -279,6 +321,15 @@ $$\eta = \frac{F_{\text{net}}}{P_{\text{abs}} / c}$$
 
 ## 4.4 Critères de succès
 
+> 💡 **En termes simples** — En science, un résultat n'est considéré
+> comme « réel » que s'il est **reproductible** (on peut le refaire),
+> **significatif** (il ne peut pas être dû au hasard), et **spécifique**
+> (il disparaît quand on enlève l'ingrédient clé). Le seuil de
+> « 3σ » signifie qu'il y a moins de 0,3 % de chances que le signal
+> soit dû au hasard — c'est la convention utilisée en physique
+> expérimentale avant de considérer un résultat comme
+> [probant](https://fr.wikipedia.org/wiki/Significativit%C3%A9_statistique).
+
 | Critère | Seuil |
 |:---|:---|
 | Reproductibilité | ≥ 5 essais avec résultat cohérent |
@@ -291,6 +342,13 @@ $$\eta = \frac{F_{\text{net}}}{P_{\text{abs}} / c}$$
 ---
 
 ## 4.5 Objections anticipées et réponses
+
+> 💡 **En termes simples** — Quand un scientifique présente un
+> résultat qui défie les lois connues, la communauté lui oppose
+> des **objections** — et c'est sain. Le but n'est pas de « prouver »
+> qu'on a raison, mais de montrer qu'on a **pensé à tout** avant
+> d'affirmer quoi que ce soit. Voici les objections les plus
+> probables et les réponses expérimentales.
 
 | Objection | Réponse |
 |:---|:---|
@@ -412,6 +470,20 @@ classique (~3,3 µN pour 1 kW).
 5. **Benvenuti, S.** (2013). « Systematic Effects in Torsion Balance
    Experiments ». Thèse de doctorat, University of Washington.
    (Catalogue complet des effets systématiques.)
+
+6. **Crookes, W.** (1874). « On Attraction and Repulsion Resulting from
+   Radiation ». *Philosophical Transactions of the Royal Society*,
+   164, 501–527.
+   [doi:10.1098/rstl.1874.0015](https://doi.org/10.1098/rstl.1874.0015)
+   (Radiomètre de Crookes — forces thermiques parasites.)
+
+7. **Oppenheim, A. V. & Willsky, A. S.** (1997). *Signals and Systems*.
+   2ᵉ édition, Prentice Hall. ISBN 978-0-138-14104-0.
+   (Corrélation croisée, filtrage, analyse fréquentielle.)
+
+8. **Fisher, R. A.** (1925). *Statistical Methods for Research Workers*.
+   Oliver & Boyd.
+   (Fondements des tests de significativité statistique, seuil 3σ.)
 
 ---
 

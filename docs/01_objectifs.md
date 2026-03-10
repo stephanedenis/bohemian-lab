@@ -23,6 +23,15 @@ où les particules suivent de vraies trajectoires guidées par une « onde pilot
 
 ## Objectif 1 — Démontrer une force de poussée en système fermé
 
+> 💡 **En termes simples** — Imaginez une boîte fermée posée sur une
+> table. À l'intérieur, quelqu'un pousse contre les murs. La boîte
+> ne bouge pas, parce que pousser le mur de gauche revient à pousser
+> le mur de droite dans l'autre sens : les forces s'annulent. C'est la
+> [3ᵉ loi de Newton](https://fr.wikipedia.org/wiki/Lois_du_mouvement_de_Newton#Troisi%C3%A8me_loi_de_Newton).
+> Si notre boîte (la chambre) bouge quand même, c'est qu'il se passe
+> quelque chose de **très inhabituel** à l'intérieur — quelque chose
+> que la physique classique ne prédit pas.
+
 ### Énoncé
 
 Démontrer l'existence d'une force de poussée macroscopique dans un système
@@ -59,6 +68,15 @@ potentiel quantique — indépendamment de toute application.
 
 ## Objectif 2 — Quantifier le gradient de phase asymétrique
 
+> 💡 **En termes simples** — Quand la lumière traverse un verre inégalement
+> épais (comme un prisme), elle dévie. Pourquoi ? Parce qu'un côté du
+> verre « ralentit » la lumière plus que l'autre. Notre plasma joue le
+> rôle du prisme : si un côté est plus dense en électrons, l'onde
+> micro-onde y voyage plus lentement, ce qui crée un « gradient de phase ».
+> Dans la théorie de Bohm, ce gradient dicte la direction de la force.
+> Les 8 tubes Nixie IN-13 servent de carte du gradient : plus la colonne
+> lumineuse est longue, plus le plasma est dense à cet endroit.
+
 ### Énoncé
 
 Quantifier l'influence d'un **gradient de phase asymétrique** sur la
@@ -87,14 +105,25 @@ et par conséquent un gradient de phase.
 
 ### Méthode de mesure
 
-Les tubes Nixie linéaires (IN-9 / IN-13) servent de capteurs visuels de
-la luminosité du plasma, fournissant une cartographie qualitative du
-gradient de densité. La corrélation entre l'asymétrie mesurée et la force
-détectée au pendule permet de quantifier l'effet.
+Les **8 tubes Nixie IN-13**, disposés en octogone sur la paroi interne de
+la chambre (espacés de 45°), servent de capteurs visuels de la luminosité
+du plasma, fournissant une cartographie angulaire du gradient de densité
+$n_e$. La corrélation entre la direction de l'asymétrie Nixie et la
+direction de la force détectée au pendule est le test clé de l'Objectif 2
+(voir la [matrice décisionnelle](04_protocole.md#46-attentes-concrètes--confirmer-ou-infirmer-lhypothèse)).
 
 ---
 
 ## Objectif 3 — Valider l'interaction potentiel quantique / plasma
+
+> 💡 **En termes simples** — La physique classique prédit qu'un faisceau
+> de lumière de 1 kW peut pousser un objet avec une force de ~ 3,3 µN
+> (micro-newtons) — le poids d'un grain de poussière. C'est la
+> [pression de radiation](https://fr.wikipedia.org/wiki/Pression_de_radiation),
+> démontrée expérimentalement par [Lebedev](https://fr.wikipedia.org/wiki/Piotr_Lebedev)
+> en 1901. Si on mesure une force **supérieure** à cette valeur,
+> l'excédent ne peut pas être expliqué par la physique classique.
+> C'est précisément ce que prédit le potentiel quantique de Bohm.
 
 ### Énoncé
 
@@ -156,6 +185,19 @@ attribuable à l'effet de guidage bohmien.
    and the Origin of Absolute Uncertainty ». *Journal of Statistical
    Physics*, 67, 843–907.
    [doi:10.1007/BF01049004](https://doi.org/10.1007/BF01049004)
+
+6. **Maxwell, J. C.** (1873). *A Treatise on Electricity and Magnetism*.
+   Clarendon Press, Oxford.
+   (Prédiction théorique de la pression de radiation.)
+
+7. **Lebedev, P.** (1901). « Experimental Examination of Light Pressure ».
+   *Annalen der Physik*, 311(11), 433–458.
+   [doi:10.1002/andp.19013111102](https://doi.org/10.1002/andp.19013111102)
+   (Première confirmation expérimentale de $F = P/c$.)
+
+8. **Chen, F. F.** (2016). *Introduction to Plasma Physics and Controlled
+   Fusion*. 3ᵉ édition, Springer. ISBN 978-3-319-22308-7.
+   (Indice de réfraction du plasma, pulsation plasma $\omega_p$.)
 
 ---
 

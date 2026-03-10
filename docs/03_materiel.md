@@ -6,6 +6,12 @@
 
 ## Inventaire du kit — Statut des composants
 
+> 💡 **En termes simples** — Ce tableau liste toutes les pièces du
+> montage, comme la liste de courses d'un kit IKEA. Les ✅ sont
+> déjà dans l'atelier ; les 🔶 restent à se procurer. Rien ici n'est
+> exotique : la plupart des composants viennent de la quincaillerie,
+> d'un micro-ondes de récupération ou d'Amazon.
+
 | # | Composant | Statut | Notes |
 |:--|:---|:---|:---|
 | 1 | Magnétron 2,45 GHz (1 kW, récupéré d'un micro-ondes) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode |
@@ -57,6 +63,13 @@ réflexion laser à travers un petit hublot.
 ---
 
 ## 3.1 Source RF — Magnétron
+
+> 💡 **En termes simples** — Un magnétron, c'est le composant qui
+> chauffe vos plats dans un four micro-ondes. Il transforme
+> l'électricité en ondes radio à 2,45 GHz. Ici, au lieu de cuire
+> un bol de soupe, on l'utilise pour ioniser de la vapeur d'eau —
+> exactement la même pièce, recyclée d'un four de cuisine.
+> *(Inventé en 1940 par Boot & Randall [1] pour le radar militaire.)*
 
 ### Principe de fonctionnement
 
@@ -202,6 +215,14 @@ la cage de Faraday :
 
 ## 3.3 Cavité RF et modes de résonance
 
+> 💡 **En termes simples** — Imaginez un tambour : frappez-le, et il
+> vibre selon des motifs précis (les « modes »). Ici, la chambre inox
+> est le tambour et les micro-ondes sont le son. Parmi les dizaines
+> de motifs possibles, un seul — le mode TM₃₁₀ — vibre pile à
+> 2,45 GHz, la fréquence de notre magnétron. C'est une coïncidence
+> heureuse des dimensions de la chambre. Les formules ci-dessous
+> calculent tous ces motifs (Pozar [2], chap. 6).
+
 ### Dimensions de la cavité
 
 La chambre inox sert directement de **cavité résonante** pour les
@@ -220,7 +241,9 @@ $\text{TM}_{mnp}$ et $\text{TE}_{mnp}$. La fréquence de résonance est :
 
 $$f_{mnp} = \frac{c}{2\pi} \sqrt{\left(\frac{x_{mn}}{a}\right)^2 + \left(\frac{p\pi}{d}\right)^2}$$
 
-où $x_{mn}$ est le $n$-ième zéro de $J_m$ (mode TM) ou de $J'_m$ (mode TE).
+où $x_{mn}$ est le $n$-ième zéro de $J_m$ (mode TM) ou de $J'_m$
+(mode TE) — voir Pozar [2], §6.3 pour la dérivation complète, et
+Jackson [7], chap. 8 pour le traitement en électrodynamique classique.
 
 ### Calcul pour $a = 125$ mm, $d = 250$ mm
 
@@ -300,6 +323,15 @@ du magnétron traversent la paroi via des feedthroughs étanches.
 ---
 
 ## 3.4 Médium — Plasma de vapeur d'eau
+
+> 💡 **En termes simples** — Un plasma, c'est un gaz tellement
+> chauffé (ou électrifié) que ses atomes perdent des électrons.
+> C'est le « quatrième état de la matière » — après solide, liquide,
+> gaz. Les néons dans la rue, les éclairs, le Soleil : tous des
+> plasmas. Ici, on ionise de la vapeur d'eau à l'aide des
+> micro-ondes, un peu comme un orage miniature dans une boîte.
+> Le plasma obtenu modifie la vitesse des ondes qui le traversent
+> (Chen [5], Lieberman & Lichtenberg [6]).
 
 ### Formation du plasma
 
@@ -1046,6 +1078,20 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 7. **Jackson, J. D.** (1999). *Classical Electrodynamics*. 3ᵉ édition,
    Wiley. ISBN 978-0-471-30932-1.
    (Chapitre 8 : cavités résonantes.)
+
+8. **IN-13** — Fiche technique du tube Nixie bargraph soviétique.
+   Plage de courant 0–5 mA, longueur de colonne 0–100 mm, tension
+   d'amorçage ~ 140 V DC. Original : *OKB Gazotron*, URSS.
+   [tube-tester.com/IN-13](http://www.tube-tester.com/sites/nixie/dat_arch/IN-13_datasheet.pdf)
+
+9. **Makita BL1850B** — Batterie Li-ion 18 V / 5,0 Ah (90 Wh). BMS
+   intégré (surcharge, surdécharge, surintensité, surtempérature).
+   Fiche produit : [makita.ca](https://www.makita.ca/productdetail/BL1850B)
+
+10. **Young, W. C. & Budynas, R. G.** (2002). *Roark's Formulas for
+    Stress and Strain*. 7ᵉ édition, McGraw-Hill.
+    ISBN 978-0-07-072542-3.
+    (Constante de torsion d'un fil cylindrique : $\kappa = \pi G r^4 / 2L$.)
 
 ---
 
