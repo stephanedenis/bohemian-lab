@@ -231,14 +231,6 @@ Ce montage permet de :
 
 ## 3.3 Cavité RF et modes de résonance
 
-> 💡 **En termes simples** — Imaginez un tambour : frappez-le, et il
-> vibre selon des motifs précis (les « modes »). Ici, la chambre inox
-> est le tambour et les micro-ondes sont le son. Parmi les dizaines
-> de motifs possibles, un seul — le mode TM₃₁₀ — vibre pile à
-> 2,45 GHz, la fréquence de notre magnétron. C'est une coïncidence
-> heureuse des dimensions de la chambre. Les formules ci-dessous
-> calculent tous ces motifs (Pozar [2], chap. 6).
-
 ### Dimensions de la cavité
 
 La chambre inox sert directement de **cavité résonante** pour les
@@ -254,46 +246,12 @@ micro-ondes. Ses dimensions :
 
 ### Modes de résonance
 
-Les modes de résonance d'une cavité cylindrique sont les modes
-$\text{TM}_{mnp}$ et $\text{TE}_{mnp}$. La fréquence de résonance est :
-
-$$f_{mnp} = \frac{c}{2\pi} \sqrt{\left(\frac{x_{mn}}{a}\right)^2 + \left(\frac{p\pi}{d}\right)^2}$$
-
-où $x_{mn}$ est le $n$-ième zéro de $J_m$ (mode TM) ou de $J'_m$
-(mode TE) — voir Pozar [2], §6.3 pour la dérivation complète, et
-Jackson [7], chap. 8 pour le traitement en électrodynamique classique.
-
-### Calcul pour $a = 125$ mm, $d = 250$ mm
-
-| Mode | $x_{mn}$ | $f$ (GHz) | Compatible 2,45 GHz ? |
-|:---|:---|:---|:---|
-| TM$_{010}$ | 2,405 | $\frac{c \times 2{,}405}{2\pi \times 0{,}125} = 0{,}918$ | Non (trop bas) |
-| TM$_{110}$ | 3,832 | $\frac{c \times 3{,}832}{2\pi \times 0{,}125} = 1{,}46$ | Non |
-| TE$_{111}$ | 1,841 | $\frac{c}{2\pi}\sqrt{(1{,}841/0{,}125)^2 + (\pi/0{,}25)^2} = 1{,}17$ | Non |
-| TM$_{011}$ | 2,405 | $\frac{c}{2\pi}\sqrt{(2{,}405/0{,}125)^2 + (\pi/0{,}25)^2} = 1{,}14$ | Non |
-| TM$_{210}$ | 5,136 | 1,96 | Non |
-| TE$_{211}$ | 3,054 | 1,32 | Non |
-| TM$_{310}$ | 6,380 | **2,44** | **✔ Excellent !** |
-| TE$_{011}$ | 3,832 | 1,62 | Non |
-| TM$_{020}$ | 5,520 | 2,11 | Non (proche) |
-| TE$_{311}$ | 4,201 | 1,78 | Non |
-| TM$_{410}$ | 7,588 | 2,90 | Non |
-| TE$_{411}$ | 5,318 | 2,19 | Non (proche) |
-| TM$_{120}$ | 7,016 | **2,68** | Proche |
-| TE$_{112}$ | 1,841 | 1,46 | Non |
-| TM$_{320}$ | 8,417 | 3,22 | Non |
-| TE$_{012}$ | 3,832 | 2,17 | Non (proche) |
-| TE$_{511}$ | 6,416 | **2,62** | Proche |
+Le calcul théorique des modes TM/TE et la table complète des
+17 fréquences de résonance sont détaillés dans
+[§2.5 Modes de résonance de la cavité cylindrique](02_theorie.md#25-modes-de-résonance-de-la-cavité-cylindrique).
 
 **Résultat clé** : le mode **TM$_{310}$** à **2,44 GHz** est quasi
-parfaitement accordé à la fréquence du magnétron (2,45 GHz). C'est
-une coïncidence favorable des dimensions de la chambre.
-
-D'autres modes (TM$_{020}$ à 2,11 GHz, TM$_{120}$ à 2,68 GHz,
-TE$_{511}$ à 2,62 GHz) sont proches et pourraient être excités
-par la largeur spectrale du magnétron ($\Delta f \sim 50$ MHz),
-créant un champ multimode complexe — favorable à l'inhémogénéité
-de la distribution de champ, et donc au gradient de phase recherché.
+parfaitement accordé à la fréquence du magnétron (2,45 GHz).
 
 ### Couplage du magnétron
 
@@ -442,16 +400,11 @@ les **fils des 8 Nixie** (16 fils, feedthroughs simples) et le
 > Le plasma obtenu modifie la vitesse des ondes qui le traversent
 > (Chen [5], Lieberman & Lichtenberg [6]).
 
-### Formation du plasma
+### Formation du plasma et rôle physique
 
-La vapeur d'eau est injectée à basse pression (~ 1–10 mbar) dans la
-chambre. Le champ micro-onde à 2,45 GHz initie l'ionisation par
-**claquage** :
-
-1. Les électrons libres résiduels sont accélérés par le champ RF.
-2. Ils acquièrent assez d'énergie pour ioniser les molécules d'eau
-   par collision : $\text{H}_2\text{O} + e^- \to \text{H}_2\text{O}^+ + 2e^-$
-3. Avalanche électronique → formation du plasma.
+Le mécanisme d'ionisation par claquage RF et le rôle du plasma
+comme modulateur de phase bohmien sont détaillés dans
+[§2.6 Formation et rôle physique du plasma](02_theorie.md#26-formation-et-rôle-physique-du-plasma).
 
 ### Composition chimique
 
@@ -466,17 +419,6 @@ Le plasma de vapeur d'eau contient un mélange complexe d'espèces :
 | $\text{O}$ | Oxygène atomique | Produit de dissociation |
 | $\text{H}_2$ | Hydrogène moléculaire | Recombinaison |
 | $\text{O}_3$ | Ozone | Sous-produit (⚠️ toxique) |
-
-### Rôle physique dans l'expérience
-
-Le plasma agit comme un **modulateur de phase non-linéaire** :
-
-- Sa densité électronique $n_e$ modifie l'indice de réfraction :
-  $n = \sqrt{1 - \omega_p^2 / \omega^2}$
-- Si la distribution de $n_e$ est **inhomogène** (plus dense d'un côté),
-  l'onde accumule une phase différente selon sa trajectoire.
-- Ce gradient de phase est l'analogue du $\nabla S$ de la mécanique
-  bohmienne.
 
 ### Émission optique — Couleur du plasma
 
