@@ -26,8 +26,8 @@ où les particules suivent de vraies trajectoires guidées par une « onde pilot
 ### Énoncé
 
 Démontrer l'existence d'une force de poussée macroscopique dans un système
-fermé (baril métallique de 205 litres), c'est-à-dire **sans éjection de masse
-ni échange avec l'extérieur**.
+fermé (chambre à vide inox de 3 gallons), c'est-à-dire **sans éjection
+de masse ni échange avec l'extérieur**.
 
 ### Contexte physique
 

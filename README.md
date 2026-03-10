@@ -12,7 +12,7 @@ Expérimentations en physique quantique : Propulsion par Guidage d'Onde Pilote (
 
 ## 1. Objectifs Scientifiques
 
-1. **Démontrer** l'existence d'une force de poussée macroscopique dans un système fermé (baril de 205L), sans éjection de masse ni échange avec l'extérieur.
+1. **Démontrer** l'existence d'une force de poussée macroscopique dans un système fermé (chambre à vide inox 3 gallons), sans éjection de masse ni échange avec l'extérieur.
 2. **Quantifier** l'influence d'un gradient de phase asymétrique sur la trajectoire des photons RF (2,45 GHz) traversant un milieu plasma inhomogène.
 3. **Valider** expérimentalement l'interaction entre le potentiel quantique de Bohm ($Q = -\frac{\hbar^2}{2m} \frac{\nabla^2 R}{R}$) et un plasma de vapeur d'eau sous vide, en mesurant un éventuel excès de force au-delà de la pression de radiation classique ($F_{\text{rad}} = P/c \approx 3{,}3 \; \mu\text{N}$ pour 1 kW).
 
@@ -45,8 +45,8 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 | Composant | Description Technique | Rôle |
 | :--- | :--- | :--- |
 | **Source** | Magnétron à cavité de 1 000 W (2,45 GHz, rendement ~ 65 %) | Générateur de l'onde pilote (mode pulsé à $f = 1/T_0$) |
-| **Enceinte** | Baril de 205 L (acier, atténuation > 40 dB) | Cage de Faraday et système isolé |
-| **Chambre** | Cylindre métal + Couvercle Plexiglas (≥ 15 mm) | Confinement du vide et du plasma |
+| **Enceinte / Chambre** | Chambre à vide inox 3 gal (Ø250×250 mm, 0–29 inHg) + couvercle acrylique 3/4" + grillage | Cage de Faraday, cavité RF, système isolé |
+| **Confinement** | Baril métallique de 205 L (acier, atténuation ~ 48 dB) | Double cage de Faraday, rétention d'éclats, confinement des gaz |
 | **Médium** | Vapeur d'eau sous vide (1–5 mbar) → Plasma H-OH | Modulateur de phase non-linéaire |
 | **Capteur** | Tubes Nixie linéaires (IN-9 / IN-13) | Cartographie du flux RF et du gradient |
 | **Mesure** | Pendule de torsion (calibré par $\kappa = 4\pi^2 I / T_0^2$) | Détection de la force de réaction |
@@ -76,9 +76,10 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 
 ## 5. Notes de Sécurité
 
-* **Risque RF :** Vérification de l'étanchéité du baril avant chaque session (fuites < 5 mW/cm² selon ICNIRP / IEEE C95.1).
+* **Risque RF :** Vérification de l'étanchéité de la chambre avant chaque session (fuites < 5 mW/cm² selon ICNIRP / IEEE C95.1). Double confinement par le baril de 205L.
 * **Haute Tension :** Isolation du transformateur (4 000 V / 300 mA). **Danger de mort.** Toujours décharger le condensateur avant intervention (énergie résiduelle ~ 8 J).
-* **Implosion :** Épaisseur du Plexiglas ≥ 15 mm (facteur de sécurité ×3). Grillage de protection devant le hublot.
+* **Implosion :** Couvercle acrylique 3/4" (19 mm), chambre certifiée 29 inHg. Grillage de protection + baril de confinement (rétention d'éclats).
+* **Urgences : 911.**
 * **Gaz :** Ventilation mécanique obligatoire pour évacuer l'ozone (O₃, VLEP 0,1 ppm) et les NOₓ produits par le plasma.
 * **Règle absolue :** Toujours travailler **à deux personnes**.
 

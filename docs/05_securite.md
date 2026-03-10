@@ -12,7 +12,7 @@ Cette expérience n'est **pas un bricolage anodin**. Elle met en jeu :
   partir de 50 mA sous quelques dizaines de volts).
 - Des **micro-ondes à haute puissance** (1 000 watts — un four
   micro-ondes ouvert qui vous cuit de l'intérieur, littéralement).
-- Du **vide partiel** (risque d'implosion — un couvercle en Plexiglas
+- Du **vide partiel** (risque d'implosion — un couvercle en acrylique
   qui lâche sous la pression atmosphérique projette des éclats à grande
   vitesse).
 - Des **gaz toxiques** (ozone O₃ et oxydes d'azote NOₓ produits par
@@ -50,14 +50,37 @@ micro-onde** (opacification irréversible du cristallin).
 
 #### Confinement (cage de Faraday)
 
-- Le baril de 205 L est la **première barrière** : acier conducteur,
-  atténuation > 40 dB (facteur 10 000 en puissance).
-- Toutes les **ouvertures** (passages de câbles, hublots, joints)
+- La chambre inox est la **première barrière** : acier inoxydable
+  conducteur, atténuation > 47 dB (facteur 50 000 en puissance).
+- Le couvercle acrylique est recouvert d'un **grillage métallique**
+  (maille < 12 mm) pour fermer la cage de Faraday.
+- Toutes les **ouvertures** (passages de câbles, joints)
   doivent être traitées :
   - Grilles métalliques maillées (maille < λ/10 = 1,2 cm).
   - Joints conducteurs (ruban de cuivre, tresse de masse).
   - Passages de câbles via **guides d'onde sous coupure** (tubes
     métalliques de diamètre < λ/2 = 6,1 cm et longueur > 3× diamètre).
+
+#### Enceinte de confinement secondaire (baril de 205L)
+
+Pendant l'expérience, l'ensemble de l'ouvrage (chambre inox + câbles +
+magnetron) est placé **à l'intérieur d'un baril métallique de 205 litres**
+fermé. Ce baril constitue une **double barrière** :
+
+- **Double cage de Faraday** — En cas de défaillance du grillage sur
+  le couvercle acrylique ou d'un joint mal serré, le baril en acier
+  (atténuation ~ 48 dB supplémentaires) confine la totalité du
+  rayonnement RF. La probabilité qu'une fuite traverse les deux
+  enceintes est quasi nulle.
+- **Rétention d'éclats** — Si le couvercle en acrylique venait à
+  céder sous vide, les éclats sont contenus dans le baril.
+- **Confinement des gaz** — L'ozone ($\text{O}_3$) et les oxydes
+  d'azote ($\text{NO}_x$) produits par le plasma restent piégés
+  dans le baril jusqu'à la purge contrôlée.
+
+> ⚠️ **Le baril ne remplace pas** les protections primaires (grillage
+> Faraday, joint silicone, épaisseur acrylique). C'est une couche de
+> défense supplémentaire selon le principe de **défense en profondeur**.
 
 #### Détection de fuites
 
@@ -80,8 +103,8 @@ Pour atteindre la limite de 1 mW/cm² = 10 W/m² :
 $$r = \sqrt{\frac{P_{\text{fuite}}}{4\pi \times 10}} = \sqrt{\frac{1}{4\pi \times 10}} \approx 0{,}09 \; \text{m}$$
 
 → Même une fuite de 1 W est dangereuse **à moins de 10 cm** du point
-de fuite. Ne jamais approcher le visage du baril lorsque le magnétron
-est actif.
+de fuite. Ne jamais approcher le visage de la chambre lorsque le
+magnétron est actif.
 
 #### Équipements de protection individuelle (EPI)
 
@@ -89,7 +112,7 @@ est actif.
   contre 2,45 GHz par des lunettes). La seule protection est le
   **confinement**.
 - **Interrupteur d'urgence** : coupure immédiate de l'alimentation
-  du magnétron, accessible sans se pencher vers le baril.
+  du magnétron, accessible sans se pencher vers la chambre.
 
 ---
 
@@ -142,21 +165,21 @@ $$E = \frac{1}{2} \times 10^{-6} \times (4\,000)^2 = 8 \; \text{J}$$
 
 - **Disjoncteur différentiel 30 mA** en amont de l'alimentation.
   (Ne protège pas contre le choc initial, mais limite la durée.)
-- **Contacts de sécurité** sur le couvercle du baril : coupure
-  automatique si le baril est ouvert.
+- **Contacts de sécurité** sur le couvercle de la chambre : coupure
+  automatique si la chambre est ouverte.
 - **Résistance de décharge automatique** (« bleeder ») en
   parallèle du condensateur : décharge en ~ 30 secondes.
   **Ne pas se fier uniquement au bleeder** — toujours décharger
   manuellement en complément.
 - **Signalétique** : autocollant « ⚡ HAUTE TENSION — DANGER DE MORT »
-  visible sur le baril et sur l'alimentation.
+  visible sur la chambre et sur l'alimentation.
 
 #### Conduite en cas d'électrocution
 
 1. **Ne pas toucher la victime** si elle est encore en contact avec
    la source.
 2. Couper l'alimentation au disjoncteur.
-3. Appeler les secours (**SAMU 15** ou **112** en France).
+3. Appeler les secours : **911** (Québec).
 4. Si la victime est inconsciente et ne respire pas :
    **massage cardiaque + défibrillateur** (DAE) si disponible.
 
@@ -166,50 +189,65 @@ $$E = \frac{1}{2} \times 10^{-6} \times (4\,000)^2 = 8 \; \text{J}$$
 
 ### Nature du danger
 
-La chambre à plasma est sous **vide partiel** (1–10 mbar, soit
-100–1 000 fois moins que la pression atmosphérique). La pression
-atmosphérique exerce une force considérable sur les parois :
+La chambre à vide inox est sous **vide partiel** (2–5 mbar en fonctionnement,
+certifiée jusqu'à 29 inHg soit ~ 31 mbar absolu). La pression atmosphérique
+exerce une force considérable sur le couvercle :
 
 $$F = \Delta P \times A$$
 
-Pour un couvercle en Plexiglas de diamètre $d = 20$ cm :
+Pour le couvercle en acrylique de diamètre $d = 250$ mm :
 
-$$A = \pi \left(\frac{d}{2}\right)^2 = \pi \times 0{,}01 = 0{,}0314 \; \text{m}^2$$
+$$A = \pi \left(\frac{d}{2}\right)^2 = \pi \times 0{,}015\,625 \approx 0{,}0491 \; \text{m}^2$$
 
-$$F = 10^5 \times 0{,}0314 \approx 3\,140 \; \text{N} \approx 320 \; \text{kg-force}$$
+$$F = 10^5 \times 0{,}0491 \approx 4\,910 \; \text{N} \approx 500 \; \text{kg-force}$$
 
-→ Trois tonnes par décimètre carré ! Si le Plexiglas cède, les éclats
-sont projetés à grande vitesse.
+→ Près d'une **demi-tonne** de pression sur le couvercle ! Le risque
+principal est la rupture de l'acrylique et la projection d'éclats.
 
 ### Mesures de protection
 
-#### Dimensionnement du Plexiglas
+#### Couvercle acrylique 3/4"
 
-Le PMMA (Plexiglas) a une résistance à la traction de ~ 70 MPa.
-Pour un disque simplement appuyé sous pression uniforme, l'épaisseur
-minimale est :
+Le couvercle en acrylique (PMMA) d'épaisseur **3/4" (19 mm)** est
+spécifiquement dimensionné pour cette chambre certifiée 0–29 inHg.
+
+Vérifions le facteur de sécurité. Le PMMA a une résistance à la
+traction de ~ 70 MPa. Pour un disque simplement appuyé sous pression
+uniforme, l'épaisseur minimale est :
 
 $$t_{\min} = \frac{d}{2} \sqrt{\frac{3 \, \Delta P \, (1 + \nu)}{8 \, \sigma_{\text{adm}}}}$$
 
-avec un coefficient de sécurité de 4 ($\sigma_{\text{adm}} = 70/4 = 17{,}5$ MPa)
+avec $\sigma_{\text{adm}} = 70/4 = 17{,}5$ MPa (facteur de sécurité 4)
 et $\nu = 0{,}37$ (coefficient de Poisson du PMMA) :
 
-$$t_{\min} = \frac{0{,}20}{2} \sqrt{\frac{3 \times 10^5 \times 1{,}37}{8 \times 17{,}5 \times 10^6}} \approx 5{,}3 \; \text{mm}$$
+$$t_{\min} = \frac{0{,}250}{2} \sqrt{\frac{3 \times 10^5 \times 1{,}37}{8 \times 17{,}5 \times 10^6}} \approx 6{,}6 \; \text{mm}$$
 
-**Épaisseur requise : minimum 15 mm** (facteur de sécurité supplémentaire
-×3 pour tenir compte du vieillissement, des micro-fissures, et de
-l'échauffement par les micro-ondes).
+L'épaisseur réelle de **19 mm** offre un facteur de sécurité
+$19/6{,}6 \approx 2{,}9\times$ au-delà du dimensionnement déjà conservateur
+(à facteur 4 sur la contrainte). La chambre est **certifiée** par le
+fabriquant pour 29 inHg, ce qui apporte une garantie supplémentaire.
+
+#### Joint d'étanchéité en silicone
+
+Le joint en silicone assure l'étanchéité entre la bride inox et
+le couvercle acrylique. Le silicone résiste jusqu'à ~ 200 °C et
+est compatible avec le vide (faible dégazage). Vérifier toutefois
+sa tenue face à l'ozone ($\text{O}_3$) produit par le plasma.
 
 #### Vérifications
 
-- Inspection visuelle du Plexiglas **avant chaque utilisation** :
+- Inspection visuelle de l'acrylique **avant chaque utilisation** :
   absence de fissures, rayures profondes, jaunissement (signe de
-  dégradation UV).
+  dégradation UV ou thermique).
 - **Test de pression** : pomper au vide et maintenir 30 minutes.
   Vérifier l'absence de déformation visible ou de bruit.
-- **Grillage de protection** : placer un grillage métallique devant
-  le hublot en Plexiglas pour retenir les éclats en cas de rupture.
-- **Ne jamais** se placer face au hublot en Plexiglas pendant la
+- **Grillage de protection** : le grillage métallique de la cage de
+  Faraday, plaqué sur la face extérieure du couvercle, sert aussi de
+  rétention d'éclats en cas de rupture. Double fonction.
+- **Baril de confinement** : pendant l'expérience, le baril de 205L
+  entourant l'ensemble constitue une **troisième barrière** contre
+  la projection d'éclats.
+- **Ne jamais** se placer face au couvercle acrylique pendant la
   mise sous vide ou pendant le fonctionnement du plasma.
 
 ---
@@ -240,7 +278,7 @@ cesse de le sentir alors que la concentration augmente.
 - **Ventilation mécanique** obligatoire dans l'espace de travail :
   hotte aspirante ou extracteur d'air orienté vers l'extérieur.
 - Débit minimal recommandé : 10 renouvellements d'air par heure.
-- Le baril doit être **purgé** à l'air propre avant ouverture
+- La chambre doit être **purgée** à l'air propre avant ouverture
   après une session de plasma.
 
 #### Détection
@@ -270,6 +308,7 @@ cesse de le sentir alors que la concentration augmente.
 | Extincteur CO₂ | ✅ | Feu électrique |
 | Ventilation mécanique | ✅ | Évacuation des gaz toxiques |
 | Grillage de protection | ✅ | Rétention d'éclats |
+| Baril de 205L (confinement) | ✅ | Double cage Faraday + rétention éclats + gaz |
 | Détecteur d'ozone | 🔶 Recommandé | Monitoring de la qualité d'air |
 | Défibrillateur (DAE) | 🔶 Recommandé | Réanimation |
 | Lunettes de sécurité | ✅ | Protection contre éclats |
@@ -284,15 +323,16 @@ Avant **chaque session**, vérifier :
 - [ ] Disjoncteur différentiel 30 mA fonctionnel (test bouton)
 - [ ] Interrupteur d'urgence accessible et testé
 - [ ] Condensateur HT déchargé (perche + multimètre)
-- [ ] Joints du baril en bon état, bien serrés
+- [ ] Joint silicone de la chambre en bon état, bien serré
 - [ ] Détecteur de fuites micro-ondes : scan complet < 5 mW/cm²
-- [ ] Plexiglas inspecté (pas de fissure, pas de jaunissement)
-- [ ] Grillage de protection en place devant le hublot
+- [ ] Couvercle acrylique inspecté (pas de fissure, pas de jaunissement)
+- [ ] Grillage de protection en place sur le couvercle (Faraday + éclats)
+- [ ] Baril de 205L fermé autour de l'ensemble (double confinement)
 - [ ] Ventilation en marche
 - [ ] Passage d'air dégagé vers l'extérieur
 - [ ] Détecteur d'ozone en marche (si disponible)
 - [ ] Deuxième personne présente et informée de la procédure d'urgence
-- [ ] Téléphone à portée de main (numéro SAMU : 15 / Urgences : 112)
+- [ ] Téléphone à portée de main (urgences : **911**)
 - [ ] Extincteur CO₂ à portée de main
 
 ---

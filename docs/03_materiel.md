@@ -6,19 +6,20 @@
 
 ## Introduction vulgarisée
 
-Imaginez un gros baril métallique — le genre qu'on utilise pour stocker de
-l'huile — posé en équilibre sur un fil, comme une balançoire très sensible.
-À l'intérieur, on installe un four micro-ondes démonté (le magnétron) qui
-envoie ses ondes dans un petit cylindre métallique fermé contenant une fine
-brume d'eau. Les micro-ondes sont si intenses qu'elles transforment cette brume
-en **plasma** : un gaz où les molécules d'eau sont brisées et ionisées, créant
-un petit nuage lumineux — comme un éclair miniature enfermé dans un bocal.
+Imaginez un petit cylindre en acier inoxydable — une chambre à vide de
+laboratoire d'environ 25 cm de diamètre — suspendu à un fil, comme une
+balançoire très sensible. À l'intérieur, un four micro-ondes démonté
+(le magnétron) envoie ses ondes dans cette chambre contenant une fine
+brume d'eau. Les micro-ondes transforment cette brume en **plasma** :
+un gaz ionisé lumineux, comme un éclair miniature enfermé dans un bocal.
 
-Le baril métallique sert de **cage de Faraday** : aucune radiation ne s'échappe.
-Tout est confiné. Et le fil de torsion sur lequel repose le baril est si
-sensible qu'il peut détecter une force de l'ordre du millionième de newton —
-comparable au poids d'un grain de poussière. Si le plasma « pousse » d'un côté,
-le baril tourne imperceptiblement, et on le mesure.
+L'inox est conducteur : la chambre sert donc naturellement de **cage de
+Faraday** — aucune radiation ne s'échappe. Le couvercle transparent en
+acrylique est recouvert d'un grillage métallique pour compléter le
+blindage. Tout est confiné dans un système compact et hermétique,
+certifié pour le vide, et suffisamment léger (~ 5 kg) pour que le fil
+de torsion détecte la moindre force — de l'ordre du millionième de
+newton.
 
 ---
 
@@ -68,7 +69,7 @@ Cette fréquence est choisie car :
 ### Mode de fonctionnement pulsé
 
 Le magnétron est activé en mode **pulsé** à la fréquence de résonance
-mécanique du baril $f = 1/T_0$. Ce mode permet :
+mécanique de la chambre $f = 1/T_0$. Ce mode permet :
 
 - D'amplifier le mouvement du pendule par **résonance mécanique**.
 - De distinguer l'effet de poussée de l'effet thermique (le chauffage est
@@ -77,76 +78,152 @@ mécanique du baril $f = 1/T_0$. Ce mode permet :
 
 ---
 
-## 3.2 Enceinte — Baril de 205 litres
+## 3.2 Enceinte intégrée — Chambre à vide inox
+
+> 💡 **Simplification majeure** — L'architecture initiale prévoyait un
+> baril de 205L comme cage de Faraday externe + une chambre à plasma
+> séparée. La chambre à vide en inox décrite ci-dessous **cumule les
+> trois fonctions** (cage de Faraday, chambre à vide, masse oscillante).
+> Le baril de 205L reste toutefois utilisé comme **enceinte de
+> confinement secondaire** pendant l'expérience (défense en profondeur :
+> double cage de Faraday, rétention d'éclats, confinement des gaz).
+> Voir la [section sécurité](05_securite.md#enceinte-de-confinement-secondaire-baril-de-205l).
 
 ### Fonction
 
-Le baril remplit trois fonctions simultanées :
+La chambre inox remplit **trois fonctions simultanées** :
 
-1. **Cage de Faraday** — Confine le rayonnement RF à l'intérieur.
-   Aucune fuite significative (< 5 mW/cm² requis par les normes).
-2. **Système isolé** — Pour démontrer une force dans un système fermé,
-   il ne doit y avoir aucun échange de matière avec l'extérieur.
-3. **Masse oscillante** — Le baril suspendu au fil de torsion est
-   l'élément mobile dont on mesure le déplacement.
+1. **Chambre à vide et cavité RF** — Confine le plasma et sert de
+   cavité résonante pour les micro-ondes.
+2. **Cage de Faraday** — L'inox est conducteur ($\sigma \approx 1{,}4 \times 10^6$ S/m) ;
+   les parois métalliques + le couvercle acrylique recouvert de grillage
+   confinent le rayonnement RF.
+3. **Masse oscillante** — Suspendue au fil de torsion, c'est l'élément
+   mobile dont on mesure le déplacement.
 
 ### Spécifications
 
 | Paramètre | Valeur |
 |:---|:---|
-| Volume | 205 litres |
-| Matériau | Acier doux (épaisseur ≈ 1 mm) |
-| Masse à vide | ~ 20 kg |
-| Conductivité | Suffisante pour l'effet de cage de Faraday |
-| Étanchéité RF | Joints conducteurs aux ouvertures |
+| Type | Chambre à vide de laboratoire |
+| Volume | 3 gallons US (≈ 11,4 litres) |
+| Matériau | Acier inoxydable |
+| Diamètre intérieur | 250 mm |
+| Hauteur intérieure | 250 mm |
+| Couvercle | Acrylique (PMMA), épaisseur 3/4" (19 mm) |
+| Joint d'étanchéité | Silicone |
+| Certification vide | 0 à 29 inHg (≈ 0 à 982 mbar de dépression) |
+| Pression résiduelle min. | ~ 18 mbar (vide limite à 29 inHg) |
+| Masse estimée (vide) | ~ 5 kg |
 
-### Efficacité de blindage
+> **Note :** 29 inHg correspond à une pression absolue d'environ
+> $1\,013 - 982 = 31$ mbar. Pour atteindre le régime optimal de
+> 2–5 mbar, une pompe à vide plus performante (pompe à palettes) sera
+> nécessaire. La certification à 29 inHg garantit toutefois la tenue
+> mécanique sous vide partiel.
 
-L'atténuation $A$ d'une cage de Faraday en acier à 2,45 GHz est
-très élevée. Pour une paroi conductrice d'épaisseur $t$ :
+### Efficacité de blindage RF
 
-$$A \approx 20 \log_{10}\left(\frac{t}{\delta}\right) \quad [\text{dB}]$$
+L'atténuation $A$ d'une cage de Faraday en inox à 2,45 GHz :
 
-où $\delta$ est l'épaisseur de peau :
+L'épaisseur de peau dans l'inox ($\sigma \approx 1{,}4 \times 10^6$ S/m) :
 
-$$\delta = \sqrt{\frac{2}{\omega \mu \sigma}} = \sqrt{\frac{1}{\pi f \mu_0 \sigma}}$$
+$$\delta = \sqrt{\frac{1}{\pi f \mu_0 \sigma}} = \sqrt{\frac{1}{\pi \times 2{,}45 \times 10^9 \times 4\pi \times 10^{-7} \times 1{,}4 \times 10^6}} \approx 8{,}6 \; \mu\text{m}$$
 
-Pour l'acier à 2,45 GHz ($\sigma \approx 6 \times 10^6$ S/m) :
+Pour une paroi d'inox typique (~ 2 mm) :
 
-$$\delta \approx 4 \; \mu\text{m}$$
+$$A \approx 20 \log_{10}\left(\frac{2\,000}{8{,}6}\right) \approx 47 \; \text{dB}$$
 
-Une paroi de 1 mm offre donc $A \approx 20 \log_{10}(1000/4) \approx 48$ dB
-d'atténuation, soit un facteur $\sim 60\,000$ en puissance.
+Soit un facteur $\sim 50\,000$ en puissance — blindage excellent.
+
+### Complétion de la cage de Faraday (couvercle)
+
+Le couvercle en acrylique est transparent aux micro-ondes. Pour fermer
+la cage de Faraday :
+
+- **Grillage métallique** (cuivre ou inox) plaqué sur la face extérieure
+  du couvercle. Maille < $\lambda/10 = 12$ mm.
+- **Contact galvanique** entre le grillage et la bride inox de la chambre
+  (ruban de cuivre conducteur, pinces, ou vis).
+- Le grillage est suffisamment ouvert pour permettre l'observation
+  visuelle du plasma et le passage de la lumière vers la photodiode.
+- L'ensemble (acrylique + grillage) remplace la transmission directe
+  par une cavité entièrement blindée.
+
+### Avantages par rapport au baril de 205L
+
+| Critère | Baril 205L (ancien) | Chambre inox 3 gal (actuel) |
+|:---|:---|:---|
+| Masse | ~ 20 kg | ~ 5 kg |
+| Volume | 205 L | 11,4 L |
+| Sensibilité pendule | Faible (masse élevée → $\theta$ petit) | **4× meilleure** (masse réduite) |
+| Certification vide | Aucune (bricolage) | 0–29 inHg (industrielle) |
+| Cage de Faraday | Native (acier) | Native (inox) + grillage couvercle |
+| Encombrement | Volumineux | Compact (25 × 25 cm) |
+| Complexité | Chambre séparée à l'intérieur | Tout intégré |
 
 ---
 
-## 3.3 Chambre à Plasma
+## 3.3 Cavité RF et modes de résonance
 
-### Construction
+### Dimensions de la cavité
 
-La chambre est un **cylindre métallique** (cuivre ou aluminium) dont une
-extrémité est fermée par un **couvercle en Plexiglas** (polyméthacrylate
-de méthyle, PMMA) :
+La chambre inox sert directement de **cavité résonante** pour les
+micro-ondes. Ses dimensions :
 
-- Le cylindre métallique sert de **cavité RF** — ses dimensions sont
-  choisies pour supporter un ou plusieurs modes de résonance proches
-  de 2,45 GHz.
-- Le Plexiglas est **transparent aux micro-ondes** partiellement et
-  transparent optiquement, permettant l'observation visuelle du plasma.
-- L'ensemble est **hermétique** pour maintenir le vide.
+- Rayon : $a = 125$ mm
+- Hauteur : $d = 250$ mm
+- Parois : inox (conductivité finie → pertes ohmiques modérées)
+- Couvercle : acrylique 19 mm (partiellement transparent aux RF →
+  recouvert de grillage pour le confinement)
 
 ### Modes de résonance
 
 Les modes de résonance d'une cavité cylindrique sont les modes
 $\text{TM}_{mnp}$ et $\text{TE}_{mnp}$. La fréquence de résonance est :
 
-$$f_{mnp} = \frac{c}{2\pi\sqrt{\mu_r \varepsilon_r}} \sqrt{\left(\frac{x_{mn}}{a}\right)^2 + \left(\frac{p\pi}{d}\right)^2}$$
+$$f_{mnp} = \frac{c}{2\pi} \sqrt{\left(\frac{x_{mn}}{a}\right)^2 + \left(\frac{p\pi}{d}\right)^2}$$
 
-où $a$ est le rayon, $d$ la longueur, et $x_{mn}$ est le $n$-ième zéro de
-la fonction de Bessel $J_m$ (mode TM) ou de sa dérivée $J'_m$ (mode TE).
+où $x_{mn}$ est le $n$-ième zéro de $J_m$ (mode TM) ou de $J'_m$ (mode TE).
 
-Le dimensionnement vise à placer un mode fondamental proche de 2,45 GHz
-pour maximiser le couplage avec le magnétron.
+### Calcul pour $a = 125$ mm, $d = 250$ mm
+
+| Mode | $x_{mn}$ | $f$ (GHz) | Compatible 2,45 GHz ? |
+|:---|:---|:---|:---|
+| TM$_{010}$ | 2,405 | $\frac{c \times 2{,}405}{2\pi \times 0{,}125} = 0{,}918$ | Non (trop bas) |
+| TM$_{110}$ | 3,832 | $\frac{c \times 3{,}832}{2\pi \times 0{,}125} = 1{,}46$ | Non |
+| TE$_{111}$ | 1,841 | $\frac{c}{2\pi}\sqrt{(1{,}841/0{,}125)^2 + (\pi/0{,}25)^2} = 1{,}17$ | Non |
+| TM$_{011}$ | 2,405 | $\frac{c}{2\pi}\sqrt{(2{,}405/0{,}125)^2 + (\pi/0{,}25)^2} = 1{,}14$ | Non |
+| TM$_{210}$ | 5,136 | 1,96 | Non |
+| TE$_{211}$ | 3,054 | 1,32 | Non |
+| TM$_{310}$ | 6,380 | **2,44** | **✔ Excellent !** |
+| TE$_{011}$ | 3,832 | 1,62 | Non |
+| TM$_{020}$ | 5,520 | 2,11 | Non (proche) |
+| TE$_{311}$ | 4,201 | 1,78 | Non |
+| TM$_{410}$ | 7,588 | 2,90 | Non |
+| TE$_{411}$ | 5,318 | 2,19 | Non (proche) |
+| TM$_{120}$ | 7,016 | **2,68** | Proche |
+| TE$_{112}$ | 1,841 | 1,46 | Non |
+| TM$_{320}$ | 8,417 | 3,22 | Non |
+| TE$_{012}$ | 3,832 | 2,17 | Non (proche) |
+| TE$_{511}$ | 6,416 | **2,62** | Proche |
+
+**Résultat clé** : le mode **TM$_{310}$** à **2,44 GHz** est quasi
+parfaitement accordé à la fréquence du magnétron (2,45 GHz). C'est
+une coïncidence favorable des dimensions de la chambre.
+
+D'autres modes (TM$_{020}$ à 2,11 GHz, TM$_{120}$ à 2,68 GHz,
+TE$_{511}$ à 2,62 GHz) sont proches et pourraient être excités
+par la largeur spectrale du magnétron ($\Delta f \sim 50$ MHz),
+créant un champ multimode complexe — favorable à l'inhémogénéité
+de la distribution de champ, et donc au gradient de phase recherché.
+
+### Couplage du magnétron
+
+Le magnétron est couplé à la cavité par une **antenne** (sonde
+capacitive) ou un **iris** (ouverture dans la paroi) positionné pour
+exciter préférentiellement le mode TM$_{310}$. La position optimale
+est au maximum du champ électrique de ce mode.
 
 ---
 
@@ -225,7 +302,7 @@ Les tubes Nixie sont utilisés de manière non conventionnelle :
 Le pendule de torsion est un instrument de mesure de force extrêmement
 sensible, utilisé depuis Coulomb (1785) et Cavendish (1798).
 
-Un objet (ici le baril) est suspendu à un fil (**fibre de torsion**).
+Un objet (ici la chambre à vide) est suspendu à un fil (**fibre de torsion**).
 Lorsqu'une force tangentielle $F$ est appliquée à une distance $L$ de
 l'axe de rotation, le fil se tord d'un angle $\theta$ :
 
@@ -244,11 +321,11 @@ d'oscillation libre $T_0$ :
 
 $$T_0 = 2\pi \sqrt{\frac{I}{\kappa}} \quad \Longrightarrow \quad \kappa = \frac{4\pi^2 I}{T_0^2}$$
 
-où $I$ est le moment d'inertie du baril autour de l'axe de torsion.
+où $I$ est le moment d'inertie de la chambre autour de l'axe de torsion.
 
-Pour un cylindre creux de masse $M$, rayon $R$ :
+Pour la chambre inox (cylindre creux, masse $M \approx 5$ kg, rayon $R = 0{,}125$ m) :
 
-$$I \approx M R^2$$
+$$I \approx M R^2 = 5 \times 0{,}125^2 \approx 0{,}078 \; \text{kg}\cdot\text{m}^2$$
 
 ### Sensibilité
 
@@ -270,18 +347,20 @@ $$\kappa = \frac{\pi G r^4}{2 \ell}$$
 ### Estimation de la résolution
 
 Pour une force $F = 3{,}3 \; \mu\text{N}$ (pression de radiation),
-un bras de levier $L = 0{,}3$ m, et un fil de tungstène
-($\kappa = 5 \times 10^{-8}$ N·m/rad) :
+un bras de levier $L = 0{,}125$ m (rayon de la chambre), et un fil
+de tungstène ($\kappa = 5 \times 10^{-8}$ N·m/rad) :
 
-$$\theta = \frac{F \cdot L}{\kappa} = \frac{3{,}3 \times 10^{-6} \times 0{,}3}{5 \times 10^{-8}} \approx 20 \; \text{rad}$$
+$$\theta = \frac{F \cdot L}{\kappa} = \frac{3{,}3 \times 10^{-6} \times 0{,}125}{5 \times 10^{-8}} \approx 8{,}3 \; \text{rad}$$
 
 Cette valeur est irréaliste, ce qui signifie qu'un fil aussi fin serait
-trop sensible pour cette application. En pratique, un fil plus rigide
+trop sensible. En pratique, un fil plus rigide
 ($\kappa \sim 10^{-4}$ N·m/rad) donnerait :
 
-$$\theta \approx 10^{-2} \; \text{rad} \approx 0{,}6°$$
+$$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}125}{10^{-4}} \approx 4{,}1 \times 10^{-3} \; \text{rad} \approx 0{,}24°$$
 
 Cet angle est mesurable par analyse vidéo ou par réflexion laser.
+Notons que la masse réduite (~ 5 kg vs ~ 20 kg avec le baril) rend le
+pendule **4× plus réactif** pour la même force.
 
 ### Alternative : Balance de torsion
 
@@ -367,7 +446,7 @@ le contrôleur corrige.
 
 #### Luminosité plasma (photodiode)
 
-Une photodiode (BPW34 ou similaire) placée face au hublot Plexiglas
+Une photodiode (BPW34 ou similaire) placée face au couvercle acrylique
 mesure l'intensité lumineuse de la recombinaison radiative, qui est
 proportionnelle à $n_e^2$. C'est un proxy redondant de la densité
 électronique.
@@ -423,38 +502,50 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
   filtres feedthrough ou câbles blindés.
 - Ferrites sur chaque ligne d'entrée/sortie.
 - Alimentation isolée (convertisseur DC-DC isolé ou batterie).
-- Placement **à l'extérieur du baril**, relié aux capteurs par câbles
+- Placement **à l'extérieur de la chambre**, relié aux capteurs par câbles
   blindés traversant la cage de Faraday via des
   [feedthrough](https://en.wikipedia.org/wiki/Feedthrough) filtrés.
 
+---
+
+## Schéma d'ensemble
+
 ```
-                    ┌─────── Fil de torsion ───────┐
-                    │                               │
-                    ▼                               │
-    ┌───────────────────────────────┐    Support fixe
-    │         BARIL 205L            │    (plafond)
-    │  ┌─────────────────────┐     │
-    │  │   CHAMBRE À PLASMA  │     │
-    │  │  ┌───────────────┐  │     │
-    │  │  │   PLASMA      │  │     │
-    │  │  │   H₂O → H-OH  │  │     │
-    │  │  └───────┬───────┘  │     │
-    │  │          │          │     │
-    │  │   Magnétron 2,45GHz │     │
-    │  └─────────────────────┘     │
-    │                               │
-    │  [Nixie IN-9] [Nixie IN-13]  │
-    └───────┬───────────────┬───────┘
-            │ câbles blindés │
-            ▼               ▼
-    ┌───────────────────────────────┐
-    │   MICROCONTRÔLEUR (ESP32)     │
-    │  ┌───────────────┐              │
-    │  │  ADC: P, P_r, │  PID → PWM │
-    │  │  lum, T      │  vanne+RF  │
-    │  └───────────────┘              │
-    │  Wi-Fi → Dashboard / SD log  │
-    └───────────────────────────────┘
+                ┌───────── Fil de torsion ─────────┐
+                │                                   │
+                ▼                                   │
+╔═════════════════════════════════════════╗    Support fixe
+║  BARIL 205L (confinement secondaire)   ║    (plafond)
+║                                         ║
+║  ┌─────────────────────────────────┐    ║
+║  │  CHAMBRE INOX 3 GAL (Ø250×250)  │    ║
+║  │                                  │    ║
+║  │  ╔═══════════════════════════╗   │    ║
+║  │  ║  Couvercle acrylique 3/4" ║   │    ║
+║  │  ║  + grillage métallique    ║   │    ║
+║  │  ║  (cage de Faraday)        ║   │    ║
+║  │  ╚═══════════════════════════╝   │    ║
+║  │  ┌─────────────────────────┐     │    ║
+║  │  │    PLASMA  H₂O → H-OH   │     │    ║
+║  │  │    (2–5 mbar, T_e~2 eV) │     │    ║
+║  │  └────────────┬────────────┘     │    ║
+║  │               │                  │    ║
+║  │    Magnétron 2,45 GHz (1 kW)     │    ║
+║  │    [Nixie IN-9] [Nixie IN-13]    │    ║
+║  │    Joint silicone                │    ║
+║  └────────┬────────────────┬────────┘    ║
+║           │  câbles blindés │             ║
+╚═══════════╪════════════════╪═════════════╝
+            │                │
+            ▼                ▼
+┌─────────────────────────────────────────┐
+│   MICROCONTRÔLEUR (ESP32)               │
+│  ┌───────────────┐                      │
+│  │ ADC: P, P_r,  │  PID → PWM          │
+│  │ lum, T        │  vanne+RF           │
+│  └───────────────┘                      │
+│  Wi-Fi → Dashboard / SD log            │
+└─────────────────────────────────────────┘
 ```
 
 ---

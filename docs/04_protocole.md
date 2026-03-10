@@ -8,7 +8,7 @@
 
 En science, **prouver** qu'un effet existe ne suffit pas : il faut aussi
 prouver que cet effet n'est pas dû à autre chose. C'est le principe du
-**contrôle expérimental**. Si on observe que le baril tourne quand on
+**contrôle expérimental**. Si on observe que la chambre tourne quand on
 allume le magnétron, il faut s'assurer que ce n'est pas simplement parce
 que l'air chaud pousse dessus, ou parce qu'un courant électrique crée un
 champ magnétique parasite, ou parce que des ions soufflent comme un petit
@@ -108,8 +108,8 @@ $$\vec{F} = q\vec{v} \times \vec{B} \quad \text{ou} \quad \vec{F} = I\vec{L} \ti
 
 #### La solution — Inversion à 180°
 
-Le dispositif interne (magnétron + chambre) est **retourné de 180°**
-à l'intérieur du baril :
+Le dispositif interne (magnétron + antenne) est **retourné de 180°**
+à l'intérieur de la chambre :
 
 - Si la force est due à un artefact EM lié à la géométrie
   (câbles, position du magnétron), elle **conserve sa direction**
@@ -133,8 +133,8 @@ quantique.
 
 ### Étape 1 — Mise sous vide
 
-1. Assembler la chambre à plasma dans le baril. Vérifier l'étanchéité
-   de tous les joints.
+1. Assembler la chambre à vide. Vérifier l'étanchéité du joint
+   silicone sur le couvercle acrylique.
 2. Connecter la pompe à vide. Atteindre une pression $P < 1$ mbar.
 3. Vérifier l'absence de fuites au détecteur (débit de fuite
    $< 10^{-3}$ mbar·L/s).
