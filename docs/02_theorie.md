@@ -428,9 +428,10 @@ résidence du gaz dans la chambre ($\tau_{\text{rés}} \sim 10-100$ ms) :
 $$f_{\text{boucle}} > \frac{1}{\tau_{\text{rés}}} \approx 10-100 \; \text{Hz}$$
 
 Un microcontrôleur comme l'ESP32 (fréquence ADC ~ 1 kHz en 12 bits)
-est largement suffisant. Voir la section matérielle
-[3.7 Contrôle — Microcontrôleur](03_materiel.md#37-contrôle--microcontrôleur)
-pour l'implémentation.
+est largement suffisant. Voir la page dédiée
+[6. Contrôle et Asservissement du Plasma](06_controle.md)
+pour l'architecture MIMO, les 3 boucles PID, le firmware et la
+télémétrie.
 
 ---
 

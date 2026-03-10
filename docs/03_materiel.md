@@ -138,7 +138,7 @@ mécanique de la chambre $f = 1/T_0$. Ce mode permet :
 > protection contre le vent, stabilité thermique, double cage de
 > Faraday, rétention d'éclats et confinement des gaz (défense en
 > profondeur). Voir la [section pendule](#36-mesure--pendule-de-torsion)
-> et la [section sécurité](05_securite.md#enceinte-de-confinement-secondaire-baril-de-205l).
+> et la [section sécurité](05_securite.md#enceinte-du-pendule-et-confinement-baril-de-205l).
 
 ### Fonction
 
@@ -1005,6 +1005,14 @@ Cet angle correspond à un déplacement du spot laser de $\Delta x \approx
 
 ## 3.7 Contrôle — Microcontrôleur
 
+> 📖 **Page dédiée** — Le système de contrôle fait l'objet d'une
+> documentation complète dans
+> [6. Contrôle et Asservissement du Plasma](06_controle.md) :
+> architecture MIMO, 3 boucles PID, machine d'état du firmware,
+> watchdog de sécurité, télémétrie MQTT, calibration capteurs,
+> bus I²C/SPI, séquence de démarrage.
+> La section ci-dessous décrit le matériel.
+
 > 💡 **En termes simples** — Le plasma est capricieux : si on le laisse
 > sans surveillance, il dérive hors des conditions idéales en quelques
 > fractions de seconde. C'est comme essayer de maintenir la température
@@ -1073,7 +1081,7 @@ Sortie analogique 0–10 V (diviseur résistif pour le 3,3 V de l'ESP32).
 
 #### Puissance RF réfléchie (coupleur directionnel)
 
-Un [coupleur directionnel](https://fr.wikipedia.org/wiki/Coupleur_directif)
+Un [coupleur directionnel](https://en.wikipedia.org/wiki/Directional_coupler)
 inséré entre le magnétron et la chambre prélève une fraction (~ −20 dB)
 de l'onde réfléchie. Après détection par diode Schottky, le signal DC
 est proportionnel à $P_r$.
@@ -1296,11 +1304,11 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 8. **IN-13** — Fiche technique du tube Nixie bargraph soviétique.
    Plage de courant 0–5 mA, longueur de colonne 0–100 mm, tension
    d'amorçage ~ 140 V DC. Original : *OKB Gazotron*, URSS.
-   [tube-tester.com/IN-13](http://www.tube-tester.com/sites/nixie/dat_arch/IN-13_datasheet.pdf)
+   ~~tube-tester.com/IN-13~~ *(lien mort — rechercher « IN-13 datasheet » sur le web)*
 
 9. **Makita BL1850B** — Batterie Li-ion 18 V / 5,0 Ah (90 Wh). BMS
    intégré (surcharge, surdécharge, surintensité, surtempérature).
-   Fiche produit : [makita.ca](https://www.makita.ca/productdetail/BL1850B)
+   Fiche produit : rechercher « Makita BL1850B » sur [makita.ca](https://www.makita.ca/)
 
 10. **Young, W. C. & Budynas, R. G.** (2002). *Roark's Formulas for
     Stress and Strain*. 7ᵉ édition, McGraw-Hill.
@@ -1309,7 +1317,7 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 
 11. **Makita BL1860B** — Batterie Li-ion 18 V / 6,0 Ah (108 Wh). BMS
     intégré. Fiche produit :
-    [makita.ca](https://www.makita.ca/productdetail/BL1860B)
+    Rechercher « Makita BL1860B » sur [makita.ca](https://www.makita.ca/)
 
 12. **Lieberman, M. A. & Lichtenberg, A. J.** (2005). *Principles of
     Plasma Discharges and Materials Processing*. 2ᵉ édition, Wiley.

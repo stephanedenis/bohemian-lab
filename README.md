@@ -100,3 +100,4 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 | 3 | Configuration Matérielle | [docs/03_materiel.md](docs/03_materiel.md) |
 | 4 | Protocole de Validation | [docs/04_protocole.md](docs/04_protocole.md) |
 | 5 | Notes de Sécurité | [docs/05_securite.md](docs/05_securite.md) |
+| 6 | Contrôle et Asservissement | [docs/06_controle.md](docs/06_controle.md) |

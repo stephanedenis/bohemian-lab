@@ -1,6 +1,6 @@
 # ⚠️ Notes de Sécurité
 
-[← Retour au README](../README.md) · [← Protocole de Validation](04_protocole.md)
+[← Retour au README](../README.md) · [← Protocole de Validation](04_protocole.md) · [Contrôle →](06_controle.md)
 
 ---
 
@@ -515,4 +515,4 @@ Avant **chaque session**, vérifier :
 
 ---
 
-[← Protocole de Validation](04_protocole.md) · [Retour au README →](../README.md)
+[← Protocole de Validation](04_protocole.md) · [Section suivante : Contrôle et Asservissement →](06_controle.md)
