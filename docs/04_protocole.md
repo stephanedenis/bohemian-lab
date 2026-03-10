@@ -143,15 +143,23 @@ L'expérience se déroule **en extérieur**. Avant de commencer :
 - Le tuyau de la pompe à vide et les câbles sortent par les
   feedthroughs du baril.
 
-### Étape 1 — Mise sous vide
+### Étape 1 — Mise sous vide et préparation
 
 1. Assembler la chambre à vide. Vérifier l'étanchéité du joint
    silicone sur le couvercle acrylique.
-2. Connecter la pompe à vide. Atteindre une pression $P < 1$ mbar.
-3. Vérifier l'absence de fuites au détecteur (débit de fuite
-   $< 10^{-3}$ mbar·L/s).
+2. Ouvrir la vanne d'isolement. Connecter le tuyau de la pompe à vide.
+   La chambre est **bridée mécaniquement** (calage, pas de rotation).
+3. Pomper jusqu'à $P < 1$ mbar. Vérifier l'absence de fuites
+   ($< 10^{-3}$ mbar·L/s).
 4. **Injection capillaire** de vapeur d'eau : ouvrir le micro-doseur
-   pour atteindre $P \approx 1-5$ mbar de vapeur d'eau.
+   pour atteindre $P \approx 2-5$ mbar.
+5. **Fermer la vanne d'isolement** (quart de tour).
+6. **Déconnecter le tuyau** de la pompe.
+7. Vérifier que tous les câbles sont en **boucle pendante souple**
+   (aucun câble tendu).
+8. Libérer la bride mécanique — la chambre est maintenant **libre
+   de tourner** sur le fil de torsion.
+9. **Fermer le baril.**
 
 ### Étape 2 — Calibration du pendule
 

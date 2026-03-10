@@ -321,9 +321,12 @@ par le fil de torsion ancré au couvercle du baril.
 |:---|:---|
 | Fil de torsion | Ancré au **couvercle du baril** (passage étanche) |
 | Chambre inox | Suspendue **au centre du baril**, libre en rotation |
+| Vanne d'isolement | Montée sur la chambre (DN10, quart de tour) |
+| Câbles (HT + capteurs) | **Boucle pendante souple** sous la chambre |
 | Miroir de mesure | Collé sur la paroi de la chambre, face au hublot |
 | Laser + photodétecteurs | Fixés à la paroi interne du baril, face au miroir |
 | Baril de 205L | **Posé au sol** sur un support rigide (référentiel fixe) |
+| Pompe à vide | **Externe**, déconnectée pendant la mesure |
 | ESP32 | À l'extérieur du baril |
 
 Le baril offre un environnement **calme et confiné** :
@@ -359,6 +362,105 @@ avec une résolution de ~ 1 µm.
 
 Un petit **hublot en verre** (⌀ 20–30 mm) percé dans la paroi du baril
 permet aussi l'observation visuelle ou vidéo du miroir si nécessaire.
+
+### Découplage mécanique — Connexions à la chambre
+
+> 💡 **Problème clé** — La chambre doit être **libre de tourner** sur
+> le fil de torsion, mais elle a besoin de connexions physiques :
+> tuyau de vide, câble HT du magnétron, câbles capteurs. Chaque
+> connexion rigide ajoute un **couple de rappel parasite** $\tau_p$
+> qui s'oppose à la rotation et risque de masquer la force recherchée.
+
+#### Stratégie : Pomper, fermer, déconnecter, mesurer
+
+La pompe à vide reste **fixe à l'extérieur du baril** et n'est
+connectée que pendant la phase de préparation. Pendant la mesure,
+le tuyau est déconnecté.
+
+| Phase | État pompe | Tuyau | Câbles | Chambre |
+|:---|:---|:---|:---|:---|
+| 1. Pompage | Active | Connecté | Connectés | **Bridée** (immobile) |
+| 2. Injection vapeur | Active | Connecté | Connectés | Bridée |
+| 3. Fermeture vanne | Arrêtée | Connecté | Connectés | Bridée |
+| 4. Déconnexion | Off | **Déconnecté** | Souples | **Libre** |
+| 5. Amortissement | Off | Aucun | Souples | Libre (repos) |
+| 6. Mesure | Off | Aucun | Souples | Libre (mesure) |
+
+#### Vanne d'isolement
+
+Une **vanne à boisseau sphérique** (quart de tour, DN10 ou DN15)
+est montée directement sur la chambre. Elle permet de :
+
+1. Isoler le volume de la chambre une fois la pression atteinte.
+2. Déconnecter physiquement le tuyau flexible de la pompe.
+
+La vanne doit être **légère** et montée **près de l'axe de rotation**
+(proche du haut de la chambre) pour minimiser le décentrage de masse.
+
+> **Tenue du vide** — À 2–5 mbar, les fuites légères sont tolérables
+> si la mesure dure < 10 min. Un débit de fuite de $10^{-3}$ mbar·L/s
+> dans un volume de 11,4 L donne une remontée de $\sim 0{,}005$ mbar/min
+> — négligeable.
+
+#### Câbles souples en boucle pendante
+
+Les câbles électriques (alimentation HT magnétron, signaux capteurs)
+restent connectés pendant la mesure. Pour **minimiser le couple
+parasite**, ils sont disposés en **boucle pendante verticale** :
+
+```
+    Couvercle du baril
+    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+         │ fil de          │
+         │ torsion     feedthrough
+         │               │
+         ▼            câbles souples
+    ┌────────┐           │
+    │ Chambre │           │
+    │  inox  │──────────┘
+    └────────┘    ↑
+                    boucle pendante
+                    (descend et remonte)
+```
+
+Le câble descend le long de l'axe, forme une **boucle sous la chambre**,
+puis remonte vers le feedthrough dans la paroi du baril. La boucle
+pendante est soumise uniquement à la gravité, qui n'exerce **aucun
+couple de torsion** (force purement verticale, parallèle à l'axe de
+rotation).
+
+#### Estimation du couple parasite résiduel
+
+Pour un câble souple (silicone RG-316, $\varnothing \approx 2{,}5$ mm),
+la rigidité en torsion est de l'ordre de $\kappa_{câble} \sim 10^{-5}$
+N·m/rad par mètre de longueur.
+
+Si le câble forme une boucle de 0,5 m sous la chambre (longueur libre
+$\ell_c \approx 1$ m entre les deux points d'ancrage), la constante de
+torsion effective du câble est :
+
+$$\kappa_{\text{parasite}} \sim \frac{\kappa_{c\hat{a}ble}}{\ell_c} \approx 10^{-5} \; \text{N\cdotm/rad}$$
+
+Comparé à la constante du fil de torsion ($\kappa \sim 10^{-4}$
+N·m/rad pour le fil d'acier choisi), le câble ajoute ~ 10 % de
+rigidité. C'est **acceptable** mais doit être **calibré** :
+
+- La constante $\kappa_{\text{total}} = \kappa_{\text{fil}} + \kappa_{\text{câbles}}$
+  est mesurée *in situ* par la période d'oscillation libre $T_0$.
+- Pour réduire $\kappa_{\text{parasite}}$ : utiliser des câbles
+  **ultra-souples** (silicone, PTFE) et des boucles **plus longues**.
+- Privilégier des câbles fins (AWG 26–30) pour les signaux capteurs.
+- Le câble HT du magnétron (plus rigide) est le facteur limitant ;
+  utiliser un câble silicone HT le plus souple possible.
+
+#### Checklist de découplage
+
+- [ ] Vanne d'isolement fermée et tuyau de pompe déconnecté
+- [ ] Tous les câbles en boucle pendante (aucun câble tendu)
+- [ ] Chambre libre de tourner sans frottement ni butoir
+- [ ] Période $T_0$ mesurée **avec les câbles en place** (étalonnage)
+
+---
 
 ### Principe physique
 
@@ -597,14 +699,15 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 ║  │    Magnétron 2,45 GHz (1 kW)      │      ║
 ║  │    [Nixie IN-9] [Nixie IN-13]     │      ║
 ║  │    Joint silicone                  │      ║
-║  │  ┌──────┐                          │      ║
-║  │  │Miroir│ ← collé sur la chambre   │      ║
-║  │  └──────┘                          │      ║
-║  └───────┬────────────────────┬───────┘      ║
-║          │  câbles souples    │               ║
-║          │  (torsadés,        │               ║
-║          │  pas de couple)    │               ║
-║  ┌───────┴────────────────────┴───────┐      ║
+║  │  ┌──────┐    ┌───────────┐       │      ║
+║  │  │Miroir│    │Vanne DN10 │ ← ¼ tour │      ║
+║  │  └──────┘    └─────┬─────┘       │      ║
+║  └───────┬───────│───────────┬───────┘      ║
+║          │       │           │               ║
+║          │ (déconnecté │  câbles souples   ║
+║          │  pendant    │  en boucle       ║
+║          │  mesure)    │  pendante        ║
+║  ┌───────┴───────┴───────────┴───────┐      ║
 ║  │  Laser ──→ [miroir] ──→ PSD       │      ║
 ║  │  (fixé à la paroi du baril)       │      ║
 ║  └────────────────────────────────────┘      ║
@@ -612,15 +715,10 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 ║          │  feedthroughs      │               ║
 ╚══════════╪════════════════════╪═══════════════╝
            │                    │
-           ▼                    ▼
-┌──────────────────────────────────────────────┐
-│   MICROCONTRÔLEUR (ESP32)                    │
-│  ┌───────────────┐                           │
-│  │ ADC: P, P_r,  │  PID → PWM               │
-│  │ lum, T, PSD   │  vanne+RF                │
-│  └───────────────┘                           │
-│  Wi-Fi → Dashboard / SD log                 │
-└──────────────────────────────────────────────┘
+     Pompe à vide            ESP32
+     (fixe, externe,       (externe,
+      déconnectée            blindé)
+      pendant mesure)
 ```
 
 ---
