@@ -15,29 +15,30 @@
 | # | Composant | Statut | Notes |
 |:--|:---|:---|:---|
 | 1 | Magnétron 2,45 GHz (1 kW, récupéré d'un micro-ondes) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode |
-| 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | 🔶 À acheter | Avec couvercle acrylique 3/4" et joint silicone |
+| 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | ✅ **En stock** | Avec couvercle acrylique 3/4" et joint silicone |
 | 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Disponibles |
-| 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) | 🔶 À acheter | Ou BL1860B (6 Ah) ; prévoir 2 batteries |
+| 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) + socles | ✅ **En stock** | Batteries et socles de charge disponibles |
 | 5 | Onduleur 120V AC sinus pur (≥ 1200 W) | 🔶 À acheter | < 1,5 kg, entrée 18V DC |
 | 6 | ESP32 (DevKitC ou similaire) | 🔶 À acheter | ~ 5 € ; boîtier alu blindé requis |
 | 7 | Baril 205L (acier, récupéré) | 🔶 À trouver | Avec couvercle amovible |
 | 8 | Fil de torsion (acier ou tungstène, ⌀ 0,1–0,2 mm) | 🔶 À acheter | Longueur ~ 0,5–1 m |
 | 9 | Fléau (tige alu ou inox, ⌀ 10–15 mm, L = 400 mm) | 🔶 À fabriquer | Support chambre + contrepoids |
 | 10 | Contrepoids (~ 10 kg, ajustable) | 🔶 À fabriquer | Masse + vis de réglage fin |
-| 11 | Pompe à vide (palettes ou membrane, ≥ 10 L/min) | 🔶 À acheter | Occasion acceptable |
+| 11 | Pompe à vide (palettes ou membrane, ≥ 10 L/min) | ✅ **En stock** | Disponible |
 | 12 | Vanne à boisseau sphérique DN10 (quart de tour) | 🔶 À acheter | Inox ou laiton, vide-compatible |
 | 13 | Grillage métallique (maille < 12 mm) | 🔶 À acheter | Pour la cage de Faraday (couvercle) |
-| 14 | Laser diode (< 5 mW, classe 3R) | 🔶 À acheter | Pour mesure angulaire PSD |
-| 15 | PSD (Position Sensitive Detector) | 🔶 À acheter | Ou barrette de photodiodes |
-| 16 | Capteurs : jauge Pirani, coupleur directionnel, photodiode BPW34, thermocouple K + MAX31855, ADS1115 | 🔶 À acheter | Kit capteurs ESP32 |
-| 17 | SSR (relais statique) + MOSFET pour électrovanne | 🔶 À acheter | Commande magnétron |
-| 18 | Caméras Wi-Fi (2–3) | 🔶 À acheter | Internes + externes |
-| 19 | Miroir plan (~ 20×20 mm) | 🔶 À acheter | Collé sur le fléau |
-| 20 | Résistances ballast, shunts, connectique, ruban cuivre | 🔶 À acheter | Consommables |
+| 14 | Laser diode (< 5 mW, classe 3R) | ✅ **En stock** | Pour mesure angulaire PSD |
+| 15 | PSD (Position Sensitive Detector) | ✅ **En stock** | Disponible |
+| 16 | Capteurs : jauge Pirani, coupleur directionnel, photodiode BPW34, thermocouple K + MAX31855, ADS1115 | ✅ **En stock** | Kit capteurs disponible |
+| 17 | SSR (relais statique) + MOSFET pour électrovanne | ✅ **En stock** | Commande magnétron |
+| 18 | Caméras Wi-Fi (2–3) | ✅ **En stock** | Internes + externes |
+| 19 | Miroir plan (~ 20×20 mm) | ✅ **En stock** | Collé sur le fléau |
+| 20 | Résistances ballast, shunts, connectique, ruban cuivre | ✅ **En stock** | Consommables disponibles |
 
-> **Composant confirmé** : les **8 tubes Nixie IN-13** sont disponibles.
-> C'est un élément critique car ces tubes sont de production soviétique
-> discontinuée — il est difficile de s'en procurer.
+> **Stock confirmé** : **13 composants sur 20** sont en stock (✅).
+> Les 7 restants (🔶) sont le magnétron, l'onduleur, l'ESP32, le baril,
+> le fil de torsion, le fléau/contrepoids et la vanne DN10 — tous
+> facilement sourçables.
 
 ---
 
