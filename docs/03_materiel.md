@@ -4,6 +4,37 @@
 
 ---
 
+## Inventaire du kit — Statut des composants
+
+| # | Composant | Statut | Notes |
+|:--|:---|:---|:---|
+| 1 | Magnétron 2,45 GHz (1 kW, récupéré d'un micro-ondes) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode |
+| 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | 🔶 À acheter | Avec couvercle acrylique 3/4" et joint silicone |
+| 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Disponibles |
+| 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) | 🔶 À acheter | Ou BL1860B (6 Ah) ; prévoir 2 batteries |
+| 5 | Onduleur 120V AC sinus pur (≥ 1200 W) | 🔶 À acheter | < 1,5 kg, entrée 18V DC |
+| 6 | ESP32 (DevKitC ou similaire) | 🔶 À acheter | ~ 5 € ; boîtier alu blindé requis |
+| 7 | Baril 205L (acier, récupéré) | 🔶 À trouver | Avec couvercle amovible |
+| 8 | Fil de torsion (acier ou tungstène, ⌀ 0,1–0,2 mm) | 🔶 À acheter | Longueur ~ 0,5–1 m |
+| 9 | Fléau (tige alu ou inox, ⌀ 10–15 mm, L = 400 mm) | 🔶 À fabriquer | Support chambre + contrepoids |
+| 10 | Contrepoids (~ 10 kg, ajustable) | 🔶 À fabriquer | Masse + vis de réglage fin |
+| 11 | Pompe à vide (palettes ou membrane, ≥ 10 L/min) | 🔶 À acheter | Occasion acceptable |
+| 12 | Vanne à boisseau sphérique DN10 (quart de tour) | 🔶 À acheter | Inox ou laiton, vide-compatible |
+| 13 | Grillage métallique (maille < 12 mm) | 🔶 À acheter | Pour la cage de Faraday (couvercle) |
+| 14 | Laser diode (< 5 mW, classe 3R) | 🔶 À acheter | Pour mesure angulaire PSD |
+| 15 | PSD (Position Sensitive Detector) | 🔶 À acheter | Ou barrette de photodiodes |
+| 16 | Capteurs : jauge Pirani, coupleur directionnel, photodiode BPW34, thermocouple K + MAX31855, ADS1115 | 🔶 À acheter | Kit capteurs ESP32 |
+| 17 | SSR (relais statique) + MOSFET pour électrovanne | 🔶 À acheter | Commande magnétron |
+| 18 | Caméras Wi-Fi (2–3) | 🔶 À acheter | Internes + externes |
+| 19 | Miroir plan (~ 20×20 mm) | 🔶 À acheter | Collé sur le fléau |
+| 20 | Résistances ballast, shunts, connectique, ruban cuivre | 🔶 À acheter | Consommables |
+
+> **Composant confirmé** : les **8 tubes Nixie IN-13** sont disponibles.
+> C'est un élément critique car ces tubes sont de production soviétique
+> discontinuée — il est difficile de s'en procurer.
+
+---
+
 ## Introduction vulgarisée
 
 Imaginez un petit cylindre en acier inoxydable — une chambre à vide
@@ -230,6 +261,42 @@ capacitive) ou un **iris** (ouverture dans la paroi) positionné pour
 exciter préférentiellement le mode TM$_{310}$. La position optimale
 est au maximum du champ électrique de ce mode.
 
+### Disposition interne de la chambre
+
+La chambre inox regroupe **tous les composants actifs** de l'expérience.
+Voici l'agencement interne, vu en coupe :
+
+```
+    ╔═══════════════════════════════════╗ ← Couvercle acrylique 3/4"
+    ║  Grillage Faraday (maille <12mm) ║     + grillage
+    ╚═══════════════════════════════════╝
+    ┌───────────────────────────────────┐
+    │  8× Nixie IN-13                  │ ← Paroi interne (octogone)
+    │  (montés verticalement sur la    │
+    │   paroi, espacés de 45°)         │
+    │                                  │
+    │  ┌────────────────────────────┐  │
+    │  │  PLASMA  H₂O              │  │ ← Volume central (~11 L)
+    │  │  2–5 mbar                 │  │
+    │  │                           │  │
+    │  └────────────────────────────┘  │
+    │                                  │
+    │  Magnétron (sonde ou iris)  ──→  │ ← Couplé à la paroi (~30°)
+    │  Jauge Pirani               ──→  │ ← Feedthrough paroi
+    │  Coupleur directionnel      ──→  │ ← Entre magnétron et cavité
+    │  Photodiode BPW34           ──→  │ ← Face au plasma
+    │  Thermocouple K             ──→  │ ← Collé paroi extérieure
+    │                                  │
+    │  Vanne DN10 (quart de tour) ──→  │ ← Pompage + injection H₂O
+    └───── ── ── ── ── ── ── ── ──────┘
+            Joint silicone
+```
+
+L'**alimentation embarquée** (batterie, onduleur, ESP32) est montée
+**à l'extérieur de la chambre**, solidaire du fléau. Elle n'est pas
+dans le volume sous vide — seuls les câbles capteurs et le câble HT
+du magnétron traversent la paroi via des feedthroughs étanches.
+
 ---
 
 ## 3.4 Médium — Plasma de vapeur d'eau
@@ -272,7 +339,7 @@ Le plasma agit comme un **modulateur de phase non-linéaire** :
 
 ---
 
-## 3.5 Capteurs — Tubes Nixie linéaires
+## 3.5 Capteurs — Tubes Nixie linéaires (8× IN-13)
 
 ### Principe de fonctionnement
 
@@ -281,22 +348,71 @@ gazeuse dont la colonne lumineuse a une **longueur proportionnelle au
 courant** qui les traverse :
 
 - **IN-9** : longueur de colonne 0–30 mm pour 0–10 mA.
-- **IN-13** : longueur de colonne 0–100 mm pour 0–5 mA.
+- **IN-13** : longueur de colonne 0–100 mm pour 0–5 mA (plus long,
+  meilleure résolution spatiale).
 
 Ils sont remplis de néon avec un peu de mercure (effet Penning) et
-fonctionnent à ~ 120–140 V DC.
+fonctionnent à ~ 120–140 V DC. Alimentés par le 120 V AC de
+l'onduleur embarqué via un redresseur/résistance ballast simple.
 
 ### Utilisation comme capteurs de plasma
 
 Les tubes Nixie sont utilisés de manière non conventionnelle :
 
-- Placés à proximité de la chambre, ils agissent comme des **capteurs
-  de rayonnement RF** — le champ électromagnétique modifie le courant
-  de décharge dans le tube.
+- Placés **à l'intérieur de la chambre** (sur la paroi interne),
+  ils agissent comme des **capteurs de rayonnement RF** — le champ
+  électromagnétique modifie le courant de décharge dans le tube.
 - La longueur de la colonne lumineuse donne une **indication visuelle
-  du flux RF** en ce point.
-- En disposant plusieurs tubes autour de la chambre, on obtient une
-  **cartographie** du gradient de champ / densité plasma.
+  directe** du flux RF en ce point.
+- En disposant **8 tubes IN-13** autour de la chambre, on obtient une
+  **cartographie octogonale** du gradient de champ / densité plasma.
+
+### Disposition des 8 IN-13 — Cartographie du gradient
+
+Les 8 tubes sont montés **verticalement** sur la paroi intérieure de
+la chambre, espacés de **45°** (octogone régulier) :
+
+```
+            Vue du dessus — Chambre inox (⌀ 250 mm)
+
+                      N₁ (0°)
+                    ╱        ╲
+               N₈ (315°)   N₂ (45°)
+              │                    │
+        N₇ (270°)   ┌──────┐  N₃ (90°)
+              │     │magnét│     │
+               N₆ (225°)   N₄ (135°)
+                    ╲        ╱
+                      N₅ (180°)
+
+            Nₖ = tube IN-13 n° k
+            Le magnétron est couplé à ~ 30° du N₁
+```
+
+Cette disposition permet de mesurer :
+
+| Mesure | Méthode |
+|:---|:---|
+| **Symétrie du champ** | Comparer les 8 colonnes lumineuses : si toutes égales → champ homogène ; si gradient → asymétrie |
+| **Direction du gradient** | Le tube le plus long indique la région de plus forte densité $n_e$ |
+| **Intensité du gradient** | $\Delta L = L_{\max} - L_{\min}$ proportionnel à $\nabla n_e$ |
+| **Confirmation de l'asymétrie** | Corrélation entre la direction du gradient Nixie et la direction de la force mesurée au pendule |
+
+> 💡 **C'est la mesure la plus critique** — Si on observe une force au
+> pendule sans asymétrie visible sur les Nixie, c'est probablement un
+> artefact. Si l'asymétrie Nixie corrèle spatialement avec la force,
+> c'est un indice fort du gradient de phase.
+
+### Lecture des Nixie par l'ESP32
+
+Chaque tube IN-13 est alimenté en série avec une **résistance ballast**
+de précision (± 1 %). Le courant $I_k$ dans chaque tube est mesuré par
+l'ESP32 via un shunt de 10 Ω (→ signal 0–50 mV pour 0–5 mA, amplifié
+par un INA219 ou un ADS1115). Les 8 courants sont loggés en CSV
+et transmis en Wi-Fi.
+
+Alternativement, une **caméra Wi-Fi** embarquée peut photographier les
+8 tubes simultanément pour une lecture visuelle directe.
 
 ---
 
@@ -311,21 +427,94 @@ Les tubes Nixie sont utilisés de manière non conventionnelle :
 > et on mesure le déplacement avec une précision extrême — le tout
 > protégé du vent et des vibrations par le baril.
 
-### Architecture
+### Architecture — Chambre décentrée sur fléau
 
 Le baril de 205L (⌀ 580 mm × 880 mm de haut) sert d'**enceinte du
-pendule**. La chambre inox (⌀ 250 × 250 mm, ~ 5 kg) est suspendue
-par le fil de torsion ancré au couvercle du baril.
+pendule**. La chambre inox (⌀ 250 × 250 mm) est montée **décentrée**
+par rapport à l'axe de torsion, sur un **fléau horizontal** (type
+balance de Cavendish). Un contrepoids équilibre la masse.
+
+#### Pourquoi décentrer la chambre ?
+
+La grandeur mesurée par un pendule de torsion est le **couple** :
+
+$$\tau = F \times d$$
+
+où $F$ est la force produite par le plasma et $d$ est la distance
+entre la ligne d'action de $F$ et l'axe de rotation (bras de levier).
+
+| Configuration | Bras de levier $d$ | Couple $\tau$ pour $F = 3{,}3~\mu$N |
+|:---|:---|:---|
+| Chambre centrée | $R_{\text{chambre}} \approx 0{,}125$ m (force tangentielle requise) | $4{,}1 \times 10^{-7}$ N·m |
+| Chambre décentrée (fléau 200 mm) | $d = 0{,}20$ m | $6{,}6 \times 10^{-7}$ N·m |
+
+Mais l'avantage principal n'est pas le facteur 1,6× — c'est que :
+
+1. **Toute force nette** (quelle que soit sa direction dans le plan
+   horizontal) produit un couple si la chambre est hors axe. Avec
+   la chambre centrée, seule la composante tangentielle contribue.
+2. **L'inversion à 180°** est triviale : faire pivoter le fléau de
+   180° change le signe du couple → test de contrôle immédiat.
+3. **Le fléau amplifie le moment d'inertie** $I$, ce qui augmente
+   $T_0$ et éloigne la fréquence de résonance du bruit (avantage
+   signal/bruit en basse fréquence).
+
+> 💡 **Analogie** — C'est exactement le principe de la
+> [balance de Cavendish](https://fr.wikipedia.org/wiki/Exp%C3%A9rience_de_Cavendish)
+> (1798) qui a permis de « peser la Terre ». Cavendish a mesuré des
+> forces gravitationnelles de l'ordre du nano-newton grâce à un fléau
+> de 1,8 m. Notre fléau de 0,4 m mesure des micro-newtons — mille
+> fois plus gros.
+
+#### Géométrie du fléau
+
+```
+    Vue du dessus — Baril de 205L (⌀ 580 mm)
+
+                    ┌─ Fil de torsion
+                    │  (axe de rotation)
+                    ▼
+    ┌───────────────●───────────────┐
+    │               │               │
+    │   ┌───────┐   │   ┌───────┐   │
+    │   │Chambre│   │   │Contre-│   │
+    │   │ inox  │   │   │ poids │   │
+    │   │⌀250mm │   │   │       │   │
+    │   └───────┘   │   └───────┘   │
+    │    ← 200 →    │    ← 200 →    │
+    │      mm       │      mm       │
+    └───────────────┴───────────────┘
+                  Fléau
+              (tige rigide)
+```
+
+| Paramètre | Valeur |
+|:---|:---|
+| Longueur du fléau | 400 mm (200 mm de chaque côté de l'axe) |
+| Bras de levier chambre | $d = 200$ mm |
+| Masse chambre (assemblage complet) | ~ 10 kg |
+| Masse contrepoids | ~ 10 kg (ajustable) |
+| Matériau fléau | Tige en aluminium ou inox, ⌀ 10–15 mm |
+
+Le fléau doit être **parfaitement équilibré** : le centre de masse
+total de l'assemblage (chambre + fléau + contrepoids) doit être
+exactement **sur l'axe de torsion**. Un déséquilibre résiduel crée
+un couple gravitationnel parasite.
+
+Équilibrage : ajuster la position du contrepoids sur le fléau par
+une vis de réglage fin (± 1 mm). Critère : le système au repos doit
+rester stable quelle que soit l'orientation du fléau.
+
+### Table d'architecture
 
 | Élément | Position |
 |:---|:---|
 | Fil de torsion | Ancré au **couvercle du baril** (seul lien mécanique) |
-| Chambre inox | Suspendue **au centre du baril**, libre en rotation |
-| Batterie Makita 18V | **Embarquée** sur l'assemblage suspendu |
-| Onduleur 120V + transfo HT | **Embarqués** sur l'assemblage suspendu |
-| ESP32 + capteurs | **Embarqués**, Wi-Fi vers l'extérieur |
-| Vanne d'isolement | Montée sur la chambre (DN10, quart de tour) |
-| Miroir de mesure | Collé sur la paroi de la chambre, face au hublot |
+| Fléau horizontal | Suspendu au fil, **traverse le baril** horizontalement |
+| Chambre inox + alimentation embarquée | **Décentrée** à 200 mm de l'axe (côté A du fléau) |
+| Contrepoids (~ 10 kg) | **Côté B** du fléau, à 200 mm de l'axe |
+| 8× Nixie IN-13 | **Intérieur** de la chambre (octogone sur la paroi) |
+| Miroir de mesure | Collé **sur le fléau**, près de l'axe (face au hublot) |
 | Laser + PSD | Fixés à la **paroi interne du baril** (référentiel fixe) |
 | Baril de 205L | **Posé au sol** (référentiel fixe) |
 | Pompe à vide | **Externe**, déconnectée pendant la mesure |
@@ -435,22 +624,30 @@ pour alimenter le transformateur HT du magnétron.
 | Complexité calibration | Mesurer $\kappa_{\text{total}}$ in situ | $\kappa = \kappa_{\text{fil}}$ uniquement |
 | Masse suspendue | ~ 5 kg | ~ 10 kg (recalcul $I$ nécessaire) |
 
-#### Nouveau moment d'inertie
+#### Nouveau moment d'inertie (configuration fléau)
 
-Avec la masse embarquée ($M \approx 10$ kg), en supposant les
-composants répartis autour de la chambre (rayon effectif
-$R_{\text{eff}} \approx 0{,}15$ m) :
+Avec le fléau, le moment d'inertie est dominé par les deux masses
+(chambre + contrepoids) aux extrémités :
 
-$$I \approx M \, R_{\text{eff}}^2 = 10 \times 0{,}15^2 = 0{,}225 \; \text{kg}\cdot\text{m}^2$$
+$$I = M_{\text{chambre}} \, d^2 + M_{\text{contrepoids}} \, d^2 = 2 M d^2$$
 
-La période d'oscillation libre augmente :
+Pour $M \approx 10$ kg et $d = 0{,}20$ m :
 
-$$T_0 = 2\pi \sqrt{\frac{I}{\kappa}} = 2\pi \sqrt{\frac{0{,}225}{10^{-4}}} \approx 298 \; \text{s} \approx 5 \; \text{min}$$
+$$I \approx 2 \times 10 \times 0{,}20^2 = 0{,}80 \; \text{kg}\cdot\text{m}^2$$
 
-C'est long mais avantageux : la fréquence de pulsation est basse
-($f_0 \approx 3{,}4$ mHz), ce qui éloigne le signal des fréquences de
-bruit sismique et de vibration (> 1 Hz). Le rapport signal/bruit
-s'en trouve **amélioré**.
+La période d'oscillation libre :
+
+$$T_0 = 2\pi \sqrt{\frac{I}{\kappa}} = 2\pi \sqrt{\frac{0{,}80}{10^{-4}}} \approx 562 \; \text{s} \approx 9{,}4 \; \text{min}$$
+
+C'est long mais très avantageux :
+- La fréquence de pulsation est basse ($f_0 \approx 1{,}8$ mHz).
+- C'est **loin** des fréquences de bruit sismique (> 1 Hz) et de
+  vibration mécanique (> 0,1 Hz) → **rapport S/B excellent**.
+- Le bilan énergétique est favorable : en mode pulsé 50 %, la
+  batterie 5 Ah suffit pour~ 1 cycle complet ($T_0 \approx$ 9 min,
+  magnétron actif ~ 4,5 min → 85 Wh requis ≈ 90 Wh dispo).
+- Pour accumuler 5+ cycles, utiliser deux batteries (180 Wh) ou
+  réduire le duty cycle.
 
 #### Connexion unique restante : la pompe à vide
 
@@ -522,10 +719,10 @@ $$T_0 = 2\pi \sqrt{\frac{I}{\kappa}} \quad \Longrightarrow \quad \kappa = \frac{
 où $I$ est le moment d'inertie de l'assemblage suspendu autour de l'axe
 de torsion.
 
-Pour l'assemblage complet (chambre + batterie + onduleur + magnétron,
-masse totale $M \approx 10$ kg, rayon effectif $R_{\text{eff}} \approx 0{,}15$ m) :
+Pour la configuration fléau (chambre + contrepoids, chacun à $d = 0{,}20$ m
+de l'axe, masse $M \approx 10$ kg chacun) :
 
-$$I \approx M R_{\text{eff}}^2 = 10 \times 0{,}15^2 \approx 0{,}225 \; \text{kg}\cdot\text{m}^2$$
+$$I \approx 2 M d^2 = 2 \times 10 \times 0{,}20^2 = 0{,}80 \; \text{kg}\cdot\text{m}^2$$
 
 ### Sensibilité
 
@@ -547,31 +744,42 @@ $$\kappa = \frac{\pi G r^4}{2 \ell}$$
 ### Estimation de la résolution
 
 Pour une force $F = 3{,}3 \; \mu\text{N}$ (pression de radiation),
-un bras de levier $L = 0{,}15$ m (rayon effectif de l'assemblage), et un fil
-de tungstène ($\kappa = 5 \times 10^{-8}$ N·m/rad) :
+un bras de levier $L = 0{,}20$ m (distance chambre–axe sur le fléau),
+et un fil de tungstène ($\kappa = 5 \times 10^{-8}$ N·m/rad) :
 
-$$\theta = \frac{F \cdot L}{\kappa} = \frac{3{,}3 \times 10^{-6} \times 0{,}15}{5 \times 10^{-8}} \approx 9{,}9 \; \text{rad}$$
+$$\theta = \frac{F \cdot L}{\kappa} = \frac{3{,}3 \times 10^{-6} \times 0{,}20}{5 \times 10^{-8}} \approx 13{,}2 \; \text{rad}$$
 
 Cette valeur est irréaliste, ce qui signifie qu'un fil aussi fin serait
 trop sensible. En pratique, un fil plus rigide
 ($\kappa \sim 10^{-4}$ N·m/rad) donnerait :
 
-$$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}15}{10^{-4}} \approx 5{,}0 \times 10^{-3} \; \text{rad} \approx 0{,}29°$$
+$$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}20}{10^{-4}} \approx 6{,}6 \times 10^{-3} \; \text{rad} \approx 0{,}38°$$
 
 Cet angle correspond à un déplacement du spot laser de $\Delta x \approx
-3{,}0$ mm sur le PSD (voir ci-dessus) — largement mesurable.
+4{,}0$ mm sur le PSD (voir ci-dessus) — largement mesurable.
 
-> **Note** — La masse doublée (~ 10 kg vs ~ 5 kg) allonge la période
-> $T_0$ mais n'affecte pas la sensibilité statique $\theta = FL/\kappa$,
-> qui ne dépend que de la force, du bras de levier et de la constante
-> du fil.
+> **Note** — La configuration fléau augmente le moment d'inertie
+> ($I = 0{,}80$ vs $0{,}225$ kg·m²), ce qui allonge la période $T_0$
+> (9 min vs 5 min), mais **augmente aussi le bras de levier** de 0,15
+> à 0,20 m. La sensibilité statique $\theta = FL/\kappa$ est donc
+> **améliorée de 33 %** par rapport à la chambre centrée.
 
-### Alternative : Balance de torsion
+### Résumé comparatif : centrée vs fléau
 
-Si la sensibilité du pendule simple est insuffisante, une **balance de
-torsion** (type Cavendish) peut être utilisée, avec un fléau horizontal
-portant des masses aux extrémités, suspendu par la fibre dans le baril.
-Cette configuration augmente le moment d'inertie et la stabilité.
+| Critère | Chambre centrée | Fléau (d = 200 mm) |
+|:---|:---|:---|
+| Bras de levier | ~ 0,125 m (tangentiel seulement) | **0,20 m (toute direction)** |
+| Sensibilité statique ($\theta$) | 0,24° pour 3,3 µN | **0,38°** (+60 %) |
+| Moment d'inertie | 0,225 kg·m² | 0,80 kg·m² |
+| Période $T_0$ | ~ 5 min | ~ 9 min |
+| Inversion 180° | Complexe (retourner la chambre) | **Trivial** (pivoter le fléau) |
+| Équilibrage | Automatique (centré) | Ajustement contrepoids requis |
+| Encombrement dans le baril | Compact | Plus serré (fléau 400 mm vs ⌀ 580 mm) |
+
+> **Verdict** — La configuration fléau est **nettement supérieure** pour
+> la sensibilité et les tests de contrôle. L'encombrement est gérable :
+> le fléau de 400 mm tient dans le baril de ⌀ 580 mm avec 90 mm de
+> dégagement de chaque côté.
 
 ---
 
@@ -721,53 +929,49 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 
 ## Schéma d'ensemble
 
+### Vue en coupe (élévation)
+
 ```
-╔══════════════════════════════════════════════════╗
-║  BARIL 205L (posé au sol — référentiel fixe)     ║
-║                                                  ║
-║  ┄┄┄┄┄┄┄┄ couvercle du baril ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ║
-║            │ Fil de torsion │                    ║
-║            │ (seul lien     │                    ║
-║            │  mécanique)    │                    ║
-║            ▼                │                    ║
-║  ┌──────────────────────────────────────────┐    ║
-║  │  ASSEMBLAGE SUSPENDU (~ 10 kg)           │    ║
-║  │                                          │    ║
-║  │  ┌──────────────────────────────┐        │    ║
-║  │  │  CHAMBRE INOX 3 GAL          │        │    ║
-║  │  │  ╔════════════════════╗      │        │    ║
-║  │  │  ║ Acrylique + grille ║      │        │    ║
-║  │  │  ╚════════════════════╝      │        │    ║
-║  │  │  ┌────────────────────┐      │        │    ║
-║  │  │  │  PLASMA  H₂O       │      │        │    ║
-║  │  │  │  (2–5 mbar)        │      │        │    ║
-║  │  │  └────────┬───────────┘      │        │    ║
-║  │  │           │                  │        │    ║
-║  │  │  Magnétron 2,45 GHz         │        │    ║
-║  │  │  Vanne DN10 (fermée)        │        │    ║
-║  │  │  [Nixie IN-9] [IN-13]       │        │    ║
-║  │  └──────────────────────────────┘        │    ║
-║  │                                          │    ║
-║  │  ┌────────────────────────────────┐      │    ║
-║  │  │  🔋 Batterie Makita 18V 5Ah   │      │    ║
-║  │  │  ⚡ Onduleur 120V AC (sinus)   │      │    ║
-║  │  │  ⬆ Transfo HT → 4 kV DC       │      │    ║
-║  │  │  🖥 ESP32 (Wi-Fi, PID, logging)│      │    ║
-║  │  │  Capteurs : Pirani, coupleur,  │      │    ║
-║  │  │  photodiode, thermocouple      │      │    ║
-║  │  └────────────────────────────────┘      │    ║
-║  │  ┌──────┐                                │    ║
-║  │  │Miroir│ ← collé sur la chambre         │    ║
-║  │  └──────┘                                │    ║
-║  └──────────────────────────────────────────┘    ║
-║                                                  ║
-║  ┌──────────────────────────────────────────┐    ║
-║  │  Laser ──→ [miroir] ──→ PSD              │    ║
-║  │  (fixé à la paroi du baril)              │    ║
-║  └──────────────────────────────────────────┘    ║
-║                                                  ║
-║  📷 Caméra Wi-Fi (hublot)                        ║
-╚══════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════╗
+║  BARIL 205L (posé au sol — référentiel fixe)             ║
+║  ⌀ 580 mm × 880 mm                                      ║
+║                                                          ║
+║  ┄┄┄┄┄┄┄┄┄┄┄ couvercle du baril ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ║
+║                      │                                   ║
+║              Fil de torsion                              ║
+║              (seul lien mécanique)                       ║
+║                      │                                   ║
+║  ┌───────────────────●───────────────────┐               ║
+║  │     ← 200 mm →    │    ← 200 mm →    │               ║
+║  │                  FLÉAU                │               ║
+║  │                    │                  │               ║
+║  │  ┌─────────────┐   │  ┌───────────┐   │               ║
+║  │  │ CHAMBRE INOX│   │  │CONTREPOIDS│   │               ║
+║  │  │ 3 gal       │   │  │  ~ 10 kg  │   │               ║
+║  │  │ ⌀250×250 mm │   │  │           │   │               ║
+║  │  │             │  [M]  └───────────┘   │               ║
+║  │  │  ┌────────┐ │   │                   │               ║
+║  │  │  │ PLASMA │ │   │ [M] = Miroir      │               ║
+║  │  │  │  H₂O   │ │   │  (sur le fléau,   │               ║
+║  │  │  │ 2-5mbar│ │   │   près de l'axe)  │               ║
+║  │  │  └────────┘ │   │                   │               ║
+║  │  │  8× IN-13   │   │                   │               ║
+║  │  │  (octogone) │   │                   │               ║
+║  │  │  Magnétron  │   │                   │               ║
+║  │  │  Vanne DN10 │   │                   │               ║
+║  │  │  🔋 Batterie│   │                   │               ║
+║  │  │  ⚡ Onduleur │   │                   │               ║
+║  │  │  🖥 ESP32   │   │                   │               ║
+║  │  └─────────────┘   │                   │               ║
+║  └────────────────────┴───────────────────┘               ║
+║                                                          ║
+║  ┌──────────────────────────────────────────┐            ║
+║  │  Laser ──→ [Miroir] ──→ PSD              │            ║
+║  │  (fixés à la paroi interne du baril)     │            ║
+║  └──────────────────────────────────────────┘            ║
+║                                                          ║
+║  📷 Caméra Wi-Fi (hublot)                                ║
+╚══════════════════════════════════════════════════════════╝
 
     Extérieur du baril :
     ┌──────────────────────────────┐
@@ -777,9 +981,39 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
     │  📱 Dashboard Wi-Fi          │
     │  📷 Caméras mobiles Wi-Fi    │
     └──────────────────────────────┘
+```
 
-    Légende : ── = aucun câble entre baril et chambre
-              Le fil de torsion est le SEUL lien mécanique
+### Vue du dessus (plan d'implantation)
+
+```
+    ┌─────────────────── Baril ⌀ 580 mm ──────────────────┐
+    │                                                      │
+    │                        ●                             │
+    │                  fil de torsion                      │
+    │                        │                             │
+    │        CÔTÉ A          │         CÔTÉ B              │
+    │    ┌───────────┐  ─────┼─────  ┌──────────┐          │
+    │    │  Chambre  │  fléau│       │Contrepoid│          │
+    │    │   inox    │  400mm│       │  ~ 10 kg │          │
+    │    │  ⌀ 250    │       │       └──────────┘          │
+    │    │           │   [M] │                             │
+    │    │  N₁  N₂   │  miroir                             │
+    │    │N₈    N₃  │       │                             │
+    │    │  ⊕mag    │      Laser──→[M]──→PSD              │
+    │    │N₇    N₄  │       │     (sur paroi du baril)    │
+    │    │  N₆  N₅   │       │                             │
+    │    │           │       │                             │
+    │    └───────────┘       │                             │
+    │                        │                             │
+    │         90 mm          │        90 mm                │
+    │      dégagement        │     dégagement              │
+    │                                                      │
+    └──────────────────────────────────────────────────────┘
+
+    Légende : Nₖ = tube IN-13 (k = 1..8, espacés de 45°)
+              ⊕ = position du couplage magnétron
+              ● = axe du fil de torsion
+              [M] = miroir (sur le fléau, près de l'axe)
 ```
 
 ---

@@ -303,6 +303,90 @@ $$\eta = \frac{F_{\text{net}}}{P_{\text{abs}} / c}$$
 
 ---
 
+## 4.6 Attentes concrètes — Confirmer ou infirmer l'hypothèse
+
+> 💡 **Ce que l'expérience tranche** — L'hypothèse bohmienne prédit une
+> force excédentaire au-delà de la pression de radiation classique.
+> Les résultats possibles sont bornés et interprétables.
+
+### Grandeur clé : le ratio d'excès $\eta$
+
+$$\eta = \frac{F_{\text{net}}}{P_{\text{abs}} / c}$$
+
+où $F_{\text{net}}$ est la force nette mesurée (après soustraction de
+la charge fantôme) et $P_{\text{abs}}/c$ est la pression de radiation
+classique (~3,3 µN pour 1 kW).
+
+### Scénarios de résultat
+
+| Résultat | $\eta$ | Interprétation | Conséquence |
+|:---|:---|:---|:---|
+| **Nul** | $\eta < 1$ (compatible avec 0) | Pas de force au-delà de la physique classique | Hypothèse **infirmée** dans cette configuration |
+| **Classique** | $\eta \approx 1$ | Force = pression de radiation seule | Physique classique confirmée, pas d'effet bohmien |
+| **Excès modéré** | $1 < \eta < 10$ | Force excédentaire, ordre de grandeur µN | **Zone intéressante** — vérifications supplémentaires requises |
+| **Excès fort** | $\eta > 10$ | Force bien au-delà de la pression de radiation | Résultat **anomal** — chercher artefacts en priorité |
+| **Négatif** | $\eta < 0$ | Force dans le sens opposé | Artefact probable (thermique, EM) |
+
+### Ce qui CONFIRME l'hypothèse (tous les critères requis)
+
+1. **$\eta > 1$** de manière reproductible (≥ 5 essais, SNR > 3).
+2. **L'inversion 180°** du fléau inverse le signe de la force
+   (même amplitude, direction opposée).
+3. **Le gradient Nixie corrèle** avec la force : la direction de
+   l'asymétrie sur les 8 IN-13 pointe vers la direction de la force
+   mesurée par le pendule.
+4. **Le test au gaz noble (argon) est négatif** : $\eta_{\text{Ar}} < 0{,}3$.
+   L'argon produit un plasma symétrique (pas de dissociation),
+   donc pas de gradient de phase.
+5. **La charge fantôme (eau liquide) est négative** :
+   $F_{\text{fantôme}} < 0{,}3 \times F_{\text{mesuré}}$.
+6. **Le test à vide (sans plasma) est négatif** :
+   $F_{\text{vide}} \approx 0$.
+
+### Ce qui INFIRME l'hypothèse
+
+| Observation | Conclusion |
+|:---|:---|
+| $\eta \leq 1$ dans tous les essais | Pas de force excédentaire |
+| La force ne s'inverse pas avec le retournement 180° | Artefact mécanique ou thermique |
+| Le test argon donne $\eta \sim \eta_{\text{H₂O}}$ | La force n'est pas liée au gradient de phase (vapeur d'eau) |
+| Les 8 Nixie montrent un champ symétrique malgré une force | Artefact non lié au plasma |
+| La charge fantôme donne une force similaire | Effet purement thermique |
+
+### Matrice décisionnelle
+
+```
+  Nixie symétriques?  ──OUI──→  Force mesurée?  ──NON──→  NULL (conforme)
+          │                          │
+         NON                        OUI
+          │                          │
+          ▼                          ▼
+  Gradient visible  ──→  ARTEFACT probable (force sans
+          │                gradient = cause mécanique/EM)
+          │
+          ▼
+  Gradient corrèle
+  avec direction force?  ──NON──→  Coïncidence ou artefact
+          │
+         OUI
+          │
+          ▼
+  Inversion 180° OK?  ──NON──→  Artefact directionnel
+          │
+         OUI
+          │
+          ▼
+  Argon négatif?  ──NON──→  Effet non spécifique au H₂O
+          │
+         OUI
+          │
+          ▼
+  ✅ CANDIDAT POUR EFFET BOHMIEN
+     → Publier + inviter réplication indépendante
+```
+
+---
+
 ## Références
 
 1. **Tajmar, M. et al.** (2007). « Measurement of Gravitomagnetic and
