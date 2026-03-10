@@ -413,7 +413,9 @@ classique (~3,3 µN pour 1 kW).
 
 ### Matrice décisionnelle
 
-```
+![Matrice décisionnelle — Confirmer ou infirmer l'hypothèse](img/matrice_decisionnelle.svg)
+
+<!-- Fallback ASCII
   Nixie symétriques?  ──OUI──→  Force mesurée?  ──NON──→  NULL (conforme)
           │                          │
          NON                        OUI
@@ -441,7 +443,7 @@ classique (~3,3 µN pour 1 kW).
           ▼
   ✅ CANDIDAT POUR EFFET BOHMIEN
      → Publier + inviter réplication indépendante
-```
+-->
 
 ---
 

@@ -361,7 +361,9 @@ Pour maintenir le plasma au voisinage de la coupure $n_e \approx n_{e,c}$,
 on implémente une **boucle de rétroaction** (contrôle PID) pilotée par
 un [micro-contrôleur](https://fr.wikipedia.org/wiki/Microcontr%C3%B4leur) :
 
-```
+![Boucle de rétroaction PID — Homéostasie du plasma](img/boucle_pid.svg)
+
+<!-- Fallback ASCII
   Consigne : n_e = n_{e,c}
        │
        ▼
@@ -377,7 +379,7 @@ un [micro-contrôleur](https://fr.wikipedia.org/wiki/Microcontr%C3%B4leur) :
                  │  lumière RF, │
                  │  température)│
                  └───────────────┘
-```
+-->
 
 **Variables mesurées** (entrées du contrôleur) :
 

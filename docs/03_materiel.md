@@ -289,7 +289,9 @@ est au maximum du champ électrique de ce mode.
 La chambre inox regroupe **tous les composants actifs** de l'expérience.
 Voici l'agencement interne, vu en coupe :
 
-```
+![Disposition interne de la chambre — Vue en coupe](img/chambre_coupe.svg)
+
+<!-- Fallback ASCII
     ╔═══════════════════════════════════╗ ← Couvercle acrylique 3/4"
     ║  Grillage Faraday (maille <12mm) ║     + grillage
     ╚═══════════════════════════════════╝
@@ -313,7 +315,7 @@ Voici l'agencement interne, vu en coupe :
     │  Vanne DN10 (quart de tour) ──→  │ ← Pompage + injection H₂O
     └───── ── ── ── ── ── ── ── ──────┘
             Joint silicone
-```
+-->
 
 L'**alimentation embarquée** (batterie, onduleur, ESP32) est montée
 **à l'extérieur de la chambre**, solidaire du fléau. Elle n'est pas
@@ -404,7 +406,9 @@ Les tubes Nixie sont utilisés de manière non conventionnelle :
 Les 8 tubes sont montés **verticalement** sur la paroi intérieure de
 la chambre, espacés de **45°** (octogone régulier) :
 
-```
+![Vue du dessus — 8× Nixie IN-13 en octogone](img/nixie_octogone.svg)
+
+<!-- Fallback ASCII
             Vue du dessus — Chambre inox (⌀ 250 mm)
 
                       N₁ (0°)
@@ -419,7 +423,7 @@ la chambre, espacés de **45°** (octogone régulier) :
 
             Nₖ = tube IN-13 n° k
             Le magnétron est couplé à ~ 30° du N₁
-```
+-->
 
 Cette disposition permet de mesurer :
 
@@ -500,7 +504,9 @@ Mais l'avantage principal n'est pas le facteur 1,6× — c'est que :
 
 #### Géométrie du fléau
 
-```
+![Géométrie du fléau — Vue du dessus](img/fleau_geometrie.svg)
+
+<!-- Fallback ASCII
     Vue du dessus — Baril de 205L (⌀ 580 mm)
 
                     ┌─ Fil de torsion
@@ -518,7 +524,7 @@ Mais l'avantage principal n'est pas le facteur 1,6× — c'est que :
     └───────────────┴───────────────┘
                   Fléau
               (tige rigide)
-```
+-->
 
 | Paramètre | Valeur |
 |:---|:---|
@@ -851,7 +857,9 @@ offre un ADC plus rapide (1 MHz) et un DMA matériel.
 
 ### Architecture de la boucle
 
-```
+![Architecture de la boucle — ESP32 embarqué](img/esp32_architecture.svg)
+
+<!-- Fallback ASCII
   ┌────────────────────────────────────────────────────┐
   │       MICROCONTRÔLEUR (ESP32) — EMBARQUÉ            │
   │       Alimentation : batterie Makita 18V → DC-DC 5V │
@@ -870,7 +878,7 @@ offre un ADC plus rapide (1 MHz) et un DMA matériel.
   │   Wi-Fi → Dashboard temps réel (MQTT / WebSocket)    │
   │   SD    → Logging CSV (horodatage + tous canaux)     │
   └────────────────────────────────────────────────────┘
-```
+-->
 
 ### Capteurs — Détail
 
@@ -963,7 +971,9 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 
 ### Vue en coupe (élévation)
 
-```
+![Schéma d'ensemble — Vue en coupe (élévation)](img/ensemble_elevation.svg)
+
+<!-- Fallback ASCII
 ╔══════════════════════════════════════════════════════════╗
 ║  BARIL 205L (posé au sol — référentiel fixe)             ║
 ║  ⌀ 580 mm × 880 mm                                      ║
@@ -1013,11 +1023,13 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
     │  📱 Dashboard Wi-Fi          │
     │  📷 Caméras mobiles Wi-Fi    │
     └──────────────────────────────┘
-```
+-->
 
 ### Vue du dessus (plan d'implantation)
 
-```
+![Vue du dessus — Plan d'implantation](img/ensemble_plan.svg)
+
+<!-- Fallback ASCII
     ┌─────────────────── Baril ⌀ 580 mm ──────────────────┐
     │                                                      │
     │                        ●                             │
@@ -1046,7 +1058,7 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
               ⊕ = position du couplage magnétron
               ● = axe du fil de torsion
               [M] = miroir (sur le fléau, près de l'axe)
-```
+-->
 
 ---
 
