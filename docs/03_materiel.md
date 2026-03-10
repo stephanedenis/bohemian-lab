@@ -189,16 +189,30 @@ Soit un facteur $\sim 50\,000$ en puissance — blindage excellent.
 ### Complétion de la cage de Faraday (couvercle)
 
 Le couvercle en acrylique est transparent aux micro-ondes. Pour fermer
-la cage de Faraday :
+la cage de Faraday, le montage est réalisé **en sandwich** de bas en
+haut :
 
-- **Grillage métallique** (cuivre ou inox) plaqué sur la face extérieure
-  du couvercle. Maille < $\lambda/10 = 12$ mm.
-- **Contact galvanique** entre le grillage et la bride inox de la chambre
-  (ruban de cuivre conducteur, pinces, ou vis).
-- Le grillage est suffisamment ouvert pour permettre l'observation
-  visuelle du plasma et le passage de la lumière vers la photodiode.
-- L'ensemble (acrylique + grillage) remplace la transmission directe
-  par une cavité entièrement blindée.
+1. **Couvercle acrylique 3/4"** — posé sur la bride inox de la
+   chambre (joint silicone). Percé en son **centre** pour la vanne
+   DN10 (pompage + injection H₂O). L'acrylique assure la rigidité
+   structurelle et la transparence visuelle.
+2. **Magnétron** — monté **au-dessus** du couvercle acrylique, fixé
+   ou soudé à une ouverture pratiquée dans le grillage. L'antenne
+   du magnétron pointe vers le bas, à travers le couvercle, pour
+   injecter les micro-ondes dans la cavité. Le couplage se fait
+   par l'ouverture (iris) dans le grillage.
+3. **Grillage métallique** (cuivre ou inox) — posé par-dessus
+   l'ensemble. Maille < $\lambda/10 = 12$ mm. Le magnétron est
+   intégré au grillage via une ouverture dédiée. **Contact
+   galvanique** avec la bride inox (ruban de cuivre, pinces ou vis).
+
+Ce montage permet de :
+- **Voir le plasma** à travers le grillage et le couvercle acrylique
+  (observation visuelle directe).
+- Garder le magnétron **hors du volume sous vide** — il est à
+  pression atmosphérique, au-dessus du couvercle.
+- Fermer la cage de Faraday entièrement (inox + grillage) tout en
+  intégrant proprement le magnétron.
 
 ### Avantages par rapport au baril de 205L
 
@@ -232,8 +246,10 @@ micro-ondes. Ses dimensions :
 - Rayon : $a = 125$ mm
 - Hauteur : $d = 250$ mm
 - Parois : inox (conductivité finie → pertes ohmiques modérées)
-- Couvercle : acrylique 19 mm (partiellement transparent aux RF →
-  recouvert de grillage pour le confinement)
+- Couvercle : acrylique 19 mm, percé au centre (vanne DN10).
+  Partiellement transparent aux RF → recouvert de grillage pour
+  le confinement. Le magnétron est monté au-dessus du couvercle,
+  intégré au grillage.
 
 ### Modes de résonance
 
@@ -280,48 +296,123 @@ de la distribution de champ, et donc au gradient de phase recherché.
 
 ### Couplage du magnétron
 
-Le magnétron est couplé à la cavité par une **antenne** (sonde
-capacitive) ou un **iris** (ouverture dans la paroi) positionné pour
-exciter préférentiellement le mode TM$_{310}$. La position optimale
-est au maximum du champ électrique de ce mode.
+Le magnétron est monté **au-dessus du couvercle acrylique**, entre
+celui-ci et le grillage Faraday. Il est fixé (soudé ou boulonné)
+à une **ouverture dédiée dans le grillage**, de sorte que le montage
+est propre et rigide. L'antenne du magnétron pointe **vers le bas**
+à travers le couvercle, injectant les micro-ondes dans la cavité
+par un iris.
+
+Cette position est **excentrée** (~30° du N₁) pour exciter
+préférentiellement le mode TM$_{310}$. Le magnétron étant au-dessus
+du couvercle, il est **hors du volume sous vide** — à pression
+atmosphérique — ce qui simplifie l'alimentation HT et le
+refroidissement.
+
+> 💡 **Avantage clé** — Le magnétron n'est pas dans le vide, donc
+> pas besoin de feedthrough HT (4 000 V) à travers la paroi inox.
+> Il est accessible sans ouvrir la chambre. Le couvercle acrylique
+> est transparent aux micro-ondes : l'onde passe à travers sans
+> atténuation significative.
 
 ### Disposition interne de la chambre
 
-La chambre inox regroupe **tous les composants actifs** de l'expérience.
-Voici l'agencement interne, vu en coupe :
+La chambre inox est un **chaudron ouvert en haut**. Le couvercle
+acrylique est posé dessus avec un joint silicone. Au-dessus du
+couvercle se trouvent le magnétron et le grillage Faraday.
+
+Principe directeur : **tout ce qui est à l'intérieur de la chambre
+(dans le volume sous vide) est exposé aux micro-ondes**. Les
+composants électroniques sensibles doivent donc être soit **protégés
+RF** (blindage individuel), soit placés **de l'autre côté du
+grillage** (au-dessus du couvercle ou à l'extérieur de la chambre).
+
+Vue en coupe du montage complet :
 
 ![Disposition interne de la chambre — Vue en coupe](img/chambre_coupe.svg)
 
 <!-- Fallback ASCII
-    ╔═══════════════════════════════════╗ ← Couvercle acrylique 3/4"
-    ║  Grillage Faraday (maille <12mm) ║     + grillage
-    ╚═══════════════════════════════════╝
-    ┌───────────────────────────────────┐
-    │  8× Nixie IN-13                  │ ← Paroi interne (octogone)
-    │  (montés verticalement sur la    │
-    │   paroi, espacés de 45°)         │
+
+    EXTÉRIEUR (dessus) — pression atmosphérique
+    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+    ╔═══════════════════════════════════╗
+    ║  Grillage Faraday (maille <12mm) ║ ← Ferme la cage de Faraday
+    ║     ┌────────────┐               ║    On voit le plasma à travers
+    ║     │ MAGNÉTRON  │ ← fixé/soudé  ║
+    ║     │  antenne ↓ │   au grillage ║
+    ║     └─────┬──────┘               ║
+    ╚═══════════╪═══════════════════════╝
+    ╔═══════════╪═══════════════════════╗
+    ║  ACRYLIQUE 3/4" (19 mm)          ║ ← Couvercle transparent RF
+    ║     iris ↓        ┌──────┐       ║
+    ║                   │Vanne │ ← DN10 percée au centre
+    ║     (micro-ondes  │DN10  │   (pompage + injection H₂O)
+    ║      passent)     └──┬───┘       ║
+    ╚══════════════════════╪═══════════╝
+    ── Joint silicone ─────┼────────────
+    ┌──────────────────────┼───────────┐
+    │                      │           │ ← Chambre inox (chaudron)
+    │  8× Nixie IN-13 (paroi interne)  │    ouverture en haut
+    │  (octogone, espacés de 45°)      │
     │                                  │
     │  ┌────────────────────────────┐  │
     │  │  PLASMA  H₂O              │  │ ← Volume central (~11 L)
-    │  │  2–5 mbar                 │  │
+    │  │  2–5 mbar                 │  │    sous vide
     │  │                           │  │
     │  └────────────────────────────┘  │
     │                                  │
-    │  Magnétron (sonde ou iris)  ──→  │ ← Couplé à la paroi (~30°)
-    │  Jauge Pirani               ──→  │ ← Feedthrough paroi
-    │  Coupleur directionnel      ──→  │ ← Entre magnétron et cavité
-    │  Photodiode BPW34           ──→  │ ← Face au plasma
-    │  Thermocouple K             ──→  │ ← Collé paroi extérieure
+    │  Thermocouple K    ──→ paroi ext │ ← Seul capteur sur la paroi
     │                                  │
-    │  Vanne DN10 (quart de tour) ──→  │ ← Pompage + injection H₂O
-    └───── ── ── ── ── ── ── ── ──────┘
-            Joint silicone
+    └──────────────────────────────────┘
+            Fond inox (repose sur le fléau)
+
+    CAPTEURS HORS VOLUME IRRADIÉ :
+    ┌──────────────────────────────────┐
+    │  Jauge Pirani         → sur la   │
+    │  Coupleur directionnel  ligne de │
+    │  Photodiode BPW34       pompage  │
+    │                         ou au-   │
+    │                         dessus   │
+    │                         du       │
+    │                         grillage │
+    └──────────────────────────────────┘
 -->
 
+#### Zones du montage
+
+| Zone | Contenu | Pression | RF |
+|:---|:---|:---|:---|
+| **Intérieur chambre** (sous le couvercle) | Plasma H₂O, 8× Nixie IN-13 | Vide (2–5 mbar) | ⚠️ Exposé 1 kW |
+| **Entre couvercle et grillage** | Magnétron (antenne vers le bas) | Atmosphérique | ⚠️ Exposé (émetteur) |
+| **Au-dessus du grillage** | Rien (on regarde à travers) | Atmosphérique | ✅ Protégé |
+| **Extérieur chambre** (paroi + fléau) | ESP32, batterie, onduleur, capteurs | Atmosphérique | ✅ Protégé (cage inox) |
+
+#### Composants et leur placement
+
+| Composant | Emplacement | Justification |
+|:---|:---|:---|
+| **Magnétron** | Au-dessus du couvercle, fixé au grillage | Hors vide. Iris dans le grillage → onde passe vers le bas |
+| **Vanne DN10** | Centre du couvercle acrylique | Accès direct au volume sous vide pour pompage et injection |
+| **8× Nixie IN-13** | Paroi intérieure (octogone) | Doivent être dans le champ RF pour le mesurer (conception résistante aux ondes — tubes à décharge, pas d'électronique) |
+| **Jauge Pirani** | Ligne de pompage (extérieure) ou feedthrough paroi | Mesure la pression sans être irradiée |
+| **Coupleur directionnel** | Entre magnétron et iris (au-dessus du couvercle) | Hors vide, hors chambre — accès facile |
+| **Photodiode BPW34** | Au-dessus du grillage, regarde à travers le maillage | Protégée de la RF par le grillage, voit la lumière du plasma |
+| **Thermocouple K** | Paroi extérieure (collé dehors) | Passif, résistant RF, ne nécessite pas de feedthrough |
+| **ESP32 + électronique** | Extérieur, sur le fléau, boîtier blindé | Protégé par la cage inox + boîtier propre |
+
+> 💡 **Pourquoi les Nixie survivent aux micro-ondes** — Les tubes
+> IN-13 sont des **tubes à décharge gazeuse** (néon + mercure). Ils
+> n'ont aucun circuit intégré, aucun semi-conducteur. Le champ RF
+> modifie leur courant de décharge — c'est précisément ce qu'on
+> veut mesurer. Leurs résistances ballast sont des résistances de
+> puissance (pas de composant actif) et peuvent être placées à
+> l'extérieur de la chambre, connectées par des feedthroughs simples
+> (fils traversant la paroi).
+
 L'**alimentation embarquée** (batterie, onduleur, ESP32) est montée
-**à l'extérieur de la chambre**, solidaire du fléau. Elle n'est pas
-dans le volume sous vide — seuls les câbles capteurs et le câble HT
-du magnétron traversent la paroi via des feedthroughs étanches.
+**à l'extérieur de la chambre**, solidaire du fléau. Les seules
+traversées de paroi sont les **fils des 8 Nixie** (16 fils,
+feedthroughs simples) et le **thermocouple**.
 
 ---
 
@@ -397,8 +488,16 @@ Les tubes Nixie sont utilisés de manière non conventionnelle :
 - Placés **à l'intérieur de la chambre** (sur la paroi interne),
   ils agissent comme des **capteurs de rayonnement RF** — le champ
   électromagnétique modifie le courant de décharge dans le tube.
+- Étant des **tubes à décharge** sans composant semi-conducteur,
+  ils résistent aux micro-ondes — c'est justement le champ RF qui
+  module leur décharge, ce qu'on veut mesurer.
+- Leurs **résistances ballast** sont placées **à l'extérieur** de
+  la chambre, connectées par des feedthroughs simples (fils à
+  travers la paroi inox). Aucun composant électronique actif n'est
+  exposé au champ RF.
 - La longueur de la colonne lumineuse donne une **indication visuelle
-  directe** du flux RF en ce point.
+  directe** du flux RF en ce point — visible à travers le grillage
+  et le couvercle acrylique.
 - En disposant **8 tubes IN-13** autour de la chambre, on obtient une
   **cartographie octogonale** du gradient de champ / densité plasma.
 
@@ -416,14 +515,16 @@ la chambre, espacés de **45°** (octogone régulier) :
                     ╱        ╲
                N₈ (315°)   N₂ (45°)
               │                    │
-        N₇ (270°)   ┌──────┐  N₃ (90°)
-              │     │magnét│     │
-               N₆ (225°)   N₄ (135°)
-                    ╲        ╱
-                      N₅ (180°)
+        N₇ (270°)              N₃ (90°)
+              │     ┌──────┐     │
+               N₆ (225°)  │vanne │  N₄ (135°)
+                    ╲    │DN10  │  ╱
+                      N₅│(180°)│
+                         └──────┘
 
             Nₖ = tube IN-13 n° k
-            Le magnétron est couplé à ~ 30° du N₁
+            Le magnétron est au-dessus du couvercle,
+            couplé par iris à ~ 30° du N₁
 -->
 
 Cette disposition permet de mesurer :
@@ -443,10 +544,11 @@ Cette disposition permet de mesurer :
 ### Lecture des Nixie par l'ESP32
 
 Chaque tube IN-13 est alimenté en série avec une **résistance ballast**
-de précision (± 1 %). Le courant $I_k$ dans chaque tube est mesuré par
-l'ESP32 via un shunt de 10 Ω (→ signal 0–50 mV pour 0–5 mA, amplifié
-par un INA219 ou un ADS1115). Les 8 courants sont loggés en CSV
-et transmis en Wi-Fi.
+de précision (± 1 %), placée **à l'extérieur** de la chambre (protégée
+de la RF par la cage inox). Le courant $I_k$ dans chaque tube est
+mesuré par l'ESP32 via un shunt de 10 Ω (→ signal 0–50 mV pour
+0–5 mA, amplifié par un INA219 ou un ADS1115). Les 8 courants sont
+loggés en CSV et transmis en Wi-Fi.
 
 Alternativement, une **caméra Wi-Fi** embarquée peut photographier les
 8 tubes simultanément pour une lecture visuelle directe.
@@ -904,10 +1006,12 @@ le contrôleur corrige.
 
 #### Luminosité plasma (photodiode)
 
-Une photodiode (BPW34 ou similaire) placée face au couvercle acrylique
-mesure l'intensité lumineuse de la recombinaison radiative, qui est
-proportionnelle à $n_e^2$. C'est un proxy redondant de la densité
-électronique.
+Une photodiode (BPW34 ou similaire) placée **au-dessus du grillage**
+Faraday regarde le plasma à travers le maillage et le couvercle
+acrylique. Elle est ainsi **protégée de la RF** par le grillage tout
+en mesurant l'intensité lumineuse de la recombinaison radiative,
+qui est proportionnelle à $n_e^2$. C'est un proxy redondant de la
+densité électronique.
 
 #### Température (thermocouple)
 
