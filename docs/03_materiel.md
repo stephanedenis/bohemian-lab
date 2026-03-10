@@ -478,6 +478,55 @@ Le plasma agit comme un **modulateur de phase non-linéaire** :
 - Ce gradient de phase est l'analogue du $\nabla S$ de la mécanique
   bohmienne.
 
+### Émission optique — Couleur du plasma
+
+> 💡 **En termes simples** — La couleur d'un plasma n'est pas
+> arbitraire : chaque espèce chimique émet de la lumière à des
+> longueurs d'onde précises, comme une empreinte digitale lumineuse.
+> Un plasma de vapeur d'eau est **bleu-violet** avec un cœur
+> blanc-bleu — assez différent d'un plasma d'argon (violet pur) ou
+> de néon (rouge-orange). Ce sont ces couleurs qui sont représentées
+> dans le [schéma SVG de l'expérience de torsion](img/torsion_experience.svg).
+
+Le spectre d'émission d'un plasma H₂O basse pression à 2,45 GHz est
+dominé par les transitions suivantes (Pearse & Gaydon [13],
+Bruggeman *et al.* [14], base NIST ASD [15]) :
+
+| Zone | Couleur visible | Longueur d'onde | Espèce / Transition | Hex (SVG) |
+|:---|:---|:---|:---|:---|
+| **Cœur** | Blanc pur | Continuum | Bremsstrahlung + recombinaison (~3 000 K) | `#ffffff` |
+| Très chaud | Blanc-cyan | 306–309 nm (UV → bleu perçu) | OH· A²Σ⁺ → X²Π (bande ultraviolette) | `#e0f2fe` |
+| Chaud | Cyan | 309 nm (perçu) | OH· (système $\Delta v = 0$, tête de bande à 306,4 nm) | `#7dd3fc` |
+| Intermédiaire | **Bleu vif** | **486,1 nm** | H$_\beta$ (Balmer, $n=4 \to 2$) | `#38bdf8` |
+| Transition | Indigo | 486 → 656 nm | Mélange H$_\beta$ + faible H$_\alpha$ | `#6366f1` |
+| Halo | **Violet** | **656,3 nm** + résiduel bleu | H$_\alpha$ (Balmer, $n=3 \to 2$) + continuum bleu | `#8b5cf6` |
+| Frange | Violet-rose | 656 nm atténué | H$_\alpha$ basse densité + O I 777 nm (proche IR) | `#a855f7` |
+| Extinction | Rose pâle | — | Faible recombinaison résiduelle | `#c084fc` |
+| Bord | Transparent | — | Fond | `#e9d5ff` → 0 |
+
+> **Note** — La raie H$_\alpha$ (656 nm) est dans le rouge pur, mais
+> dans un plasma H₂O à basse pression elle se superpose toujours au
+> continuum bleu et aux raies OH·, donnant visuellement un **violet**
+> (mélange rouge + bleu) et non un rouge pur. C'est une caractéristique
+> distinctive des plasmas de vapeur d'eau par rapport aux plasmas
+> d'hydrogène pur.
+
+#### Comparaison avec d'autres plasmas
+
+| Gaz | Couleur dominante | Raies principales | Référence |
+|:---|:---|:---|:---|
+| **H₂O** (cette expérience) | **Blanc-bleu → violet** | OH· 309 nm, H$_\beta$ 486 nm, H$_\alpha$ 656 nm | Bruggeman [14] |
+| Argon | Violet-lilas | Ar I 750, 763, 811 nm | NIST ASD [15] |
+| Néon | Rouge-orange | Ne I 585, 640 nm | NIST ASD [15] |
+| Azote (air) | Bleu-rose | N₂ bandes 337, 358 nm; N₂⁺ 391 nm | Pearse & Gaydon [13] |
+| Hélium | Jaune-rose | He I 587, 668 nm | NIST ASD [15] |
+
+Cette signature spectrale est utile pour **vérifier visuellement** que
+le plasma est bien constitué de vapeur d'eau dissociée (et non d'air
+résiduel). Un plasma bleu-violet avec un cœur blanc confirme la
+présence dominante de H et OH·. Un plasma rose ou rose-bleu
+indiquerait une contamination par l'azote de l'air (fuite).
+
 ---
 
 ## 3.5 Capteurs — Tubes Nixie linéaires (8× IN-13)
@@ -887,6 +936,46 @@ où $\kappa$ est la **constante de torsion** du fil (N·m/rad).
 
 ![Expérience de torsion — Résultats attendus](img/torsion_experience.svg)
 
+> ⚠️ **Direction de F — Ce n'est PAS une fusée !**
+>
+> La flèche F sur le schéma peut paraître contraire à l'intuition.
+> Voici la différence fondamentale avec un moteur à réaction :
+>
+> | | **Fusée** | **Cette expérience** |
+> |:---|:---|:---|
+> | Système | **Ouvert** — les gaz brûlés s'échappent | **Fermé** — le plasma reste enfermé |
+> | Principe | 3ᵉ loi de Newton : masse éjectée → réaction | Gradient du potentiel quantique $Q$ |
+> | Ce qui sort | Des gaz à haute vitesse | **Rien** |
+> | Direction de la force | Opposée à l'éjection | Opposée au gradient $\nabla Q$ |
+>
+> Dans une fusée, le feu sort par derrière et la fusée avance par
+> devant. Ici, **rien ne sort** : le plasma est confiné dans la chambre
+> hermétique sous vide. La force vient du **gradient de phase** de
+> l'onde pilote dans le plasma, créé par l'asymétrie de densité
+> électronique $n_e$.
+>
+> L'analogie correcte n'est pas la fusée, mais la **pression de
+> radiation** : quand la lumière frappe un miroir, elle le pousse
+> *sans que rien ne s'échappe*. Ici, l'onde micro-onde interagit avec
+> le gradient de plasma et pousse la paroi du côté où le plasma
+> est **moins dense** (opposé au magnétron). C'est $F = -\nabla Q$ :
+> la chambre est poussée *à l'opposé* du pic de potentiel quantique.
+>
+> Sur le schéma, la flèche F part du magnétron (zone de haut $Q$)
+> et pointe vers l'extérieur de la chambre (zone de bas $Q$). C'est
+> la direction où **la chambre se déplace**.
+>
+> ```
+> Fusée (éjection)          Expérience (gradient Q)
+>
+>  🚀 →→→  🔥🔥🔥           ┌──────────────┐
+>  avance   gaz éjectés      │  ▒▒ magn.  │  → F
+>  ←───── réaction         │  ▒▒▒▒▒plasma│
+>                          │  haut Q → bas Q│
+>  Masse s'échappe          └──────────────┘
+>  (≠ de notre cas)        Rien ne sort !
+> ```
+
 <!-- Fallback ASCII
     ① REPOS (θ = 0)        ② HORAIRE (θ > 0)      ③ ANTI-HORAIRE (θ < 0)
     ┌──── Baril ────┐      ┌──── Baril ────┐       ┌──── Baril ────┐
@@ -1284,6 +1373,35 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
     Stress and Strain*. 7ᵉ édition, McGraw-Hill.
     ISBN 978-0-07-072542-3.
     (Constante de torsion d'un fil cylindrique : $\kappa = \pi G r^4 / 2L$.)
+
+11. **Makita BL1860B** — Batterie Li-ion 18 V / 6,0 Ah (108 Wh). BMS
+    intégré. Fiche produit :
+    [makita.ca](https://www.makita.ca/productdetail/BL1860B)
+
+12. **Lieberman, M. A. & Lichtenberg, A. J.** (2005). *Principles of
+    Plasma Discharges and Materials Processing*. 2ᵉ édition, Wiley.
+    ISBN 978-0-471-72001-0.
+    (Chapitre 12 : plasmas micro-ondes et couplage à 2,45 GHz.)
+
+13. **Pearse, R. W. B. & Gaydon, A. G.** (1976). *The Identification
+    of Molecular Spectra*. 4ᵉ édition, Chapman & Hall.
+    ISBN 978-0-412-14350-5.
+    (Tables de référence pour les bandes moléculaires OH·, N₂, etc.
+    Système A²Σ⁺ → X²Π de OH· : tête de bande à 306,4 nm.)
+
+14. **Bruggeman, P. J. *et al.*** (2014). « Gas temperature
+    determination from rotational lines in non-equilibrium plasmas:
+    a review ». *Plasma Sources Science and Technology*, 23(2), 023001.
+    [doi:10.1088/0963-0252/23/2/023001](https://doi.org/10.1088/0963-0252/23/2/023001)
+    (Émission OH· dans les plasmas de vapeur d'eau à pression
+    atmosphérique et sub-atmosphérique. Spectre OH· A–X à 306–309 nm.)
+
+15. **Kramida, A., Ralchenko, Yu., Reader, J. & NIST ASD Team** (2024).
+    *NIST Atomic Spectra Database* (version 5.12).
+    National Institute of Standards and Technology, Gaithersburg, MD.
+    [nist.gov/pml/atomic-spectra-database](https://www.nist.gov/pml/atomic-spectra-database)
+    (Raies Balmer : H$_\alpha$ 656,28 nm, H$_\beta$ 486,13 nm.
+    Raies O I : 777,19 / 777,42 / 777,54 nm.)
 
 ---
 

@@ -54,6 +54,19 @@ Le vent ionique ne peut pas transmettre de force à l'extérieur car :
 - Toute force exercée par le vent ionique sur une paroi est exactement
   compensée par la force de réaction sur le plasma.
 
+> 🔍 **Distinction essentielle** — Le vent ionique (ions éjectés vers
+> les parois) s'annule dans un système fermé par Newton 3. C'est le
+> même mécanisme qu'une fusée — sauf que dans une fusée, les gaz
+> **s'échappent** (système ouvert), et ici ils **restent enfermés**.
+>
+> La force bohmienne que l'on cherche est fondamentalement différente :
+> elle n'implique **aucun transport de masse**. C'est un transfert de
+> quantité de mouvement entre le champ électromagnétique et la paroi,
+> médié par le gradient du potentiel quantique $Q$ dans le plasma.
+> L'analogie correcte n'est pas la fusée, mais la **pression de
+> radiation** (photons poussant un miroir sans s'échapper).
+> Voir la [discussion détaillée](03_materiel.md#schéma-de-lexpérience-de-torsion).
+
 #### Vérification
 
 - Test de référence avec **gaz noble** (argon) à la place de la vapeur

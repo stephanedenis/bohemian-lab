@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" font-family="'Segoe UI', Arial, sans-serif" font-size="11">
+  <rect width="680" height="420" fill="#ffffff"/>
   <!-- Titre -->
   <text x="340" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">Architecture de la boucle — ESP32 embarqué</text>
   <text x="340" y="40" text-anchor="middle" font-size="11" fill="#64748b">Alimentation : batterie Makita 18V → DC-DC 5V</text>

@@ -52,6 +52,25 @@ pas entièrement capturé par la pression de radiation standard :
 
 $$F_Q = -\nabla Q = -\nabla \left( -\frac{\hbar^2}{2m} \frac{\nabla^2 R}{R} \right)$$
 
+> ⚠️ **Ce n'est pas une fusée** — Le mécanisme de poussée ici est
+> fondamentalement différent d'un moteur à réaction. Dans une fusée,
+> des gaz brûlés **s'échappent** (système ouvert) et la fusée recule
+> par réaction (3ᵉ loi de Newton). Ici, **rien ne sort** : le plasma
+> reste enfermé dans la chambre hermtique.
+>
+> La force provient du **gradient du potentiel quantique** $\nabla Q$
+> dans le plasma. Le $Q$ est maximal près du magnétron (champ intense,
+> gradient de $n_e$ abrupt, forte courbure de $R$) et la force
+> $F = -\nabla Q$ pousse la chambre vers la zone de plus faible $Q$
+> — c'est-à-dire **à l'opposé du magnétron**.
+>
+> L'analogie correcte est la **pression de radiation** : un photon
+> qui frappe un miroir le pousse *sans s'échapper*. De même, l'onde
+> micro-onde interagit avec le gradient de plasma et exerce une
+> poussée sur la paroi — dans un système totalement fermé.
+> Voir le [diagramme de torsion](03_materiel.md#schéma-de-lexpérience-de-torsion)
+> pour la géométrie détaillée.
+
 ### Critère de succès
 
 Un déplacement reproductible du pendule de torsion, corrélé temporellement

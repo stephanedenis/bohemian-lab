@@ -466,6 +466,38 @@ poussière). Tout excès mesuré par rapport à cette valeur serait attribuable
 - **Non-réversibilité par rotation** : rotation de 180° du dispositif
   interne → inversion de la direction de la force (et non annulation).
 
+### Direction de la force — Pression de radiation, pas propulsion à réaction
+
+> 💡 **En termes simples** — Sur les schémas de l'expérience, la
+> flèche F peut sembler contraire à l'intuition. On pourrait penser
+> que le plasma « souffle » la chambre comme le feu d'une fusée. En
+> réalité, c'est **l'inverse exact** :
+>
+> - **Fusée** : les gaz brûlés s'échappent du système (système
+>   ouvert). La fusée recule par conservation de la quantité de
+>   mouvement. Force = $m \dot{v}_{\text{éjection}}$.
+> - **Notre expérience** : **rien ne sort**. Le plasma reste confiné
+>   dans la chambre hermtique sous vide. La force vient du gradient
+>   du potentiel quantique $Q$ dans le plasma, pas d'une éjection.
+>
+> L'analogie correcte est la **pression de radiation** : quand un
+> photon frappe un miroir, il le pousse *sans s'échapper*. De même,
+> l'onde micro-onde interagit avec le gradient de densité électronique
+> du plasma et pousse la paroi vers la zone de plus faible $Q$ —
+> c'est-à-dire **à l'opposé du magnétron** (où $n_e$ et $Q$ sont
+> maximaux).
+
+Le champ de vitesse bohmien dans le plasma est $\vec{v} = \nabla S / m$ ;
+le flux d'énergie (vecteur de Poynting) est dévié par le gradient de
+phase. La réaction mécanique de cette déviation sur la paroi est une
+poussée nette dans la direction $-\nabla Q$.
+
+Le transfert de quantité de mouvement s'opère entre le **champ EM** et
+la **matière** (paroi), médié par le potentiel quantique — sans
+transport de masse. C'est précisément ce qui rend cet effet
+intéressant : il violerait la conservation classique de la quantité de
+mouvement dans un système fermé (d'où l'objectif 1 du protocole).
+
 ---
 
 ## 2.6 Lien avec le formalisme quantique computationnel

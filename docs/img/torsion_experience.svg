@@ -1,17 +1,112 @@
+<!--
+  Géométrie (vue du dessus) — mise à jour :
+    • Magnétron = cercle r=8, DANS la chambre, décentré côté force.
+      Repos : décalé vers la gauche (x=50) dans la chambre (cx=60).
+      Le motif de cavités imite la structure intérieure d'un magnétron.
+    • Force F ⊥ au bras de pivot, partant du bord du magnétron.
+    • Contrepoids dans panneaux 2 & 3 : opacity=0.5, sans libellés.
+
+  ☁ DIRECTION DE F — ATTENTION, C'EST CONTRAIRE À UNE FUSÉE :
+    • Fusée : les gaz s'éjectent (système OUVERT) → réaction ⇐.
+    • Ici  : le plasma reste enfermé (système FERMÉ), rien ne sort.
+      La force vient du gradient de potentiel quantique Q dans le
+      plasma. Le ∇Q est maximal côté magnétron (champ intense,
+      gradient de n_e abrupt) et la force F = −∇Q pousse la
+      chambre dans la direction opposée au magnétron.
+    • Sur le schéma, la flèche F pointe DEPUIS le magnétron VERS
+      l'extérieur de la chambre = direction de la poussée sur
+      la paroi. C'est la direction où la chambre se déplace.
+    • Analogie : pression de radiation (lumiere pousse le miroir),
+      PAS propulsion à réaction (gaz éjectés).
+-->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 520" font-family="'Segoe UI', Arial, sans-serif" font-size="11">
+  <rect width="740" height="520" fill="#ffffff"/>
   <defs>
-    <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/>
+    <marker id="arrowR" markerWidth="5" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L5,2 L0,4 Z" fill="#dc2626"/>
     </marker>
-    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/>
+    <marker id="arrowG" markerWidth="5" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L5,2 L0,4 Z" fill="#16a34a"/>
     </marker>
-    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
+    <marker id="arrowAmber" markerWidth="5" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L5,2 L0,4 Z" fill="#4338ca"/>
     </marker>
-    <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6 Z" fill="#d97706"/>
-    </marker>
+    <!-- Glow plasma H₂O — dominante OH· (UV→bleu-blanc) + Hβ (bleu 486nm).
+         Halo étendu, intensité forte pour visibilité sur fond gris. -->
+    <filter id="plasmaGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0.3
+                0 0 0 0 0.55
+                0 0 0 0 1
+                0 0 0 1.2 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!--
+      ╔══════════════════════════════════════════════════════════════════╗
+      ║  PALETTE PLASMA H₂O — Magnétron 2,45 GHz, ~20 mbar            ║
+      ╠══════╦══════════╦═══════════╦════════════════════════════════════╣
+      ║ Stop ║ Hex      ║ Opacité   ║ Origine physique                  ║
+      ╠══════╬══════════╬═══════════╬════════════════════════════════════╣
+      ║  0 % ║ #ffffff  ║ 1.00      ║ Continuum thermique ~3 000 K      ║
+      ║  8 % ║ #e0f2fe  ║ 1.00      ║ OH· UV rétrodiffusé (bleu-blanc)  ║
+      ║ 18 % ║ #7dd3fc  ║ 0.95      ║ OH· A²Σ⁺→X²Π, 306–309 nm (cyan) ║
+      ║ 32 % ║ #38bdf8  ║ 0.90      ║ Hβ 486 nm (bleu vif)              ║
+      ║ 45 % ║ #6366f1  ║ 0.80      ║ Transition Hβ→Hα (indigo)         ║
+      ║ 60 % ║ #8b5cf6  ║ 0.65      ║ Mélange Hα 656 nm + bleu (violet) ║
+      ║ 75 % ║ #a855f7  ║ 0.40      ║ Halo basse densité (violet-rose)  ║
+      ║ 88 % ║ #c084fc  ║ 0.15      ║ Extinction ionique (rose pâle)    ║
+      ║100 % ║ #e9d5ff  ║ 0.00      ║ Fond (transparent)                ║
+      ╚══════╩══════════╩═══════════╩════════════════════════════════════╝
+
+      Le point focal (fx, fy) est décalé vers le magnétron dans chaque
+      panneau : le plasma est plus dense sous l'antenne d'émission.
+    -->
+    <!-- Panneau 2 (horaire) : magnétron en haut-gauche de la chambre
+         BBox cercle r=19 à (64,221) : x∈[45,83] y∈[202,240], dim=38×38
+         Magnétron (61,212) → fx=(61−45)/38≈0.42  fy=(212−202)/38≈0.26 -->
+    <radialGradient id="plasmaGrad2" cx="0.5" cy="0.5" r="0.55" fx="0.42" fy="0.26">
+      <stop offset="0%"  stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="8%"  stop-color="#e0f2fe" stop-opacity="1"/>
+      <stop offset="18%" stop-color="#7dd3fc" stop-opacity="0.95"/>
+      <stop offset="32%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="45%" stop-color="#6366f1" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#8b5cf6" stop-opacity="0.65"/>
+      <stop offset="75%" stop-color="#a855f7" stop-opacity="0.4"/>
+      <stop offset="88%" stop-color="#c084fc" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#e9d5ff" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Panneau 3 (anti-horaire) : magnétron en bas-gauche de la chambre
+         BBox cercle r=19 à (64,179) : x∈[45,83] y∈[160,198], dim=38×38
+         Magnétron (61,188) → fx=(61−45)/38≈0.42  fy=(188−160)/38≈0.74 -->
+    <radialGradient id="plasmaGrad3" cx="0.5" cy="0.5" r="0.55" fx="0.42" fy="0.74">
+      <stop offset="0%"  stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="8%"  stop-color="#e0f2fe" stop-opacity="1"/>
+      <stop offset="18%" stop-color="#7dd3fc" stop-opacity="0.95"/>
+      <stop offset="32%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="45%" stop-color="#6366f1" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#8b5cf6" stop-opacity="0.65"/>
+      <stop offset="75%" stop-color="#a855f7" stop-opacity="0.4"/>
+      <stop offset="88%" stop-color="#c084fc" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#e9d5ff" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Motif cavités magnétron (vue du dessus) -->
+    <g id="magnetron">
+      <!-- Corps du magnétron -->
+      <circle r="8" fill="#ef4444" stroke="#b91c1c" stroke-width="0.8"/>
+      <!-- Cavités intérieures (6 petits cercles en anneau) -->
+      <circle cx="0" cy="-4.5" r="1.4" fill="#7f1d1d"/>
+      <circle cx="3.9" cy="-2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="3.9" cy="2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="0" cy="4.5" r="1.4" fill="#7f1d1d"/>
+      <circle cx="-3.9" cy="2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="-3.9" cy="-2.25" r="1.4" fill="#7f1d1d"/>
+      <!-- Cathode centrale -->
+      <circle r="2" fill="#fca5a5" stroke="#b91c1c" stroke-width="0.5"/>
+    </g>
   </defs>
 
   <!-- Titre -->
@@ -20,33 +115,35 @@
 
   <!-- ==================== PANNEAU 1 : REPOS (équilibre) ==================== -->
   <g transform="translate(15,0)">
-    <!-- Cadre -->
     <rect x="15" y="60" width="210" height="260" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
     <text x="120" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">① Repos (équilibre)</text>
     <text x="120" y="96" text-anchor="middle" font-size="9" fill="#94a3b8">Plasma OFF — aucune force</text>
 
-    <!-- Baril (cercle extérieur) -->
+    <!-- Baril -->
     <circle cx="120" cy="200" r="85" fill="none" stroke="#78716c" stroke-width="2.5"/>
-    <text x="120" y="128" text-anchor="middle" font-size="7" fill="#78716c">Baril ⌀ 580 mm</text>
+    <text x="120" y="128" text-anchor="middle" font-size="7" fill="#78716c">Baril</text>
 
-    <!-- Plateau (barre horizontale passant par le centre) -->
+    <!-- Bras de pivot (plateau) — horizontal -->
     <line x1="40" y1="200" x2="200" y2="200" stroke="#57534e" stroke-width="3"/>
 
     <!-- Fil de torsion (point central) -->
     <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
 
-    <!-- Chambre (côté A — à gauche) -->
-    <rect x="42" y="184" width="36" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="60" y="199" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="bold">Chambre</text>
-    <text x="60" y="209" text-anchor="middle" font-size="6" fill="#1e40af">⌀ 250</text>
+    <!-- Chambre (cercle r=20, centre sur le bras côté A) -->
+    <circle cx="60" cy="200" r="20" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <text x="60" y="226" text-anchor="middle" font-size="7" fill="#475569" font-weight="bold">Chambre</text>
 
-    <!-- Contrepoids (côté B — à droite) -->
-    <rect x="162" y="188" width="32" height="24" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
-    <text x="178" y="204" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="bold">10 kg</text>
+    <!-- Magnétron : cercle avec cavités, DANS la chambre, décentré ⊥ au bras.
+         Centre chambre = (60,200). Magnétron à (60,190) → 10 px au-dessus du bras.
+         Le magnétron émet vers le haut → la réaction pousse vers le bas ⊥ au bras
+         → couple maximal sur le fil de torsion. -->
+    <use href="#magnetron" x="60" y="190"/>
+    <text x="60" y="178" text-anchor="middle" font-size="6" fill="#b91c1c" font-weight="bold">Magnétron</text>
 
-    <!-- Bras de levier L -->
-    <line x1="60" y1="222" x2="120" y2="222" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="3,2"/>
-    <text x="90" y="234" text-anchor="middle" font-size="7" fill="#2563eb" font-weight="bold">L = 200 mm</text>
+    <!-- Contrepoids -->
+    <circle cx="178" cy="200" r="16" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="178" y="198" text-anchor="middle" font-size="6" fill="#991b1b" font-weight="bold">Contre-</text>
+    <text x="178" y="206" text-anchor="middle" font-size="6" fill="#991b1b" font-weight="bold">poids</text>
 
     <!-- Angle θ = 0 -->
     <text x="120" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">θ = 0</text>
@@ -54,90 +151,117 @@
     <text x="120" y="308" text-anchor="middle" font-size="8" fill="#64748b">Laser → PSD centré</text>
   </g>
 
-  <!-- ==================== PANNEAU 2 : TORSION HORAIRE ==================== -->
+  <!-- ==================== PANNEAU 2 : TORSION HORAIRE (θ = +20°) ==================== -->
   <g transform="translate(257,0)">
-    <!-- Cadre -->
     <rect x="15" y="60" width="210" height="260" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
     <text x="120" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">② Torsion horaire</text>
-    <text x="120" y="96" text-anchor="middle" font-size="9" fill="#f87171">Plasma ON — force F vers côté A</text>
+    <text x="120" y="96" text-anchor="middle" font-size="9" fill="#f87171">Plasma ON — force ⊥ au bras</text>
 
     <!-- Baril -->
     <circle cx="120" cy="200" r="85" fill="none" stroke="#78716c" stroke-width="2.5"/>
 
-    <!-- Plateau (pivoté ~15° horaire) -->
-    <line x1="43" y1="179" x2="197" y2="221" stroke="#57534e" stroke-width="3"/>
+    <!-- Ligne de référence (position repos, pointillée fine) -->
+    <line x1="40" y1="200" x2="200" y2="200" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
 
-    <!-- Fil de torsion (point central — tordu) -->
+    <!-- Contrepoids pivoté (en arrière-plan, 50% opacité, sans libellés)
+         Centre à (175, 180) pour +20° horaire -->
+    <circle cx="175" cy="180" r="16" fill="#fecaca" stroke="#dc2626" stroke-width="1.5" opacity="0.25"/>
+
+    <!-- Bras de pivot pivoté +20° horaire -->
+    <line x1="45" y1="227" x2="195" y2="173" stroke="#57534e" stroke-width="3"/>
+
+    <!-- Fil de torsion -->
     <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
 
-    <!-- Chambre (pivotée) -->
-    <rect x="38" y="163" width="36" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" transform="rotate(15, 56, 179)"/>
-    <text x="56" y="178" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="bold">Chambre</text>
-    <text x="56" y="188" text-anchor="middle" font-size="6" fill="#1e40af">⌀ 250</text>
+    <!-- Chambre pivotée — centre à (64, 221) -->
+    <circle cx="64" cy="221" r="20" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <!-- Plasma H₂O remplissant la chambre (r=19, clipé r=19 → pas de débordement).
+         Cercle centré sur la chambre ; le gradient plasmaGrad2 a son point focal
+         décalé vers le magnétron (61,212) pour l'asymétrie de densité. -->
+    <clipPath id="clipChambre2"><circle cx="64" cy="221" r="19"/></clipPath>
+    <circle cx="64" cy="221" r="19" fill="url(#plasmaGrad2)" filter="url(#plasmaGlow)" clip-path="url(#clipChambre2)"/>
 
-    <!-- Contrepoids (pivoté) -->
-    <rect x="168" y="206" width="32" height="24" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5" transform="rotate(15, 184, 218)"/>
-    <text x="184" y="222" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="bold">10 kg</text>
+    <!-- Magnétron dans la chambre, décentré ⊥ au bras pivoté (+20°).
+         Bras direction = (cos20°, −sin20°) = (0.940, −0.342) [de gauche à droite].
+         ⊥ au bras vers le "haut" relatif = (−sin20°, −cos20°) = (−0.342, −0.940).
+         Centre chambre (64, 221), offset 10 px ⊥ : (64−3, 221−9) = (61, 212). -->
+    <use href="#magnetron" x="61" y="212"/>
 
-    <!-- Flèche force F sur la chambre -->
-    <line x1="56" y1="155" x2="36" y2="140" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowR)"/>
-    <text x="25" y="135" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="bold">F</text>
+    <!-- Force F : ⊥ au bras, depuis le magnétron.
+         Le magnétron émet vers le "haut" (−sin20°, −cos20°) → réaction vers le "bas" :
+         Direction force = (sin20°, cos20°) = (0.342, 0.940) → pousse le côté gauche
+         du bras vers le bas en SVG = rotation horaire ✓.
+         Départ bord magnétron côté bas : (61+0.342·8, 212+0.940·8) = (64, 220).
+         Flèche 28 px : arrivée (64+10, 220+26) = (74, 246). -->
+    <line x1="64" y1="220" x2="74" y2="246" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrowR)"/>
+    <text x="80" y="250" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="bold">F</text>
 
-    <!-- Arc de rotation (horaire) -->
-    <path d="M140,175 A25,25 0 0,1 145,195" fill="none" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
-    <text x="158" y="182" font-size="8" fill="#d97706" font-weight="bold">↻</text>
-
-    <!-- Angle θ > 0 -->
-    <path d="M120,200 L148,200" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-    <path d="M135,200 A15,15 0 0,0 133,192" fill="none" stroke="#dc2626" stroke-width="1.5"/>
-    <text x="148" y="194" font-size="8" fill="#dc2626" font-weight="bold">+θ</text>
+    <!-- Arc d'angle côté contrepoids -->
+    <path d="M160,200 A40,40 0 0,0 158,186" fill="none" stroke="#4338ca" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+    <text x="168" y="192" font-size="9" fill="#4338ca" font-weight="bold">+θ</text>
 
     <text x="120" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">θ &gt; 0</text>
     <text x="120" y="296" text-anchor="middle" font-size="8" fill="#ef4444">PSD déplacé → Δx positif</text>
     <text x="120" y="308" text-anchor="middle" font-size="8" fill="#ef4444">Force de Bohm détectée ?</text>
   </g>
 
-  <!-- ==================== PANNEAU 3 : TORSION ANTI-HORAIRE ==================== -->
+  <!-- ==================== PANNEAU 3 : TORSION ANTI-HORAIRE (θ = −20°) ==================== -->
   <g transform="translate(498,0)">
-    <!-- Cadre -->
     <rect x="15" y="60" width="210" height="260" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
     <text x="120" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#16a34a">③ Torsion anti-horaire</text>
-    <text x="120" y="96" text-anchor="middle" font-size="9" fill="#4ade80">Plasma ON — force F vers côté B</text>
+    <text x="120" y="96" text-anchor="middle" font-size="9" fill="#4ade80">Couvercle de cuve pivoté 180° — F inversée</text>
 
     <!-- Baril -->
     <circle cx="120" cy="200" r="85" fill="none" stroke="#78716c" stroke-width="2.5"/>
 
-    <!-- Plateau (pivoté ~15° anti-horaire) -->
-    <line x1="43" y1="221" x2="197" y2="179" stroke="#57534e" stroke-width="3"/>
+    <!-- Ligne de référence (position repos, pointillée fine) -->
+    <line x1="40" y1="200" x2="200" y2="200" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
 
-    <!-- Fil de torsion (point central — tordu) -->
+    <!-- Contrepoids pivoté (en arrière-plan, 50% opacité, sans libellés)
+         Centre à (175, 220) pour −20° anti-horaire -->
+    <circle cx="175" cy="220" r="16" fill="#fecaca" stroke="#dc2626" stroke-width="1.5" opacity="0.25"/>
+
+    <!-- Bras de pivot pivoté −20° anti-horaire -->
+    <line x1="45" y1="173" x2="195" y2="227" stroke="#57534e" stroke-width="3"/>
+
+    <!-- Fil de torsion -->
     <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
 
-    <!-- Chambre (pivotée anti-horaire) -->
-    <rect x="38" y="205" width="36" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" transform="rotate(-15, 56, 221)"/>
-    <text x="56" y="220" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="bold">Chambre</text>
-    <text x="56" y="230" text-anchor="middle" font-size="6" fill="#1e40af">⌀ 250</text>
+    <!-- Chambre pivotée — centre à (64, 179) -->
+    <circle cx="64" cy="179" r="20" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <!-- Plasma H₂O remplissant la chambre (r=19, clipé r=19 → pas de débordement).
+         Cercle centré sur la chambre ; le gradient plasmaGrad3 a son point focal
+         décalé vers le magnétron (61,188) pour l'asymétrie de densité. -->
+    <clipPath id="clipChambre3"><circle cx="64" cy="179" r="19"/></clipPath>
+    <circle cx="64" cy="179" r="19" fill="url(#plasmaGrad3)" filter="url(#plasmaGlow)" clip-path="url(#clipChambre3)"/>
 
-    <!-- Contrepoids (pivoté) -->
-    <rect x="168" y="164" width="32" height="24" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5" transform="rotate(-15, 184, 176)"/>
-    <text x="184" y="180" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="bold">10 kg</text>
+    <!-- Magnétron dans la chambre, décentré ⊥ au bras pivoté (−20°).
+         Plateau retourné 180° → magnétron passe de l'autre côté du bras.
+         En panneau 2 le magnétron est "au-dessus" du bras ; ici il est "en-dessous".
+         Bras direction (cos20°, sin20°) = (0.940, 0.342) [de gauche à droite].
+         ⊥ au bras vers le "bas" relatif = (sin20°, cos20°) = (0.342, 0.940)…
+         Non : les perps sont (−0.342, 0.940) et (0.342, −0.940).
+         "En-dessous" du bras au côté gauche = décalé vers y+ pour la partie gauche
+         = direction (−0.342, 0.940).
+         Centre chambre (64, 179), offset 10 px : (64−3, 179+9) = (61, 188). -->
+    <use href="#magnetron" x="61" y="188"/>
 
-    <!-- Flèche force F sur la chambre -->
-    <line x1="56" y1="243" x2="36" y2="258" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowG)"/>
-    <text x="25" y="265" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">F</text>
+    <!-- Force F : ⊥ au bras, direction opposée à l'émission.
+         Le magnétron émet vers le "bas" rel. → réaction vers le "haut" rel.
+         Direction force = (0.342, −0.940) → pousse le côté gauche du bras
+         vers le haut en SVG = rotation anti-horaire ✓.
+         Départ bord magnétron côté haut : (61+0.342·8, 188−0.940·8) = (64, 180).
+         Flèche 28 px : arrivée (64+10, 180−26) = (74, 154). -->
+    <line x1="64" y1="180" x2="74" y2="154" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrowG)"/>
+    <text x="80" y="152" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">F</text>
 
-    <!-- Arc de rotation (anti-horaire) -->
-    <path d="M145,205 A25,25 0 0,0 140,225" fill="none" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
-    <text x="158" y="220" font-size="8" fill="#d97706" font-weight="bold">↺</text>
-
-    <!-- Angle θ < 0 -->
-    <path d="M120,200 L148,200" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-    <path d="M135,200 A15,15 0 0,1 133,208" fill="none" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="148" y="210" font-size="8" fill="#16a34a" font-weight="bold">−θ</text>
+    <!-- Arc d'angle côté contrepoids -->
+    <path d="M160,200 A40,40 0 0,1 158,214" fill="none" stroke="#4338ca" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+    <text x="168" y="210" font-size="9" fill="#4338ca" font-weight="bold">−θ</text>
 
     <text x="120" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#16a34a">θ &lt; 0</text>
     <text x="120" y="296" text-anchor="middle" font-size="8" fill="#22c55e">PSD déplacé → Δx négatif</text>
-    <text x="120" y="308" text-anchor="middle" font-size="8" fill="#22c55e">Rotation 180° du plateau</text>
+    <text x="120" y="308" text-anchor="middle" font-size="8" fill="#22c55e">Inversion du signe confirmée</text>
   </g>
 
   <!-- ==================== SECTION INTERPRÉTATION ==================== -->
