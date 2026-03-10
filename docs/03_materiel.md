@@ -18,15 +18,15 @@
 | 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | ✅ **En stock** | Avec couvercle acrylique 3/4" et joint silicone |
 | 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Disponibles |
 | 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) + socles | ✅ **En stock** | Batteries et socles de charge disponibles |
-| 5 | Onduleur 120V AC sinus pur (≥ 1200 W) | 🔶 À acheter | < 1,5 kg, entrée 18V DC |
-| 6 | ESP32 (DevKitC ou similaire) | 🔶 À acheter | ~ 5 € ; boîtier alu blindé requis |
+| 5 | Onduleur 120V AC sinus pur (≥ 1200 W) | ✅ **En stock** | < 1,5 kg, entrée 18V DC |
+| 6 | ESP32 (DevKitC ou similaire) | ✅ **En stock** | Boîtier alu blindé requis |
 | 7 | Baril 205L (acier, récupéré) | 🔶 À trouver | Avec couvercle amovible |
 | 8 | Fil de torsion (acier ou tungstène, ⌀ 0,1–0,2 mm) | 🔶 À acheter | Longueur ~ 0,5–1 m |
 | 9 | Fléau (tige alu ou inox, ⌀ 10–15 mm, L = 400 mm) | 🔶 À fabriquer | Support chambre + contrepoids |
 | 10 | Contrepoids (~ 10 kg, ajustable) | 🔶 À fabriquer | Masse + vis de réglage fin |
 | 11 | Pompe à vide (palettes ou membrane, ≥ 10 L/min) | ✅ **En stock** | Disponible |
-| 12 | Vanne à boisseau sphérique DN10 (quart de tour) | 🔶 À acheter | Inox ou laiton, vide-compatible |
-| 13 | Grillage métallique (maille < 12 mm) | 🔶 À acheter | Pour la cage de Faraday (couvercle) |
+| 12 | Vanne à boisseau sphérique DN10 (quart de tour) | ✅ **En stock** | Inox ou laiton, vide-compatible |
+| 13 | Grillage métallique (maille < 12 mm) | ✅ **En stock** | Pour la cage de Faraday (couvercle) |
 | 14 | Laser diode (< 5 mW, classe 3R) | ✅ **En stock** | Pour mesure angulaire PSD |
 | 15 | PSD (Position Sensitive Detector) | ✅ **En stock** | Disponible |
 | 16 | Capteurs : jauge Pirani, coupleur directionnel, photodiode BPW34, thermocouple K + MAX31855, ADS1115 | ✅ **En stock** | Kit capteurs disponible |
@@ -35,10 +35,10 @@
 | 19 | Miroir plan (~ 20×20 mm) | ✅ **En stock** | Collé sur le fléau |
 | 20 | Résistances ballast, shunts, connectique, ruban cuivre | ✅ **En stock** | Consommables disponibles |
 
-> **Stock confirmé** : **13 composants sur 20** sont en stock (✅).
-> Les 7 restants (🔶) sont le magnétron, l'onduleur, l'ESP32, le baril,
-> le fil de torsion, le fléau/contrepoids et la vanne DN10 — tous
-> facilement sourçables.
+> **Stock confirmé** : **17 composants sur 20** sont en stock (✅).
+> Les 3 restants (🔶) sont le magnétron (à récupérer d'un micro-ondes),
+> le baril 205L (à trouver) et le fil de torsion — tous facilement
+> sourçables. Le fléau et le contrepoids sont à fabriquer.
 
 ---
 
