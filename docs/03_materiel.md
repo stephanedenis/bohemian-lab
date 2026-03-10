@@ -292,7 +292,140 @@ configuration augmente le moment d'inertie et la stabilité.
 
 ---
 
-## Schéma d'ensemble
+## 3.7 Contrôle — Microcontrôleur
+
+> 💡 **En termes simples** — Le plasma est capricieux : si on le laisse
+> sans surveillance, il dérive hors des conditions idéales en quelques
+> fractions de seconde. C'est comme essayer de maintenir la température
+> d'une douche en jouant avec le robinet — sauf qu'ici le « robinet »
+> c'est la pression de gaz et la puissance micro-ondes, et la « douche »
+> c'est un plasma à 30 000 °C.
+>
+> On confie donc cette tâche à un petit ordinateur embarqué (un
+> [microcontrôleur](https://fr.wikipedia.org/wiki/Microcontr%C3%B4leur))
+> qui mesure en permanence l'état du plasma et ajuste les paramètres
+> pour le garder au point de résonance. C'est le même principe qu'un
+> thermostat, mais appliqué à un plasma.
+
+### Choix du microcontrôleur
+
+| Critère | Exigence | Candidat : [ESP32](https://fr.wikipedia.org/wiki/ESP32) |
+|:---|:---|:---|
+| ADC | ≥ 4 canaux, ≥ 12 bits, ≥ 1 kHz | 18 canaux, 12 bits, SAR ~ 1 kHz ✔ |
+| PWM | ≥ 2 sorties, résolution ≥ 10 bits | 16 canaux LEDC, 16 bits ✔ |
+| Wi-Fi / BLE | Télémétrie temps réel | Intégré ✔ |
+| GPIO | Relais pompe, sécurité | 34 GPIO ✔ |
+| Coût | Accessible | ~ 5 € ✔ |
+| Blindage RF | Survie à proximité du magnétron | Boîtier métallique obligatoire ⚠️ |
+
+**Alternative** : un [Arduino](https://fr.wikipedia.org/wiki/Arduino) Nano
+suffit si la télémétrie sans fil n'est pas requise. Pour du temps réel
+strict, un [STM32](https://en.wikipedia.org/wiki/STM32) (ARM Cortex-M4)
+offre un ADC plus rapide (1 MHz) et un DMA matériel.
+
+### Architecture de la boucle
+
+```
+  ┌────────────────────────────────────────────────────┐
+  │                 MICROCONTRÔLEUR (ESP32)               │
+  │                                                      │
+  │   ADC0 ← Jauge pression (Pirani)                     │
+  │   ADC1 ← Photodiode (luminosité plasma)              │
+  │   ADC2 ← Coupleur directionnel (P_réfléchie)          │
+  │   ADC3 ← Thermocouple type K (via MAX31855)           │
+  │                                                      │
+  │   PWM0 → Électrovanne admission H₂O (via MOSFET)     │
+  │   PWM1 → Duty cycle magnétron (via SSR / triac)      │
+  │   GPIO → Relais pompe à vide                         │
+  │   GPIO → LED/Buzzer alarme sécurité                  │
+  │                                                      │
+  │   Wi-Fi → Dashboard temps réel (MQTT / WebSocket)    │
+  │   SD    → Logging CSV (horodatage + tous canaux)     │
+  └────────────────────────────────────────────────────┘
+```
+
+### Capteurs — Détail
+
+#### Pression (jauge Pirani)
+
+La [jauge Pirani](https://fr.wikipedia.org/wiki/Jauge_de_Pirani) mesure
+la pression par la variation de conductivité thermique du gaz. Plage
+typique : 10⁻³ à 100 mbar — parfaitement adaptée au régime 2–5 mbar.
+Sortie analogique 0–10 V (diviseur résistif pour le 3,3 V de l'ESP32).
+
+#### Puissance RF réfléchie (coupleur directionnel)
+
+Un [coupleur directionnel](https://fr.wikipedia.org/wiki/Coupleur_directif)
+inséré entre le magnétron et la chambre prélève une fraction (~ −20 dB)
+de l'onde réfléchie. Après détection par diode Schottky, le signal DC
+est proportionnel à $P_r$.
+
+**C'est le signal-clé** de l'asservissement : à la résonance
+($f_p = 2{,}45$ GHz), le couplage plasma-onde est maximal et $P_r$ est
+minimal. Toute dérive de $n_e$ hors de $n_{e,c}$ augmente $P_r$ →
+le contrôleur corrige.
+
+#### Luminosité plasma (photodiode)
+
+Une photodiode (BPW34 ou similaire) placée face au hublot Plexiglas
+mesure l'intensité lumineuse de la recombinaison radiative, qui est
+proportionnelle à $n_e^2$. C'est un proxy redondant de la densité
+électronique.
+
+#### Température (thermocouple)
+
+Thermocouple type K collé sur la paroi extérieure de la chambre,
+lu via un convertisseur [MAX31855](https://www.analog.com/en/products/max31855.html)
+(interface SPI, résolution 0,25 °C). Permet de détecter une dérive
+thermique et de couper le magnétron si $T_{\text{paroi}} > T_{\text{max}}$
+(sécurité).
+
+### Actionneurs
+
+#### Électrovanne d'admission
+
+Électrovanne proportionnelle (ou tout-ou-rien commandée en PWM basse
+fréquence, ~ 1 Hz) sur la ligne d'injection de vapeur d'eau. Le duty
+cycle contrôle le débit moyen $\dot{m}$ et donc la pression $P$ :
+
+$$\frac{dP}{dt} = \frac{1}{V}(\dot{m}_{\text{in}} - S_p \cdot P)$$
+
+où $V$ est le volume de la chambre et $S_p$ la vitesse de pompage.
+Le PID ajuste $\dot{m}_{\text{in}}$ pour stabiliser $P$ à la consigne.
+
+#### Modulation de puissance RF
+
+Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.org/wiki/Relais_statique)
+à passage par zéro sur le transformateur HT. Le duty cycle (période
+~ 100 ms) contrôle la puissance moyenne délivrée et donc $T_e$.
+
+### Firmware et logging
+
+- **Boucle PID** : cadencée à 100 Hz (période 10 ms), priorité temps
+  réel (tâche FreeRTOS dédiée sur l'ESP32).
+- **Logging** : écriture sur carte SD au format CSV avec horodatage
+  (colonnes : `timestamp_ms, P_mbar, P_refl_mW, lum_plasma_mV,
+  T_paroi_C, duty_vanne, duty_RF, erreur_PID`).
+- **Télémétrie** : publication MQTT à 1 Hz vers un dashboard
+  (Grafana, Node-RED, ou simple page web ESP32).
+- **Sécurité firmware** : watchdog matériel, coupure automatique
+  du magnétron si :
+  - $P_r > P_{r,\text{max}}$ (découplage total → onde non absorbée),
+  - $T_{\text{paroi}} > 150$ °C,
+  - perte du signal de pression (capteur déconnecté),
+  - timeout de communication (> 5 s sans battement de cœur).
+
+### Protection RF du microcontrôleur
+
+À proximité d'un magnétron 1 kW, le microcontrôleur doit être **blindé** :
+
+- Boîtier métallique (aluminium ≥ 1 mm) avec passages de câbles via
+  filtres feedthrough ou câbles blindés.
+- Ferrites sur chaque ligne d'entrée/sortie.
+- Alimentation isolée (convertisseur DC-DC isolé ou batterie).
+- Placement **à l'extérieur du baril**, relié aux capteurs par câbles
+  blindés traversant la cage de Faraday via des
+  [feedthrough](https://en.wikipedia.org/wiki/Feedthrough) filtrés.
 
 ```
                     ┌─────── Fil de torsion ───────┐
@@ -311,6 +444,16 @@ configuration augmente le moment d'inertie et la stabilité.
     │  └─────────────────────┘     │
     │                               │
     │  [Nixie IN-9] [Nixie IN-13]  │
+    └───────┬───────────────┬───────┘
+            │ câbles blindés │
+            ▼               ▼
+    ┌───────────────────────────────┐
+    │   MICROCONTRÔLEUR (ESP32)     │
+    │  ┌───────────────┐              │
+    │  │  ADC: P, P_r, │  PID → PWM │
+    │  │  lum, T      │  vanne+RF  │
+    │  └───────────────┘              │
+    │  Wi-Fi → Dashboard / SD log  │
     └───────────────────────────────┘
 ```
 

@@ -225,7 +225,20 @@ lequel les particules se déplacent.
 > Un point crucial : la fréquence naturelle de vibration de notre plasma
 > (~ 1-9 GHz) est très proche de la fréquence du magnétron (2,45 GHz).
 > C'est comme accorder un instrument de musique : quand les deux
-> fréquences se rapprochent, l'interaction est maximale.
+> fréquences coïncident, l'interaction est maximale.
+>
+> Comment « accorder » le plasma ? Avec deux boutons de réglage :
+> - **La pression** de vapeur d'eau dans la chambre (~ 1–5 mbar). Plus de
+>   gaz = plus de molécules à ioniser = plus d'électrons libres = fréquence
+>   plasma plus haute. On vise le « point juste » où $f_p = 2{,}45$ GHz.
+> - **La puissance** du magnétron (qui contrôle la température électronique).
+>   Des électrons plus chauds ionisent davantage, ce qui augmente aussi la
+>   densité. On cherche environ $7 \times 10^{16}$ électrons par cm³.
+>
+> Quand on atteint la résonance exacte, l'indice de réfraction tombe à
+> zéro : le plasma devient « opaque » à l'onde, créant une barrière qui
+> dévie fortement le flux d'énergie — exactement ce qu'il faut pour
+> maximiser le gradient de phase et donc la force de guidage.
 
 ### Le problème de la masse
 
@@ -263,6 +276,152 @@ Ceci est du même ordre de grandeur que la fréquence du magnétron
 ($f = 2{,}45$ GHz), ce qui place le système dans un régime où le plasma
 interagit fortement avec l'onde — condition idéale pour maximiser le
 gradient de phase.
+
+### Condition de résonance et densité critique
+
+La résonance optimale se produit lorsque la fréquence plasma égale la
+fréquence du magnétron : $\omega_p = \omega$, soit $f_p = 2{,}45$ GHz.
+Cela correspond à la **densité électronique critique** $n_{e,c}$ :
+
+$$n_{e,c} = \frac{\omega^2 \varepsilon_0 m_e}{e^2} = \frac{(2\pi \times 2{,}45 \times 10^9)^2 \times 8{,}85 \times 10^{-12} \times 9{,}11 \times 10^{-31}}{(1{,}60 \times 10^{-19})^2}$$
+
+$$\boxed{n_{e,c} \approx 7{,}4 \times 10^{16} \; \text{m}^{-3}}$$
+
+À cette densité, l'indice de réfraction s'annule ($n = 0$) : le plasma
+devient **opaque** à l'onde. C'est la **coupure plasma** — le gradient
+de $n$ diverge localement, maximisant le $\nabla S$ et donc la force
+de guidage.
+
+### Paramètres de tuning
+
+La densité électronique dépend de deux paramètres contrôlables :
+
+#### Pression de vapeur d'eau
+
+La pression détermine la densité de neutres disponibles pour
+l'ionisation. Pour un plasma micro-onde de vapeur d'eau à 2,45 GHz :
+
+| Pression (mbar) | Régime | $n_e$ typique (m$^{-3}$) | $f_p$ (GHz) | Observations |
+|:---|:---|:---|:---|:---|
+| < 0,5 | Sous-critique | $< 10^{15}$ | < 0,3 | Claquage difficile, plasma instable |
+| 0,5 – 2 | Transition | $10^{15} - 10^{16}$ | 0,3 – 0,9 | Plasma diffus, interaction modérée |
+| **2 – 5** | **Optimal** | $\mathbf{\sim 7 \times 10^{16}}$ | **≈ 2,45** | **Résonance — coupure plasma** |
+| 5 – 15 | Collisionnel | $10^{16} - 10^{17}$ | 1 – 3 | Fréquence de collision $\nu > \omega$ : plasma amortissant |
+| > 15 | Sur-critique | $> 10^{17}$ | > 3 | Plasma d'arc, thermique, instable |
+
+Le régime optimal se situe autour de **2–5 mbar** : assez de neutres
+pour atteindre $n_{e,c}$ par ionisation, mais assez peu pour que le
+libre parcours moyen des électrons reste suffisant ($\ell_{\text{mpm}} > \delta_s$,
+l'épaisseur de peau).
+
+#### Température électronique
+
+Dans un plasma micro-onde basse pression, il y a **deux températures** :
+
+- **Température électronique** $T_e \approx 1 - 3$ eV ($\approx 12\,000 - 35\,000$ K) :
+  contrôle le taux d'ionisation.
+- **Température du gaz** $T_g \approx 300 - 800$ K :
+  reste proche de l'ambiante (plasma « froid » hors équilibre).
+
+Le taux d'ionisation de la vapeur d'eau suit une loi d'[Arrhenius](https://fr.wikipedia.org/wiki/Loi_d%27Arrhenius) :
+
+$$k_{\text{ion}} = k_0 \exp\left(-\frac{E_i}{k_B T_e}\right)$$
+
+où $E_i \approx 12{,}6$ eV est l'énergie de première ionisation de H₂O.
+Pour atteindre $n_{e,c}$ :
+
+- À $T_e = 1$ eV : ionisation faible → $n_e < n_{e,c}$ → sous la coupure.
+- À $T_e \approx 2$ eV : ionisation suffisante → $n_e \approx n_{e,c}$ → **résonance**.
+- À $T_e > 3$ eV : ionisation excessive → $n_e > n_{e,c}$ → plasma opaque,
+  l'onde est réfléchie avant de pénétrer.
+
+$T_e$ est contrôlée principalement par la **puissance absorbée par
+électron**, qui dépend du ratio puissance/pression. Pour 1 kW à 3 mbar
+de vapeur d'eau, les modèles prédisent $T_e \approx 2$ eV — exactement
+le point de fonctionnement visé.
+
+#### Résumé des conditions optimales
+
+$$\boxed{P \approx 2-5 \; \text{mbar} \qquad T_e \approx 2 \; \text{eV} \qquad n_e \approx 7{,}4 \times 10^{16} \; \text{m}^{-3} \qquad f_p = 2{,}45 \; \text{GHz}}$$
+
+Ces conditions placent le plasma exactement à la **coupure** :
+l'indice de réfraction passe par zéro, créant une zone de transition
+abrupte entre propagation ($n_e < n_{e,c}$) et réflexion
+($n_e > n_{e,c}$). Cette transition est la source du gradient de phase
+maximal recherché par l'expérience.
+
+### Homéostasie du plasma par rétroaction
+
+Le point de fonctionnement optimal ($P \approx 3$ mbar, $T_e \approx 2$ eV)
+est un équilibre **instable** : de petites perturbations (désorption des
+parois, consommation de neutres par ionisation, variations de puissance
+RF) déplacent le plasma hors de la résonance en quelques millisecondes.
+
+Pour maintenir le plasma au voisinage de la coupure $n_e \approx n_{e,c}$,
+on implémente une **boucle de rétroaction** (contrôle PID) pilotée par
+un [micro-contrôleur](https://fr.wikipedia.org/wiki/Microcontr%C3%B4leur) :
+
+```
+  Consigne : n_e = n_{e,c}
+       │
+       ▼
+  ┌─────────────┐    ┌───────────────┐    ┌─────────────────┐
+  │ Contrôleur  │────▶│  Actionneurs  │────▶│     Plasma      │
+  │   (PID)    │    │  (vanne +     │    │  P, T_e, n_e   │
+  │ MCU/ESP32  │    │   PWM RF)     │    │                 │
+  └─────────────┘    └───────────────┘    └─────────────────┘
+       ▲                                       │
+       │         ┌───────────────┐          │
+       └─────────┤   Capteurs    │◀──────────┘
+                 │ (pression,   │
+                 │  lumière RF, │
+                 │  température)│
+                 └───────────────┘
+```
+
+**Variables mesurées** (entrées du contrôleur) :
+
+| Grandeur | Capteur | Signal | Proxy de |
+|:---|:---|:---|:---|
+| Pression $P$ | Jauge Pirani / capacitive | 0–10 V analogique | Densité de neutres |
+| Luminosité plasma | Photodiode + filtre | 0–3,3 V analogique | $n_e$ (intensité de recombinaison $\propto n_e^2$) |
+| Puissance RF réfléchie | Coupleur directionnel | 0–3,3 V analogique | Désaccord $f_p \neq f$ |
+| Température paroi | Thermocouple type K | 0–50 mV | $T_g$ (dérive thermique) |
+
+**Variables de commande** (sorties du contrôleur) :
+
+| Actionneur | Commande | Effet |
+|:---|:---|:---|
+| Électrovanne d'admission | PWM basse fréquence (0,1–10 Hz) | Ajuste la pression $P$ → $n_e$ |
+| Puissance magnétron | PWM haute fréquence (duty cycle) | Ajuste $T_e$ → taux d'ionisation |
+| Pompe à vide (vitesse) | Signal analogique / relais | Ajuste le pompage (puits de neutres) |
+
+**Loi de commande** — Régulateur [PID](https://fr.wikipedia.org/wiki/R%C3%A9gulateur_PID) :
+
+L'erreur est définie comme l'écart entre la puissance RF réfléchie
+mesurée $P_r$ et la consigne $P_{r,0}$ (minimum de réflexion = résonance) :
+
+$$e(t) = P_r(t) - P_{r,0}$$
+
+La commande sur la vanne d'admission $u(t)$ est :
+
+$$u(t) = K_p \, e(t) + K_i \int_0^t e(\tau) \, d\tau + K_d \, \frac{de}{dt}$$
+
+En pratique, le signal le plus **rapide** et le plus **fiable** pour
+asservir est la **puissance réfléchie** : à la résonance $f_p = f$, le
+couplage est maximal et la réflexion est minimale. Toute dérive de $n_e$
+hors de $n_{e,c}$ augmente $P_r$ → le contrôleur corrige en ajustant
+la pression.
+
+La fréquence de la boucle doit être supérieure à l'inverse du temps de
+résidence du gaz dans la chambre ($\tau_{\text{rés}} \sim 10-100$ ms) :
+
+$$f_{\text{boucle}} > \frac{1}{\tau_{\text{rés}}} \approx 10-100 \; \text{Hz}$$
+
+Un microcontrôleur comme l'ESP32 (fréquence ADC ~ 1 kHz en 12 bits)
+est largement suffisant. Voir la section matérielle
+[3.7 Contrôle — Microcontrôleur](03_materiel.md#37-contrôle--microcontrôleur)
+pour l'implémentation.
 
 ---
 
