@@ -131,6 +131,18 @@ quantique.
 
 ## 4.2 Procédure de Test
 
+### Conditions préalables — Météo
+
+L'expérience se déroule **en extérieur**. Avant de commencer :
+
+- **Pas de pluie** ni d'orage (sécurité électrique + humidité).
+- Le vent n'est **plus un facteur limitant** pour le pendule : la chambre
+  est suspendue à l'intérieur du baril fermé, totalement à l'abri.
+- Éviter les heures de grand ensoleillement direct sur le baril
+  (dérive thermique, atténuée par l'inertie de l'acier).
+- Le tuyau de la pompe à vide et les câbles sortent par les
+  feedthroughs du baril.
+
 ### Étape 1 — Mise sous vide
 
 1. Assembler la chambre à vide. Vérifier l'étanchéité du joint
@@ -143,12 +155,12 @@ quantique.
 
 ### Étape 2 — Calibration du pendule
 
-1. Laisser le système au repos jusqu'à ce que les oscillations
-   parasites soient amorties (~ 30 min).
+1. Fermer le baril. Laisser le système au repos jusqu'à ce que les
+   oscillations parasites soient amorties (~ 30 min).
 2. Provoquer une oscillation libre en donnant une légère impulsion
    calibrée (masse connue lâchée sur un bras de levier).
-3. Enregistrer la période d'oscillation $T_0$ par vidéo (minimum
-   10 oscillations complètes).
+3. Enregistrer la période d'oscillation $T_0$ via le signal PSD
+   (minimum 10 oscillations complètes).
 4. Calculer la constante de torsion :
 
 $$\kappa = \frac{4\pi^2 I}{T_0^2}$$
@@ -174,9 +186,11 @@ $$\kappa = \frac{4\pi^2 I}{T_0^2}$$
 
 $$f_{\text{pulse}} = \frac{1}{T_0}$$
 
-3. Enregistrer en vidéo le déplacement du bras de torsion.
+3. Enregistrer le déplacement angulaire via le **signal PSD** (laser
+   + photodétecteur interne au baril).
 4. Enregistrer simultanément : courant du magnétron, pression de la
-   chambre, luminosité du plasma (tubes Nixie), température des parois.
+   chambre, luminosité du plasma (tubes Nixie), température des parois,
+   position du spot laser (PSD).
 5. Durée minimale : 20 cycles complets ($20 \times T_0$).
 
 ### Étape 5 — Tests de contrôle
@@ -199,9 +213,11 @@ Le signal brut $\theta(t)$ contient :
 
 - **Signal recherché** : oscillation à la fréquence $f_0 = 1/T_0$,
   en phase avec le magnétron.
-- **Bruit** : vibrations sismiques, courants d'air, bruit thermique
-  du fil.
-- **Dérive** : composante thermique lente.
+- **Bruit** : vibrations sismiques (atténuées par la masse du baril),
+  bruit thermique du fil. Le vent est **éliminé** par le confinement
+  dans le baril.
+- **Dérive** : composante thermique lente (tamponnée par l'inertie
+  thermique du baril, mais présente en extérieur).
 
 Traitement :
 

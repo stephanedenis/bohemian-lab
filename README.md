@@ -46,7 +46,7 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 | :--- | :--- | :--- |
 | **Source** | Magnétron à cavité de 1 000 W (2,45 GHz, rendement ~ 65 %) | Générateur de l'onde pilote (mode pulsé à $f = 1/T_0$) |
 | **Enceinte / Chambre** | Chambre à vide inox 3 gal (Ø250×250 mm, 0–29 inHg) + couvercle acrylique 3/4" + grillage | Cage de Faraday, cavité RF, système isolé |
-| **Confinement** | Baril métallique de 205 L (acier, atténuation ~ 48 dB) | Double cage de Faraday, rétention d'éclats, confinement des gaz |
+| **Enceinte pendule** | Baril de 205 L (acier, posé au sol) | Enceinte du pendule, double Faraday, rétention éclats, coupe-vent |
 | **Médium** | Vapeur d'eau sous vide (1–5 mbar) → Plasma H-OH | Modulateur de phase non-linéaire |
 | **Capteur** | Tubes Nixie linéaires (IN-9 / IN-13) | Cartographie du flux RF et du gradient |
 | **Mesure** | Pendule de torsion (calibré par $\kappa = 4\pi^2 I / T_0^2$) | Détection de la force de réaction |
@@ -67,7 +67,7 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 1. Mise sous vide de la chambre et injection capillaire de vapeur d'eau (1–5 mbar).
 2. Calibration du pendule : détermination de la période de résonance $T_0$ et de la constante de torsion $\kappa$.
 3. Activation pulsée du magnétron ($f = 1/T_0$) pour amplifier le mouvement par résonance mécanique.
-4. Analyse vidéo du déplacement du bras de torsion, corrélation croisée avec le signal de commande (objectif : SNR > 3).
+4. Mesure du déplacement angulaire par **réflexion laser + PSD** (photodétecteur linéaire) à l'intérieur du baril. Corrélation croisée avec le signal de commande (objectif : SNR > 3).
 5. Tests de contrôle : inversion 180°, gaz noble, vide sans plasma.
 
 > 📖 **[Protocole de validation — documentation détaillée →](docs/04_protocole.md)** — analyse de données, critères de succès, objections anticipées.
@@ -80,7 +80,8 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 * **Haute Tension :** Isolation du transformateur (4 000 V / 300 mA). **Danger de mort.** Toujours décharger le condensateur avant intervention (énergie résiduelle ~ 8 J).
 * **Implosion :** Couvercle acrylique 3/4" (19 mm), chambre certifiée 29 inHg. Grillage de protection + baril de confinement (rétention d'éclats).
 * **Urgences : 911.**
-* **Gaz :** Ventilation mécanique obligatoire pour évacuer l'ozone (O₃, VLEP 0,1 ppm) et les NOₓ produits par le plasma.
+* **Gaz :** Expérience en extérieur (ventilation naturelle). Se positionner dos au vent lors de l'ouverture du baril.
+* **Météo :** Pas de pluie, pas d'orage. Le pendule est protégé du vent par le baril.
 * **Règle absolue :** Toujours travailler **à deux personnes**.
 
 > ⚠️ **[Notes de sécurité — documentation détaillée →](docs/05_securite.md)** — Normes, calculs, checklist pré-expérience. Lecture obligatoire avant toute manipulation.

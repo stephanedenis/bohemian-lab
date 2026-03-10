@@ -61,22 +61,26 @@ micro-onde** (opacification irréversible du cristallin).
   - Passages de câbles via **guides d'onde sous coupure** (tubes
     métalliques de diamètre < λ/2 = 6,1 cm et longueur > 3× diamètre).
 
-#### Enceinte de confinement secondaire (baril de 205L)
+#### Enceinte du pendule et confinement (baril de 205L)
 
-Pendant l'expérience, l'ensemble de l'ouvrage (chambre inox + câbles +
-magnetron) est placé **à l'intérieur d'un baril métallique de 205 litres**
-fermé. Ce baril constitue une **double barrière** :
+La chambre inox est suspendue par le fil de torsion **à l'intérieur
+du baril métallique de 205 litres**, qui repose au sol comme
+référentiel fixe. Le baril cumule **cinq fonctions** :
 
-- **Double cage de Faraday** — En cas de défaillance du grillage sur
-  le couvercle acrylique ou d'un joint mal serré, le baril en acier
-  (atténuation ~ 48 dB supplémentaires) confine la totalité du
-  rayonnement RF. La probabilité qu'une fuite traverse les deux
-  enceintes est quasi nulle.
-- **Rétention d'éclats** — Si le couvercle en acrylique venait à
-  céder sous vide, les éclats sont contenus dans le baril.
-- **Confinement des gaz** — L'ozone ($\text{O}_3$) et les oxydes
-  d'azote ($\text{NO}_x$) produits par le plasma restent piégés
-  dans le baril jusqu'à la purge contrôlée.
+1. **Enceinte du pendule** — Le baril protège le fil de torsion et
+   la chambre suspendue des perturbations extérieures (vent, chocs,
+   vibrations), ce qui est essentiel pour une expérience en extérieur.
+2. **Double cage de Faraday** — En cas de défaillance du grillage sur
+   le couvercle acrylique ou d'un joint mal serré, le baril en acier
+   (atténuation ~ 48 dB supplémentaires) confine la totalité du
+   rayonnement RF.
+3. **Rétention d'éclats** — Si le couvercle en acrylique venait à
+   céder sous vide, les éclats sont contenus dans le baril.
+4. **Confinement des gaz** — L'ozone ($\text{O}_3$) et les oxydes
+   d'azote ($\text{NO}_x$) produits par le plasma restent piégés
+   dans le baril jusqu'à la purge contrôlée.
+5. **Stabilité thermique** — L'inertie thermique de l'acier tamponne
+   les variations de température ambiante (soleil, nuages).
 
 > ⚠️ **Le baril ne remplace pas** les protections primaires (grillage
 > Faraday, joint silicone, épaisseur acrylique). C'est une couche de
@@ -273,27 +277,35 @@ cesse de le sentir alors que la concentration augmente.
 
 ### Mesures de protection
 
-#### Ventilation
+#### Ventilation — Expérience en extérieur
 
-- **Ventilation mécanique** obligatoire dans l'espace de travail :
-  hotte aspirante ou extracteur d'air orienté vers l'extérieur.
-- Débit minimal recommandé : 10 renouvellements d'air par heure.
+L'expérience se déroule **en extérieur** (cour, terrain dégagé),
+ce qui procure une ventilation naturelle largement suffisante pour
+disperser l'ozone et les NOₓ produits par le plasma.
+
+- **Se positionner dos au vent** (ou perpendiculairement) pour
+  que les gaz soient emportés loin de l'opérateur.
 - La chambre doit être **purgée** à l'air propre avant ouverture
   après une session de plasma.
+- Par temps **calme** (vent < 5 km/h), la dispersion est plus lente :
+  prévoir un ventilateur portatif ou un extracteur sur batterie
+  dirigé vers l'ouvrage.
 
 #### Détection
 
 - **Détecteur d'ozone** (tubes colorimétriques Dräger ou détecteur
-  électrochimique) : à utiliser régulièrement pendant les sessions.
+  électrochimique) : à utiliser régulièrement pendant les sessions,
+  même en extérieur.
 - Seuil d'alerte : 0,1 ppm (VLEP).
-- Seuil d'évacuation : 0,3 ppm.
+- Seuil d'évacuation : 0,3 ppm (s'éloigner de l'ouvrage, côté
+  au vent).
 
 #### Protection individuelle
 
-- **Masque FFP3** avec cartouche à charbon actif si ventilation
-  insuffisante.
-- **Travail en extérieur** recommandé si possible (garage ouvert,
-  atelier ventilé).
+- **Masque FFP3** avec cartouche à charbon actif si vent calme
+  ou stagnation atmosphérique.
+- En extérieur, le risque gazeux est fortement réduit mais reste
+  non nul lors de l'ouverture du baril/chambre après une session.
 
 ---
 
@@ -306,7 +318,7 @@ cesse de le sentir alors que la concentration augmente.
 | Multimètre (CAT III/IV) | ✅ | Vérification d'absence de tension |
 | Détecteur de fuites micro-ondes | ✅ | Contrôle du blindage RF |
 | Extincteur CO₂ | ✅ | Feu électrique |
-| Ventilation mécanique | ✅ | Évacuation des gaz toxiques |
+| Ventilateur portatif (vent calme) | 🔶 Recommandé | Dispersion des gaz par vent faible |
 | Grillage de protection | ✅ | Rétention d'éclats |
 | Baril de 205L (confinement) | ✅ | Double cage Faraday + rétention éclats + gaz |
 | Détecteur d'ozone | 🔶 Recommandé | Monitoring de la qualité d'air |
@@ -328,8 +340,9 @@ Avant **chaque session**, vérifier :
 - [ ] Couvercle acrylique inspecté (pas de fissure, pas de jaunissement)
 - [ ] Grillage de protection en place sur le couvercle (Faraday + éclats)
 - [ ] Baril de 205L fermé autour de l'ensemble (double confinement)
-- [ ] Ventilation en marche
-- [ ] Passage d'air dégagé vers l'extérieur
+- [ ] **Conditions météo vérifiées** : pas de pluie, pas d'orage
+- [ ] Positionnement dos au vent, zone dégagée
+- [ ] Baril fermé, chambre suspendue librement (pas de frottement)
 - [ ] Détecteur d'ozone en marche (si disponible)
 - [ ] Deuxième personne présente et informée de la procédure d'urgence
 - [ ] Téléphone à portée de main (urgences : **911**)

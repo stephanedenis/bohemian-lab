@@ -6,9 +6,9 @@
 
 ## Introduction vulgarisée
 
-Imaginez un petit cylindre en acier inoxydable — une chambre à vide de
-laboratoire d'environ 25 cm de diamètre — suspendu à un fil, comme une
-balançoire très sensible. À l'intérieur, un four micro-ondes démonté
+Imaginez un petit cylindre en acier inoxydable — une chambre à vide
+d'environ 25 cm de diamètre — suspendu à un fil **en plein air**, comme
+une balançoire très sensible. À l'intérieur, un four micro-ondes démonté
 (le magnétron) envoie ses ondes dans cette chambre contenant une fine
 brume d'eau. Les micro-ondes transforment cette brume en **plasma** :
 un gaz ionisé lumineux, comme un éclair miniature enfermé dans un bocal.
@@ -16,10 +16,12 @@ un gaz ionisé lumineux, comme un éclair miniature enfermé dans un bocal.
 L'inox est conducteur : la chambre sert donc naturellement de **cage de
 Faraday** — aucune radiation ne s'échappe. Le couvercle transparent en
 acrylique est recouvert d'un grillage métallique pour compléter le
-blindage. Tout est confiné dans un système compact et hermétique,
-certifié pour le vide, et suffisamment léger (~ 5 kg) pour que le fil
-de torsion détecte la moindre force — de l'ordre du millionième de
-newton.
+blindage. L'ensemble est suspendu par un fil de torsion **à l'intérieur
+d'un baril métallique de 205 litres**, qui le protège du vent, du soleil
+et de toute perturbation extérieure. Le baril est posé au sol et ne
+bouge pas — c'est la référence fixe. Si le plasma « pousse » d'un côté,
+la chambre tourne imperceptiblement dans le baril, et on le mesure par
+réflexion laser à travers un petit hublot.
 
 ---
 
@@ -84,10 +86,13 @@ mécanique de la chambre $f = 1/T_0$. Ce mode permet :
 > baril de 205L comme cage de Faraday externe + une chambre à plasma
 > séparée. La chambre à vide en inox décrite ci-dessous **cumule les
 > trois fonctions** (cage de Faraday, chambre à vide, masse oscillante).
-> Le baril de 205L reste toutefois utilisé comme **enceinte de
-> confinement secondaire** pendant l'expérience (défense en profondeur :
-> double cage de Faraday, rétention d'éclats, confinement des gaz).
-> Voir la [section sécurité](05_securite.md#enceinte-de-confinement-secondaire-baril-de-205l).
+> Le baril de 205L sert d'**enceinte du pendule de torsion** : la
+> chambre est suspendue par un fil à l'intérieur du baril, qui repose
+> au sol comme référentiel fixe. Le baril cumule ainsi 5 fonctions :
+> protection contre le vent, stabilité thermique, double cage de
+> Faraday, rétention d'éclats et confinement des gaz (défense en
+> profondeur). Voir la [section pendule](#36-mesure--pendule-de-torsion)
+> et la [section sécurité](05_securite.md#enceinte-de-confinement-secondaire-baril-de-205l).
 
 ### Fonction
 
@@ -297,6 +302,64 @@ Les tubes Nixie sont utilisés de manière non conventionnelle :
 
 ## 3.6 Mesure — Pendule de torsion
 
+> 💡 **En termes simples** — La chambre à vide est suspendue par un fil
+> très fin à l'intérieur du baril de 205L, comme une marionnette dans
+> un théâtre. Le baril est posé au sol et ne bouge pas : c'est le
+> « décor fixe ». Si le plasma pousse la chambre ne serait-ce qu'un
+> millionième de newton, le fil se tord légèrement. Un petit miroir
+> collé sur la chambre réfléchit un rayon laser vers un détecteur,
+> et on mesure le déplacement avec une précision extrême — le tout
+> protégé du vent et des vibrations par le baril.
+
+### Architecture
+
+Le baril de 205L (⌀ 580 mm × 880 mm de haut) sert d'**enceinte du
+pendule**. La chambre inox (⌀ 250 × 250 mm, ~ 5 kg) est suspendue
+par le fil de torsion ancré au couvercle du baril.
+
+| Élément | Position |
+|:---|:---|
+| Fil de torsion | Ancré au **couvercle du baril** (passage étanche) |
+| Chambre inox | Suspendue **au centre du baril**, libre en rotation |
+| Miroir de mesure | Collé sur la paroi de la chambre, face au hublot |
+| Laser + photodétecteurs | Fixés à la paroi interne du baril, face au miroir |
+| Baril de 205L | **Posé au sol** sur un support rigide (référentiel fixe) |
+| ESP32 | À l'extérieur du baril |
+
+Le baril offre un environnement **calme et confiné** :
+
+- **Pas de vent** — perturbation n° 1 en extérieur, totalement éliminée.
+- **Stabilité thermique** — l'inertie du baril en acier tamponne les
+  variations de température ambiante.
+- **Atmosphère interne contrôlée** — l'air piégé dans le baril (entre
+  la chambre et les parois) est immobile.
+
+### Mesure angulaire par réflexion laser
+
+La rotation de la chambre est mesurée par un système optique interne :
+
+1. Un **miroir plan** est collé sur la paroi de la chambre.
+2. Un **laser diode** (< 5 mW, classe 3R) est fixé à la paroi du baril,
+   dirigé vers le miroir.
+3. Le faisceau réfléchi frappe un **photodétecteur linéaire** (PSD
+   ou barrette de photodiodes) monté sur la paroi opposée du baril.
+4. Le déplacement du spot sur le détecteur est proportionnel à
+   l'angle de rotation $\theta$ :
+
+$$\Delta x = 2 D \cdot \theta$$
+
+où $D$ est la distance miroir–détecteur (~ 0,3 m dans le baril).
+Pour $\theta = 0{,}24°= 4{,}1 \times 10^{-3}$ rad :
+
+$$\Delta x = 2 \times 0{,}3 \times 4{,}1 \times 10^{-3} \approx 2{,}5 \; \text{mm}$$
+
+Ce déplacement est facilement mesurable par un PSD
+([Position Sensitive Detector](https://en.wikipedia.org/wiki/Position_sensitive_device))
+avec une résolution de ~ 1 µm.
+
+Un petit **hublot en verre** (⌀ 20–30 mm) percé dans la paroi du baril
+permet aussi l'observation visuelle ou vidéo du miroir si nécessaire.
+
 ### Principe physique
 
 Le pendule de torsion est un instrument de mesure de force extrêmement
@@ -358,16 +421,17 @@ trop sensible. En pratique, un fil plus rigide
 
 $$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}125}{10^{-4}} \approx 4{,}1 \times 10^{-3} \; \text{rad} \approx 0{,}24°$$
 
-Cet angle est mesurable par analyse vidéo ou par réflexion laser.
-Notons que la masse réduite (~ 5 kg vs ~ 20 kg avec le baril) rend le
-pendule **4× plus réactif** pour la même force.
+Cet angle correspond à un déplacement du spot laser de $\Delta x \approx
+2{,}5$ mm sur le PSD (voir ci-dessus) — largement mesurable.
+Notons que la masse réduite (~ 5 kg vs ~ 20 kg) rend le pendule
+**4× plus réactif** pour la même force.
 
 ### Alternative : Balance de torsion
 
 Si la sensibilité du pendule simple est insuffisante, une **balance de
 torsion** (type Cavendish) peut être utilisée, avec un fléau horizontal
-portant des masses aux extrémités, suspendu par la fibre. Cette
-configuration augmente le moment d'inertie et la stabilité.
+portant des masses aux extrémités, suspendu par la fibre dans le baril.
+Cette configuration augmente le moment d'inertie et la stabilité.
 
 ---
 
@@ -511,41 +575,52 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 ## Schéma d'ensemble
 
 ```
-                ┌───────── Fil de torsion ─────────┐
-                │                                   │
-                ▼                                   │
-╔═════════════════════════════════════════╗    Support fixe
-║  BARIL 205L (confinement secondaire)   ║    (plafond)
-║                                         ║
-║  ┌─────────────────────────────────┐    ║
-║  │  CHAMBRE INOX 3 GAL (Ø250×250)  │    ║
-║  │                                  │    ║
-║  │  ╔═══════════════════════════╗   │    ║
-║  │  ║  Couvercle acrylique 3/4" ║   │    ║
-║  │  ║  + grillage métallique    ║   │    ║
-║  │  ║  (cage de Faraday)        ║   │    ║
-║  │  ╚═══════════════════════════╝   │    ║
-║  │  ┌─────────────────────────┐     │    ║
-║  │  │    PLASMA  H₂O → H-OH   │     │    ║
-║  │  │    (2–5 mbar, T_e~2 eV) │     │    ║
-║  │  └────────────┬────────────┘     │    ║
-║  │               │                  │    ║
-║  │    Magnétron 2,45 GHz (1 kW)     │    ║
-║  │    [Nixie IN-9] [Nixie IN-13]    │    ║
-║  │    Joint silicone                │    ║
-║  └────────┬────────────────┬────────┘    ║
-║           │  câbles blindés │             ║
-╚═══════════╪════════════════╪═════════════╝
-            │                │
-            ▼                ▼
-┌─────────────────────────────────────────┐
-│   MICROCONTRÔLEUR (ESP32)               │
-│  ┌───────────────┐                      │
-│  │ ADC: P, P_r,  │  PID → PWM          │
-│  │ lum, T        │  vanne+RF           │
-│  └───────────────┘                      │
-│  Wi-Fi → Dashboard / SD log            │
-└─────────────────────────────────────────┘
+╔══════════════════════════════════════════════╗
+║  BARIL 205L (posé au sol — référentiel fixe) ║
+║                                              ║
+║  ┄┄┄┄┄┄ couvercle du baril ┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ║
+║          │ Fil de torsion │                  ║
+║          │ (tungstène)    │                  ║
+║          ▼                │                  ║
+║  ┌────────────────────────────────────┐      ║
+║  │  CHAMBRE INOX 3 GAL (Ø250×250)    │      ║
+║  │                                    │      ║
+║  │  ╔════════════════════════════╗    │      ║
+║  │  ║  Couvercle acrylique 3/4"  ║    │      ║
+║  │  ║  + grillage (Faraday)      ║    │      ║
+║  │  ╚════════════════════════════╝    │      ║
+║  │  ┌────────────────────────┐       │      ║
+║  │  │    PLASMA  H₂O → H-OH  │       │      ║
+║  │  │    (2–5 mbar, T_e~2eV) │       │      ║
+║  │  └────────────┬───────────┘       │      ║
+║  │               │                    │      ║
+║  │    Magnétron 2,45 GHz (1 kW)      │      ║
+║  │    [Nixie IN-9] [Nixie IN-13]     │      ║
+║  │    Joint silicone                  │      ║
+║  │  ┌──────┐                          │      ║
+║  │  │Miroir│ ← collé sur la chambre   │      ║
+║  │  └──────┘                          │      ║
+║  └───────┬────────────────────┬───────┘      ║
+║          │  câbles souples    │               ║
+║          │  (torsadés,        │               ║
+║          │  pas de couple)    │               ║
+║  ┌───────┴────────────────────┴───────┐      ║
+║  │  Laser ──→ [miroir] ──→ PSD       │      ║
+║  │  (fixé à la paroi du baril)       │      ║
+║  └────────────────────────────────────┘      ║
+║          │                    │               ║
+║          │  feedthroughs      │               ║
+╚══════════╪════════════════════╪═══════════════╝
+           │                    │
+           ▼                    ▼
+┌──────────────────────────────────────────────┐
+│   MICROCONTRÔLEUR (ESP32)                    │
+│  ┌───────────────┐                           │
+│  │ ADC: P, P_r,  │  PID → PWM               │
+│  │ lum, T, PSD   │  vanne+RF                │
+│  └───────────────┘                           │
+│  Wi-Fi → Dashboard / SD log                 │
+└──────────────────────────────────────────────┘
 ```
 
 ---
