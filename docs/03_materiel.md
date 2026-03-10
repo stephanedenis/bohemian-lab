@@ -319,15 +319,17 @@ par le fil de torsion ancré au couvercle du baril.
 
 | Élément | Position |
 |:---|:---|
-| Fil de torsion | Ancré au **couvercle du baril** (passage étanche) |
+| Fil de torsion | Ancré au **couvercle du baril** (seul lien mécanique) |
 | Chambre inox | Suspendue **au centre du baril**, libre en rotation |
+| Batterie Makita 18V | **Embarquée** sur l'assemblage suspendu |
+| Onduleur 120V + transfo HT | **Embarqués** sur l'assemblage suspendu |
+| ESP32 + capteurs | **Embarqués**, Wi-Fi vers l'extérieur |
 | Vanne d'isolement | Montée sur la chambre (DN10, quart de tour) |
-| Câbles (HT + capteurs) | **Boucle pendante souple** sous la chambre |
 | Miroir de mesure | Collé sur la paroi de la chambre, face au hublot |
-| Laser + photodétecteurs | Fixés à la paroi interne du baril, face au miroir |
-| Baril de 205L | **Posé au sol** sur un support rigide (référentiel fixe) |
+| Laser + PSD | Fixés à la **paroi interne du baril** (référentiel fixe) |
+| Baril de 205L | **Posé au sol** (référentiel fixe) |
 | Pompe à vide | **Externe**, déconnectée pendant la mesure |
-| ESP32 | À l'extérieur du baril |
+| Caméras Wi-Fi | Internes (hublot) et externes (mobiles) |
 
 Le baril offre un environnement **calme et confiné** :
 
@@ -363,102 +365,133 @@ avec une résolution de ~ 1 µm.
 Un petit **hublot en verre** (⌀ 20–30 mm) percé dans la paroi du baril
 permet aussi l'observation visuelle ou vidéo du miroir si nécessaire.
 
-### Découplage mécanique — Connexions à la chambre
+### Découplage mécanique — Alimentation embarquée
 
-> 💡 **Problème clé** — La chambre doit être **libre de tourner** sur
-> le fil de torsion, mais elle a besoin de connexions physiques :
-> tuyau de vide, câble HT du magnétron, câbles capteurs. Chaque
-> connexion rigide ajoute un **couple de rappel parasite** $\tau_p$
-> qui s'oppose à la rotation et risque de masquer la force recherchée.
+> 💡 **Simplification radicale** — Plutôt que de gérer des câbles
+> souples entre la partie fixe (baril) et la partie mobile (chambre),
+> **toute l'alimentation électrique est embarquée** sur l'assemblage
+> suspendu. Résultat : **zéro câble** entre le baril et la chambre.
+> Le seul lien physique est le fil de torsion. Le système est
+> véritablement isolé.
 
-#### Stratégie : Pomper, fermer, déconnecter, mesurer
+#### Architecture électrique embarquée
 
-La pompe à vide reste **fixe à l'extérieur du baril** et n'est
-connectée que pendant la phase de préparation. Pendant la mesure,
-le tuyau est déconnecté.
+L'assemblage suspendu au fil de torsion comprend :
 
-| Phase | État pompe | Tuyau | Câbles | Chambre |
-|:---|:---|:---|:---|:---|
-| 1. Pompage | Active | Connecté | Connectés | **Bridée** (immobile) |
-| 2. Injection vapeur | Active | Connecté | Connectés | Bridée |
-| 3. Fermeture vanne | Arrêtée | Connecté | Connectés | Bridée |
-| 4. Déconnexion | Off | **Déconnecté** | Souples | **Libre** |
-| 5. Amortissement | Off | Aucun | Souples | Libre (repos) |
-| 6. Mesure | Off | Aucun | Souples | Libre (mesure) |
+| Composant | Masse (kg) | Rôle |
+|:---|:---|:---|
+| Chambre inox 3 gal | ~ 5,0 | Cavité RF, vide, cage de Faraday |
+| Batterie Li-ion 18V Makita (BL1850B, 5 Ah) | 0,63 | Source d'énergie |
+| Onduleur 120 V AC (300–600 W) | ~ 1,0 | Conversion DC→AC |
+| Transformateur HT + magnétron | ~ 3,5 | Inclus dans la chambre |
+| ESP32 (boîtier blindé) | < 0,1 | Contrôle PID + télémétrie Wi-Fi |
+| Capteurs (Pirani, coupleur, photodiode, thermo.) | < 0,2 | Asservissement |
+| **Total assemblage suspendu** | **~ 10,4** | |
 
-#### Vanne d'isolement
+#### Bilan énergétique
 
-Une **vanne à boisseau sphérique** (quart de tour, DN10 ou DN15)
-est montée directement sur la chambre. Elle permet de :
+La batterie Makita BL1850B offre 18 V × 5 Ah = **90 Wh**.
 
-1. Isoler le volume de la chambre une fois la pression atteinte.
-2. Déconnecter physiquement le tuyau flexible de la pompe.
+| Mode | Puissance moy. | Autonomie |
+|:---|:---|:---|
+| Magnétron continu (1 kW sortie, ~1,2 kW entrée AC) | 1 400 W (pertes onduleur) | **~ 4 min** |
+| Magnétron pulsé 50 % duty ($f = 1/T_0$) | ~ 700 W | **~ 8 min** |
+| Magnétron pulsé 25 % duty | ~ 350 W | **~ 15 min** |
+| Veille (ESP32 + capteurs, magnétron off) | ~ 5 W | **~ 18 h** |
 
-La vanne doit être **légère** et montée **près de l'axe de rotation**
-(proche du haut de la chambre) pour minimiser le décentrage de masse.
+Pour une session de mesure de 20 cycles à $T_0 \sim 20$ s :
+$ 20 \times 20 = 400$ s ≈ **7 min** de fonctionnement pulsé → une batterie
+5 Ah suffit en mode 50 % duty.
 
-> **Tenue du vide** — À 2–5 mbar, les fuites légères sont tolérables
-> si la mesure dure < 10 min. Un débit de fuite de $10^{-3}$ mbar·L/s
-> dans un volume de 11,4 L donne une remontée de $\sim 0{,}005$ mbar/min
-> — négligeable.
+> **Astuce** : utiliser **deux batteries en parallèle** (via adaptateur
+> double Makita) pour doubler l'autonomie à ~15 min en mode 50 %.
+> Les batteries 6 Ah (BL1860B, 108 Wh) offrent encore plus de marge.
 
-#### Câbles souples en boucle pendante
+#### Onduleur 120 V
 
-Les câbles électriques (alimentation HT magnétron, signaux capteurs)
-restent connectés pendant la mesure. Pour **minimiser le couple
-parasite**, ils sont disposés en **boucle pendante verticale** :
+L'onduleur convertit le 18 V DC de la batterie en 120 V AC 60 Hz
+pour alimenter le transformateur HT du magnétron.
 
-```
-    Couvercle du baril
-    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
-         │ fil de          │
-         │ torsion     feedthrough
-         │               │
-         ▼            câbles souples
-    ┌────────┐           │
-    │ Chambre │           │
-    │  inox  │──────────┘
-    └────────┘    ↑
-                    boucle pendante
-                    (descend et remonte)
-```
+| Critère | Exigence |
+|:---|:---|
+| Puissance nominale | ≥ 1 200 W (crête magnétron) |
+| Forme d'onde | **Sinusoïdale pure** (recommandé pour le transfo HT) |
+| Masse | < 1,5 kg (embarqué sur le pendule) |
+| Rendement | > 85 % |
 
-Le câble descend le long de l'axe, forme une **boucle sous la chambre**,
-puis remonte vers le feedthrough dans la paroi du baril. La boucle
-pendante est soumise uniquement à la gravité, qui n'exerce **aucun
-couple de torsion** (force purement verticale, parallèle à l'axe de
-rotation).
+> ⚠️ **Sécurité** — L'onduleur produit du 120 V AC et le transformateur
+> génère **4 000 V DC**. L'ESP32 embarqué doit pouvoir **couper le SSR
+> du magnétron** en cas d'anomalie, même sans connexion Wi-Fi (watchdog
+> autonome). La batterie doit être protégée contre les courts-circuits
+> (BMS intégré dans les batteries Makita).
 
-#### Estimation du couple parasite résiduel
+#### Avantages du tout-embarqué
 
-Pour un câble souple (silicone RG-316, $\varnothing \approx 2{,}5$ mm),
-la rigidité en torsion est de l'ordre de $\kappa_{câble} \sim 10^{-5}$
-N·m/rad par mètre de longueur.
+| Critère | Architecture câblée (ancien) | Tout embarqué (actuel) |
+|:---|:---|:---|
+| Câbles fixe→mobile | HT + capteurs en boucle pendante | **Aucun** |
+| Couple parasite $\kappa_{\text{câbles}}$ | ~ $10^{-5}$ N·m/rad (~10 % de $\kappa$) | **0** |
+| Système fermé | Partiellement (câbles traversent) | **Totalement** |
+| Complexité calibration | Mesurer $\kappa_{\text{total}}$ in situ | $\kappa = \kappa_{\text{fil}}$ uniquement |
+| Masse suspendue | ~ 5 kg | ~ 10 kg (recalcul $I$ nécessaire) |
 
-Si le câble forme une boucle de 0,5 m sous la chambre (longueur libre
-$\ell_c \approx 1$ m entre les deux points d'ancrage), la constante de
-torsion effective du câble est :
+#### Nouveau moment d'inertie
 
-$$\kappa_{\text{parasite}} \sim \frac{\kappa_{c\hat{a}ble}}{\ell_c} \approx 10^{-5} \; \text{N\cdotm/rad}$$
+Avec la masse embarquée ($M \approx 10$ kg), en supposant les
+composants répartis autour de la chambre (rayon effectif
+$R_{\text{eff}} \approx 0{,}15$ m) :
 
-Comparé à la constante du fil de torsion ($\kappa \sim 10^{-4}$
-N·m/rad pour le fil d'acier choisi), le câble ajoute ~ 10 % de
-rigidité. C'est **acceptable** mais doit être **calibré** :
+$$I \approx M \, R_{\text{eff}}^2 = 10 \times 0{,}15^2 = 0{,}225 \; \text{kg}\cdot\text{m}^2$$
 
-- La constante $\kappa_{\text{total}} = \kappa_{\text{fil}} + \kappa_{\text{câbles}}$
-  est mesurée *in situ* par la période d'oscillation libre $T_0$.
-- Pour réduire $\kappa_{\text{parasite}}$ : utiliser des câbles
-  **ultra-souples** (silicone, PTFE) et des boucles **plus longues**.
-- Privilégier des câbles fins (AWG 26–30) pour les signaux capteurs.
-- Le câble HT du magnétron (plus rigide) est le facteur limitant ;
-  utiliser un câble silicone HT le plus souple possible.
+La période d'oscillation libre augmente :
+
+$$T_0 = 2\pi \sqrt{\frac{I}{\kappa}} = 2\pi \sqrt{\frac{0{,}225}{10^{-4}}} \approx 298 \; \text{s} \approx 5 \; \text{min}$$
+
+C'est long mais avantageux : la fréquence de pulsation est basse
+($f_0 \approx 3{,}4$ mHz), ce qui éloigne le signal des fréquences de
+bruit sismique et de vibration (> 1 Hz). Le rapport signal/bruit
+s'en trouve **amélioré**.
+
+#### Connexion unique restante : la pompe à vide
+
+La pompe reste **externe et fixe** (trop lourde pour être embarquée).
+Elle est connectée uniquement pendant la phase de préparation, puis
+déconnectée via la **vanne d'isolement** (quart de tour, DN10) montée
+sur la chambre.
+
+| Phase | Pompe | Tuyau | Chambre |
+|:---|:---|:---|:---|
+| 1. Pompage + injection | Active | Connecté | **Bridée** |
+| 2. Fermeture vanne | Arrêtée | Connecté | Bridée |
+| 3. Déconnexion tuyau | Off | **Déconnecté** | **Libre** |
+| 4. Amortissement (~30 min) | Off | Aucun | Libre (repos) |
+| 5. Mesure | Off | Aucun | Libre |
+
+> **Tenue du vide** — À 2–5 mbar, un débit de fuite de $10^{-3}$
+> mbar·L/s donne une remontée de ~ 0,005 mbar/min dans 11,4 L
+> — négligeable sur une session de 15 min.
+
+#### Caméras de surveillance
+
+Plusieurs **caméras sans fil** (Wi-Fi) sont placées à divers points :
+
+| Caméra | Position | Vue |
+|:---|:---|:---|
+| Caméra 1 (fixe) | Hublot du baril | Miroir de mesure / confirmations PSD |
+| Caméra 2 (fixe) | Extérieur, plongée | Vue d'ensemble du baril |
+| Caméra 3 (mobile, optionnel) | Trépied, angle variable | Gros plan, détails |
+
+Les caméras fournissent une **vérification indépendante** du signal PSD
+et documentent chaque session pour une validation ultérieure.
 
 #### Checklist de découplage
 
 - [ ] Vanne d'isolement fermée et tuyau de pompe déconnecté
-- [ ] Tous les câbles en boucle pendante (aucun câble tendu)
+- [ ] Batterie chargée (vérifier indicateur LED Makita)
+- [ ] Onduleur et ESP32 sous tension (vérifier Wi-Fi)
 - [ ] Chambre libre de tourner sans frottement ni butoir
-- [ ] Période $T_0$ mesurée **avec les câbles en place** (étalonnage)
+- [ ] Aucun câble entre le baril et la chambre
+- [ ] Caméras sans fil en marche
 
 ---
 
@@ -486,11 +519,13 @@ d'oscillation libre $T_0$ :
 
 $$T_0 = 2\pi \sqrt{\frac{I}{\kappa}} \quad \Longrightarrow \quad \kappa = \frac{4\pi^2 I}{T_0^2}$$
 
-où $I$ est le moment d'inertie de la chambre autour de l'axe de torsion.
+où $I$ est le moment d'inertie de l'assemblage suspendu autour de l'axe
+de torsion.
 
-Pour la chambre inox (cylindre creux, masse $M \approx 5$ kg, rayon $R = 0{,}125$ m) :
+Pour l'assemblage complet (chambre + batterie + onduleur + magnétron,
+masse totale $M \approx 10$ kg, rayon effectif $R_{\text{eff}} \approx 0{,}15$ m) :
 
-$$I \approx M R^2 = 5 \times 0{,}125^2 \approx 0{,}078 \; \text{kg}\cdot\text{m}^2$$
+$$I \approx M R_{\text{eff}}^2 = 10 \times 0{,}15^2 \approx 0{,}225 \; \text{kg}\cdot\text{m}^2$$
 
 ### Sensibilité
 
@@ -512,21 +547,24 @@ $$\kappa = \frac{\pi G r^4}{2 \ell}$$
 ### Estimation de la résolution
 
 Pour une force $F = 3{,}3 \; \mu\text{N}$ (pression de radiation),
-un bras de levier $L = 0{,}125$ m (rayon de la chambre), et un fil
+un bras de levier $L = 0{,}15$ m (rayon effectif de l'assemblage), et un fil
 de tungstène ($\kappa = 5 \times 10^{-8}$ N·m/rad) :
 
-$$\theta = \frac{F \cdot L}{\kappa} = \frac{3{,}3 \times 10^{-6} \times 0{,}125}{5 \times 10^{-8}} \approx 8{,}3 \; \text{rad}$$
+$$\theta = \frac{F \cdot L}{\kappa} = \frac{3{,}3 \times 10^{-6} \times 0{,}15}{5 \times 10^{-8}} \approx 9{,}9 \; \text{rad}$$
 
 Cette valeur est irréaliste, ce qui signifie qu'un fil aussi fin serait
 trop sensible. En pratique, un fil plus rigide
 ($\kappa \sim 10^{-4}$ N·m/rad) donnerait :
 
-$$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}125}{10^{-4}} \approx 4{,}1 \times 10^{-3} \; \text{rad} \approx 0{,}24°$$
+$$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}15}{10^{-4}} \approx 5{,}0 \times 10^{-3} \; \text{rad} \approx 0{,}29°$$
 
 Cet angle correspond à un déplacement du spot laser de $\Delta x \approx
-2{,}5$ mm sur le PSD (voir ci-dessus) — largement mesurable.
-Notons que la masse réduite (~ 5 kg vs ~ 20 kg) rend le pendule
-**4× plus réactif** pour la même force.
+3{,}0$ mm sur le PSD (voir ci-dessus) — largement mesurable.
+
+> **Note** — La masse doublée (~ 10 kg vs ~ 5 kg) allonge la période
+> $T_0$ mais n'affecte pas la sensibilité statique $\theta = FL/\kappa$,
+> qui ne dépend que de la force, du bras de levier et de la constante
+> du fil.
 
 ### Alternative : Balance de torsion
 
@@ -550,7 +588,10 @@ Cette configuration augmente le moment d'inertie et la stabilité.
 > [microcontrôleur](https://fr.wikipedia.org/wiki/Microcontr%C3%B4leur))
 > qui mesure en permanence l'état du plasma et ajuste les paramètres
 > pour le garder au point de résonance. C'est le même principe qu'un
-> thermostat, mais appliqué à un plasma.
+> thermostat, mais appliqué à un plasma. Le microcontrôleur est
+> **embarqué directement sur l'assemblage suspendu**, alimenté par
+> la batterie Makita et communiquant par **Wi-Fi** — aucun câble
+> vers l'extérieur.
 
 ### Choix du microcontrôleur
 
@@ -572,16 +613,18 @@ offre un ADC plus rapide (1 MHz) et un DMA matériel.
 
 ```
   ┌────────────────────────────────────────────────────┐
-  │                 MICROCONTRÔLEUR (ESP32)               │
+  │       MICROCONTRÔLEUR (ESP32) — EMBARQUÉ            │
+  │       Alimentation : batterie Makita 18V → DC-DC 5V │
   │                                                      │
   │   ADC0 ← Jauge pression (Pirani)                     │
   │   ADC1 ← Photodiode (luminosité plasma)              │
   │   ADC2 ← Coupleur directionnel (P_réfléchie)          │
   │   ADC3 ← Thermocouple type K (via MAX31855)           │
+  │   ADC4 ← Tension batterie (diviseur résistif)         │
+  │   ADC5 ← NTC température batterie / onduleur          │
   │                                                      │
   │   PWM0 → Électrovanne admission H₂O (via MOSFET)     │
   │   PWM1 → Duty cycle magnétron (via SSR / triac)      │
-  │   GPIO → Relais pompe à vide                         │
   │   GPIO → LED/Buzzer alarme sécurité                  │
   │                                                      │
   │   Wi-Fi → Dashboard temps réel (MQTT / WebSocket)    │
@@ -658,6 +701,8 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
   - $P_r > P_{r,\text{max}}$ (découplage total → onde non absorbée),
   - $T_{\text{paroi}} > 150$ °C,
   - perte du signal de pression (capteur déconnecté),
+  - $V_{\text{bat}} < 15$ V (seuil de surdécharge batterie Li-ion),
+  - $T_{\text{batterie}} > 60$ °C ou $T_{\text{onduleur}} > 80$ °C,
   - timeout de communication (> 5 s sans battement de cœur).
 
 ### Protection RF du microcontrôleur
@@ -667,58 +712,74 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 - Boîtier métallique (aluminium ≥ 1 mm) avec passages de câbles via
   filtres feedthrough ou câbles blindés.
 - Ferrites sur chaque ligne d'entrée/sortie.
-- Alimentation isolée (convertisseur DC-DC isolé ou batterie).
-- Placement **à l'extérieur de la chambre**, relié aux capteurs par câbles
-  blindés traversant la cage de Faraday via des
-  [feedthrough](https://en.wikipedia.org/wiki/Feedthrough) filtrés.
+- Alimentation depuis la batterie Makita (via régulateur DC-DC 18 V → 5 V).
+- Placement **sur l'assemblage suspendu**, à l'extérieur de la chambre
+  mais à l'intérieur du baril. Communication **exclusivement par
+  Wi-Fi** — aucun câble vers le baril ou l'extérieur.
 
 ---
 
 ## Schéma d'ensemble
 
 ```
-╔══════════════════════════════════════════════╗
-║  BARIL 205L (posé au sol — référentiel fixe) ║
-║                                              ║
-║  ┄┄┄┄┄┄ couvercle du baril ┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ║
-║          │ Fil de torsion │                  ║
-║          │ (tungstène)    │                  ║
-║          ▼                │                  ║
-║  ┌────────────────────────────────────┐      ║
-║  │  CHAMBRE INOX 3 GAL (Ø250×250)    │      ║
-║  │                                    │      ║
-║  │  ╔════════════════════════════╗    │      ║
-║  │  ║  Couvercle acrylique 3/4"  ║    │      ║
-║  │  ║  + grillage (Faraday)      ║    │      ║
-║  │  ╚════════════════════════════╝    │      ║
-║  │  ┌────────────────────────┐       │      ║
-║  │  │    PLASMA  H₂O → H-OH  │       │      ║
-║  │  │    (2–5 mbar, T_e~2eV) │       │      ║
-║  │  └────────────┬───────────┘       │      ║
-║  │               │                    │      ║
-║  │    Magnétron 2,45 GHz (1 kW)      │      ║
-║  │    [Nixie IN-9] [Nixie IN-13]     │      ║
-║  │    Joint silicone                  │      ║
-║  │  ┌──────┐    ┌───────────┐       │      ║
-║  │  │Miroir│    │Vanne DN10 │ ← ¼ tour │      ║
-║  │  └──────┘    └─────┬─────┘       │      ║
-║  └───────┬───────│───────────┬───────┘      ║
-║          │       │           │               ║
-║          │ (déconnecté │  câbles souples   ║
-║          │  pendant    │  en boucle       ║
-║          │  mesure)    │  pendante        ║
-║  ┌───────┴───────┴───────────┴───────┐      ║
-║  │  Laser ──→ [miroir] ──→ PSD       │      ║
-║  │  (fixé à la paroi du baril)       │      ║
-║  └────────────────────────────────────┘      ║
-║          │                    │               ║
-║          │  feedthroughs      │               ║
-╚══════════╪════════════════════╪═══════════════╝
-           │                    │
-     Pompe à vide            ESP32
-     (fixe, externe,       (externe,
-      déconnectée            blindé)
-      pendant mesure)
+╔══════════════════════════════════════════════════╗
+║  BARIL 205L (posé au sol — référentiel fixe)     ║
+║                                                  ║
+║  ┄┄┄┄┄┄┄┄ couvercle du baril ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ║
+║            │ Fil de torsion │                    ║
+║            │ (seul lien     │                    ║
+║            │  mécanique)    │                    ║
+║            ▼                │                    ║
+║  ┌──────────────────────────────────────────┐    ║
+║  │  ASSEMBLAGE SUSPENDU (~ 10 kg)           │    ║
+║  │                                          │    ║
+║  │  ┌──────────────────────────────┐        │    ║
+║  │  │  CHAMBRE INOX 3 GAL          │        │    ║
+║  │  │  ╔════════════════════╗      │        │    ║
+║  │  │  ║ Acrylique + grille ║      │        │    ║
+║  │  │  ╚════════════════════╝      │        │    ║
+║  │  │  ┌────────────────────┐      │        │    ║
+║  │  │  │  PLASMA  H₂O       │      │        │    ║
+║  │  │  │  (2–5 mbar)        │      │        │    ║
+║  │  │  └────────┬───────────┘      │        │    ║
+║  │  │           │                  │        │    ║
+║  │  │  Magnétron 2,45 GHz         │        │    ║
+║  │  │  Vanne DN10 (fermée)        │        │    ║
+║  │  │  [Nixie IN-9] [IN-13]       │        │    ║
+║  │  └──────────────────────────────┘        │    ║
+║  │                                          │    ║
+║  │  ┌────────────────────────────────┐      │    ║
+║  │  │  🔋 Batterie Makita 18V 5Ah   │      │    ║
+║  │  │  ⚡ Onduleur 120V AC (sinus)   │      │    ║
+║  │  │  ⬆ Transfo HT → 4 kV DC       │      │    ║
+║  │  │  🖥 ESP32 (Wi-Fi, PID, logging)│      │    ║
+║  │  │  Capteurs : Pirani, coupleur,  │      │    ║
+║  │  │  photodiode, thermocouple      │      │    ║
+║  │  └────────────────────────────────┘      │    ║
+║  │  ┌──────┐                                │    ║
+║  │  │Miroir│ ← collé sur la chambre         │    ║
+║  │  └──────┘                                │    ║
+║  └──────────────────────────────────────────┘    ║
+║                                                  ║
+║  ┌──────────────────────────────────────────┐    ║
+║  │  Laser ──→ [miroir] ──→ PSD              │    ║
+║  │  (fixé à la paroi du baril)              │    ║
+║  └──────────────────────────────────────────┘    ║
+║                                                  ║
+║  📷 Caméra Wi-Fi (hublot)                        ║
+╚══════════════════════════════════════════════════╝
+
+    Extérieur du baril :
+    ┌──────────────────────────────┐
+    │  Pompe à vide (déconnectée   │
+    │  pendant la mesure)          │
+    ├──────────────────────────────┤
+    │  📱 Dashboard Wi-Fi          │
+    │  📷 Caméras mobiles Wi-Fi    │
+    └──────────────────────────────┘
+
+    Légende : ── = aucun câble entre baril et chambre
+              Le fil de torsion est le SEUL lien mécanique
 ```
 
 ---

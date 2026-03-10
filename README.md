@@ -50,8 +50,10 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 | **Médium** | Vapeur d'eau sous vide (1–5 mbar) → Plasma H-OH | Modulateur de phase non-linéaire |
 | **Capteur** | Tubes Nixie linéaires (IN-9 / IN-13) | Cartographie du flux RF et du gradient |
 | **Mesure** | Pendule de torsion (calibré par $\kappa = 4\pi^2 I / T_0^2$) + laser/PSD | Détection de la force de réaction |
+| **Alimentation** | Batterie Li-ion Makita 18V (5 Ah) + onduleur 120V sinus pur | Alimentation embarquée — zéro câble |
 | **Pompage** | Pompe à vide (palettes ou membrane) + vanne d'isolement DN10 | Cycle pump-seal-disconnect |
-| **Contrôle** | Microcontrôleur ESP32 + capteurs (pression, $P_r$, lumière, temp.) | Homéostasie plasma (boucle PID) |
+| **Contrôle** | ESP32 embarqué + capteurs + Wi-Fi (PID, logging, télémétrie) | Homéostasie plasma autonome |
+| **Observation** | Caméras sans fil (Wi-Fi) — fixes + mobiles | Vérification indépendante |
 
 > 📖 **[Configuration matérielle — documentation détaillée →](docs/03_materiel.md)** — magnétron, blindage, modes de cavité, plasma, pendule.
 

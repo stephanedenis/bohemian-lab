@@ -167,8 +167,9 @@ $$E = \frac{1}{2} \times 10^{-6} \times (4\,000)^2 = 8 \; \text{J}$$
 
 #### Dispositifs de sécurité
 
-- **Disjoncteur différentiel 30 mA** en amont de l'alimentation.
-  (Ne protège pas contre le choc initial, mais limite la durée.)
+- **Coupure d'urgence via SSR** commandé par l'ESP32 embarqué
+  (watchdog autonome). Le SSR interrompt l'alimentation 120 V AC
+  du transformateur HT en quelques millisecondes.
 - **Contacts de sécurité** sur le couvercle de la chambre : coupure
   automatique si la chambre est ouverte.
 - **Résistance de décharge automatique** (« bleeder ») en
@@ -309,15 +310,83 @@ disperser l'ozone et les NOₓ produits par le plasma.
 
 ---
 
-## 5.5 Récapitulatif des équipements de sécurité
+## 5.5 Alimentation embarquée — Batterie lithium-ion et onduleur
+
+### Nature du danger
+
+L'assemblage suspendu comprend une **batterie Li-ion Makita 18 V**
+(5–6 Ah, 90–108 Wh) et un **onduleur 120 V AC** qui alimente le
+transformateur HT du magnétron. Ce système embarqué introduit des
+risques spécifiques :
+
+| Risque | Description | Probabilité |
+|:---|:---|:---|
+| **Emballement thermique** (thermal runaway) | Court-circuit interne → incendie/explosion de la batterie | Faible (BMS intégré), mais catastrophique |
+| **Incendie Li-ion en espace confiné** | Flamme + gaz toxiques (HF, PF₅) dans le baril fermé | Faible |
+| **Choc électrique 120 V** | Sortie onduleur accessible lors d'une intervention | Modérée |
+| **Surchauffe onduleur** | 1 200 W dans un espace fermé → risque thermique | Modérée |
+
+### Mesures de protection
+
+#### Batterie
+
+- Utiliser **exclusivement des batteries Makita authentiques** (BMS
+  intégré : protection contre surcharge, surdécharge, surintensité,
+  court-circuit, surtempérature).
+- **Ne jamais modifier** le pack batterie ou contourner le BMS.
+- Inspecter visuellement la batterie avant chaque session :
+  - Pas de gonflement, fissure ou odeur.
+  - Contacts propres et non corrodés.
+  - Température ambiante entre 0 °C et 40 °C.
+- **Ne pas laisser la batterie en plein soleil** avant le montage
+  (risque de surchauffe → dégradation des cellules).
+- Prévoir un **sac ignifuge Li-ion** (LiPo bag) à portée de main
+  pour stocker la batterie en cas d'anomalie.
+
+#### Onduleur
+
+- L'onduleur produit du **120 V AC** — mêmes précautions que pour
+  toute alimentation secteur.
+- En régime continu à 1 200 W, le rendement de ~ 85 % implique
+  ~ 200 W de pertes thermiques. Assurer un **dégagement de chaleur**
+  (l'onduleur ne doit pas être noyé dans un isolant).
+- Vérifier que l'onduleur dispose de protections intégrées :
+  - Surintensité (fusible ou disjoncteur).
+  - Surtempérature (arrêt automatique).
+  - Court-circuit (coupure immédiate).
+- Raccorder l'onduleur à la batterie **avant** de connecter la
+  charge (transfo HT). Ne jamais brancher sous charge.
+
+#### Surveillance par l'ESP32 embarqué
+
+L'ESP32 embarqué doit monitorer en continu :
+
+- **Tension batterie** (via diviseur résistif) : couper le système
+  si $V_{\text{bat}} < 15$ V (seuil de surdécharge).
+- **Température batterie** (thermocouple ou NTC collé sur le pack) :
+  couper si $T > 60$ °C.
+- **Température onduleur** : couper si $T > 80$ °C.
+- En cas d'anomalie, le watchdog de l'ESP32 ouvre le **SSR du
+  magnétron** même sans connexion Wi-Fi.
+
+> ⚠️ **En cas d'emballement thermique** — NE PAS ouvrir le baril.
+> Éloigner tout le monde à > 5 m. Laisser refroidir.
+> Appeler les secours : **911**. Ne PAS utiliser d'eau sur un feu
+> de batterie lithium — utiliser l'extincteur CO₂ ou un extincteur
+> spécifique Li-ion (classe D).
+
+---
+
+## 5.6 Récapitulatif des équipements de sécurité
 
 | Équipement | Obligatoire | Usage |
 |:---|:---|:---|
-| Disjoncteur différentiel 30 mA | ✅ | Protection électrique |
+| SSR + watchdog ESP32 (coupure magnétron) | ✅ | Protection électrique embarquée |
 | Perche de décharge HT | ✅ | Décharge du condensateur |
 | Multimètre (CAT III/IV) | ✅ | Vérification d'absence de tension |
 | Détecteur de fuites micro-ondes | ✅ | Contrôle du blindage RF |
-| Extincteur CO₂ | ✅ | Feu électrique |
+| Extincteur CO₂ | ✅ | Feu électrique / batterie Li-ion |
+| Sac ignifuge Li-ion (LiPo bag) | 🔶 Recommandé | Confinement batterie en cas d'anomalie |
 | Ventilateur portatif (vent calme) | 🔶 Recommandé | Dispersion des gaz par vent faible |
 | Grillage de protection | ✅ | Rétention d'éclats |
 | Baril de 205L (confinement) | ✅ | Double cage Faraday + rétention éclats + gaz |
@@ -328,25 +397,44 @@ disperser l'ozone et les NOₓ produits par le plasma.
 
 ---
 
-## 5.6 Checklist pré-expérience
+## 5.7 Checklist pré-expérience
 
 Avant **chaque session**, vérifier :
 
-- [ ] Disjoncteur différentiel 30 mA fonctionnel (test bouton)
-- [ ] Interrupteur d'urgence accessible et testé
-- [ ] Condensateur HT déchargé (perche + multimètre)
+**Alimentation embarquée :**
+- [ ] Batterie Makita inspectée (pas de gonflement, contacts propres)
+- [ ] Batterie chargée (indicateur LED ≥ 75 %)
+- [ ] Température batterie < 40 °C avant montage
+- [ ] Onduleur testé (mise sous tension brève sans charge)
+
+**Sécurité électrique :**
+- [ ] Condensateur HT déchargé si le circuit a été sous tension
+      (perche + multimètre)
+- [ ] Interrupteur d'urgence / SSR fonctionnel et accessible
+
+**Chambre et confinement :**
 - [ ] Joint silicone de la chambre en bon état, bien serré
-- [ ] Détecteur de fuites micro-ondes : scan complet < 5 mW/cm²
 - [ ] Couvercle acrylique inspecté (pas de fissure, pas de jaunissement)
 - [ ] Grillage de protection en place sur le couvercle (Faraday + éclats)
+- [ ] Détecteur de fuites micro-ondes : scan complet < 5 mW/cm²
+
+**Pendule et baril :**
+- [ ] Aucun lien mécanique entre la chambre et le baril
+      (hormis le fil de torsion)
+- [ ] Chambre suspendue librement (pas de frottement ni butoir)
 - [ ] Baril de 205L fermé autour de l'ensemble (double confinement)
+
+**Environnement :**
 - [ ] **Conditions météo vérifiées** : pas de pluie, pas d'orage
 - [ ] Positionnement dos au vent, zone dégagée
-- [ ] Baril fermé, chambre suspendue librement (pas de frottement)
 - [ ] Détecteur d'ozone en marche (si disponible)
+
+**Communication et secours :**
+- [ ] ESP32 connecté en Wi-Fi, dashboard visible
+- [ ] Caméras sans fil actives
 - [ ] Deuxième personne présente et informée de la procédure d'urgence
 - [ ] Téléphone à portée de main (urgences : **911**)
-- [ ] Extincteur CO₂ à portée de main
+- [ ] Extincteur CO₂ + sac ignifuge Li-ion à portée de main
 
 ---
 
