@@ -11,77 +11,107 @@ un son qui se propage dans une direction. Maintenant, imaginez que ce « souffle
 une onde électromagnétique (comme celles de votre four micro-ondes) et que le
 « sifflet » soit un nuage de plasma — un gaz ionisé qui brille comme un petit éclair.
 
-En manipulant la façon dont l'onde
-se propage à travers ce plasma, on espère créer une **poussée mécanique** — une force
-qui déplacerait physiquement l'appareil. C'est un peu comme si la lumière pouvait
-« pousser » la boîte dans laquelle elle est enfermée, non pas seulement par la
-classique pression de radiation (effet connu et minuscule), mais grâce à un effet
-prédit par la **mécanique bohmienne** — une interprétation de la physique quantique
-où les particules suivent de vraies trajectoires guidées par une « onde pilote ».
+En manipulant la façon dont l'onde se propage à travers ce plasma, on cherche à
+détecter si une **force mécanique anomale** — au-delà de la pression de radiation
+classique — apparaît dans un système totalement fermé. La **mécanique bohmienne**
+(une interprétation de la physique quantique où les particules suivent de vraies
+trajectoires guidées par une « onde pilote ») prédit l'existence d'une telle force.
+Mais d'autres interprétations — et le principe classique d'action/réaction —
+prédisent une force nette **nulle**. L'expérience tranche.
 
 ---
 
-## Objectif 1 — Démontrer une force de poussée en système fermé
+## Objectif 1 — Contraindre expérimentalement la force anomale en système fermé
 
 > 💡 **En termes simples** — Imaginez une boîte fermée posée sur une
 > table. À l'intérieur, quelqu'un pousse contre les murs. La boîte
 > ne bouge pas, parce que pousser le mur de gauche revient à pousser
 > le mur de droite dans l'autre sens : les forces s'annulent. C'est la
 > [3ᵉ loi de Newton](https://fr.wikipedia.org/wiki/Lois_du_mouvement_de_Newton#Troisi%C3%A8me_loi_de_Newton).
-> Si notre boîte (la chambre) bouge quand même, c'est qu'il se passe
-> quelque chose de **très inhabituel** à l'intérieur — quelque chose
-> que la physique classique ne prédit pas.
+> L'expérience vise à mesurer si une exception à cette règle existe
+> lorsqu'un plasma est guidé par une onde électromagnétique en cavité.
+> Le résultat — positif ou nul — est scientifiquement informatif.
 
 ### Énoncé
 
-Démontrer l'existence d'une force de poussée macroscopique dans un système
-fermé (chambre à vide inox de 3 gallons), c'est-à-dire **sans éjection
-de masse ni échange avec l'extérieur**.
+Mesurer si une **force anomale** (au-delà de la pression de radiation
+classique) existe dans un système fermé (chambre à vide inox de 3 gallons)
+**sans éjection de masse ni échange mécanique avec l'extérieur**, et
+établir une **borne supérieure** sur cette force.
 
 ### Contexte physique
 
 La conservation de la quantité de mouvement dans un système isolé est un
-principe fondamental de la mécanique classique (3ᵉ loi de Newton). Toute
-force mesurée dans un système fermé sans éjection de matière constituerait
-une anomalie exigeant une explication théorique nouvelle.
+principe fondamental de la mécanique classique (3ᵉ loi de Newton). Dans un
+système fermé rigide, les forces internes s'annulent par paires :
+
+- Le magnétron émet des photons → recule vers la gauche.
+- Les photons frappent la paroi droite → la poussent vers la droite.
+- Mais le magnétron est **fixé** à la chambre → les deux forces s'annulent.
+
+Le **théorème du centre de masse** impose que $\vec{F}_{\text{nette}} = 0$
+si aucune quantité de mouvement n'est échangée avec l'extérieur — y compris
+la pression de radiation classique $P/c$, puisque la source (magnétron) est
+interne.
 
 Dans le cadre bohmien, la force additionnelle provient du **potentiel quantique**
-$Q$, qui n'a pas d'analogue classique. Le potentiel quantique peut produire
-un transfert de quantité de mouvement entre le champ et la matière qui n'est
-pas entièrement capturé par la pression de radiation standard :
+$Q$, qui n'a pas d'analogue classique :
 
 $$F_Q = -\nabla Q = -\nabla \left( -\frac{\hbar^2}{2m} \frac{\nabla^2 R}{R} \right)$$
 
-> ⚠️ **Ce n'est pas une fusée** — Le mécanisme de poussée ici est
-> fondamentalement différent d'un moteur à réaction. Dans une fusée,
-> des gaz brûlés **s'échappent** (système ouvert) et la fusée recule
-> par réaction (3ᵉ loi de Newton). Ici, **rien ne sort** : le plasma
-> reste enfermé dans la chambre hermtique.
+L'asymétrie structurelle de dBB est ici cruciale : l'onde pilote $\psi$ guide
+les particules ($\vec{v} = \nabla S / m$), mais les particules **n'exercent
+pas de réaction** sur $\psi$ (qui évolue selon Schrödinger indépendamment).
+Si $-\nabla Q$ exerce une force sur le plasma, et que cette force n'a pas de
+réaction mécanique sur un objet physique, le théorème du centre de masse
+serait violé.
+
+> ⚠️ **Avertissement épistémologique** — La mécanique bohmienne est
+> construite pour être **empiriquement équivalente** à la mécanique
+> quantique standard (Bohm, 1952 ; Holland, 1993, chap. 3). Cela
+> signifie que si la MQ standard prédit $F = 0$ dans un système fermé,
+> dBB devrait prédire la même chose — sauf si le système se trouve
+> dans un régime de **non-équilibre quantique** ($\rho \neq |\psi|^2$),
+> une condition spéculative théorisée par Valentini (1991, 2002).
 >
-> La force provient du **gradient du potentiel quantique** $\nabla Q$
-> dans le plasma. Le $Q$ est maximal près du magnétron (champ intense,
-> gradient de $n_e$ abrupt, forte courbure de $R$) et la force
-> $F = -\nabla Q$ pousse la chambre vers la zone de plus faible $Q$
-> — c'est-à-dire **à l'opposé du magnétron**.
+> Le plasma hors-équilibre thermodynamique est un candidat intéressant
+> (mais non garanti) pour explorer cette faille. L'expérience ne
+> *présuppose* pas un résultat positif : elle le **teste**.
+
+> 📝 **Précédent : l'EmDrive** — L'[EmDrive](https://en.wikipedia.org/wiki/EmDrive)
+> (Shawyer, 2001) est une cavité RF fermée qui prétendait produire une
+> poussée nette. Après 15 ans de tests (NASA Eagleworks, Université de
+> Dresde), toutes les mesures positives ont été attribuées à des
+> **artefacts thermiques** (dilatation, courants de convection, forces
+> de Lorentz sur les câbles). Les tests les plus soignés (Dresde, 2021)
+> ont donné un résultat **nul**.
 >
-> L'analogie correcte est la **pression de radiation** : un photon
-> qui frappe un miroir le pousse *sans s'échapper*. De même, l'onde
-> micro-onde interagit avec le gradient de plasma et exerce une
-> poussée sur la paroi — dans un système totalement fermé.
-> Voir le [diagramme de torsion](03_materiel.md#schéma-de-lexpérience-de-torsion)
-> pour la géométrie détaillée.
+> Notre motivation théorique est différente (dBB + plasma vs. cavité
+> asymétrique vide), mais ce précédent illustre la difficulté des
+> mesures de micro-force en cavité RF et la fréquence des faux positifs.
+> Le protocole de Bohemian Lab intègre les leçons de l'EmDrive :
+> autonomie sur pendule (pas de câbles rigides), baril isolant, tests
+> de baseline et rotation 180°.
 
 ### Critère de succès
 
-Un déplacement reproductible du pendule de torsion, corrélé temporellement
-avec l'activation du magnétron, et **non explicable** par les artefacts connus
-(vent ionique, effets thermiques, forces EM résiduelles).
+L'expérience a **deux issues scientifiquement valides** :
+
+| Issue | Observation | Conclusion |
+|:---|:---|:---|
+| **Résultat positif** | Force reproductible corrélée au plasma, non explicable par les artefacts connus (vent ionique, effets thermiques, forces EM résiduelles), et significativement supérieure au bruit | Anomalie nécessitant une explication théorique (non-équilibre quantique ?) |
+| **Résultat nul** | Aucune force détectable au-delà du bruit du pendule | Borne supérieure publiable : « dans une cavité RF plasma à $n_{e,c}$, aucune force anomale > $X\;\mu$N n'a été détectée » — contrainte expérimentale sur les théories alternatives |
+
+Dans les deux cas, la corrélation temporelle avec l'activation du magnétron
+et le test de rotation 180° restent les contrôles clés.
 
 ### Pertinence
 
-Si une telle force était confirmée, elle ouvrirait un champ d'investigation
-fondamental sur les transferts de quantité de mouvement médiés par le
-potentiel quantique — indépendamment de toute application.
+Un résultat **positif** ouvrirait un champ d'investigation fondamental
+sur les transferts de quantité de mouvement médiés par le potentiel
+quantique. Un résultat **nul** fournirait une contrainte expérimentale
+rigoureuse dans un régime (cavité RF + plasma) rarement testé
+— les deux contribuent à la littérature scientifique.
 
 ---
 
@@ -136,13 +166,14 @@ direction de la force détectée au pendule est le test clé de l'Objectif 2
 ## Objectif 3 — Valider l'interaction potentiel quantique / plasma
 
 > 💡 **En termes simples** — La physique classique prédit qu'un faisceau
-> de lumière de 1 kW peut pousser un objet avec une force de ~ 3,3 µN
-> (micro-newtons) — le poids d'un grain de poussière. C'est la
+> de lumière de 1 kW venant de **l'extérieur** peut pousser un objet
+> avec une force de ~ 3,3 µN (micro-newtons) — le poids d'un grain de
+> poussière. C'est la
 > [pression de radiation](https://fr.wikipedia.org/wiki/Pression_de_radiation),
 > démontrée expérimentalement par [Lebedev](https://fr.wikipedia.org/wiki/Piotr_Lebedev)
-> en 1901. Si on mesure une force **supérieure** à cette valeur,
-> l'excédent ne peut pas être expliqué par la physique classique.
-> C'est précisément ce que prédit le potentiel quantique de Bohm.
+> en 1901. Dans notre cas, la source (magnétron) est **interne** au
+> système fermé, donc la force nette classique devrait être **nulle**.
+> Toute force détectée constituerait une anomalie.
 
 ### Énoncé
 
@@ -168,15 +199,24 @@ classique et de la contribution bohmienne :
 
 $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho \, (-\nabla Q) \, dV$$
 
+### Bilan de quantité de mouvement en système fermé
+
+**Note importante** : la pression de radiation classique $P_{\text{abs}}/c$
+ne s'applique comme force nette que si la source de photons est
+**extérieure** au système. Ici, le magnétron est fixé à la chambre :
+le recul du magnétron annule exactement la pression sur la paroi opposée
+(théorème du centre de masse). La force nette classique attendue est donc
+**zéro**, pas $3{,}3\;\mu$N.
+
+Cela renforce l'intérêt de l'expérience : toute force mesurable au-delà
+du bruit est **entièrement anomale**, sans baseline classique à soustraire.
+
 ### Défi expérimental
 
-La pression de radiation classique pour 1 kW absorbé est de l'ordre de :
-
-$$F_{\text{rad}} = \frac{P}{c} = \frac{1000}{3 \times 10^8} \approx 3{,}3 \; \mu\text{N}$$
-
-Le pendule de torsion doit donc être suffisamment sensible pour détecter
-des forces de cet ordre de grandeur, et toute composante supérieure serait
-attribuable à l'effet de guidage bohmien.
+Le pendule de torsion doit être suffisamment sensible pour détecter des
+forces de l'ordre du micro-newton. La sensibilité de l'instrument
+(constante de torsion $\kappa$, longueur du bras, résolution du PSD)
+définit la borne supérieure atteignable.
 
 ---
 
@@ -217,6 +257,21 @@ attribuable à l'effet de guidage bohmien.
 8. **Chen, F. F.** (2016). *Introduction to Plasma Physics and Controlled
    Fusion*. 3ᵉ édition, Springer. ISBN 978-3-319-22308-7.
    (Indice de réfraction du plasma, pulsation plasma $\omega_p$.)
+
+9. **Valentini, A.** (1991). « Signal-locality, uncertainty, and the
+   subquantum H-theorem ». *Physics Letters A*, 156(1–2), 5–11.
+   (Non-équilibre quantique : conditions où dBB prédit des résultats
+   différents de la MQ standard.)
+
+10. **Valentini, A.** (2002). « Signal-locality in hidden-variables
+    theories ». *Physics Letters A*, 297(5–6), 273–278.
+    (Formalisation du régime $\rho \neq |\psi|^2$.)
+
+11. **Tajmar, M. et al.** (2021). « The SpaceDrive Project — Thrust
+    Balance Development and New Measurements of the Mach-Effect and
+    EmDrive Thrusters ». *Acta Astronautica*, 187, 224–237.
+    (Tests de l'EmDrive à l'Université de Dresde — résultat nul après
+    correction des artefacts thermiques.)
 
 ---
 

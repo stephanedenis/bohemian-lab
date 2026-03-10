@@ -530,31 +530,56 @@ chimique, diagnostic spectral) sont détaillés dans
 
 > 💡 **En termes simples** — On sait depuis Maxwell (1873) que la lumière
 > exerce une pression quand elle frappe un objet : c'est la **pression de
-> radiation**. C'est elle qui pousse les queues des comètes à l'opposé du
-> Soleil. Mais cette force est minuscule : pour 1 000 watts (la puissance
-> d'un four micro-ondes), elle vaut environ 3 millionièmes de newton — le
-> poids d'un grain de poussière.
+> radiation**. Pour 1 kW, elle vaut environ 3,3 µN — le poids d'un grain
+> de poussière. Mais dans notre cas, la source (magnétron) est **à
+> l'intérieur** de la chambre fermée : le recul du magnétron annule
+> exactement la poussée sur la paroi opposée. La force nette classique
+> attendue est donc **zéro** (théorème du centre de masse).
 >
-> Notre expérience mesure la force totale exercée. Si on trouve **plus**
-> que ces 3,3 µN, l'excès ne peut pas venir de la pression de radiation
-> classique. C'est cet excès qui serait la signature de la force
-> bohmienne — la « poussée du terrain quantique ».
+> Si le pendule de torsion détecte **quoi que ce soit** au-delà du bruit,
+> c'est entièrement anomal. C'est ce qui rend l'expérience tranchante :
+> pas de baseline classique à soustraire, pas d'ambiguïté.
 
 ### Expression théorique
 
-La force mesurée est la somme de deux contributions :
+Dans l'hypothèse où la force bohmienne existerait, la force mesurée serait :
 
 $$\boxed{F_{\text{totale}} = \underbrace{\frac{P_{\text{abs}}}{c}}_{\text{pression de radiation}} + \underbrace{\int \rho \, (-\nabla Q) \, dV}_{\text{force bohmienne}}}$$
 
-### Estimation de la composante classique
+### Bilan de quantité de mouvement en système fermé
 
-Pour une puissance absorbée $P_{\text{abs}} = 1\,000$ W :
+**Correction essentielle** : la pression de radiation $P_{\text{abs}}/c$
+ne produit une force nette que si la source de photons est **extérieure**
+au système. Ici, le magnétron est fixé à la chambre : son recul compense
+exactement la poussée sur la paroi opposée. Par le théorème du centre de
+masse, la force nette classique est :
 
-$$F_{\text{rad}} = \frac{P_{\text{abs}}}{c} = \frac{1\,000}{3 \times 10^8} \approx 3{,}3 \; \mu\text{N}$$
+$$F_{\text{classique}} = 0$$
 
-Cette force est extrêmement faible (comparable au poids d'un grain de
-poussière). Tout excès mesuré par rapport à cette valeur serait attribuable
-à la composante bohmienne $\int \rho (-\nabla Q) \, dV$.
+Cela signifie que **toute force détectée** par le pendule est entièrement
+anomale. La référence de 3,3 µN ($P/c$ pour 1 kW) reste utile comme
+échelle de sensibilité instrumentale, mais elle ne constitue pas une
+baseline à soustraire.
+
+### Équivalence empirique et non-équilibre quantique
+
+La mécanique bohmienne (dBB) est construite pour être **empiriquement
+équivalente** à la mécanique quantique standard pour toutes les
+prédictions observables (Bohm, 1952 ; Holland, 1993, chap. 3). Si la MQ
+standard prédit $F = 0$ dans un système fermé, dBB devrait prédire la
+même chose — **tant que** le système est en **équilibre quantique**
+($\rho = |\psi|^2$).
+
+Une faille théorique existe cependant : Valentini (1991, 2002) a montré
+que si les particules sont en **non-équilibre quantique**
+($\rho \neq |\psi|^2$), les prédictions de dBB divergent de celles de
+la MQ standard. Le plasma — un système hautement hors-équilibre
+thermodynamique — est un candidat spéculatif mais intéressant pour
+explorer cette possibilité.
+
+L'expérience ne présuppose aucun résultat : elle **contraint**
+l'amplitude de la force anomale dans un régime (cavité RF + plasma)
+rarement testé. Un résultat nul est une borne supérieure publiable.
 
 ### Signature expérimentale attendue
 
@@ -565,37 +590,38 @@ poussière). Tout excès mesuré par rapport à cette valeur serait attribuable
 - **Non-réversibilité par rotation** : rotation de 180° du dispositif
   interne → inversion de la direction de la force (et non annulation).
 
-### Direction de la force — Pression de radiation, pas propulsion à réaction
+### Direction de la force hypothétique
 
-> 💡 **En termes simples** — Sur les schémas de l'expérience, la
-> flèche F peut sembler contraire à l'intuition. On pourrait penser
-> que le plasma « souffle » la chambre comme le feu d'une fusée. En
-> réalité, c'est **l'inverse exact** :
+> 💡 **En termes simples** — Si une force anomale existe, dans quelle
+> direction pointerait-elle ?
 >
 > - **Fusée** : les gaz brûlés s'échappent du système (système
 >   ouvert). La fusée recule par conservation de la quantité de
 >   mouvement. Force = $m \dot{v}_{\text{éjection}}$.
 > - **Notre expérience** : **rien ne sort**. Le plasma reste confiné
->   dans la chambre hermtique sous vide. La force vient du gradient
->   du potentiel quantique $Q$ dans le plasma, pas d'une éjection.
+>   dans la chambre hermétique sous vide. Classiquement, la force
+>   nette est **nulle** (théorème du centre de masse).
 >
-> L'analogie correcte est la **pression de radiation** : quand un
-> photon frappe un miroir, il le pousse *sans s'échapper*. De même,
-> l'onde micro-onde interagit avec le gradient de densité électronique
-> du plasma et pousse la paroi vers la zone de plus faible $Q$ —
-> c'est-à-dire **à l'opposé du magnétron** (où $n_e$ et $Q$ sont
-> maximaux).
+> Si l'asymétrie action/réaction de dBB produit un effet, la force
+> $-\nabla Q$ serait dirigée **à l'opposé du magnétron** (où $n_e$
+> et $Q$ sont maximaux), vers la zone de plus faible $Q$.
 
-Le champ de vitesse bohmien dans le plasma est $\vec{v} = \nabla S / m$ ;
-le flux d'énergie (vecteur de Poynting) est dévié par le gradient de
-phase. La réaction mécanique de cette déviation sur la paroi est une
-poussée nette dans la direction $-\nabla Q$.
+Dans le cadre bohmien, le champ de vitesse dans le plasma est
+$\vec{v} = \nabla S / m$ ; le flux d'énergie (vecteur de Poynting) est
+dévié par le gradient de phase. La direction $-\nabla Q$ est la
+prédiction de la théorie pour la force nette hypothétique.
 
-Le transfert de quantité de mouvement s'opère entre le **champ EM** et
-la **matière** (paroi), médié par le potentiel quantique — sans
-transport de masse. C'est précisément ce qui rend cet effet
-intéressant : il violerait la conservation classique de la quantité de
-mouvement dans un système fermé (d'où l'objectif 1 du protocole).
+L'asymétrie fondamentale de dBB est structurelle : l'onde pilote $\psi$
+viole la 3ᵉ loi de Newton car elle agit **sur** les particules sans
+subir de réaction. Si cette asymétrie se manifeste macroscopiquement,
+elle violerait le théorème du centre de masse — c'est précisément ce
+que l'expérience teste (Objectif 1).
+
+> 📝 **Rappel : l'EmDrive** — Une cavité RF fermée (sans plasma)
+> a fait l'objet de revendications similaires de « poussée en système
+> fermé » pendant 15 ans. Tous les résultats positifs ont finalement
+> été attribués à des artefacts. Voir l'[Objectif 1](01_objectifs.md)
+> pour le détail et les leçons intégrées dans notre protocole.
 
 ---
 
