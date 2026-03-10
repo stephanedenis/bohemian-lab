@@ -21,24 +21,25 @@
 | 5 | Onduleur 120V AC sinus pur (≥ 1200 W) | ✅ **En stock** | < 1,5 kg, entrée 18V DC |
 | 6 | ESP32 (DevKitC ou similaire) | ✅ **En stock** | Boîtier alu blindé requis |
 | 7 | Baril 205L (acier, récupéré) | 🔶 À trouver | Avec couvercle amovible |
-| 8 | Fil de torsion (acier ou tungstène, ⌀ 0,1–0,2 mm) | 🔶 À acheter | Longueur ~ 0,5–1 m |
-| 9 | Fléau (tige alu ou inox, ⌀ 10–15 mm, L = 400 mm) | 🔶 À fabriquer | Support chambre + contrepoids |
-| 10 | Contrepoids (~ 10 kg, ajustable) | 🔶 À fabriquer | Masse + vis de réglage fin |
-| 11 | Pompe à vide (palettes ou membrane, ≥ 10 L/min) | ✅ **En stock** | Disponible |
-| 12 | Vanne à boisseau sphérique DN10 (quart de tour) | ✅ **En stock** | Inox ou laiton, vide-compatible |
-| 13 | Grillage métallique (maille < 12 mm) | ✅ **En stock** | Pour la cage de Faraday (couvercle) |
-| 14 | Laser diode (< 5 mW, classe 3R) | ✅ **En stock** | Pour mesure angulaire PSD |
-| 15 | PSD (Position Sensitive Detector) | ✅ **En stock** | Disponible |
-| 16 | Capteurs : jauge Pirani, coupleur directionnel, photodiode BPW34, thermocouple K + MAX31855, ADS1115 | ✅ **En stock** | Kit capteurs disponible |
-| 17 | SSR (relais statique) + MOSFET pour électrovanne | ✅ **En stock** | Commande magnétron |
-| 18 | Caméras Wi-Fi (2–3) | ✅ **En stock** | Internes + externes |
-| 19 | Miroir plan (~ 20×20 mm) | ✅ **En stock** | Collé sur le fléau |
-| 20 | Résistances ballast, shunts, connectique, ruban cuivre | ✅ **En stock** | Consommables disponibles |
+| 8 | Fil de torsion (acier ou tungstène, ⌀ 0,1–0,2 mm) | 🔶 À acheter | Le + long possible (sensibilité ∝ 1/ℓ) |
+| 9 | Plateau porteur + tige rigide (alu ou inox, ⌀ 10–15 mm) | 🔶 À fabriquer | Module autonome : support chambre + contrepoids |
+| 10 | Barre transversale (acier ou alu, ⌀ 15–20 mm, ~ 500 mm) | 🔶 À fabriquer | Fixée aux parois du baril, supporte le fil de torsion |
+| 11 | Contrepoids (~ 10 kg, ajustable) | 🔶 À fabriquer | Masse + vis de réglage fin |
+| 12 | Pompe à vide (palettes ou membrane, ≥ 10 L/min) | ✅ **En stock** | Disponible |
+| 13 | Vanne à boisseau sphérique DN10 (quart de tour) | ✅ **En stock** | Inox ou laiton, vide-compatible |
+| 14 | Grillage métallique (maille < 12 mm) | ✅ **En stock** | Pour la cage de Faraday (couvercle) |
+| 15 | Laser diode (< 5 mW, classe 3R) | ✅ **En stock** | Pour mesure angulaire PSD |
+| 16 | PSD (Position Sensitive Detector) | ✅ **En stock** | Disponible |
+| 17 | Capteurs : jauge Pirani, coupleur directionnel, caméra Wi-Fi (plasma), thermocouple K + MAX31855, ADS1115 | ✅ **En stock** | Kit capteurs disponible |
+| 18 | SSR (relais statique) + MOSFET pour électrovanne | ✅ **En stock** | Commande magnétron |
+| 19 | Caméras Wi-Fi (2–3) | ✅ **En stock** | Internes + externes |
+| 20 | Miroir plan (~ 20×20 mm) | ✅ **En stock** | Collé en haut de la tige rigide |
+| 21 | Résistances ballast, shunts, connectique, ruban cuivre | ✅ **En stock** | Consommables disponibles |
 
-> **Stock confirmé** : **17 composants sur 20** sont en stock (✅).
+> **Stock confirmé** : **17 composants sur 21** sont en stock (✅).
 > Les 3 restants (🔶) sont le magnétron (à récupérer d'un micro-ondes),
 > le baril 205L (à trouver) et le fil de torsion — tous facilement
-> sourçables. Le fléau et le contrepoids sont à fabriquer.
+> sourçables. Le plateau porteur (avec la tige rigide) et le contrepoids sont à fabriquer.
 
 ---
 
@@ -196,23 +197,23 @@ haut :
    chambre (joint silicone). Percé en son **centre** pour la vanne
    DN10 (pompage + injection H₂O). L'acrylique assure la rigidité
    structurelle et la transparence visuelle.
-2. **Magnétron** — monté **au-dessus** du couvercle acrylique, fixé
-   ou soudé à une ouverture pratiquée dans le grillage. L'antenne
-   du magnétron pointe vers le bas, à travers le couvercle, pour
-   injecter les micro-ondes dans la cavité. Le couplage se fait
-   par l'ouverture (iris) dans le grillage.
-3. **Grillage métallique** (cuivre ou inox) — posé par-dessus
-   l'ensemble. Maille < $\lambda/10 = 12$ mm. Le magnétron est
-   intégré au grillage via une ouverture dédiée. **Contact
-   galvanique** avec la bride inox (ruban de cuivre, pinces ou vis).
+2. **Grillage métallique** (cuivre ou inox) — posé **directement
+   sur l'acrylique**. Maille < $\lambda/10 = 12$ mm. **Contact
+   galvanique** avec la bride inox (ruban de cuivre, pinces ou
+   vis). Le grillage comporte une **fenêtre (iris)** pour le
+   passage de l'antenne du magnétron.
+3. **Magnétron** — monté **au-dessus du grillage**, c'est-à-dire
+   **à l'extérieur de la cage de Faraday**. L'antenne pointe vers
+   le bas à travers l'iris du grillage et le couvercle acrylique
+   pour injecter les micro-ondes dans la cavité.
 
 Ce montage permet de :
 - **Voir le plasma** à travers le grillage et le couvercle acrylique
   (observation visuelle directe).
-- Garder le magnétron **hors du volume sous vide** — il est à
-  pression atmosphérique, au-dessus du couvercle.
-- Fermer la cage de Faraday entièrement (inox + grillage) tout en
-  intégrant proprement le magnétron.
+- Garder le magnétron **hors du volume sous vide** et **hors de la
+  cage de Faraday** — accessible sans démontage.
+- Fermer la cage de Faraday entièrement (inox + grillage directement
+  sur acrylique) avec une seule ouverture contrôlée (iris).
 
 ### Avantages par rapport au baril de 205L
 
@@ -247,9 +248,9 @@ micro-ondes. Ses dimensions :
 - Hauteur : $d = 250$ mm
 - Parois : inox (conductivité finie → pertes ohmiques modérées)
 - Couvercle : acrylique 19 mm, percé au centre (vanne DN10).
-  Partiellement transparent aux RF → recouvert de grillage pour
-  le confinement. Le magnétron est monté au-dessus du couvercle,
-  intégré au grillage.
+  Partiellement transparent aux RF → recouvert de grillage
+  (directement sur l'acrylique) pour le confinement. Le magnétron
+  est monté au-dessus du grillage, à l'extérieur de la cage.
 
 ### Modes de résonance
 
@@ -296,36 +297,43 @@ de la distribution de champ, et donc au gradient de phase recherché.
 
 ### Couplage du magnétron
 
-Le magnétron est monté **au-dessus du couvercle acrylique**, entre
-celui-ci et le grillage Faraday. Il est fixé (soudé ou boulonné)
-à une **ouverture dédiée dans le grillage**, de sorte que le montage
-est propre et rigide. L'antenne du magnétron pointe **vers le bas**
-à travers le couvercle, injectant les micro-ondes dans la cavité
-par un iris.
+Le magnétron est monté **au-dessus du grillage Faraday**, c'est-à-dire
+**à l'extérieur de la cage de Faraday**. Le grillage, posé
+directement sur l'acrylique, comporte une **fenêtre (iris)** à
+travers laquelle l'antenne du magnétron pointe **vers le bas**.
+L'onde traverse l'iris puis le couvercle acrylique (transparent RF)
+pour atteindre la cavité.
 
 Cette position est **excentrée** (~30° du N₁) pour exciter
 préférentiellement le mode TM$_{310}$. Le magnétron étant au-dessus
-du couvercle, il est **hors du volume sous vide** — à pression
-atmosphérique — ce qui simplifie l'alimentation HT et le
-refroidissement.
+du grillage, il est **hors du volume sous vide** et **hors de la
+cage de Faraday** — à pression atmosphérique — ce qui simplifie
+l'alimentation HT et le refroidissement.
 
-> 💡 **Avantage clé** — Le magnétron n'est pas dans le vide, donc
-> pas besoin de feedthrough HT (4 000 V) à travers la paroi inox.
-> Il est accessible sans ouvrir la chambre. Le couvercle acrylique
-> est transparent aux micro-ondes : l'onde passe à travers sans
-> atténuation significative.
+> 💡 **Avantage clé** — Le magnétron n'est ni dans le vide, ni dans
+> la cage. Pas besoin de feedthrough HT (4 000 V). Il est accessible
+> sans démontage. Le grillage ferme la cage directement sur
+> l'acrylique avec une seule ouverture contrôlée (iris).
 
 ### Disposition interne de la chambre
 
 La chambre inox est un **chaudron ouvert en haut**. Le couvercle
-acrylique est posé dessus avec un joint silicone. Au-dessus du
-couvercle se trouvent le magnétron et le grillage Faraday.
+acrylique est posé dessus avec un joint silicone. Le **grillage
+Faraday** est posé **directement sur l'acrylique** (avec une fenêtre
+iris). Le **magnétron** est monté **au-dessus du grillage**, à
+l'extérieur de la cage de Faraday.
 
-Principe directeur : **tout ce qui est à l'intérieur de la chambre
-(dans le volume sous vide) est exposé aux micro-ondes**. Les
-composants électroniques sensibles doivent donc être soit **protégés
-RF** (blindage individuel), soit placés **de l'autre côté du
-grillage** (au-dessus du couvercle ou à l'extérieur de la chambre).
+L'ensemble repose sur un **plateau porteur** soutenu par une
+**tige rigide verticale** dont le sommet est accroché au fil de
+torsion. Ce module autonome (tige + plateau + chambre + contrepoids)
+peut être assemblé et testé sur un établi avant d'être suspendu
+dans le baril.
+
+Principe directeur : **tout ce qui est à l'intérieur de la cage de
+Faraday (chambre inox + grillage) est exposé aux micro-ondes**. Les
+composants électroniques sensibles doivent donc être placés **à
+l'extérieur de la cage** (au-dessus du grillage ou hors de la
+chambre).
 
 Vue en coupe du montage complet :
 
@@ -334,26 +342,32 @@ Vue en coupe du montage complet :
 <!-- Fallback ASCII
 
     EXTÉRIEUR (dessus) — pression atmosphérique
-    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
-    ╔═══════════════════════════════════╗
+    ┄┄┄┄┄┄┄┄┄┄┄┄ HORS CAGE ┄┄┄┄┄┄┄┄┄┄┄
+         ┌────────────┐
+         │ MAGNÉTRON  │ ← au-dessus du grillage
+         │  antenne ↓ │   (hors cage de Faraday)
+         └─────┬──────┘
+    ╔══════════╪═══════════════════════╗
     ║  Grillage Faraday (maille <12mm) ║ ← Ferme la cage de Faraday
-    ║     ┌────────────┐               ║    On voit le plasma à travers
-    ║     │ MAGNÉTRON  │ ← fixé/soudé  ║
-    ║     │  antenne ↓ │   au grillage ║
-    ║     └─────┬──────┘               ║
-    ╚═══════════╪═══════════════════════╝
-    ╔═══════════╪═══════════════════════╗
+    ║     ┌────────┐                   ║    On voit le plasma à travers
+    ║     │  iris  │ ← fenêtre         ║
+    ║     └────┬───┘                   ║
+    ╚══════════╪═══════════════════════╝
+         ┌─────┴──────┐
+         │ Connecteur │ ← raccord tuyau pompe
+         └─────┬──────┘
+    ╔══════════╪═══════════════════════╗
     ║  ACRYLIQUE 3/4" (19 mm)          ║ ← Couvercle transparent RF
-    ║     iris ↓        ┌──────┐       ║
+    ║                   ┌──────┐       ║
     ║                   │Vanne │ ← DN10 percée au centre
-    ║     (micro-ondes  │DN10  │   (pompage + injection H₂O)
-    ║      passent)     └──┬───┘       ║
-    ╚══════════════════════╪═══════════╝
+    ║                   │DN10  │   (pompage + injection H₂O)
+    ║                   └──┬───┘       ║
+    ╚══════════╪═══════════════════════╝
     ── Joint silicone ─────┼────────────
-    ┌──────────────────────┼───────────┐
-    │                      │           │ ← Chambre inox (chaudron)
+    ┌──────────────────────┴───────────┐
+    │                                  │ ← Chambre inox (chaudron)
     │  8× Nixie IN-13 (paroi interne)  │    ouverture en haut
-    │  (octogone, espacés de 45°)      │
+    │  (octogone, centrés en hauteur)   │
     │                                  │
     │  ┌────────────────────────────┐  │
     │  │  PLASMA  H₂O              │  │ ← Volume central (~11 L)
@@ -364,17 +378,17 @@ Vue en coupe du montage complet :
     │  Thermocouple K    ──→ paroi ext │ ← Seul capteur sur la paroi
     │                                  │
     └──────────────────────────────────┘
-            Fond inox (repose sur le fléau)
+    ════════════════════════════════════
+    FOND INOX (repose sur le plateau)
 
-    CAPTEURS HORS VOLUME IRRADIÉ :
+    CAPTEURS HORS CAGE DE FARADAY :
     ┌──────────────────────────────────┐
-    │  Jauge Pirani         → sur la   │
-    │  Coupleur directionnel  ligne de │
-    │  Photodiode BPW34       pompage  │
-    │                         ou au-   │
-    │                         dessus   │
-    │                         du       │
-    │                         grillage │
+    │  Coupleur directionnel  → au-    │
+    │  Caméra Wi-Fi (plasma)    dessus │
+    │                           du     │
+    │  Jauge Pirani  → ligne    grill- │
+    │                   de      age    │
+    │                   pompage        │
     └──────────────────────────────────┘
 -->
 
@@ -382,23 +396,22 @@ Vue en coupe du montage complet :
 
 | Zone | Contenu | Pression | RF |
 |:---|:---|:---|:---|
-| **Intérieur chambre** (sous le couvercle) | Plasma H₂O, 8× Nixie IN-13 | Vide (2–5 mbar) | ⚠️ Exposé 1 kW |
-| **Entre couvercle et grillage** | Magnétron (antenne vers le bas) | Atmosphérique | ⚠️ Exposé (émetteur) |
-| **Au-dessus du grillage** | Rien (on regarde à travers) | Atmosphérique | ✅ Protégé |
-| **Extérieur chambre** (paroi + fléau) | ESP32, batterie, onduleur, capteurs | Atmosphérique | ✅ Protégé (cage inox) |
+| **Intérieur chambre** (sous le grillage) | Plasma H₂O, 8× Nixie IN-13 | Vide (2–5 mbar) | ⚠️ Exposé 1 kW |
+| **Au-dessus du grillage** | Magnétron + coupleur directionnel + caméra Wi-Fi | Atmosphérique | ⚠️ Hors cage (émetteur) |
+| **Contrepoids** (côté B du plateau) | Batterie, onduleur, ESP32 (blindé) | Atmosphérique | ✅ Éloigné |
 
 #### Composants et leur placement
 
 | Composant | Emplacement | Justification |
 |:---|:---|:---|
-| **Magnétron** | Au-dessus du couvercle, fixé au grillage | Hors vide. Iris dans le grillage → onde passe vers le bas |
-| **Vanne DN10** | Centre du couvercle acrylique | Accès direct au volume sous vide pour pompage et injection |
-| **8× Nixie IN-13** | Paroi intérieure (octogone) | Doivent être dans le champ RF pour le mesurer (conception résistante aux ondes — tubes à décharge, pas d'électronique) |
+| **Magnétron** | Au-dessus du grillage (hors cage de Faraday) | Hors vide, hors cage. Antenne ↓ à travers l'iris du grillage puis l'acrylique |
+| **Vanne DN10 + connecteur** | Centre du couvercle acrylique, connecteur au-dessus | Accès direct au volume sous vide pour pompage et injection ; le connecteur permet de brancher/débrancher le tuyau de pompe |
+| **8× Nixie IN-13** | Paroi intérieure (octogone, centrés en hauteur) | Doivent être dans le champ RF pour le mesurer (tubes à décharge, pas d'électronique) |
 | **Jauge Pirani** | Ligne de pompage (extérieure) ou feedthrough paroi | Mesure la pression sans être irradiée |
-| **Coupleur directionnel** | Entre magnétron et iris (au-dessus du couvercle) | Hors vide, hors chambre — accès facile |
-| **Photodiode BPW34** | Au-dessus du grillage, regarde à travers le maillage | Protégée de la RF par le grillage, voit la lumière du plasma |
+| **Coupleur directionnel** | Au-dessus du grillage, à côté du magnétron | Hors vide, hors cage — accès facile |
+| **Caméra Wi-Fi (plasma)** | Au-dessus du grillage, regarde à travers le maillage | Hors cage, voit le plasma et les Nixie — image complète + mesure de luminosité |
 | **Thermocouple K** | Paroi extérieure (collé dehors) | Passif, résistant RF, ne nécessite pas de feedthrough |
-| **ESP32 + électronique** | Extérieur, sur le fléau, boîtier blindé | Protégé par la cage inox + boîtier propre |
+| **ESP32 + électronique** | Dans le contrepoids (côté B du plateau), boîtier blindé | Éloigné de la RF, sert aussi de masse d'équilibrage |
 
 > 💡 **Pourquoi les Nixie survivent aux micro-ondes** — Les tubes
 > IN-13 sont des **tubes à décharge gazeuse** (néon + mercure). Ils
@@ -409,10 +422,12 @@ Vue en coupe du montage complet :
 > l'extérieur de la chambre, connectées par des feedthroughs simples
 > (fils traversant la paroi).
 
-L'**alimentation embarquée** (batterie, onduleur, ESP32) est montée
-**à l'extérieur de la chambre**, solidaire du fléau. Les seules
-traversées de paroi sont les **fils des 8 Nixie** (16 fils,
-feedthroughs simples) et le **thermocouple**.
+L'**alimentation embarquée** (batterie, onduleur, ESP32) est intégrée
+dans le **contrepoids** (côté B du plateau). Cela simplifie le côté
+chambre et utilise la masse de ces composants comme masse
+d'équilibrage. Les seules traversées de paroi de la chambre sont
+les **fils des 8 Nixie** (16 fils, feedthroughs simples) et le
+**thermocouple**.
 
 ---
 
@@ -485,9 +500,11 @@ l'onduleur embarqué via un redresseur/résistance ballast simple.
 
 Les tubes Nixie sont utilisés de manière non conventionnelle :
 
-- Placés **à l'intérieur de la chambre** (sur la paroi interne),
-  ils agissent comme des **capteurs de rayonnement RF** — le champ
-  électromagnétique modifie le courant de décharge dans le tube.
+- Placés **à l'intérieur de la chambre** (sur la paroi interne,
+  **centrés en hauteur** pour être dans la zone de densité plasma
+  maximale), ils agissent comme des **capteurs de rayonnement RF**
+  — le champ électromagnétique modifie le courant de décharge dans
+  le tube.
 - Étant des **tubes à décharge** sans composant semi-conducteur,
   ils résistent aux micro-ondes — c'est justement le champ RF qui
   module leur décharge, ce qu'on veut mesurer.
@@ -523,7 +540,7 @@ la chambre, espacés de **45°** (octogone régulier) :
                          └──────┘
 
             Nₖ = tube IN-13 n° k
-            Le magnétron est au-dessus du couvercle,
+            Le magnétron est au-dessus du grillage,
             couplé par iris à ~ 30° du N₁
 -->
 
@@ -562,16 +579,26 @@ Alternativement, une **caméra Wi-Fi** embarquée peut photographier les
 > un théâtre. Le baril est posé au sol et ne bouge pas : c'est le
 > « décor fixe ». Si le plasma pousse la chambre ne serait-ce qu'un
 > millionième de newton, le fil se tord légèrement. Un petit miroir
-> collé sur la chambre réfléchit un rayon laser vers un détecteur,
+> collé en haut de la tige rigide réfléchit un rayon laser vers un détecteur,
 > et on mesure le déplacement avec une précision extrême — le tout
 > protégé du vent et des vibrations par le baril.
 
-### Architecture — Chambre décentrée sur fléau
+### Architecture — Chambre décentrée sur plateau porteur
 
 Le baril de 205L (⌀ 580 mm × 880 mm de haut) sert d'**enceinte du
-pendule**. La chambre inox (⌀ 250 × 250 mm) est montée **décentrée**
-par rapport à l'axe de torsion, sur un **fléau horizontal** (type
-balance de Cavendish). Un contrepoids équilibre la masse.
+pendule**. Une **barre transversale** métallique est fixée aux
+parois internes du baril, juste sous le couvercle ; le fil de
+torsion (≈ 500 mm) y est ancré. À son extrémité inférieure, une **tige rigide verticale**
+(~ 300 mm) supporte un **plateau porteur horizontal** (type balance
+de Cavendish). Le module autonome est ainsi dans le **quart
+inférieur** du baril. La chambre inox (⌀ 250 × 250 mm) est posée
+**décentrée** sur un côté du plateau, un contrepoids équilibre la
+masse de l'autre côté.
+
+> 🔧 **Module autonome** — L'ensemble tige + plateau + chambre +
+> contrepoids forme un module indépendant qui peut être assemblé et
+> testé unitairement sur un établi, puis simplement suspendu dans
+> le baril par le fil de torsion.
 
 #### Pourquoi décentrer la chambre ?
 
@@ -585,16 +612,16 @@ entre la ligne d'action de $F$ et l'axe de rotation (bras de levier).
 | Configuration | Bras de levier $d$ | Couple $\tau$ pour $F = 3{,}3~\mu$N |
 |:---|:---|:---|
 | Chambre centrée | $R_{\text{chambre}} \approx 0{,}125$ m (force tangentielle requise) | $4{,}1 \times 10^{-7}$ N·m |
-| Chambre décentrée (fléau 200 mm) | $d = 0{,}20$ m | $6{,}6 \times 10^{-7}$ N·m |
+| Chambre décentrée (plateau 200 mm) | $d = 0{,}20$ m | $6{,}6 \times 10^{-7}$ N·m |
 
 Mais l'avantage principal n'est pas le facteur 1,6× — c'est que :
 
 1. **Toute force nette** (quelle que soit sa direction dans le plan
    horizontal) produit un couple si la chambre est hors axe. Avec
    la chambre centrée, seule la composante tangentielle contribue.
-2. **L'inversion à 180°** est triviale : faire pivoter le fléau de
+2. **L'inversion à 180°** est triviale : faire pivoter le plateau de
    180° change le signe du couple → test de contrôle immédiat.
-3. **Le fléau amplifie le moment d'inertie** $I$, ce qui augmente
+3. **Le plateau amplifie le moment d'inertie** $I$, ce qui augmente
    $T_0$ et éloigne la fréquence de résonance du bruit (avantage
    signal/bruit en basse fréquence).
 
@@ -602,17 +629,17 @@ Mais l'avantage principal n'est pas le facteur 1,6× — c'est que :
 > [balance de Cavendish](https://fr.wikipedia.org/wiki/Exp%C3%A9rience_de_Cavendish)
 > (1798) qui a permis de « peser la Terre ». Cavendish a mesuré des
 > forces gravitationnelles de l'ordre du nano-newton grâce à un fléau
-> de 1,8 m. Notre fléau de 0,4 m mesure des micro-newtons — mille
+> de 1,8 m. Notre plateau de 0,4 m mesure des micro-newtons — mille
 > fois plus gros.
 
-#### Géométrie du fléau
+#### Géométrie du plateau porteur
 
-![Géométrie du fléau — Vue du dessus](img/fleau_geometrie.svg)
+![Géométrie du plateau porteur — Vue du dessus](img/fleau_geometrie.svg)
 
 <!-- Fallback ASCII
     Vue du dessus — Baril de 205L (⌀ 580 mm)
 
-                    ┌─ Fil de torsion
+                    ┌─ Fil de torsion → tige rigide
                     │  (axe de rotation)
                     ▼
     ┌───────────────●───────────────┐
@@ -625,41 +652,43 @@ Mais l'avantage principal n'est pas le facteur 1,6× — c'est que :
     │    ← 200 →    │    ← 200 →    │
     │      mm       │      mm       │
     └───────────────┴───────────────┘
-                  Fléau
-              (tige rigide)
+              PLATEAU PORTEUR
+           (module autonome)
 -->
 
 | Paramètre | Valeur |
 |:---|:---|
-| Longueur du fléau | 400 mm (200 mm de chaque côté de l'axe) |
+| Longueur du plateau porteur | 400 mm (200 mm de chaque côté de l'axe) |
+| Tige rigide verticale | ~ 300 mm, aluminium ou inox, ⌀ 10–15 mm |
 | Bras de levier chambre | $d = 200$ mm |
 | Masse chambre (assemblage complet) | ~ 10 kg |
 | Masse contrepoids | ~ 10 kg (ajustable) |
-| Matériau fléau | Tige en aluminium ou inox, ⌀ 10–15 mm |
+| Matériau plateau | Aluminium ou inox, ⌀ 10–15 mm |
 
-Le fléau doit être **parfaitement équilibré** : le centre de masse
-total de l'assemblage (chambre + fléau + contrepoids) doit être
-exactement **sur l'axe de torsion**. Un déséquilibre résiduel crée
-un couple gravitationnel parasite.
+Le plateau porteur doit être **parfaitement équilibré** : le centre
+de masse total de l'assemblage (chambre + plateau + contrepoids)
+doit être exactement **sur l'axe de torsion** (la tige rigide).
+Un déséquilibre résiduel crée un couple gravitationnel parasite.
 
-Équilibrage : ajuster la position du contrepoids sur le fléau par
+Équilibrage : ajuster la position du contrepoids sur le plateau par
 une vis de réglage fin (± 1 mm). Critère : le système au repos doit
-rester stable quelle que soit l'orientation du fléau.
+rester stable quelle que soit l'orientation du plateau.
 
 ### Table d'architecture
 
 | Élément | Position |
 |:---|:---|
-| Fil de torsion | Ancré au **couvercle du baril** (seul lien mécanique) |
-| Fléau horizontal | Suspendu au fil, **traverse le baril** horizontalement |
-| Chambre inox + alimentation embarquée | **Décentrée** à 200 mm de l'axe (côté A du fléau) |
-| Contrepoids (~ 10 kg) | **Côté B** du fléau, à 200 mm de l'axe |
-| 8× Nixie IN-13 | **Intérieur** de la chambre (octogone sur la paroi) |
-| Miroir de mesure | Collé **sur le fléau**, près de l'axe (face au hublot) |
+| Fil de torsion | Ancré à une **barre transversale** fixée aux parois du baril (seul lien mécanique), ≈ 500 mm |
+| Tige rigide verticale | Accrochée au fil de torsion par son **sommet**, ~ 300 mm |
+| Plateau porteur horizontal | À la **base de la tige**, dans le **¼ inférieur** du baril |
+| Chambre inox (sur plateau) | **Décentrée** à 200 mm de l'axe (côté A du plateau) |
+| Contrepoids (~ 10 kg, inclut batterie + onduleur + ESP32) | **Côté B** du plateau, à 200 mm de l'axe |
+| 8× Nixie IN-13 | **Intérieur** de la chambre (octogone sur la paroi, centrés en hauteur) |
+| Miroir de mesure | Collé **en haut de la tige rigide**, près du point d'attache (face au hublot) |
 | Laser + PSD | Fixés à la **paroi interne du baril** (référentiel fixe) |
 | Baril de 205L | **Posé au sol** (référentiel fixe) |
 | Pompe à vide | **Externe**, déconnectée pendant la mesure |
-| Caméras Wi-Fi | Internes (hublot) et externes (mobiles) |
+| Caméras Wi-Fi | Internes (barre transversale + chambre) et externes (mobiles) |
 
 Le baril offre un environnement **calme et confiné** :
 
@@ -673,7 +702,8 @@ Le baril offre un environnement **calme et confiné** :
 
 La rotation de la chambre est mesurée par un système optique interne :
 
-1. Un **miroir plan** est collé sur la paroi de la chambre.
+1. Un **miroir plan** est collé **en haut de la tige rigide**, près
+   du point d'attache du fil (position optimale sur l'axe de rotation).
 2. Un **laser diode** (< 5 mW, classe 3R) est fixé à la paroi du baril,
    dirigé vers le miroir.
 3. Le faisceau réfléchi frappe un **photodétecteur linéaire** (PSD
@@ -706,17 +736,20 @@ permet aussi l'observation visuelle ou vidéo du miroir si nécessaire.
 
 #### Architecture électrique embarquée
 
-L'assemblage suspendu au fil de torsion comprend :
+L'assemblage suspendu au fil de torsion (module autonome : tige
+rigide + plateau porteur) comprend deux côtés :
+- **Côté A (chambre)** : chambre inox + magnétron, posée sur le plateau porteur.
+- **Côté B (contrepoids)** : batterie, onduleur, ESP32, capteurs — servent de masse d'équilibrage.
 
-| Composant | Masse (kg) | Rôle |
-|:---|:---|:---|
-| Chambre inox 3 gal | ~ 5,0 | Cavité RF, vide, cage de Faraday |
-| Batterie Li-ion 18V Makita (BL1850B, 5 Ah) | 0,63 | Source d'énergie |
-| Onduleur 120 V AC (300–600 W) | ~ 1,0 | Conversion DC→AC |
-| Transformateur HT + magnétron | ~ 3,5 | Inclus dans la chambre |
-| ESP32 (boîtier blindé) | < 0,1 | Contrôle PID + télémétrie Wi-Fi |
-| Capteurs (Pirani, coupleur, photodiode, thermo.) | < 0,2 | Asservissement |
-| **Total assemblage suspendu** | **~ 10,4** | |
+| Composant | Masse (kg) | Côté | Rôle |
+|:---|:---|:---|:---|
+| Chambre inox 3 gal | ~ 5,0 | A | Cavité RF, vide, cage de Faraday |
+| Transformateur HT + magnétron | ~ 3,5 | A | Au-dessus du grillage |
+| Batterie Li-ion 18V Makita (BL1850B, 5 Ah) | 0,63 | B | Source d'énergie |
+| Onduleur 120 V AC (300–600 W) | ~ 1,0 | B | Conversion DC→AC |
+| ESP32 (boîtier blindé) | < 0,1 | B | Contrôle PID + télémétrie Wi-Fi |
+| Capteurs (Pirani, coupleur, caméra, thermo.) | < 0,2 | A/B | Asservissement |
+| **Total assemblage suspendu** | **~ 10,4** | | |
 
 #### Bilan énergétique
 
@@ -765,9 +798,9 @@ pour alimenter le transformateur HT du magnétron.
 | Complexité calibration | Mesurer $\kappa_{\text{total}}$ in situ | $\kappa = \kappa_{\text{fil}}$ uniquement |
 | Masse suspendue | ~ 5 kg | ~ 10 kg (recalcul $I$ nécessaire) |
 
-#### Nouveau moment d'inertie (configuration fléau)
+#### Nouveau moment d'inertie (configuration plateau porteur)
 
-Avec le fléau, le moment d'inertie est dominé par les deux masses
+Avec le plateau porteur, le moment d'inertie est dominé par les deux masses
 (chambre + contrepoids) aux extrémités :
 
 $$I = M_{\text{chambre}} \, d^2 + M_{\text{contrepoids}} \, d^2 = 2 M d^2$$
@@ -815,7 +848,7 @@ Plusieurs **caméras sans fil** (Wi-Fi) sont placées à divers points :
 
 | Caméra | Position | Vue |
 |:---|:---|:---|
-| Caméra 1 (fixe) | Hublot du baril | Miroir de mesure / confirmations PSD |
+| Caméra 1 (fixe) | Barre transversale (intérieure, vue plongeante) | Module autonome / chambre / plateau |
 | Caméra 2 (fixe) | Extérieur, plongée | Vue d'ensemble du baril |
 | Caméra 3 (mobile, optionnel) | Trépied, angle variable | Gros plan, détails |
 
@@ -850,6 +883,24 @@ $$\boxed{\theta = \frac{F \cdot L}{\kappa}}$$
 
 où $\kappa$ est la **constante de torsion** du fil (N·m/rad).
 
+#### Schéma de l'expérience de torsion
+
+![Expérience de torsion — Résultats attendus](img/torsion_experience.svg)
+
+<!-- Fallback ASCII
+    ① REPOS (θ = 0)        ② HORAIRE (θ > 0)      ③ ANTI-HORAIRE (θ < 0)
+    ┌──── Baril ────┐      ┌──── Baril ────┐       ┌──── Baril ────┐
+    │               │      │    F↗          │       │               │
+    │  [Chambre]──●──[10kg]│  [Ch]  ↻  ●    │  [10kg]──●  ↺  [Ch]  │
+    │               │      │        ──[10kg]│       │          F↙   │
+    │  θ = 0        │      │  θ > 0 (Δx +)  │       │  θ < 0 (Δx −) │
+    └───────────────┘      └────────────────┘       └────────────────┘
+    ● = fil de torsion (axe)   L = 200 mm   τ = F·L = κ·θ
+
+   Signal détecté (θ ≠ 0) → inversion à 180° doit inverser le signe
+   Aucun signal (θ = 0)   → hypothèse invalidée à cette échelle
+-->
+
 ### Calibration par oscillation libre
 
 La constante de torsion se détermine par la mesure de la période
@@ -860,7 +911,7 @@ $$T_0 = 2\pi \sqrt{\frac{I}{\kappa}} \quad \Longrightarrow \quad \kappa = \frac{
 où $I$ est le moment d'inertie de l'assemblage suspendu autour de l'axe
 de torsion.
 
-Pour la configuration fléau (chambre + contrepoids, chacun à $d = 0{,}20$ m
+Pour la configuration plateau porteur (chambre + contrepoids, chacun à $d = 0{,}20$ m
 de l'axe, masse $M \approx 10$ kg chacun) :
 
 $$I \approx 2 M d^2 = 2 \times 10 \times 0{,}20^2 = 0{,}80 \; \text{kg}\cdot\text{m}^2$$
@@ -870,6 +921,12 @@ $$I \approx 2 M d^2 = 2 \times 10 \times 0{,}20^2 = 0{,}80 \; \text{kg}\cdot\tex
 La sensibilité du pendule dépend de la **faiblesse** de $\kappa$.
 Plus le fil est fin et long, plus $\kappa$ est petit, plus l'angle
 $\theta$ est grand pour une force donnée.
+
+> 💡 **Stratégie** — Le module autonome (tige + plateau + chambre +
+> contrepoids) est descendu dans le **quart inférieur** du baril.
+> Le fil de torsion occupe ainsi **≈ 500 mm** de la hauteur du baril,
+> ce qui minimise $\kappa$ et maximise la sensibilité.
+> La tige rigide (≈ 300 mm) assure le dégagement du miroir.
 
 Pour un fil métallique de rayon $r$, longueur $\ell$, module de
 cisaillement $G$ :
@@ -885,7 +942,7 @@ $$\kappa = \frac{\pi G r^4}{2 \ell}$$
 ### Estimation de la résolution
 
 Pour une force $F = 3{,}3 \; \mu\text{N}$ (pression de radiation),
-un bras de levier $L = 0{,}20$ m (distance chambre–axe sur le fléau),
+un bras de levier $L = 0{,}20$ m (distance chambre–axe sur le plateau),
 et un fil de tungstène ($\kappa = 5 \times 10^{-8}$ N·m/rad) :
 
 $$\theta = \frac{F \cdot L}{\kappa} = \frac{3{,}3 \times 10^{-6} \times 0{,}20}{5 \times 10^{-8}} \approx 13{,}2 \; \text{rad}$$
@@ -899,27 +956,27 @@ $$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}20}{10^{-4}} \approx 6{,}6 \tim
 Cet angle correspond à un déplacement du spot laser de $\Delta x \approx
 4{,}0$ mm sur le PSD (voir ci-dessus) — largement mesurable.
 
-> **Note** — La configuration fléau augmente le moment d'inertie
+> **Note** — La configuration plateau porteur augmente le moment d'inertie
 > ($I = 0{,}80$ vs $0{,}225$ kg·m²), ce qui allonge la période $T_0$
 > (9 min vs 5 min), mais **augmente aussi le bras de levier** de 0,15
 > à 0,20 m. La sensibilité statique $\theta = FL/\kappa$ est donc
 > **améliorée de 33 %** par rapport à la chambre centrée.
 
-### Résumé comparatif : centrée vs fléau
+### Résumé comparatif : centrée vs plateau porteur
 
-| Critère | Chambre centrée | Fléau (d = 200 mm) |
+| Critère | Chambre centrée | Plateau porteur (d = 200 mm) |
 |:---|:---|:---|
 | Bras de levier | ~ 0,125 m (tangentiel seulement) | **0,20 m (toute direction)** |
 | Sensibilité statique ($\theta$) | 0,24° pour 3,3 µN | **0,38°** (+60 %) |
 | Moment d'inertie | 0,225 kg·m² | 0,80 kg·m² |
 | Période $T_0$ | ~ 5 min | ~ 9 min |
-| Inversion 180° | Complexe (retourner la chambre) | **Trivial** (pivoter le fléau) |
+| Inversion 180° | Complexe (retourner la chambre) | **Trivial** (pivoter le plateau) |
 | Équilibrage | Automatique (centré) | Ajustement contrepoids requis |
-| Encombrement dans le baril | Compact | Plus serré (fléau 400 mm vs ⌀ 580 mm) |
+| Encombrement dans le baril | Compact | Plus serré (plateau 400 mm vs ⌀ 580 mm) |
 
-> **Verdict** — La configuration fléau est **nettement supérieure** pour
+> **Verdict** — La configuration plateau porteur est **nettement supérieure** pour
 > la sensibilité et les tests de contrôle. L'encombrement est gérable :
-> le fléau de 400 mm tient dans le baril de ⌀ 580 mm avec 90 mm de
+> le plateau de 400 mm tient dans le baril de ⌀ 580 mm avec 90 mm de
 > dégagement de chaque côté.
 
 ---
@@ -968,7 +1025,7 @@ offre un ADC plus rapide (1 MHz) et un DMA matériel.
   │       Alimentation : batterie Makita 18V → DC-DC 5V │
   │                                                      │
   │   ADC0 ← Jauge pression (Pirani)                     │
-  │   ADC1 ← Photodiode (luminosité plasma)              │
+  │   ADC1 ← Caméra Wi-Fi (luminosité plasma via analyse)      │
   │   ADC2 ← Coupleur directionnel (P_réfléchie)          │
   │   ADC3 ← Thermocouple type K (via MAX31855)           │
   │   ADC4 ← Tension batterie (diviseur résistif)         │
@@ -1004,14 +1061,16 @@ est proportionnel à $P_r$.
 minimal. Toute dérive de $n_e$ hors de $n_{e,c}$ augmente $P_r$ →
 le contrôleur corrige.
 
-#### Luminosité plasma (photodiode)
+#### Luminosité plasma (caméra Wi-Fi)
 
-Une photodiode (BPW34 ou similaire) placée **au-dessus du grillage**
+Une **caméra Wi-Fi** placée **au-dessus du grillage**
 Faraday regarde le plasma à travers le maillage et le couvercle
 acrylique. Elle est ainsi **protégée de la RF** par le grillage tout
-en mesurant l'intensité lumineuse de la recombinaison radiative,
-qui est proportionnelle à $n_e^2$. C'est un proxy redondant de la
-densité électronique.
+en capturant l'image complète du plasma et des 8 Nixie IN-13.
+La luminosité globale de l'image est proportionnelle à $n_e^2$
+(recombinaison radiative) — proxy redondant de la
+densité électronique. L'image fournit aussi une **cartographie
+visuelle** du plasma en complément de la cartographie Nixie.
 
 #### Température (thermocouple)
 
@@ -1066,9 +1125,9 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
   filtres feedthrough ou câbles blindés.
 - Ferrites sur chaque ligne d'entrée/sortie.
 - Alimentation depuis la batterie Makita (via régulateur DC-DC 18 V → 5 V).
-- Placement **sur l'assemblage suspendu**, à l'extérieur de la chambre
-  mais à l'intérieur du baril. Communication **exclusivement par
-  Wi-Fi** — aucun câble vers le baril ou l'extérieur.
+- Placement **dans le contrepoids** (côté B du plateau) — éloigné du
+  magnétron. Communication **exclusivement par Wi-Fi** — aucun câble
+  vers le baril ou l'extérieur.
 
 ---
 
@@ -1079,46 +1138,56 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 ![Schéma d'ensemble — Vue en coupe (élévation)](img/ensemble_elevation.svg)
 
 <!-- Fallback ASCII
-╔══════════════════════════════════════════════════════════╗
-║  BARIL 205L (posé au sol — référentiel fixe)             ║
-║  ⌀ 580 mm × 880 mm                                      ║
-║                                                          ║
-║  ┄┄┄┄┄┄┄┄┄┄┄ couvercle du baril ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ║
-║                      │                                   ║
-║              Fil de torsion                              ║
-║              (seul lien mécanique)                       ║
-║                      │                                   ║
-║  ┌───────────────────●───────────────────┐               ║
-║  │     ← 200 mm →    │    ← 200 mm →    │               ║
-║  │                  FLÉAU                │               ║
-║  │                    │                  │               ║
-║  │  ┌─────────────┐   │  ┌───────────┐   │               ║
-║  │  │ CHAMBRE INOX│   │  │CONTREPOIDS│   │               ║
-║  │  │ 3 gal       │   │  │  ~ 10 kg  │   │               ║
-║  │  │ ⌀250×250 mm │   │  │           │   │               ║
-║  │  │             │  [M]  └───────────┘   │               ║
-║  │  │  ┌────────┐ │   │                   │               ║
-║  │  │  │ PLASMA │ │   │ [M] = Miroir      │               ║
-║  │  │  │  H₂O   │ │   │  (sur le fléau,   │               ║
-║  │  │  │ 2-5mbar│ │   │   près de l'axe)  │               ║
-║  │  │  └────────┘ │   │                   │               ║
-║  │  │  8× IN-13   │   │                   │               ║
-║  │  │  (octogone) │   │                   │               ║
-║  │  │  Magnétron  │   │                   │               ║
-║  │  │  Vanne DN10 │   │                   │               ║
-║  │  │  🔋 Batterie│   │                   │               ║
-║  │  │  ⚡ Onduleur │   │                   │               ║
-║  │  │  🖥 ESP32   │   │                   │               ║
-║  │  └─────────────┘   │                   │               ║
-║  └────────────────────┴───────────────────┘               ║
-║                                                          ║
-║  ┌──────────────────────────────────────────┐            ║
-║  │  Laser ──→ [Miroir] ──→ PSD              │            ║
-║  │  (fixés à la paroi interne du baril)     │            ║
-║  └──────────────────────────────────────────┘            ║
-║                                                          ║
-║  📷 Caméra Wi-Fi (hublot)                                ║
-╚══════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════╗
+║  BARIL 205L (posé au sol — référentiel fixe)                     ║
+║  ⌀ 580 mm × 880 mm                                              ║
+║                                                                  ║
+║  ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ couvercle du baril (amovible) ┄┄┄┄┄┄┄┄┄┄┄   ║
+║  ══════════ BARRE TRANSVERSALE ══════════════════   ║
+║  (fixée aux parois)   │           📷 Cam (sur barre, vue ↓)     ║
+║                 Fil de torsion                                   ║
+║                 (≈ 500 mm                                        ║
+║                  → κ minimal                                     ║
+║                  → sensibilité max)                              ║
+║                        │                                         ║
+║                        │  ~ 500 mm                               ║
+║                        │                                         ║
+║                        │  ‹ espace vide ›                        ║
+║                        │                                         ║
+║                        │                                         ║
+║  Laser ─ ─ ─ ─ ─ ─ ─ ─● ─ ─ ─ ─ ─ ─ ─ ─ PSD                   ║
+║                       [M]  ← miroir (haut de tige)               ║
+║  ┆                      ┃  TIGE RIGIDE (~ 300 mm)                ║
+║  ┆                      ┃                                        ║
+║  ┆  CÔTÉ A (chambre)    ┃        CÔTÉ B                          ║
+║  ┆                      ┃                                        ║
+║  ┆  ┌ ─ HORS CAGE ─ ┐  ┃                                        ║
+║  ┆  │  Magnétron ↓   │  ┃                                        ║
+║  ┆  │  Coupleur dir. │  ┃                                        ║
+║  ┆  │  Caméra Wi-Fi  │  ┃                                        ║
+║  M  └ ─ ─ ─ ─ ─ ─ ─ ┘  ┃                                        ║
+║  O  ▓▓▓ GRILLAGE ▓▓▓▓▓  ┃                                        ║
+║  D  ▓ (sur acrylique) ▓ ┃                                        ║
+║  U  ▒▒▒ ACRYLIQUE ▒▒▒▒  ┃                                        ║
+║  L  ▒▒ 3/4" + DN10 ▒▒▒  ┃                                        ║
+║  E  ~ joint silicone ~  ┃                                        ║
+║     ┌═══ CHAMBRE ═══┐   ┃   ┌───────────┐                        ║
+║  A  │  ← ouverture  │   ┃   │CONTREPOIDS│                        ║
+║  U  │ CHAMBRE INOX  │   ┃   │  ~ 10 kg  │                        ║
+║  T  │ 3 gal ⌀250mm │   ┃   │ 🔋 Batt.  │                        ║
+║  O  │  ┌────────┐   │   ┃   │ ⚡ Onduleur│                        ║
+║  N  │  │ PLASMA │   │   ┃   │ 🖥 ESP32  │                        ║
+║  O  │  │  H₂O   │   ┃   └───────────┘                        ║
+║  M  │  │ 2-5mbar│   │   ┃                                        ║
+║  E  │  └────────┘   │   ┃   [M] = Miroir                         ║
+║     │  8× IN-13     │   ┃    (haut de la tige,                   ║
+║     │  (octogone)   │   ┃     près de l'attache)                 ║
+║     │  fond inox    │   ┃                                        ║
+║     └═══════════════┘   ┃                                        ║
+║     ━━━━ PLATEAU PORTEUR ━━━━━━━━━━━━━━━━━━━━━                   ║
+║     ← 200 mm →    ┃     ← 200 mm →                              ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
 
     Extérieur du baril :
     ┌──────────────────────────────┐
@@ -1136,23 +1205,27 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 
 <!-- Fallback ASCII
     ┌─────────────────── Baril ⌀ 580 mm ──────────────────┐
-    │                                                      │
-    │                        ●                             │
+    │  ══════════ barre transversale ══════════  📷         │
+    │                        ●              (cam sur barre) │
     │                  fil de torsion                      │
     │                        │                             │
     │        CÔTÉ A          │         CÔTÉ B              │
     │    ┌───────────┐  ─────┼─────  ┌──────────┐          │
-    │    │  Chambre  │  fléau│       │Contrepoid│          │
+    │    │  Chambre  │plateau│       │Contrepoid│          │
     │    │   inox    │  400mm│       │  ~ 10 kg │          │
-    │    │  ⌀ 250    │       │       └──────────┘          │
-    │    │           │   [M] │                             │
+    │    │  ⌀ 250    │       │       │🔋⚡🖥    │          │
+    │    │           │   [M] │       └──────────┘          │
     │    │  N₁  N₂   │  miroir                             │
     │    │N₈    N₃  │       │                             │
-    │    │  ⊕mag    │      Laser──→[M]──→PSD              │
+    │    │  ⊙DN10   │      Laser──→[M]──→PSD              │
     │    │N₇    N₄  │       │     (sur paroi du baril)    │
     │    │  N₆  N₅   │       │                             │
     │    │           │       │                             │
-    │    └───────────┘       │                             │
+    │    └───────────┘       │  ┌──────────┐               │
+    │    ⊕ mag (au-dessus    │  │🔋⚡🖥    │               │
+    │      du grillage)      │  │(dans le  │               │
+    │                        │  │contrepoid)│               │
+    │                        │  └──────────┘               │
     │                        │                             │
     │         90 mm          │        90 mm                │
     │      dégagement        │     dégagement              │
@@ -1160,9 +1233,11 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
     └──────────────────────────────────────────────────────┘
 
     Légende : Nₖ = tube IN-13 (k = 1..8, espacés de 45°)
-              ⊕ = position du couplage magnétron
+              ⊙ = vanne DN10 (centre du couvercle acrylique)
+              ⊕ = magnétron (au-dessus du grillage, iris ~30° de N₁)
               ● = axe du fil de torsion
-              [M] = miroir (sur le fléau, près de l'axe)
+              [M] = miroir (haut de la tige, près de l'attache)
+              📷 = caméra Wi-Fi (sur barre transversale, vue plongeante)
 -->
 
 ---

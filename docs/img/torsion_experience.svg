@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 520" font-family="'Segoe UI', Arial, sans-serif" font-size="11">
+  <defs>
+    <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#d97706"/>
+    </marker>
+  </defs>
+
+  <!-- Titre -->
+  <text x="370" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Expérience de torsion — Résultats attendus (vue du dessus)</text>
+  <text x="370" y="42" text-anchor="middle" font-size="10" fill="#64748b">Force de Bohm F sur la chambre → couple τ = F·L → torsion θ = τ/κ</text>
+
+  <!-- ==================== PANNEAU 1 : REPOS (équilibre) ==================== -->
+  <g transform="translate(15,0)">
+    <!-- Cadre -->
+    <rect x="15" y="60" width="210" height="260" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="120" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">① Repos (équilibre)</text>
+    <text x="120" y="96" text-anchor="middle" font-size="9" fill="#94a3b8">Plasma OFF — aucune force</text>
+
+    <!-- Baril (cercle extérieur) -->
+    <circle cx="120" cy="200" r="85" fill="none" stroke="#78716c" stroke-width="2.5"/>
+    <text x="120" y="128" text-anchor="middle" font-size="7" fill="#78716c">Baril ⌀ 580 mm</text>
+
+    <!-- Plateau (barre horizontale passant par le centre) -->
+    <line x1="40" y1="200" x2="200" y2="200" stroke="#57534e" stroke-width="3"/>
+
+    <!-- Fil de torsion (point central) -->
+    <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
+
+    <!-- Chambre (côté A — à gauche) -->
+    <rect x="42" y="184" width="36" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="60" y="199" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="bold">Chambre</text>
+    <text x="60" y="209" text-anchor="middle" font-size="6" fill="#1e40af">⌀ 250</text>
+
+    <!-- Contrepoids (côté B — à droite) -->
+    <rect x="162" y="188" width="32" height="24" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="178" y="204" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="bold">10 kg</text>
+
+    <!-- Bras de levier L -->
+    <line x1="60" y1="222" x2="120" y2="222" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <text x="90" y="234" text-anchor="middle" font-size="7" fill="#2563eb" font-weight="bold">L = 200 mm</text>
+
+    <!-- Angle θ = 0 -->
+    <text x="120" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">θ = 0</text>
+    <text x="120" y="296" text-anchor="middle" font-size="8" fill="#64748b">Position de référence</text>
+    <text x="120" y="308" text-anchor="middle" font-size="8" fill="#64748b">Laser → PSD centré</text>
+  </g>
+
+  <!-- ==================== PANNEAU 2 : TORSION HORAIRE ==================== -->
+  <g transform="translate(257,0)">
+    <!-- Cadre -->
+    <rect x="15" y="60" width="210" height="260" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="120" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">② Torsion horaire</text>
+    <text x="120" y="96" text-anchor="middle" font-size="9" fill="#f87171">Plasma ON — force F vers côté A</text>
+
+    <!-- Baril -->
+    <circle cx="120" cy="200" r="85" fill="none" stroke="#78716c" stroke-width="2.5"/>
+
+    <!-- Plateau (pivoté ~15° horaire) -->
+    <line x1="43" y1="179" x2="197" y2="221" stroke="#57534e" stroke-width="3"/>
+
+    <!-- Fil de torsion (point central — tordu) -->
+    <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
+
+    <!-- Chambre (pivotée) -->
+    <rect x="38" y="163" width="36" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" transform="rotate(15, 56, 179)"/>
+    <text x="56" y="178" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="bold">Chambre</text>
+    <text x="56" y="188" text-anchor="middle" font-size="6" fill="#1e40af">⌀ 250</text>
+
+    <!-- Contrepoids (pivoté) -->
+    <rect x="168" y="206" width="32" height="24" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5" transform="rotate(15, 184, 218)"/>
+    <text x="184" y="222" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="bold">10 kg</text>
+
+    <!-- Flèche force F sur la chambre -->
+    <line x1="56" y1="155" x2="36" y2="140" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowR)"/>
+    <text x="25" y="135" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="bold">F</text>
+
+    <!-- Arc de rotation (horaire) -->
+    <path d="M140,175 A25,25 0 0,1 145,195" fill="none" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+    <text x="158" y="182" font-size="8" fill="#d97706" font-weight="bold">↻</text>
+
+    <!-- Angle θ > 0 -->
+    <path d="M120,200 L148,200" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+    <path d="M135,200 A15,15 0 0,0 133,192" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="148" y="194" font-size="8" fill="#dc2626" font-weight="bold">+θ</text>
+
+    <text x="120" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">θ &gt; 0</text>
+    <text x="120" y="296" text-anchor="middle" font-size="8" fill="#ef4444">PSD déplacé → Δx positif</text>
+    <text x="120" y="308" text-anchor="middle" font-size="8" fill="#ef4444">Force de Bohm détectée ?</text>
+  </g>
+
+  <!-- ==================== PANNEAU 3 : TORSION ANTI-HORAIRE ==================== -->
+  <g transform="translate(498,0)">
+    <!-- Cadre -->
+    <rect x="15" y="60" width="210" height="260" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+    <text x="120" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#16a34a">③ Torsion anti-horaire</text>
+    <text x="120" y="96" text-anchor="middle" font-size="9" fill="#4ade80">Plasma ON — force F vers côté B</text>
+
+    <!-- Baril -->
+    <circle cx="120" cy="200" r="85" fill="none" stroke="#78716c" stroke-width="2.5"/>
+
+    <!-- Plateau (pivoté ~15° anti-horaire) -->
+    <line x1="43" y1="221" x2="197" y2="179" stroke="#57534e" stroke-width="3"/>
+
+    <!-- Fil de torsion (point central — tordu) -->
+    <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
+
+    <!-- Chambre (pivotée anti-horaire) -->
+    <rect x="38" y="205" width="36" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" transform="rotate(-15, 56, 221)"/>
+    <text x="56" y="220" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="bold">Chambre</text>
+    <text x="56" y="230" text-anchor="middle" font-size="6" fill="#1e40af">⌀ 250</text>
+
+    <!-- Contrepoids (pivoté) -->
+    <rect x="168" y="164" width="32" height="24" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5" transform="rotate(-15, 184, 176)"/>
+    <text x="184" y="180" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="bold">10 kg</text>
+
+    <!-- Flèche force F sur la chambre -->
+    <line x1="56" y1="243" x2="36" y2="258" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowG)"/>
+    <text x="25" y="265" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">F</text>
+
+    <!-- Arc de rotation (anti-horaire) -->
+    <path d="M145,205 A25,25 0 0,0 140,225" fill="none" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+    <text x="158" y="220" font-size="8" fill="#d97706" font-weight="bold">↺</text>
+
+    <!-- Angle θ < 0 -->
+    <path d="M120,200 L148,200" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+    <path d="M135,200 A15,15 0 0,1 133,208" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="148" y="210" font-size="8" fill="#16a34a" font-weight="bold">−θ</text>
+
+    <text x="120" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#16a34a">θ &lt; 0</text>
+    <text x="120" y="296" text-anchor="middle" font-size="8" fill="#22c55e">PSD déplacé → Δx négatif</text>
+    <text x="120" y="308" text-anchor="middle" font-size="8" fill="#22c55e">Rotation 180° du plateau</text>
+  </g>
+
+  <!-- ==================== SECTION INTERPRÉTATION ==================== -->
+  <rect x="30" y="340" width="680" height="170" rx="8" fill="#fffbeb" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="370" y="362" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Interprétation des résultats</text>
+
+  <!-- Colonne gauche : résultat positif -->
+  <rect x="50" y="375" width="300" height="55" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="200" y="392" text-anchor="middle" font-size="10" font-weight="bold" fill="#dc2626">✦ Signal détecté (θ ≠ 0)</text>
+  <text x="200" y="406" text-anchor="middle" font-size="8" fill="#7f1d1d">Le couple τ = κ·θ mesure la force anomale.</text>
+  <text x="200" y="420" text-anchor="middle" font-size="8" fill="#7f1d1d">Inversion à 180° doit inverser le signe de θ.</text>
+
+  <!-- Colonne droite : résultat nul -->
+  <rect x="390" y="375" width="300" height="55" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="540" y="392" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">✦ Aucun signal (θ = 0)</text>
+  <text x="540" y="406" text-anchor="middle" font-size="8" fill="#14532d">Pas de force mesurable → hypothèse invalidée</text>
+  <text x="540" y="420" text-anchor="middle" font-size="8" fill="#14532d">à cette échelle, ou effet sous le seuil κ.</text>
+
+  <!-- Contrôle -->
+  <rect x="50" y="440" width="640" height="58" rx="6" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="370" y="458" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">Contrôles de validité</text>
+  <text x="65" y="474" font-size="8" fill="#334155">① Plasma OFF → θ doit rester = 0 (pas de dérive thermique ni vibration)</text>
+  <text x="65" y="486" font-size="8" fill="#334155">② Rotation 180° du plateau → le signe de θ doit s'inverser (élimine les artefacts systématiques)</text>
+  <text x="65" y="498" font-size="8" fill="#334155">③ Puissance magnétron variable → θ doit varier proportionnellement (si signal réel, τ ∝ P)</text>
+</svg>
