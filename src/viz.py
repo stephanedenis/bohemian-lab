@@ -3,7 +3,8 @@ Utilitaires de visualisation quantique — Bohemian Lab.
 
 Ce module centralise toutes les fonctions de visualisation réutilisables
 du projet : sphère de Bloch, modes de cavité, profils de champ, plasma,
-potentiel quantique, trajectoires bohmiennes.
+potentiel quantique, trajectoires bohmiennes, analyse signal, PID,
+sensibilité Monte Carlo.
 
 Usage:
     from src.viz import (
@@ -15,6 +16,10 @@ Usage:
         plot_potentiel_quantique,
         plot_trajectoires_bohm,
         plot_force_comparaison,
+        plot_signal_pendule,
+        plot_correlation,
+        plot_pid_reponse,
+        plot_monte_carlo_eta,
     )
 """
 import numpy as np
@@ -539,6 +544,267 @@ def plot_force_comparaison(
     ax.set_ylabel("Force (µN)", fontsize=12)
     ax.set_title(titre, fontsize=13, fontweight="bold")
     ax.grid(True, axis="y", alpha=0.3)
+    plt.tight_layout()
+
+    if sauvegarde:
+        fig.savefig(sauvegarde, dpi=150, bbox_inches="tight")
+        print(f"  💾 Figure sauvegardée → {sauvegarde}")
+
+    return fig
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# SECTION 7 — Signal du pendule et corrélation croisée
+# ═══════════════════════════════════════════════════════════════════════
+
+def plot_signal_pendule(
+    t: np.ndarray,
+    signal_total: np.ndarray,
+    signal_filtre: np.ndarray | None = None,
+    commande: np.ndarray | None = None,
+    fenetre_zoom: tuple[float, float] | None = None,
+    titre: str = "Signal du pendule de torsion",
+    sauvegarde: str | None = None,
+) -> plt.Figure:
+    """Visualise le signal brut du pendule et sa version filtrée.
+
+    Affiche 2 ou 3 panneaux : signal brut, signal filtré, et optionnellement
+    la commande du magnétron pour comparaison visuelle.
+
+    Args:
+        t: Vecteur temps (s).
+        signal_total: Signal brut θ(t) en µrad.
+        signal_filtre: Signal après filtrage passe-bande (µrad), optionnel.
+        commande: Signal de commande du magnétron M(t), optionnel.
+        fenetre_zoom: Tuple (t_min, t_max) pour zoom temporel.
+        titre: Titre de la figure.
+        sauvegarde: Chemin de fichier pour sauvegarder.
+
+    Returns:
+        Figure matplotlib.
+    """
+    n_panels = 2 + (1 if commande is not None else 0)
+    fig, axes = plt.subplots(n_panels, 1, figsize=(14, 4 * n_panels),
+                             sharex=True)
+
+    # Panneau 1 : signal brut
+    axes[0].plot(t, signal_total, "b-", linewidth=0.5, alpha=0.7)
+    axes[0].set_ylabel("θ brut (µrad)")
+    axes[0].set_title("Signal brut (force + thermique + bruit)")
+    axes[0].grid(True, alpha=0.3)
+
+    # Panneau 2 : signal filtré
+    if signal_filtre is not None:
+        axes[1].plot(t, signal_filtre, "r-", linewidth=0.8)
+        axes[1].set_ylabel("θ filtré (µrad)")
+        axes[1].set_title("Signal après filtrage passe-bande autour de $f_0$")
+    else:
+        axes[1].text(0.5, 0.5, "Pas de signal filtré fourni",
+                     transform=axes[1].transAxes, ha="center", va="center")
+    axes[1].grid(True, alpha=0.3)
+
+    # Panneau 3 : commande magnétron
+    if commande is not None:
+        axes[2].plot(t, commande, "k-", linewidth=0.8)
+        axes[2].set_ylabel("M(t)")
+        axes[2].set_title("Commande du magnétron (référence)")
+        axes[2].set_ylim(-0.2, 1.2)
+        axes[2].grid(True, alpha=0.3)
+
+    axes[-1].set_xlabel("Temps (s)")
+
+    if fenetre_zoom:
+        for ax in axes:
+            ax.set_xlim(*fenetre_zoom)
+
+    fig.suptitle(titre, fontsize=14, fontweight="bold", y=1.01)
+    plt.tight_layout()
+
+    if sauvegarde:
+        fig.savefig(sauvegarde, dpi=150, bbox_inches="tight")
+        print(f"  💾 Figure sauvegardée → {sauvegarde}")
+
+    return fig
+
+
+def plot_correlation(
+    lags: np.ndarray,
+    correlation: np.ndarray,
+    t_attendu: float | None = None,
+    titre: str = "Corrélation croisée θ(t) ⊗ M(t)",
+    sauvegarde: str | None = None,
+) -> plt.Figure:
+    """Affiche la fonction de corrélation croisée avec pic annoté.
+
+    Args:
+        lags: Décalages temporels τ (s).
+        correlation: Valeurs C(τ) normalisées (−1 à +1).
+        t_attendu: Décalage attendu (marqueur vertical), optionnel.
+        titre: Titre du graphique.
+        sauvegarde: Chemin de fichier pour sauvegarder.
+
+    Returns:
+        Figure matplotlib.
+    """
+    fig, ax = plt.subplots(figsize=(12, 5))
+
+    ax.plot(lags, correlation, "b-", linewidth=1)
+    ax.axhline(0, color="gray", linestyle=":", linewidth=0.8)
+
+    # Pic maximal
+    idx_max = np.argmax(np.abs(correlation))
+    ax.axvline(lags[idx_max], color="red", linestyle="--",
+               label=f"Pic : τ = {lags[idx_max]:.2f} s, "
+                     f"C = {correlation[idx_max]:.3f}")
+    ax.plot(lags[idx_max], correlation[idx_max], "ro", markersize=8)
+
+    if t_attendu is not None:
+        ax.axvline(t_attendu, color="green", linestyle="-.",
+                   label=f"τ attendu = {t_attendu:.2f} s")
+
+    ax.set_xlabel("Décalage τ (s)")
+    ax.set_ylabel("$C(\\tau)$ normalisée")
+    ax.set_title(titre, fontsize=13, fontweight="bold")
+    ax.legend(fontsize=10)
+    ax.grid(True, alpha=0.3)
+    plt.tight_layout()
+
+    if sauvegarde:
+        fig.savefig(sauvegarde, dpi=150, bbox_inches="tight")
+        print(f"  💾 Figure sauvegardée → {sauvegarde}")
+
+    return fig
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# SECTION 8 — Réponse des boucles PID
+# ═══════════════════════════════════════════════════════════════════════
+
+def plot_pid_reponse(
+    t: np.ndarray,
+    variables: dict[str, np.ndarray],
+    commandes: dict[str, np.ndarray] | None = None,
+    perturbation_t: float | None = None,
+    titre: str = "Dynamique plasma et boucles PID",
+    sauvegarde: str | None = None,
+) -> plt.Figure:
+    """Affiche les variables d'état du plasma et les commandes PID.
+
+    Variables d'état attendues : P (mbar), n_e (m⁻³), T_e (eV).
+    Commandes : u1 (vanne), u2 (magnétron).
+
+    Args:
+        t: Vecteur temps (s).
+        variables: Dict {'P': array, 'n_e': array, 'T_e': array}.
+        commandes: Dict {'u1': array, 'u2': array}, optionnel.
+        perturbation_t: Instant de perturbation (s), pour marqueur vertical.
+        titre: Titre global.
+        sauvegarde: Chemin de fichier pour sauvegarder.
+
+    Returns:
+        Figure matplotlib.
+    """
+    n_vars = len(variables)
+    n_cmd = len(commandes) if commandes else 0
+    n_panels = n_vars + n_cmd
+    fig, axes = plt.subplots(n_panels, 1, figsize=(14, 3 * n_panels),
+                             sharex=True)
+    if n_panels == 1:
+        axes = [axes]
+
+    couleurs_var = ["#3498db", "#2ecc71", "#e74c3c", "#9b59b6"]
+    for i, (nom, data) in enumerate(variables.items()):
+        if nom == "n_e":
+            axes[i].semilogy(t, data, color=couleurs_var[i], linewidth=0.8)
+        else:
+            axes[i].plot(t, data, color=couleurs_var[i], linewidth=0.8)
+        axes[i].set_ylabel(nom)
+        axes[i].set_title(f"Variable : {nom}")
+        axes[i].grid(True, alpha=0.3)
+        if perturbation_t is not None:
+            axes[i].axvline(perturbation_t, color="orange", linestyle=":",
+                           alpha=0.7, label="Perturbation")
+            axes[i].legend(fontsize=8, loc="upper right")
+
+    if commandes:
+        couleurs_cmd = ["#2c3e50", "#8e44ad"]
+        for j, (nom, data) in enumerate(commandes.items()):
+            idx = n_vars + j
+            axes[idx].plot(t, data, color=couleurs_cmd[j], linewidth=0.5)
+            axes[idx].set_ylabel(nom)
+            axes[idx].set_title(f"Commande PID : {nom}")
+            axes[idx].set_ylim(-0.05, 1.05)
+            axes[idx].grid(True, alpha=0.3)
+
+    axes[-1].set_xlabel("Temps (s)")
+    fig.suptitle(titre, fontsize=14, fontweight="bold", y=1.01)
+    plt.tight_layout()
+
+    if sauvegarde:
+        fig.savefig(sauvegarde, dpi=150, bbox_inches="tight")
+        print(f"  💾 Figure sauvegardée → {sauvegarde}")
+
+    return fig
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# SECTION 9 — Distribution Monte Carlo de η et matrice de décision
+# ═══════════════════════════════════════════════════════════════════════
+
+def plot_monte_carlo_eta(
+    eta_values: np.ndarray,
+    eta_mean: float,
+    eta_std: float,
+    ic_90: tuple[float, float] | None = None,
+    titre: str = "Distribution Monte Carlo de η",
+    sauvegarde: str | None = None,
+) -> plt.Figure:
+    """Histogramme de la distribution Monte Carlo de η.
+
+    Affiche les zones de classification (§4.6) en arrière-plan :
+    η < 1 (rouge), 1–10 (orange), > 10 (vert).
+
+    Args:
+        eta_values: Array des η tirés par Monte Carlo.
+        eta_mean: Moyenne de η.
+        eta_std: Écart-type de η.
+        ic_90: Intervalle de confiance 90 % (p5, p95), optionnel.
+        titre: Titre du graphique.
+        sauvegarde: Chemin de fichier pour sauvegarder.
+
+    Returns:
+        Figure matplotlib.
+    """
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    # Zones de décision en arrière-plan
+    xlim_max = min(np.percentile(eta_values, 99.5) * 1.3, 50)
+    ax.axvspan(0, 1, alpha=0.12, color="red", label="η < 1 : INFIRMÉ")
+    ax.axvspan(1, 10, alpha=0.12, color="orange",
+               label="1 < η < 10 : INTÉRESSANT")
+    ax.axvspan(10, xlim_max, alpha=0.12, color="green",
+               label="η > 10 : ANOMALIE")
+
+    # Histogramme
+    ax.hist(eta_values, bins=200, density=True, color="#3498db",
+            alpha=0.7, edgecolor="none")
+
+    # Lignes de référence
+    ax.axvline(eta_mean, color="red", linestyle="-", linewidth=2,
+               label=f"Moyenne = {eta_mean:.2f}")
+    ax.axvline(1.0, color="black", linestyle=":", linewidth=1.5)
+
+    if ic_90:
+        ax.axvline(ic_90[0], color="darkorange", linestyle="--",
+                   label=f"IC 90 % : [{ic_90[0]:.2f}, {ic_90[1]:.2f}]")
+        ax.axvline(ic_90[1], color="darkorange", linestyle="--")
+
+    ax.set_xlabel("η = F_net / (P/c)")
+    ax.set_ylabel("Densité de probabilité")
+    ax.set_title(titre, fontsize=13, fontweight="bold")
+    ax.set_xlim(0, xlim_max)
+    ax.legend(fontsize=9, loc="upper right")
+    ax.grid(True, alpha=0.3)
     plt.tight_layout()
 
     if sauvegarde:
