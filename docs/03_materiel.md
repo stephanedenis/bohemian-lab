@@ -687,11 +687,40 @@ Voir le [bilan de puissance détaillé](02_theorie.md#bilan-de-puissance-et-puis
 pour la justification complète (bilan ionisation-recombinaison, gradient
 d'indice de réfraction, et force mesurable en fonction de $P_{\text{RF}}$).
 
-Le mode **pulsé** du magnétron (duty cycle 25–50 %) réduit la
-puissance *moyenne* mais pas les pics. Pour protéger les Nixie,
-il faut réduire la puissance *crête* — soit en utilisant un
-magnétron moins puissant (four micro-ondes compact 600–700 W), soit
-en atténuant via un coupleur variable ou un iris calibré.
+Le mode **pulsé** du magnétron (duty cycle SSR 25–50 %) réduit la
+puissance *moyenne* mais **pas la puissance crête** : pendant chaque
+pulse « ON » (typiquement 50–100 ms), le champ dans la cavité atteint
+sa valeur nominale complète. Pour un magnétron de 1 kW, cela signifie
+$E_{\text{peak}} = 22{,}7$ kV/m *à chaque pulse* — les Nixie saturent
+pendant la phase ON, et l'information de gradient est perdue.
+
+Pour rester dans la fenêtre 100–300 W en puissance **crête**
+(pas seulement moyenne), trois approches sont possibles :
+
+| Méthode | Principe | Masse ajoutée | Fiabilité | Compatibilité |
+|:---|:---|:---|:---|:---|
+| **A. Magnétron compact 600–700 W** | Transfo HT plus petit → $V_{\text{anode}}$ réduite → puissance nominale moindre. Piloté à 30–50 % via variac ou SCR. | 0 (remplace le 1 kW) | ★★★ | Tout four compact (Panasonic, LG…) |
+| **B. Magnétron 1 kW + variac** | Autotransformateur variable sur le primaire du transfo HT (220 V → ~140–160 V) réduit $V_{\text{anode}}$ proportionnellement. | +2–3 kg | ★★☆ | Nécessite un variac de ≥ 1 kVA |
+| **C. Magnétron 1 kW + SCR/triac** (contrôle d'angle de phase) | Coupe une fraction de chaque demi-onde AC → $V_{\text{anode,eff}}$ réduite en continu. | +0,2 kg | ★★☆ | Harmoniques possibles → modeshopping |
+
+> 💡 **Pourquoi pas simplement le duty cycle ?** — Un magnétron est un
+> oscillateur **à seuil** : en dessous de ~70 % de sa tension d'anode
+> nominale, il ne produit plus de micro-ondes (extinction brutale, pas
+> progressive). La courbe $P_{\text{RF}}(V_{\text{anode}})$ est très
+> raide : pour un magnétron 1 kW ($V_{\text{anode}} \approx 4{,}1$ kV),
+> la zone de réglage stable se situe entre ~3,2 kV (seuil, ~200 W) et
+> 4,1 kV (1 kW) — soit seulement ~900 V de plage.
+>
+> Un magnétron compact de 700 W ($V_{\text{anode}} \approx 3{,}4$ kV)
+> offre une plage de réglage **proportionnellement plus large** pour
+> atteindre 200 W (~2,8 kV → 18 % de réduction vs. 22 % pour le 1 kW),
+> et son transformateur HT est plus léger (~2,5 kg vs. ~3,5 kg).
+
+**Recommandation** : utiliser un magnétron de **four compact 600–700 W**
+récupéré (gratuit) avec contrôle de $V_{\text{anode}}$ par SCR ou
+variac pour descendre à 200 W crête. Si un magnétron de 1 kW est déjà
+disponible, l'option B (variac) fonctionne — au prix de 2–3 kg
+supplémentaires sur le plateau porteur.
 
 ---
 
@@ -1285,9 +1314,26 @@ Le PID ajuste $\dot{m}_{\text{in}}$ pour stabiliser $P$ à la consigne.
 
 #### Modulation de puissance RF
 
-Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.org/wiki/Relais_statique)
-à passage par zéro sur le transformateur HT. Le duty cycle (période
-~ 100 ms) contrôle la puissance moyenne délivrée et donc $T_e$.
+Deux niveaux de contrôle indépendants agissent sur la puissance :
+
+1. **Puissance crête** (réglage lent, ~ 1×/session) — détermine le
+   $E_{\text{peak}}$ dans la cavité. Ajustée par réduction de la tension
+   d'anode via :
+   - **Variac** sur le primaire du transfo HT (220 V → 140–180 V), ou
+   - **SCR à angle de phase** sur le primaire (plus compact, ~200 g).
+   - Cible : $V_{\text{anode}}$ telle que $P_{\text{crête}} \approx$
+     200–300 W → $E_{\text{peak}} \approx 10\text{–}12$ kV/m.
+
+2. **Puissance moyenne** (réglage dynamique, PID) — contrôle $T_e$ et
+   le taux d'ionisation. Ajustée par le
+   [relais statique (SSR)](https://fr.wikipedia.org/wiki/Relais_statique)
+   à passage par zéro sur le primaire du transfo HT. Le duty cycle
+   (période ~ 100 ms) module la puissance moyenne entre 0 et
+   $P_{\text{crête}}$.
+
+Cette architecture à deux étages permet de fixer $E_{\text{peak}}$
+(contrainte Nixie) indépendamment de la puissance moyenne délivrée
+au plasma (contrainte $n_e/n_{e,c}$).
 
 ### Firmware et logging
 
