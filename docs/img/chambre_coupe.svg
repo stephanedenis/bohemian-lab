@@ -39,13 +39,19 @@
   <line x1="130" y1="55" x2="130" y2="125" stroke="#ea580c" stroke-width="1" stroke-dasharray="4,3"/>
   <line x1="430" y1="55" x2="430" y2="125" stroke="#ea580c" stroke-width="1" stroke-dasharray="4,3"/>
 
-  <!-- Magnétron -->
-  <rect x="150" y="62" width="90" height="40" rx="5" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
-  <text x="195" y="80" text-anchor="middle" font-size="11" fill="white" font-weight="bold">MAGNÉTRON</text>
-  <text x="195" y="94" text-anchor="middle" font-size="9" fill="#fecaca">1 kW · 2,45 GHz</text>
+  <!-- Magnétron (vue de côté → ellipse avec cavités) -->
+  <ellipse cx="195" cy="80" rx="40" ry="18" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Cavités intérieures (vue côté simplifié) -->
+  <circle cx="172" cy="80" r="3" fill="#7f1d1d"/>
+  <circle cx="182" cy="80" r="3" fill="#7f1d1d"/>
+  <circle cx="195" cy="80" r="4" fill="#fca5a5" stroke="#b91c1c" stroke-width="0.8"/>
+  <circle cx="208" cy="80" r="3" fill="#7f1d1d"/>
+  <circle cx="218" cy="80" r="3" fill="#7f1d1d"/>
+  <text x="195" y="68" text-anchor="middle" font-size="11" fill="#b91c1c" font-weight="bold">MAGNÉTRON</text>
+  <text x="195" y="96" text-anchor="middle" font-size="9" fill="#fecaca">1 kW · 2,45 GHz</text>
 
   <!-- Antenne vers le bas (vers l'iris) -->
-  <line x1="195" y1="102" x2="195" y2="118" stroke="#b91c1c" stroke-width="3"/>
+  <line x1="195" y1="98" x2="195" y2="118" stroke="#b91c1c" stroke-width="3"/>
   <polygon points="190,118 200,118 195,126" fill="#b91c1c"/>
   <text x="210" y="115" font-size="8" fill="#b91c1c">antenne ↓</text>
 
@@ -184,6 +190,6 @@
   <rect x="340" y="610" width="14" height="14" rx="2" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
   <text x="360" y="622" font-size="9" fill="#1e293b">Acrylique + vanne DN10 + connecteur</text>
 
-  <rect x="340" y="633" width="14" height="14" rx="2" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
-  <text x="360" y="645" font-size="9" fill="#1e293b">📷 Caméra + coupleur + magnétron (hors cage)</text>
+  <ellipse cx="347" cy="640" rx="7" ry="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
+  <text x="360" y="645" font-size="9" fill="#1e293b">Magnétron + 📷 Caméra + coupleur (hors cage)</text>
 </svg>

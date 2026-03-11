@@ -1,5 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 580" font-family="'Segoe UI', Arial, sans-serif" font-size="11">
   <rect width="600" height="580" fill="#ffffff"/>
+  <defs>
+    <g id="magnetron">
+      <circle r="8" fill="#ef4444" stroke="#b91c1c" stroke-width="0.8"/>
+      <circle cx="0" cy="-4.5" r="1.4" fill="#7f1d1d"/>
+      <circle cx="3.9" cy="-2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="3.9" cy="2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="0" cy="4.5" r="1.4" fill="#7f1d1d"/>
+      <circle cx="-3.9" cy="2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="-3.9" cy="-2.25" r="1.4" fill="#7f1d1d"/>
+      <circle r="2" fill="#fca5a5" stroke="#b91c1c" stroke-width="0.5"/>
+    </g>
+  </defs>
   <!-- Titre -->
   <text x="300" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">Vue du dessus — Plan d'implantation</text>
   <text x="300" y="40" text-anchor="middle" font-size="11" fill="#64748b">Baril ⌀ 580 mm · Magnétron au-dessus du grillage (hors cage)</text>
@@ -8,7 +20,7 @@
   <circle cx="300" cy="280" r="240" fill="#fafaf9" stroke="#57534e" stroke-width="4"/>
 
   <!-- Barre transversale (fixée aux parois du baril, supporte le fil) -->
-  <rect x="70" y="277" width="460" height="6" rx="2" fill="#a8a29e" stroke="#57534e" stroke-width="1" opacity="0.4"/>
+  <rect x="60" y="277" width="480" height="6" rx="2" fill="#78716c" stroke="#44403c" stroke-width="1" opacity="0.4"/>
   <text x="540" y="283" font-size="7" fill="#57534e">barre transv.</text>
 
   <!-- Fil de torsion (axe central) -->
@@ -52,8 +64,8 @@
     <text x="143" y="226" text-anchor="middle" fill="white">N₈</text>
   </g>
 
-  <!-- Magnétron (au-dessus du grillage, ~30° du N₁ — montré en semi-transparent car c'est une couche au-dessus) -->
-  <rect x="210" y="196" width="22" height="16" rx="3" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" opacity="0.8"/>
+  <!-- Magnétron (au-dessus du grillage, ~30° du N₁ — cercle à cavités, semi-transparent) -->
+  <use href="#magnetron" x="221" y="204" opacity="0.8"/>
   <text x="237" y="199" font-size="8" fill="#b91c1c" font-weight="bold">⊕ mag</text>
   <text x="237" y="210" font-size="7" fill="#b91c1c">(sur grillage)</text>
 
@@ -71,14 +83,14 @@
   <text x="305" y="262" font-size="8" fill="#a16207" font-weight="bold">[M]</text>
 
   <!-- Laser (fixé sur paroi du baril) -->
-  <rect x="65" y="430" width="48" height="18" rx="4" fill="#f97316" stroke="#c2410c" stroke-width="1.5"/>
+  <rect x="65" y="430" width="48" height="18" rx="4" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
   <text x="89" y="443" text-anchor="middle" font-size="8" font-weight="bold" fill="white">Laser</text>
-  <line x1="89" y1="430" x2="313" y2="278" stroke="#f97316" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="89" y1="430" x2="313" y2="278" stroke="#10b981" stroke-width="1.2" stroke-dasharray="5,3"/>
 
   <!-- PSD (fixé sur paroi du baril) -->
-  <rect x="490" y="430" width="42" height="18" rx="4" fill="#f97316" stroke="#c2410c" stroke-width="1.5"/>
+  <rect x="490" y="430" width="42" height="18" rx="4" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
   <text x="511" y="443" text-anchor="middle" font-size="8" font-weight="bold" fill="white">PSD</text>
-  <line x1="321" y1="276" x2="490" y2="439" stroke="#f97316" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="321" y1="276" x2="490" y2="439" stroke="#10b981" stroke-width="1.2" stroke-dasharray="5,3"/>
 
   <!-- Cote dégagement 90 mm -->
   <g font-size="9" fill="#64748b">
@@ -93,7 +105,7 @@
   <text x="300" y="517" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">Légende</text>
   <circle cx="120" cy="537" r="6" fill="#ff6b2b" stroke="#cc4400" stroke-width="1"/>
   <text x="135" y="541" font-size="9" fill="#1e293b">Nₖ = IN-13 néon (paroi int.)</text>
-  <rect x="259" y="531" width="12" height="10" rx="1" fill="#ef4444" stroke="#b91c1c" stroke-width="1" opacity="0.8"/>
+  <circle cx="265" cy="537" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1" opacity="0.8"/>
   <text x="279" y="541" font-size="9" fill="#1e293b">⊕ = magnétron (au-dessus)</text>
   <circle cx="120" cy="557" r="6" fill="#94a3b8" stroke="#334155" stroke-width="1"/>
   <text x="135" y="561" font-size="9" fill="#1e293b">DN10 = vanne (centre couvercle)</text>

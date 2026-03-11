@@ -21,8 +21,8 @@
 
 | Composant | fill | stroke | text | Aperçu |
 |---|---|---|---|---|
-| **Laser** | `#f97316` | `#c2410c` | `white` | 🟧 orange |
-| **PSD** | `#f97316` | `#c2410c` | `white` | 🟧 orange |
+| **Laser** | `#10b981` | `#047857` | `white` | 🟢 émeraude |
+| **PSD** | `#10b981` | `#047857` | `white` | 🟢 émeraude |
 | **Nixie IN-13** | `#ff6b2b` | `#cc4400` | `white` | 🟧 néon orange |
 | **Coupleur directionnel** | `#fef3c7` | `#f59e0b` | `#92400e` | 🟨 ambre clair |
 | **Thermocouple K** | `#ccfbf1` | `#14b8a6` | `#0f766e` | 🩵 teal |
@@ -43,7 +43,9 @@
 ## Règles générales
 
 1. **Opacité** : par défaut `1.0`. Utiliser `0.25` uniquement pour les éléments fantômes (ex : contrepoids en arrière-plan).
-2. **Formes** : la forme peut varier selon la vue (cercle en plan, rect en élévation) — mais les **couleurs** restent identiques.
-3. **Polices** : `'Segoe UI', Arial, sans-serif`, taille `11` par défaut.
-4. **Fond** : toujours `#ffffff` (blanc).
-5. **Labels** : texte `font-weight="bold"` pour le nom du composant, poids normal pour les détails.
+2. **Formes** : la forme peut varier selon la vue (cercle en plan, ellipse en élévation) — mais les **couleurs** restent identiques.
+3. **Symbole magnétron** : cercle avec 6 cavités + cathode centrale (`<g id="magnetron">`). En vue de côté, utiliser une ellipse avec cavités alignées horizontalement.
+4. **Polices** : `'Segoe UI', Arial, sans-serif`, taille `11` par défaut.
+5. **Fond** : toujours `#ffffff` (blanc).
+6. **Labels** : texte `font-weight="bold"` pour le nom du composant, poids normal pour les détails.
+7. **Laser / PSD** : vert émeraude `#10b981` — bien distinct du néon orange des Nixie `#ff6b2b`.

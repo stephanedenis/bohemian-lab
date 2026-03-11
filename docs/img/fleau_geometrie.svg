@@ -66,14 +66,14 @@
 
   <!-- Laser + PSD -->
   <g transform="translate(80, 310)">
-    <rect x="0" y="0" width="60" height="20" rx="4" fill="#f97316" stroke="#c2410c" stroke-width="1.5"/>
+    <rect x="0" y="0" width="60" height="20" rx="4" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
     <text x="30" y="14" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Laser</text>
   </g>
-  <line x1="140" y1="320" x2="290" y2="162" stroke="#f97316" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <line x1="310" y1="155" x2="460" y2="320" stroke="#f97316" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="140" y1="320" x2="290" y2="162" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="310" y1="155" x2="460" y2="320" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3"/>
   <g transform="translate(460, 310)">
-    <rect x="0" y="0" width="60" height="20" rx="4" fill="#f97316" stroke="#c2410c" stroke-width="1.5"/>
+    <rect x="0" y="0" width="60" height="20" rx="4" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
     <text x="30" y="14" text-anchor="middle" font-size="9" font-weight="bold" fill="white">PSD</text>
   </g>
-  <text x="300" y="345" text-anchor="middle" font-size="9" fill="#9a3412">(Laser et PSD fixés à la paroi interne du baril)</text>
+  <text x="300" y="345" text-anchor="middle" font-size="9" fill="#047857">(Laser et PSD fixés à la paroi interne du baril)</text>
 </svg>

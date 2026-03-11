@@ -129,15 +129,15 @@
   <text x="388" y="586" font-size="8" fill="#44403c"> au sommet)</text>
 
   <!-- ==================== SYSTÈME OPTIQUE (paroi du baril) ==================== -->
-  <rect x="85" y="480" width="28" height="16" rx="3" fill="#f97316" stroke="#c2410c" stroke-width="1"/>
+  <rect x="85" y="480" width="28" height="16" rx="3" fill="#10b981" stroke="#047857" stroke-width="1"/>
   <text x="99" y="491" text-anchor="middle" font-size="6" fill="white" font-weight="bold">Laser</text>
-  <line x1="113" y1="488" x2="345" y2="488" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="113" y1="488" x2="345" y2="488" stroke="#10b981" stroke-width="1" stroke-dasharray="4,3"/>
 
-  <rect x="630" y="480" width="28" height="16" rx="3" fill="#f97316" stroke="#c2410c" stroke-width="1"/>
+  <rect x="630" y="480" width="28" height="16" rx="3" fill="#10b981" stroke="#047857" stroke-width="1"/>
   <text x="644" y="491" text-anchor="middle" font-size="6" fill="white" font-weight="bold">PSD</text>
-  <line x1="630" y1="488" x2="370" y2="488" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="630" y1="488" x2="370" y2="488" stroke="#10b981" stroke-width="1" stroke-dasharray="4,3"/>
 
-  <text x="550" y="475" font-size="8" fill="#9a3412">Laser → [M] → PSD (paroi baril)</text>
+  <text x="550" y="475" font-size="8" fill="#047857">Laser → [M] → PSD (paroi baril)</text>
 
   <!-- ==================== ESPACE VIDE ANNOTÉ ==================== -->
   <text x="230" y="370" text-anchor="middle" font-size="10" fill="#a16207" font-style="italic" opacity="0.5">‹ espace dédié au fil de torsion ›</text>
@@ -211,10 +211,16 @@
   <rect x="168" y="595" width="28" height="8" rx="1" fill="#fff7ed" stroke="#ea580c" stroke-width="1"/>
   <text x="182" y="601" text-anchor="middle" font-size="5" fill="#ea580c">iris</text>
 
-  <!-- Magnétron (AU-DESSUS du grillage — hors cage) -->
-  <rect x="155" y="576" width="56" height="19" rx="3" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
-  <text x="183" y="587" text-anchor="middle" font-size="7" fill="white" font-weight="bold">MAGNÉTRON</text>
-  <text x="183" y="593" text-anchor="middle" font-size="6" fill="#fecaca">1 kW</text>
+  <!-- Magnétron (AU-DESSUS du grillage — hors cage, vue de côté → ellipse cavités) -->
+  <ellipse cx="183" cy="585" rx="26" ry="10" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+  <!-- Cavités intérieures (vue côté simplifié) -->
+  <circle cx="168" cy="585" r="2" fill="#7f1d1d"/>
+  <circle cx="176" cy="585" r="2" fill="#7f1d1d"/>
+  <circle cx="183" cy="585" r="2" fill="#fca5a5" stroke="#b91c1c" stroke-width="0.5"/>
+  <circle cx="190" cy="585" r="2" fill="#7f1d1d"/>
+  <circle cx="198" cy="585" r="2" fill="#7f1d1d"/>
+  <text x="183" y="575" text-anchor="middle" font-size="7" fill="#b91c1c" font-weight="bold">MAGNÉTRON</text>
+  <text x="183" y="600" text-anchor="middle" font-size="6" fill="#b91c1c">1 kW</text>
 
   <!-- Coupleur directionnel -->
   <rect x="220" y="578" width="40" height="14" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
@@ -264,7 +270,7 @@
   <text x="375" y="1004" font-size="8" fill="#1e293b">Fil de torsion (≈ 500 mm → κ minimal)</text>
   <rect x="140" y="1012" width="10" height="10" rx="1" fill="#57534e" stroke="#44403c" stroke-width="1"/>
   <text x="155" y="1020" font-size="8" fill="#1e293b">Tige rigide (~ 300 mm, miroir dégagé)</text>
-  <rect x="350" y="1012" width="10" height="10" rx="1" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
+  <ellipse cx="355" cy="1017" rx="6" ry="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
   <text x="365" y="1020" font-size="8" fill="#1e293b">Magnétron (hors cage)</text>
   <rect x="140" y="1028" width="10" height="10" rx="1" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
   <text x="155" y="1036" font-size="8" fill="#1e293b">Contrepoids (bat. + onduleur + ESP32)</text>

@@ -11,6 +11,17 @@
       <feComposite in="color" in2="blur" operator="in" result="glow"/>
       <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <!-- Symbole magnétron (vue du dessus : corps + 6 cavités + cathode) -->
+    <g id="magnetron">
+      <circle r="8" fill="#ef4444" stroke="#b91c1c" stroke-width="0.8"/>
+      <circle cx="0" cy="-4.5" r="1.4" fill="#7f1d1d"/>
+      <circle cx="3.9" cy="-2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="3.9" cy="2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="0" cy="4.5" r="1.4" fill="#7f1d1d"/>
+      <circle cx="-3.9" cy="2.25" r="1.4" fill="#7f1d1d"/>
+      <circle cx="-3.9" cy="-2.25" r="1.4" fill="#7f1d1d"/>
+      <circle r="2" fill="#fca5a5" stroke="#b91c1c" stroke-width="0.5"/>
+    </g>
   </defs>
 
   <!-- Titre -->
@@ -74,11 +85,11 @@
   <text x="260" y="272" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Vanne</text>
   <text x="260" y="283" text-anchor="middle" font-size="9" font-weight="bold" fill="white">DN10</text>
 
-  <!-- Magnétron au-dessus (position ~30° du N₁, symbolisé par un rectangle au-dessus) -->
-  <g transform="translate(312, 115)">
-    <rect x="-18" y="-14" width="36" height="28" rx="5" fill="#ef4444" stroke="#b91c1c" stroke-width="2" opacity="0.85"/>
-    <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="bold" fill="white">MAG</text>
+  <!-- Magnétron au-dessus (position ~30° du N₁, cercle à cavités) -->
+  <g transform="translate(312, 115) scale(2)" opacity="0.85">
+    <use href="#magnetron"/>
   </g>
+  <text x="312" y="119" text-anchor="middle" font-size="8" font-weight="bold" fill="white">MAG</text>
   <!-- Ligne pointillée indiquant que le magnétron est AU-DESSUS -->
   <line x1="312" y1="129" x2="312" y2="150" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="3,2"/>
   <text x="355" y="115" font-size="10" fill="#b91c1c" font-weight="bold">⊕ Magnétron</text>
@@ -88,5 +99,5 @@
   <!-- Légende -->
   <rect x="60" y="485" width="400" height="48" rx="5" fill="#fefce8" stroke="#ca8a04" stroke-width="1"/>
   <text x="260" y="503" text-anchor="middle" font-size="10" fill="#854d0e">Nₖ = IN-13 néon (passif, broches à la masse) · Lueur orange naturelle du néon</text>
-  <text x="260" y="520" text-anchor="middle" font-size="10" fill="#854d0e">Le magnétron est monté au-dessus du grillage Faraday (hors cage), pas à l'intérieur</text>
+  <text x="260" y="520" text-anchor="middle" font-size="10" fill="#854d0e">⊕ = magnétron (cavités, au-dessus du grillage Faraday, hors cage)</text>
 </svg>
