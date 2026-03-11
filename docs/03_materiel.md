@@ -14,7 +14,8 @@
 
 | # | Composant | Statut | Notes |
 |:--|:---|:---|:---|
-| 1 | 2× Magnétrons 2,45 GHz (500 W, récupérés de micro-ondes bon marché) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode chacun. Un seul actif à la fois. Fonctionnement à 200–400 W via duty cycle SSR. |
+| 1 | Magnétron 2,45 GHz (500 W, récupéré d'un micro-ondes bon marché) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode. Phase 1 : un seul magnétron. |
+| 1b | *(Phase 2)* 2ᵉ magnétron 500 W + transfo HT (même modèle) | 🔶 À récupérer | Ajouté en Phase 2 pour commuter la direction du gradient (iris B à 90°). |
 | 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | ✅ **En stock** | Avec couvercle acrylique 3/4" et joint silicone |
 | 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Mode passif (broches à la masse, pas de câblage) |
 | 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) + socles | ✅ **En stock** | Batteries et socles de charge disponibles |
@@ -36,10 +37,11 @@
 | 20 | Miroir plan (~ 20×20 mm) | ✅ **En stock** | Collé en haut de la tige rigide |
 | 21 | Résistances ballast, shunts, connectique, ruban cuivre | ✅ **En stock** | Consommables disponibles |
 
-> **Stock confirmé** : **17 composants sur 21** sont en stock (✅).
-> Les 3 restants (🔶) sont le magnétron (à récupérer d'un micro-ondes),
+> **Stock confirmé** : **17 composants sur 22** sont en stock (✅).
+> Les restants (🔶) sont le(s) magnétron(s) (à récupérer d'un micro-ondes),
 > le baril 205L (à trouver) et le fil de torsion — tous facilement
-> sourçables. Le plateau porteur (avec la tige rigide) et le contrepoids sont à fabriquer.
+> sourçables. Le plateau porteur (avec la tige rigide) et le contrepoids
+> sont à fabriquer. Le 2ᵉ magnétron (1b) n'est nécessaire qu'en Phase 2.
 
 ---
 
@@ -96,14 +98,15 @@ entre un faisceau d'électrons et un ensemble de cavités résonantes :
 | Paramètre | Valeur |
 |:---|:---|
 | Fréquence | 2,45 GHz (λ = 12,24 cm) |
-| Magnétrons | **2× 500 W** (micro-ondes domestique bon marché) |
+| Magnétron (Phase 1) | **1× 500 W** (micro-ondes domestique bon marché) |
+| Magnétron (Phase 2) | **2× 500 W** (un seul actif à la fois, commutation direction) |
 | Puissance RF nominale (chaque) | ~ 500 W |
 | Puissance RF de fonctionnement | **200–400 W** (duty cycle SSR ajustable) |
 | Puissance électrique (entrée) | ~ 400–800 W (selon duty) |
 | Rendement | ~ 65 % |
 | Tension d'anode | ~ 3 500–4 000 V DC |
 | Courant d'anode | ~ 150–250 mA |
-| Commutation A/B | Via MCU (SSR + volets iris) |
+| Commutation A/B *(Phase 2)* | Via MCU (SSR + volets iris) |
 
 > ⚠️ **Pourquoi pas 1 kW ?** — Un magnétron de 1 kW produit un champ
 > $E_{\text{peak}} \approx 23$ kV/m dans la cavité (Q ≈ 100), ce qui
@@ -122,8 +125,21 @@ entre un faisceau d'électrons et un ensemble de cavités résonantes :
 > et le *pulling* sont identiques sur tout magnétron à cavité et le plasma
 > charge la cavité, ce qui verrouille le magnétron sur la résonance
 > (*injection locking*). Durée de vie (~1 000 h) largement suffisante.
-> À 500 W, $E_{\text{peak}} \approx 10{,}2$ kV/m — directement dans la
-> fenêtre optimale sans réduction de $V_{\text{anode}}$.
+
+> ⚠️ **500 W vs 1 000 W — la puissance nominale compte** — Le champ
+> pic évolue comme $E_{\text{peak}} = 22{,}7\sqrt{P/1000}$ kV/m. Le duty
+> cycle SSR réduit la puissance *moyenne* mais **pas** $E_{\text{peak}}$ :
+> chaque pulse ON est à pleine puissance nominale.
+>
+> | Magnétron | $E_{\text{peak}}$ | Nixie (seuil ~20 kV/m) | Variac requis ? |
+> |:---|:---|:---|:---|
+> | **500 W** | 16,1 kV/m | ✅ sous le seuil | **Non** — utilisable tel quel |
+> | **1 000 W** | 22,7 kV/m | ❌ sature | **Oui** — variac ou SCR (+2 kg, ~20 $) |
+>
+> **Conclusion** : un magnétron 500 W est le meilleur choix — il fonctionne
+> dans la fenêtre optimale sans aucun accessoire de réduction de tension.
+> Un 1 000 W fonctionne *aussi*, mais nécessite un variac pour descendre
+> $V_{\text{anode}}$ (poids et complexité supplémentaires).
 
 > ⚠️ **Et en dessous de 100 W ?** — Le plasma s'allume dès ~20 W
 > dans la cavité, mais la densité électronique reste très inférieure
@@ -314,9 +330,16 @@ l'alimentation HT et le refroidissement.
 > 💡 **Avantage clé** — Le magnétron n'est ni dans le vide, ni dans
 > la cage. Pas besoin de feedthrough HT (4 000 V). Il est accessible
 > sans démontage. Le grillage ferme la cage directement sur
-> l'acrylique avec deux ouvertures contrôlées (iris A et iris B).
+> l'acrylique avec une ouverture contrôlée (iris). En Phase 2, une
+> seconde iris est ajoutée pour le magnétron B.
 
-### Architecture bi-magnétron — Contrôle de la direction de la force
+### Architecture bi-magnétron — Contrôle de la direction de la force *(Phase 2)*
+
+> 💡 **Approche phasée** — En **Phase 1**, un seul magnétron est utilisé
+> (iris A seulement). L'objectif est de détecter la force et mesurer
+> sa magnitude. En **Phase 2**, un second magnétron est ajouté à une
+> position angulaire différente pour **corréler la direction de la force
+> avec la direction du gradient** (Objectif 2 — test critique).
 
 Deux magnétrons 500 W identiques sont montés côte à côte au-dessus du
 grillage Faraday, à des **positions angulaires distinctes** :
@@ -349,6 +372,17 @@ RF quasi-totale (atténuation > 30 dB). Le servo est piloté par l'ESP32.
 | Consommation servo | ~150 mA @ 5 V (actif), 0 en position |
 | Temps de commutation | ~200 ms |
 | Atténuation iris obturée | > 30 dB |
+
+> 💡 **Pourquoi un transfo HT par magnétron ?** — Partager un seul
+> transformateur nécessiterait de commuter la sortie HV (**4 000 V DC
+> @ 250 mA**) entre les deux tubes, ce qui requiert un relais HV
+> spécialisé (cher, lourd, risque d'arc). En gardant un transfo par
+> magnétron, on commute sur le **primaire 120 V AC** avec un simple
+> SSR ou relais — sûr, fiable, ~5 $. Chaque ensemble
+> (transfo + diode + condensateur + magnétron) est récupéré en bloc
+> du même micro-ondes — coût supplémentaire : 0 $. Le surpoids du
+> second transfo (~2 kg) est compensé en ajoutant du contrepoids
+> côté B du plateau.
 
 #### Séquence de commutation A → B (MCU)
 
@@ -457,8 +491,8 @@ Vue en coupe du montage complet :
 | Composant | Emplacement | Justification |
 |:---|:---|:---|
 | **Magnétron A** (500 W) | Au-dessus du grillage, iris à ~30° de N₁ | Hors vide, hors cage. Antenne ↓ à travers iris A + acrylique |
-| **Magnétron B** (500 W) | Au-dessus du grillage, iris à ~120° de N₁ | Idem, Δθ = 90° → changement de direction du gradient |
-| **Volets iris A/B** | Sur le grillage, commandés par micro-servos | Isolation RF du magnétron OFF (> 30 dB) |
+| *(Phase 2)* **Magnétron B** (500 W) | Au-dessus du grillage, iris à ~120° de N₁ | Idem, Δθ = 90° → changement de direction du gradient |
+| *(Phase 2)* **Volets iris A/B** | Sur le grillage, commandés par micro-servos | Isolation RF du magnétron OFF (> 30 dB) |
 | **Vanne DN10 + connecteur** | Centre du couvercle acrylique, connecteur au-dessus | Accès direct au volume sous vide pour pompage et injection ; le connecteur permet de brancher/débrancher le tuyau de pompe |
 | **8× Nixie IN-13** | Paroi intérieure (octogone, centrés en hauteur), broches à la masse | Mode passif : ionisation RF directe du néon, pas de câblage. Lecture par caméra Wi-Fi |
 | **Jauge Pirani** | Ligne de pompage (extérieure) ou feedthrough paroi | Mesure la pression sans être irradiée |
@@ -782,18 +816,20 @@ Pour rester dans la fenêtre 100–300 W en puissance **crête**
 > atteindre 200 W (~2,8 kV → 18 % de réduction vs. 22 % pour le 1 kW),
 > et son transformateur HT est plus léger (~2,5 kg vs. ~3,5 kg).
 
-**Recommandation** : utiliser **deux magnétrons 500 W** récupérés de
+**Recommandation** : utiliser des **magnétrons 500 W** récupérés de
 micro-ondes domestiques bon marché (~5–10 $ pièce). La puissance crête
-de 500 W ($E_{\text{peak}} \approx 10{,}2$ kV/m) est **directement dans
-la fenêtre optimale** sans réduction de $V_{\text{anode}}$ nécessaire.
-Le duty cycle SSR suffit pour ajuster $P_{\text{moy}}$ entre 100 et
-500 W. Les deux magnétrons (un seul actif à la fois) permettent de
-**commuter la direction du gradient** par contrôle MCU
-(voir [architecture bi-magnétron](#architecture-bi-magnétron--contrôle-de-la-direction-de-la-force)).
+de 500 W ($E_{\text{peak}} \approx 16$ kV/m) est **sous le seuil Nixie**
+sans réduction de $V_{\text{anode}}$ nécessaire. Le duty cycle SSR
+suffit pour ajuster $P_{\text{moy}}$ entre 100 et 500 W.
+
+- **Phase 1** : un seul magnétron (iris A). Objectif : détecter la force.
+- **Phase 2** : ajouter un second magnétron (iris B, Δθ = 90°) avec son
+  propre transfo HT, pour commuter la direction du gradient par MCU
+  (voir [architecture bi-magnétron](#architecture-bi-magnétron--contrôle-de-la-direction-de-la-force-phase-2)).
 
 Si des magnétrons de puissance différente sont déjà disponibles
 (600–700 W, 1 kW), les options B et C (variac, SCR) restent valides
-pour descendre à 200 W crête.
+pour descendre à ~500 W crête ($E_{\text{peak}} < 20$ kV/m).
 
 ---
 
@@ -975,19 +1011,21 @@ permet aussi l'observation visuelle ou vidéo du miroir si nécessaire.
 
 L'assemblage suspendu au fil de torsion (module autonome : tige
 rigide + plateau porteur) comprend deux côtés :
-- **Côté A (chambre)** : chambre inox + 2× magnétrons, posée sur le plateau porteur.
+- **Côté A (chambre)** : chambre inox + magnétron(s), posée sur le plateau porteur.
 - **Côté B (contrepoids)** : batterie, onduleur, ESP32, capteurs — servent de masse d'équilibrage.
 
-| Composant | Masse (kg) | Côté | Rôle |
-|:---|:---|:---|:---|
-| Chambre inox 3 gal | ~ 5,0 | A | Cavité RF, vide, cage de Faraday |
-| 2× Transfo HT + magnétron 500 W | ~ 4,5 | A | Au-dessus du grillage, iris A/B |
-| 2× Volets iris (servo + tôle alu) | ~ 0,1 | A | Isolation RF du magnétron OFF |
-| Batterie Li-ion 18V Makita (BL1850B, 5 Ah) | 0,63 | B | Source d'énergie |
-| Onduleur 120 V AC (300–600 W) | ~ 1,0 | B | Conversion DC→AC |
-| ESP32 (boîtier blindé) | < 0,1 | B | Contrôle PID + télémétrie Wi-Fi |
-| Capteurs (Pirani, coupleur, caméra, thermo.) | < 0,2 | A/B | Asservissement |
-| **Total assemblage suspendu** | **~ 11,5** | | |
+| Composant | Masse (kg) | Côté | Phase | Rôle |
+|:---|:---|:---|:---|:---|
+| Chambre inox 3 gal | ~ 5,0 | A | 1 | Cavité RF, vide, cage de Faraday |
+| 1× Transfo HT + magnétron 500 W | ~ 2,3 | A | 1 | Au-dessus du grillage, iris A |
+| *(Phase 2)* 2ᵉ transfo HT + magnétron | ~ 2,3 | A | 2 | Iris B (Δθ = 90°) |
+| *(Phase 2)* 2× volets iris (servo + tôle) | ~ 0,1 | A | 2 | Isolation RF du magnétron OFF |
+| Batterie Li-ion 18V Makita (BL1850B, 5 Ah) | 0,63 | B | 1 | Source d'énergie |
+| Onduleur 120 V AC (300–600 W) | ~ 1,0 | B | 1 | Conversion DC→AC |
+| ESP32 (boîtier blindé) | < 0,1 | B | 1 | Contrôle PID + télémétrie Wi-Fi |
+| Capteurs (Pirani, coupleur, caméra, thermo.) | < 0,2 | A/B | 1 | Asservissement |
+| **Total Phase 1** | **~ 9,3** | | | |
+| **Total Phase 2** | **~ 11,6** | | | |
 
 #### Bilan énergétique
 
@@ -1388,18 +1426,21 @@ Le PID ajuste $\dot{m}_{\text{in}}$ pour stabiliser $P$ à la consigne.
 
 #### Modulation de puissance RF
 
-Trois niveaux de contrôle indépendants agissent sur la puissance :
+En Phase 1, deux niveaux de contrôle ; en Phase 2, trois niveaux :
 
-1. **Sélection du magnétron actif** (commutation de direction) —
+1. *(Phase 2)* **Sélection du magnétron actif** (commutation de direction) —
    L'ESP32 active le magnétron A ou B via la séquence de commutation
    (SSR + volets iris, ~500 ms). Permet de modifier la **direction
    du gradient** $\nabla n_e$ dans la cavité. Un interlock matériel
-   empêche l'activation simultanée des deux magnétrons.
+   empêche l'activation simultanée des deux magnétrons. Chaque
+   magnétron conserve son propre transfo HT — la commutation se fait
+   sur le **primaire 120 V AC** (pas de commutation HV).
 
 2. **Puissance crête** — Avec des magnétrons 500 W, la puissance crête
-   ($E_{\text{peak}} \approx 10{,}2$ kV/m) est directement dans la
-   fenêtre optimale. Aucune réduction de $V_{\text{anode}}$ nécessaire.
-   Si des magnétrons de puissance supérieure sont utilisés, réduire
+   ($E_{\text{peak}} \approx 16$ kV/m) est sous le seuil Nixie.
+   Aucune réduction de $V_{\text{anode}}$ nécessaire.
+   Si des magnétrons de puissance supérieure sont utilisés (1 kW →
+   $E_{\text{peak}} = 22{,}7$ kV/m → sature Nixie), réduire
    $V_{\text{anode}}$ via variac ou SCR à angle de phase.
 
 3. **Puissance moyenne** (réglage dynamique, PID) — contrôle $T_e$ et
@@ -1409,9 +1450,10 @@ Trois niveaux de contrôle indépendants agissent sur la puissance :
    Le duty cycle (période ~ 100 ms) module la puissance moyenne entre
    0 et $P_{\text{crête}}$.
 
-Cette architecture à trois étages permet de contrôler la **direction**
-(magnétron A/B), le **champ crête** ($E_{\text{peak}}$, contrainte Nixie)
-et la **puissance moyenne** ($n_e/n_{e,c}$) de façon indépendante.
+Cette architecture permet de contrôler la **direction**
+(magnétron A/B, Phase 2), le **champ crête** ($E_{\text{peak}}$,
+contrainte Nixie) et la **puissance moyenne** ($n_e/n_{e,c}$)
+de façon indépendante.
 
 ### Firmware et logging
 
