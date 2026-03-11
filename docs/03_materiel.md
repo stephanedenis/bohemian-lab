@@ -253,6 +253,10 @@ Le calcul théorique des modes TM/TE et la table complète des
 **Résultat clé** : le mode **TM$_{310}$** à **2,44 GHz** est quasi
 parfaitement accordé à la fréquence du magnétron (2,45 GHz).
 
+> 📐 **Modes propres** — Le script [002_modes_cavite.py](../experiments/002_modes_cavite.py)
+> calcule les 17 fréquences TM/TE de la cavité cylindrique ($a = 125$ mm,
+> $d = 250$ mm) et identifie le TM$_{310}$ à 2,44 GHz comme mode dominant.
+
 > 📐 **Superposition 3D** — Le [modèle 3D](../experiments/009_plasma_3d.py)
 > superpose 4 modes (TM$_{310}$, TM$_{110}$, TM$_{210}$, TM$_{311}$)
 > avec des poids relatifs et des déphasages. Le mode TM$_{311}$ ($p=1$)
@@ -763,6 +767,11 @@ $$\Delta x = 2 \times 0{,}3 \times 4{,}1 \times 10^{-3} \approx 2{,}5 \; \text{m
 Ce déplacement est facilement mesurable par un PSD
 ([Position Sensitive Detector](https://en.wikipedia.org/wiki/Position_sensitive_device))
 avec une résolution de ~ 1 µm.
+
+> 📐 **Simulation du signal** — Le script [006_analyse_signal.py](../experiments/006_analyse_signal.py)
+> simule numériquement le signal PSD (bruit + dérive thermique + poussée
+> pulsée), applique un filtrage passe-bande et une corrélation croisée
+> pour extraire le SNR. Résultat : SNR $\approx 12$ pour $F = 3{,}3\;\mu$N.
 
 Un petit **hublot en verre** (⌀ 20–30 mm) percé dans la paroi du baril
 permet aussi l'observation visuelle ou vidéo du miroir si nécessaire.

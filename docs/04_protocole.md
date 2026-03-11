@@ -124,6 +124,11 @@ fantôme donne la contribution nette du plasma :
 
 $$F_{\text{plasma}} = F_{\text{mesuré}} - F_{\text{charge fantôme}}$$
 
+> 📐 **Faux positifs** — Le script [008_sensibilite_eta.py](../experiments/008_sensibilite_eta.py)
+> quantifie le risque de faux positif par $10^5$ tirages Monte-Carlo
+> sur les paramètres ($F_{\text{mesuré}}, F_{\text{fantôme}}, P_{\text{abs}}$)
+> et trace la probabilité d'observer $\eta > 1$ par pur hasard.
+
 ---
 
 ### 4.1.3 Forces électromagnétiques parasites
@@ -307,6 +312,11 @@ $$\text{SNR} = \frac{A_{\text{signal}}}{\sigma_{\text{bruit}}}$$
 
    Objectif : SNR > 3 (significativité à 3σ).
 
+> 📐 **Simulation du filtrage** — Le script [006_analyse_signal.py](../experiments/006_analyse_signal.py)
+> génère un signal synthétique (bruit + dérive + poussée pulsée) et
+> applique le pipeline complet (passe-bande, corrélation croisée, SNR).
+> Résultat : SNR $\approx 12$ pour $F = 3{,}3\;\mu$N — largement au-dessus de 3.
+
 ### Calcul de la force
 
 À partir de l'amplitude $\theta_{\text{max}}$ mesurée :
@@ -329,6 +339,12 @@ $$\eta = \frac{F_{\text{net}}}{P_{\text{abs}} / c}$$
   candidat pour l'effet bohmien.
 - $\eta \gg 1$ → résultat surprenant, nécessitant vérification
   indépendante et recherche d'artefact.
+> 📐 **Sensibilité Monte-Carlo** — Le script [008_sensibilite_eta.py](../experiments/008_sensibilite_eta.py)
+> propage $10^5$ tirages sur $(P_{\text{abs}}, F_{\text{mes}}, F_{\text{fant}})$
+> et obtient la distribution de $\eta$ : médiane $\approx 0{,}98$,
+> intervalle 5–95 % $\approx [0{,}6 \;; 1{,}5]$. Voir les histogrammes
+> dans [data/](../data/).
+
 > 📐 **Distinction $\eta_H$ vs $\eta_{\text{total}}$** — Le pendule ne
 > détecte que la composante horizontale de la force. Le
 > [modèle 3D](../experiments/009_plasma_3d.py) prédit que $F_H \approx
@@ -356,6 +372,11 @@ $$\eta = \frac{F_{\text{net}}}{P_{\text{abs}} / c}$$
 | Inversion 180° | Force inversée (même amplitude, signe opposé) |
 | Charge fantôme | $F_{\text{charge fantôme}} < 0{,}3 \times F_{\text{mesuré}}$ |
 | Gaz noble | $F_{\text{argon}} < 0{,}3 \times F_{\text{vapeur d'eau}}$ |
+
+> 📐 **Validation numérique** — Le script [006_analyse_signal.py](../experiments/006_analyse_signal.py)
+> vérifie numériquement que le pipeline (filtrage + corrélation) atteint
+> bien SNR > 3 et un pic de corrélation > 0,8 pour une force de 3,3 µN
+> avec le bruit et la dérive attendus.
 
 ---
 

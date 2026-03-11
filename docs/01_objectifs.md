@@ -167,6 +167,11 @@ La corrélation entre la direction de l'asymétrie Nixie et la
 direction de la force détectée au pendule est le test clé de l'Objectif 2
 (voir la [matrice décisionnelle](04_protocole.md#46-attentes-concrètes--confirmer-ou-infirmer-lhypothèse)).
 
+> 📐 **Circuit quantique** — Le script [005_phase_circuit.py](../experiments/005_phase_circuit.py)
+> simule l'accumulation de phase $S = \int n \cdot (\omega/c) \, d\ell$
+> par des portes $R_z$ et modélise le gradient sur 8 qubits (analogie
+> directe avec les 8 Nixie IN-13).
+
 > 📐 **Modèle 3D** — La simulation [009_plasma_3d.py](../experiments/009_plasma_3d.py)
 > prédit que la direction de $-\nabla Q$ a un angle d'élévation de
 > ≈ −55° (composante verticale dominante). La corrélation Nixie
@@ -210,6 +215,10 @@ La force totale mesurable est la somme de la pression de radiation
 classique et de la contribution bohmienne :
 
 $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho \, (-\nabla Q) \, dV$$
+
+> 📐 **Modèle 2D** — Le script [003_profil_plasma.py](../experiments/003_profil_plasma.py)
+> calcule cette intégrale en 2D ($r,\theta$) pour un plasma asymétrique
+> et obtient $F_Q \sim$ quelques µN, du même ordre que $P_{\text{abs}}/c$.
 
 > 📐 **3D** — Cette intégrale volumique est un **vecteur 3D**. La simulation
 > [009_plasma_3d.py](../experiments/009_plasma_3d.py) la décompose en

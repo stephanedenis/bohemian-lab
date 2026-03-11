@@ -270,6 +270,11 @@ ou auto-tuning) :
 | $K_{d1}$ | 0,01 s | Dérivateur — amorti les oscillations |
 | Anti-windup | ±100 % duty | Borne de l'intégrateur |
 
+> 📐 **Simulation PID** — Le script [007_dynamique_pid.py](../experiments/007_dynamique_pid.py)
+> intègre numériquement le système couplé $(P, n_e, T_e)$ avec ces gains
+> initiaux et valide la convergence vers $n_e \approx n_{e,c}$ en $< 200$ ms.
+> L'auto-tuning Ziegler–Nichols y est également implémenté.
+
 ### 6.5.2 PID₂ — Boucle d'ionisation (moyenne, 10 Hz)
 
 | Paramètre | Valeur |
@@ -335,6 +340,11 @@ couple les grandeurs physiques :
 La **séparation de cadences** (100:10:1) est la protection principale
 contre les oscillations couplées : chaque boucle rapide apparaît
 comme « instantanée » du point de vue de la boucle lente.
+
+> 📐 **Confirmation numérique** — Le script [007_dynamique_pid.py](../experiments/007_dynamique_pid.py)
+> simule les 3 boucles imbriquées (100, 10, 1 Hz) sur un modèle ODE
+> couplé et confirme l'absence d'oscillation croisée lorsque le ratio
+> de cadences est $\geq 10\times$.
 
 ---
 
