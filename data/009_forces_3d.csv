@@ -1,0 +1,13 @@
+grandeur,valeur_N,valeur_uN,description
+Fx,-2.699287e-21,-0.0000,Composante x
+Fy,-1.559128e-21,-0.0000,Composante y
+Fz,-4.504239e-21,-0.0000,Composante z (verticale)
+F_horiz,3.117215e-21,0.0000,Force horizontale (mesurable)
+F_vert,4.504239e-21,0.0000,Force verticale (non mesurable)
+F_total,5.477701e-21,0.0000,Force totale 3D
+F_rad,3.335641e-06,3.3356,Pression de radiation P/c
+eta_horiz,0.0000,,Ratio F_horiz / F_rad
+eta_total,0.0000,,Ratio F_total / F_rad
+angle_horiz,-149.99,deg,Direction horizontale de la force
+angle_elev,-55.31,deg,Angle d'élévation de la force
+ratio_HV,0.6921,,Ratio F_horiz / F_vert
