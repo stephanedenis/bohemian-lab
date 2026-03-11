@@ -400,6 +400,95 @@ abrupte entre propagation ($n_e < n_{e,c}$) et réflexion
 ($n_e > n_{e,c}$). Cette transition est la source du gradient de phase
 maximal recherché par l'expérience.
 
+#### Bilan de puissance et puissance RF minimale
+
+Le plasma s'allume dès que $E/p$ dépasse le seuil de claquage (~20 W
+dans notre cavité, cf. tableau ci-dessus). Mais **allumer** un plasma
+ne suffit pas : il faut que $n_e$ approche $n_{e,c}$ pour que le
+gradient d'indice soit physiquement pertinent.
+
+En régime stationnaire, la puissance absorbée compense les pertes par
+diffusion ambipolaire et recombinaison dissociative
+(Lieberman & Lichtenberg [11], cap. 10 ; Capitelli *et al.*, 2016) :
+
+$$P_{\text{abs}} = n_e \, V_{\text{pl}} \, E_T \left(
+  \underbrace{\frac{1}{\tau_{\text{diff}}}}_{\text{pertes aux parois}}
+  + \underbrace{\alpha_{\text{rec}} \, n_e}_{\text{recombinaison vol.}}
+\right)$$
+
+où :
+
+| Symbole | Valeur | Signification |
+|:---|:---|:---|
+| $E_T$ | ≈ 170 eV | Coût énergétique total par paire ion-électron perdue (ionisation 12,6 eV + dissociation 9,5 eV + excitations + énergie cinétique aux parois + radiation) |
+| $\alpha_{\text{rec}}$ | ≈ $10^{-13}$ m³/s | Coefficient de recombinaison dissociative H₃O⁺ + e⁻ (Florescu-Mitchell & Mitchell, 2006) |
+| $\tau_{\text{diff}}$ | ≈ 1,9 s | Temps de confinement par diffusion ambipolaire ($\Lambda^2 / D_a$, $D_a \approx 10^{-3}$ m²/s à 3 mbar) |
+| $V_{\text{pl}}$ | ≈ 6 100 cm³ | Volume plasma effectif (~50 % de la cavité) |
+
+En résolvant cette équation quadratique en $n_e$, on obtient la densité
+électronique en fonction de la puissance RF injectée ($\eta_{\text{abs}} \approx 50\;\%$) :
+
+| $P_{\text{RF}}$ | $P_{\text{abs}}$ | $n_e$ | $n_e / n_{e,c}$ | Régime |
+|:---|:---|:---|:---|:---|
+| 20 W | 10 W | $2{,}5 \times 10^{16}$ m⁻³ | 0,33 | Sous-critique — gradient faible |
+| 50 W | 25 W | $3{,}9 \times 10^{16}$ m⁻³ | 0,52 | Sous-critique — gradient modéré |
+| 75 W | 38 W | $4{,}7 \times 10^{16}$ m⁻³ | 0,64 | Sous-critique — gradient insuffisant |
+| **100 W** | **50 W** | $5{,}5 \times 10^{16}$ m⁻³ | **0,73** | **Approche la coupure — viable** |
+| **150 W** | **75 W** | $6{,}7 \times 10^{16}$ m⁻³ | **0,90** | **★ Coupure — optimal** |
+| **200 W** | **100 W** | $7{,}7 \times 10^{16}$ m⁻³ | **1,04** | **★ Coupure dépassée — optimal** |
+| 300 W | 150 W | $9{,}5 \times 10^{16}$ m⁻³ | 1,27 | Légèrement sur-critique |
+| 400 W | 200 W | $1{,}1 \times 10^{17}$ m⁻³ | 1,47 | Sur-critique — risque Nixie |
+
+#### Pourquoi le gradient d'indice est le critère clé
+
+L'indice de réfraction du plasma est :
+
+$$n_{\text{refr}} = \sqrt{1 - \frac{n_e}{n_{e,c}}}$$
+
+Son gradient diverge à la coupure :
+
+$$\frac{\partial n_{\text{refr}}}{\partial n_e} = -\frac{1}{2\,n_{e,c}\,\sqrt{1 - n_e/n_{e,c}}}$$
+
+| $n_e / n_{e,c}$ | $n_{\text{refr}}$ | Force relative du gradient | Épaisseur de transition |
+|:---:|:---:|:---:|:---:|
+| 0,3 | 0,84 | ×0,60 | ~100 mm (doux) |
+| 0,5 | 0,71 | ×0,71 | ~85 mm |
+| 0,7 | 0,55 | ×0,91 | ~66 mm |
+| 0,8 | 0,45 | ×1,12 | ~54 mm |
+| 0,9 | 0,32 | ×1,58 | ~38 mm |
+| 0,95 | 0,22 | ×2,24 | ~27 mm |
+| 1,0 | 0 | ∞ (singularité) | 0 (discontinuité) |
+
+En dessous de $n_e/n_{e,c} \sim 0{,}7$, la transition
+propagation/réflexion est trop progressive : le $\nabla S$ est dilué
+sur ~100 mm — comparable aux dimensions de la cavité — et la force
+bohmienne attendue (si elle existe) est proportionnellement réduite.
+
+> ⚠️ **Puissance minimum absolue** — Pour que l'expérience conserve
+> sa pertinence physique (gradient de phase marqué à la coupure),
+> la puissance RF ne doit pas descendre en dessous de :
+>
+> $$\boxed{P_{\text{RF,min}} \approx 100 \; \text{W} \qquad (n_e/n_{e,c} \approx 0{,}7)}$$
+>
+> La zone **optimale** est $P_{\text{RF}} = 150\text{–}200$ W, où le
+> plasma atteint ou dépasse la coupure ($n_e/n_{e,c} \gtrsim 0{,}9$)
+> tout en restant sous le seuil de saturation des Nixie.
+
+Notons que la **sensibilité du pendule** n'est jamais le facteur
+limitant : même à 100 W, la force de radiation
+$F = P_{\text{abs}}/c \approx 0{,}17\;\mu$N produit un déplacement de
+~350 mm au PSD — plus de $10^5$ fois la résolution. Le goulot
+d'étranglement est exclusivement la **physique du plasma**.
+
+Le tableau suivant résume les trois contraintes qui encadrent la
+fenêtre de puissance utilisable :
+
+| Contrainte | Borne | $P_{\text{RF}}$ |
+|:---|:---:|:---:|
+| Gradient de phase insuffisant ($n_e/n_{e,c} < 0{,}7$) | min | ~100 W |
+| **Zone optimale** ($n_e/n_{e,c} \approx 0{,}9\text{–}1{,}2$) | **cible** | **150–200 W** |
+| Saturation Nixie ($E_{\text{peak}} > 20$ kV/m) | max | ~300 W |
+
 ### Homéostasie du plasma par rétroaction
 
 Le point de fonctionnement optimal ($P \approx 3$ mbar, $T_e \approx 2$ eV)

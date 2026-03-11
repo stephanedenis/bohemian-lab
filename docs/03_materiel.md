@@ -111,6 +111,16 @@ entre un faisceau d'électrons et un ensemble de cavités résonantes :
 > forme normalement ($E/p$ au-dessus du seuil de maintien) mais les
 > Nixie restent en régime **linéaire**. Voir [§3.5](03_materiel.md#limite-de-puissance-rf--saturation-et-échauffement)
 > et [§2.4](02_theorie.md#température-électronique).
+
+> ⚠️ **Et en dessous de 100 W ?** — Le plasma s'allume dès ~20 W
+> dans la cavité, mais la densité électronique reste très inférieure
+> à la densité critique ($n_e/n_{e,c} < 0{,}7$). Le gradient de
+> l'indice de réfraction est alors trop doux : la transition
+> propagation/réflexion s'étale sur ~100 mm au lieu de ~30 mm à la
+> coupure. L'expérience perd sa pertinence physique.
+> **Minimum absolu : 100 W** ($n_e/n_{e,c} \approx 0{,}73$).
+> **Zone optimale : 150–200 W** ($n_e/n_{e,c} \approx 0{,}9\text{–}1{,}0$).
+> Voir le [bilan de puissance détaillé](02_theorie.md#bilan-de-puissance-et-puissance-rf-minimale).
 | Champ magnétique | ~ 0,1 T (aimants permanents) |
 
 ### Fréquence de 2,45 GHz
@@ -654,9 +664,17 @@ Le tableau ci-dessous résume les régimes de fonctionnement :
    brillance ne code plus le champ local mais seulement
    l'énergie injectée (constante pour tous les tubes).
 
-**Recommandation** :
+**Recommandation — Fenêtre de puissance exploitable** :
 
-$$P_{\text{RF}} \leq 200{-}300 \; \text{W}$$
+$$\boxed{100 \; \text{W} \;\leq\; P_{\text{RF}} \;\leq\; 300 \; \text{W} \qquad \text{(optimal : 150–200 W)}}$$
+
+Trois contraintes encadrent cette fenêtre :
+
+| Contrainte | Borne | $P_{\text{RF}}$ | Critère physique |
+|:---|:---:|:---:|:---|
+| Gradient de phase insuffisant | min | ~100 W | $n_e/n_{e,c} < 0{,}7$ → transition étalée sur ~100 mm |
+| **Zone optimale** | **cible** | **150–200 W** | $n_e/n_{e,c} \approx 0{,}9\text{–}1{,}0$ → coupure abrupte (~30 mm) |
+| Saturation Nixie | max | ~300 W | $E_{\text{peak}} > 20$ kV/m → claquage néon |
 
 À 200 W, le champ pic (~10 kV/m) est **sous le claquage** : le néon
 subit une ionisation douce où la brillance est proportionnelle à
@@ -664,6 +682,10 @@ $|E|^2$ local → capteur de gradient fonctionnel. La force de
 radiation correspondante ($F_{\text{rad}} \approx 0{,}43\;\mu$N) reste
 mesurable par le pendule ($\Delta x \approx 0{,}5$ mm sur le PSD,
 résolution ~1 µm).
+
+Voir le [bilan de puissance détaillé](02_theorie.md#bilan-de-puissance-et-puissance-rf-minimale)
+pour la justification complète (bilan ionisation-recombinaison, gradient
+d'indice de réfraction, et force mesurable en fonction de $P_{\text{RF}}$).
 
 Le mode **pulsé** du magnétron (duty cycle 25–50 %) réduit la
 puissance *moyenne* mais pas les pics. Pour protéger les Nixie,
