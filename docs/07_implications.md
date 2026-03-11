@@ -220,15 +220,12 @@ artificielle** — un « champ gravitationnel » d'origine quantique.
 
 #### Résumé conceptuel
 
-```
-Double fente          Cavité plasma         Espace-temps courbe
-═══════════          ══════════════        ═══════════════════
-2 ouvertures    →    Modes TM (6 « fentes »)  →  Distribution de masse
-Interférence    →    Onde stationnaire + plasma →  Courbure métrique
-Q structuré     →    ∇Q asymétrique            →  Champ gravitationnel
-Déviation des   →    Force nette sur           →  Déviation des
-trajectoires         la chambre fermée              géodésiques
-```
+| Double fente | Cavité plasma | Espace-temps courbe |
+|:---|:---|:---|
+| 2 ouvertures | Modes TM (6 « fentes ») | Distribution de masse |
+| Interférence | Onde stationnaire + plasma | Courbure métrique |
+| $Q$ structuré | $\nabla Q$ asymétrique | Champ gravitationnel |
+| Déviation des trajectoires | Force nette sur la chambre fermée | Déviation des géodésiques |
 
 Cette chaîne conceptuelle — de Young (1801) à Bohm (1952) à la cavité
 plasma (2026) — est le fil conducteur de l'expérience. La double fente
