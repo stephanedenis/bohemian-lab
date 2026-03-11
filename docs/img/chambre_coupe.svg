@@ -119,19 +119,19 @@
   <text x="105" y="302" font-size="8" fill="#57534e" text-anchor="end">Poignées</text>
 
   <!-- 8× Nixie IN-13 : 1 seule rangée, centrée en hauteur (en coupe, 1 tube visible par côté) -->
-  <g fill="#22c55e" stroke="#15803d" stroke-width="1.5" opacity="0.9">
+  <g fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5" opacity="0.9">
     <rect x="142" y="310" width="10" height="90" rx="3"/>
     <rect x="408" y="310" width="10" height="90" rx="3"/>
   </g>
-  <g fill="#22c55e" opacity="0.15" filter="url(#glow)">
+  <g fill="#ff6b2b" opacity="0.15" filter="url(#glow)">
     <rect x="142" y="310" width="10" height="90" rx="3"/>
     <rect x="408" y="310" width="10" height="90" rx="3"/>
   </g>
 
   <!-- Annotation Nixie -->
-  <line x1="152" y1="310" x2="172" y2="297" stroke="#15803d" stroke-width="1"/>
-  <text x="175" y="295" font-size="10" fill="#15803d" font-weight="bold">8× IN-13 (octogone, 45°)</text>
-  <text x="175" y="307" font-size="9" fill="#15803d">1 rangée centrée · Tubes à décharge · résistants RF</text>
+  <line x1="152" y1="310" x2="172" y2="297" stroke="#cc4400" stroke-width="1"/>
+  <text x="175" y="295" font-size="10" fill="#cc4400" font-weight="bold">8× IN-13 néon (octogone, 45°)</text>
+  <text x="175" y="307" font-size="9" fill="#cc4400">Mode passif · Broches à la masse · Lueur orange</text>
 
   <!-- Zone plasma (centrée verticalement dans la chambre) -->
   <rect x="170" y="300" width="220" height="170" rx="10" fill="url(#plasma)" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6,3"/>
@@ -146,11 +146,11 @@
     <text x="23" y="21" font-size="8" fill="#0f766e">(collé paroi ext.)</text>
   </g>
 
-  <!-- Feedthroughs fils Nixie -->
-  <g font-size="8" fill="#15803d">
-    <text x="105" y="370" text-anchor="end">16 fils</text>
-    <text x="105" y="380" text-anchor="end">Nixie →</text>
-    <line x1="108" y1="372" x2="130" y2="372" stroke="#15803d" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <!-- Nixie passifs : broches à la masse (contact inox) -->
+  <g font-size="8" fill="#cc4400">
+    <text x="105" y="370" text-anchor="end">Broches</text>
+    <text x="105" y="380" text-anchor="end">à la masse</text>
+    <line x1="108" y1="372" x2="130" y2="372" stroke="#cc4400" stroke-width="1.5" stroke-dasharray="2,2"/>
   </g>
 
   <!-- Fond du chaudron (en bas — repose sur le plateau) -->

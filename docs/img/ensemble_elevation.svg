@@ -172,12 +172,12 @@
   <!-- Parois inox du chaudron (160×160 px = section carrée) -->
   <rect x="150" y="620" width="160" height="160" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
 
-  <!-- 8× IN-13 (1 seule rangée centrée, vue en coupe : 1 tube visible par côté) -->
-  <g fill="#22c55e" stroke="#15803d" stroke-width="1">
+  <!-- 8× IN-13 néon (1 seule rangée centrée, vue en coupe : 1 tube visible par côté) -->
+  <g fill="#ff6b2b" stroke="#cc4400" stroke-width="1">
     <rect x="157" y="665" width="5" height="70" rx="1.5"/>
     <rect x="298" y="665" width="5" height="70" rx="1.5"/>
   </g>
-  <text x="230" y="770" text-anchor="middle" font-size="8" fill="#15803d" font-weight="bold">8× IN-13 (octogone, 1 rangée centrée)</text>
+  <text x="230" y="770" text-anchor="middle" font-size="8" fill="#cc4400" font-weight="bold">8× IN-13 néon (passif, broches à la masse)</text>
 
   <!-- Plasma -->
   <rect x="172" y="655" width="116" height="90" rx="8" fill="url(#plasmaG)" stroke="#a855f7" stroke-width="1" stroke-dasharray="4,3"/>

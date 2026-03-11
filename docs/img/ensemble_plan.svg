@@ -34,21 +34,21 @@
 
   <!-- Nixie positions (dans la chambre) -->
   <g font-size="8" font-weight="bold">
-    <circle cx="200" cy="205" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="200" cy="205" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="200" y="208" text-anchor="middle" fill="white">N₁</text>
-    <circle cx="257" cy="223" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="257" cy="223" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="257" y="226" text-anchor="middle" fill="white">N₂</text>
-    <circle cx="275" cy="280" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="275" cy="280" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="275" y="283" text-anchor="middle" fill="white">N₃</text>
-    <circle cx="257" cy="337" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="257" cy="337" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="257" y="340" text-anchor="middle" fill="white">N₄</text>
-    <circle cx="200" cy="355" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="200" cy="355" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="200" y="358" text-anchor="middle" fill="white">N₅</text>
-    <circle cx="143" cy="337" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="143" cy="337" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="143" y="340" text-anchor="middle" fill="white">N₆</text>
-    <circle cx="125" cy="280" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="125" cy="280" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="125" y="283" text-anchor="middle" fill="white">N₇</text>
-    <circle cx="143" cy="223" r="8" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+    <circle cx="143" cy="223" r="8" fill="#ff6b2b" stroke="#cc4400" stroke-width="1.5"/>
     <text x="143" y="226" text-anchor="middle" fill="white">N₈</text>
   </g>
 
@@ -91,8 +91,8 @@
   <!-- Légende -->
   <rect x="80" y="500" width="440" height="70" rx="6" fill="white" stroke="#cbd5e1" stroke-width="1"/>
   <text x="300" y="517" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">Légende</text>
-  <circle cx="120" cy="537" r="6" fill="#22c55e" stroke="#15803d" stroke-width="1"/>
-  <text x="135" y="541" font-size="9" fill="#1e293b">Nₖ = IN-13 (paroi int.)</text>
+  <circle cx="120" cy="537" r="6" fill="#ff6b2b" stroke="#cc4400" stroke-width="1"/>
+  <text x="135" y="541" font-size="9" fill="#1e293b">Nₖ = IN-13 néon (paroi int.)</text>
   <rect x="259" y="531" width="12" height="10" rx="1" fill="#ef4444" stroke="#b91c1c" stroke-width="1" opacity="0.8"/>
   <text x="279" y="541" font-size="9" fill="#1e293b">⊕ = magnétron (au-dessus)</text>
   <circle cx="120" cy="557" r="6" fill="#94a3b8" stroke="#334155" stroke-width="1"/>
