@@ -101,7 +101,7 @@
   </g>
 
   <!-- Légende -->
-  <rect x="80" y="500" width="440" height="70" rx="6" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="80" y="500" width="440" height="80" rx="6" fill="white" stroke="#cbd5e1" stroke-width="1"/>
   <text x="300" y="517" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">Légende</text>
   <circle cx="120" cy="537" r="6" fill="#ff6b2b" stroke="#cc4400" stroke-width="1"/>
   <text x="135" y="541" font-size="9" fill="#1e293b">Nₖ = IN-13 néon (paroi int.)</text>
@@ -113,4 +113,6 @@
   <text x="320" y="561" font-size="9" fill="#1e293b">● = axe torsion</text>
   <rect x="410" y="553" width="10" height="8" rx="1" fill="#fbbf24" stroke="#a16207" stroke-width="1"/>
   <text x="427" y="561" font-size="9" fill="#1e293b">[M] = miroir (haut de tige)</text>
+  <rect x="109" y="570" width="16" height="10" rx="2" fill="#10b981" stroke="#047857" stroke-width="1"/>
+  <text x="135" y="578" font-size="9" fill="#1e293b">Laser / PSD (paroi baril)</text>
 </svg>

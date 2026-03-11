@@ -103,13 +103,13 @@ Le dossier `experiments/` contient les scripts de simulation autonomes
 | # | Expérience | Description |
 |:--|:-----------|:------------|
 | 001 | [001_superposition.py](experiments/001_superposition.py) | Superposition quantique — circuit Hadamard, sphère de Bloch |
-| 002 | [002_phase_gradient.py](experiments/002_phase_gradient.py) | Gradient de phase — accumulation $\nabla S$ dans un plasma inhomogène |
+| 002 | [002_modes_cavite.py](experiments/002_modes_cavite.py) | Modes de résonance TM/TE de la cavité cylindrique |
 | 003 | [003_profil_plasma.py](experiments/003_profil_plasma.py) | Profil plasma 2D — densité $n_e(r,\theta)$, potentiel quantique $Q$, force $F_Q$ |
 | 004 | [004_trajectoires_bohm.py](experiments/004_trajectoires_bohm.py) | Trajectoires bohmiennes — intégration de $\vec{v} = \nabla S / m$ |
-| 005 | [005_modes_cavite.py](experiments/005_modes_cavite.py) | Modes de résonance TM/TE de la cavité cylindrique |
+| 005 | [005_phase_circuit.py](experiments/005_phase_circuit.py) | Circuits quantiques et accumulation de phase — portes $R_z$, interféromètre, gradient 8 qubits |
 | 006 | [006_analyse_signal.py](experiments/006_analyse_signal.py) | Analyse de signal — corrélation croisée, filtrage, extraction SNR |
-| 007 | [007_pid_plasma.py](experiments/007_pid_plasma.py) | Contrôle PID du plasma — simulation de la boucle de rétroaction |
-| 008 | [008_monte_carlo_sensibilite.py](experiments/008_monte_carlo_sensibilite.py) | Analyse Monte-Carlo de sensibilité du pendule de torsion |
+| 007 | [007_dynamique_pid.py](experiments/007_dynamique_pid.py) | Dynamique du plasma et boucles PID — simulation ODE couplée, auto-tuning |
+| 008 | [008_sensibilite_eta.py](experiments/008_sensibilite_eta.py) | Analyse Monte-Carlo de sensibilité sur $\eta$ et estimation des faux positifs |
 | **009** | [**009_plasma_3d.py**](experiments/009_plasma_3d.py) | **Modèle 3D complet** — $n_e(r,\theta,z)$, champ EM multimode, force bohmienne 3D, décomposition H/V |
 
 > 📊 Les résultats (figures, données) sont dans `data/` — préfixés par

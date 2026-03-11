@@ -81,6 +81,11 @@ La particule a toujours une position définie $\mathbf{Q}(t)$. La fonction
 d'onde n'est pas un simple outil de calcul : c'est un **champ physique réel**
 qui pilote la particule.
 
+> 📐 **Simulation** — Le script [004_trajectoires_bohm.py](../experiments/004_trajectoires_bohm.py)
+> intègre numériquement cette loi de guidage en 2D (split-operator FFT +
+> RK4) pour trois scénarios : double fente, puits asymétrique (analogue
+> cavité plasma) et effet tunnel.
+
 ---
 
 ## 2.2 La Loi de Guidage — Dérivation complète
@@ -129,6 +134,11 @@ $$\boxed{\vec{v} = \frac{\nabla S}{m}}$$
 
 C'est la **loi de guidage** : la vitesse de la particule est proportionnelle
 au gradient de la phase de la fonction d'onde.
+
+> 📐 **Trajectoires** — Le script [004_trajectoires_bohm.py](../experiments/004_trajectoires_bohm.py)
+> visualise le champ de vitesse $\vec{v} = \nabla S / m$ et les trajectoires
+> qui en résultent. Le scénario « puits asymétrique » montre la déviation
+> des particules par le potentiel quantique $Q$.
 
 **Partie réelle** — Équation de [Hamilton-Jacobi](https://fr.wikipedia.org/wiki/%C3%89quation_de_Hamilton-Jacobi) modifiée :
 
@@ -194,6 +204,11 @@ $$\boxed{Q = -\frac{\hbar^2}{2m} \frac{\nabla^2 R}{R}}$$
 $$\mathbf{F}_Q = -\nabla Q$$
 
 C'est cette force que l'expérience Bohemian Lab cherche à détecter.
+
+> 📐 **Modèle 2D** — Le script [003_profil_plasma.py](../experiments/003_profil_plasma.py)
+> modélise $n_e(r,\theta)$ avec asymétrie azimutale, calcule $Q$ et
+> $-\nabla Q$ en 2D, et compare la force bohméenne intégrée à la
+> pression de radiation $P/c \approx 3{,}3\;\mu$N.
 
 > 📐 **Modèle 3D** — La simulation [009_plasma_3d.py](../experiments/009_plasma_3d.py)
 > calcule $\mathbf{F}_Q$ en 3D sur 384 000 points de grille. Résultat
@@ -445,6 +460,11 @@ est largement suffisant. Voir la page dédiée
 pour l'architecture MIMO, les 3 boucles PID, le firmware et la
 télémétrie.
 
+> 📐 **Simulation PID** — Le script [007_dynamique_pid.py](../experiments/007_dynamique_pid.py)
+> simule le système d'ODE couplé ($dP/dt$, $dn_e/dt$, $dT_e/dt$) et
+> les 3 boucles PID à cadences étagées (100/10/1 Hz), avec auto-tuning
+> par Ziegler-Nichols et réponse aux perturbations.
+
 ---
 
 ## 2.5 Modes de résonance de la cavité cylindrique
@@ -503,6 +523,11 @@ par la largeur spectrale du magnétron ($\Delta f \sim 50$ MHz),
 créant un champ multimode complexe — favorable à l'inhomogénéité
 de la distribution de champ, et donc au gradient de phase recherché.
 
+> 📐 **Calcul des modes** — Le script [002_modes_cavite.py](../experiments/002_modes_cavite.py)
+> calcule les fréquences de résonance de tous les modes TM/TE ≤ 4 GHz,
+> trace le champ $E_z(r,\theta)$ du TM$_{310}$ et confirme numériquement
+> la compatibilité à 2,44 GHz.
+
 > 📐 **Modes 3D** — Le [modèle 3D](../experiments/009_plasma_3d.py)
 > inclut la superposition de modes avec $p \neq 0$ (TM$_{311}$),
 > introduisant une **structure axiale** du champ $E_z(r,\theta,z)$.
@@ -533,6 +558,12 @@ Le plasma agit comme un **modulateur de phase non-linéaire** :
   l'onde accumule une phase différente selon sa trajectoire.
 - Ce gradient de phase est l'analogue du $\nabla S$ de la mécanique
   bohmienne.
+
+> 📐 **Profil 2D** — Le script [003_profil_plasma.py](../experiments/003_profil_plasma.py)
+> modélise $n_e(r,\theta) = n_{e0}\exp(-r^2/\sigma_r^2)[1+\varepsilon\cos(\theta-\theta_{\text{mag}})]$
+> et calcule l'indice de réfraction, la phase accumulée et $-\nabla Q$
+> en 2D.
+
 > 📐 **3D** — En réalité la distribution $n_e$ est tridimensionnelle :
 > $n_e(r,\theta,z)$. Le magnétron étant au sommet de la cavité, le
 > maximum de densité se situe à $z \approx 0{,}75d$ (75 % de la
@@ -683,13 +714,15 @@ dans un cadre de [circuits quantiques](https://fr.wikipedia.org/wiki/Circuit_qua
 > Le [modèle 3D](../experiments/009_plasma_3d.py) dépasse le cadre
 > des circuits quantiques : il simule directement $n_e(r,\theta,z)$,
 > le champ EM multimode et la force bohméenne 3D.
+
 - **Superposition** → modélise l'onde pilote (amplitude et phase).
+  Voir [001_superposition.py](../experiments/001_superposition.py).
 - **Portes de phase** ($R_z$, $P$) → simulent l'accumulation de phase
-  dans le plasma.
+  dans le plasma. Voir [005_phase_circuit.py](../experiments/005_phase_circuit.py).
 - **Intrication** (CNOT) → explore les corrélations non-locales du
-  potentiel quantique.
+  potentiel quantique. Voir [005_phase_circuit.py](../experiments/005_phase_circuit.py).
 - **Mesure** → simule l'effondrement de la fonction d'onde et la
-  sélection de trajectoire bohmienne.
+  sélection de trajectoire bohméenne. Voir [001_superposition.py](../experiments/001_superposition.py).
 
 La visualisation sur la **[sphère de Bloch](https://fr.wikipedia.org/wiki/Sph%C3%A8re_de_Bloch)** permet de suivre l'évolution
 de la phase et de l'amplitude du qubit, en analogie directe avec le
