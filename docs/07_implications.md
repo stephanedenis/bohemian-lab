@@ -137,8 +137,8 @@ pour maintenir le plasma et le champ RF. La masse du véhicule resterait
 | Limite fondamentale | Masse de propergol | Masse de propergol (réduite) | Puissance électrique |
 
 > ⚠️ **Ordre de grandeur** — Avec 1 kW et un facteur d'efficacité
-> bohmien $\eta \sim 1$, la force serait de l'ordre de $P/c \approx
-> 3{,}3\;\mu$N. Pour une application spatiale utile, il faudrait
+> bohmien $\eta \sim 1$, la force serait de l'ordre de
+> $P/c \approx 3{,}3 \; \mu\text{N}$. Pour une application spatiale utile, il faudrait
 > soit augmenter massivement la puissance, soit découvrir un facteur
 > d'amplification ($\eta \gg 1$) — deux possibilités hautement
 > spéculatives à ce stade.
