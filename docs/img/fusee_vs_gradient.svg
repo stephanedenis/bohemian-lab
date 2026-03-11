@@ -119,7 +119,7 @@
     <text x="43" y="64" text-anchor="middle" font-size="7"
           fill="#b91c1c" font-weight="bold">MAG</text>
     <text x="43" y="93" text-anchor="middle" font-size="7"
-          fill="#b91c1c">1 kW</text>
+          fill="#b91c1c">200–400 W</text>
 
     <!-- Annotation haut Q / bas Q -->
     <text x="60" y="35" font-size="10" fill="#7c3aed"

@@ -91,7 +91,7 @@ Le vent ionique ne peut pas transmettre de force à l'extérieur car :
 
 #### Le problème
 
-L'absorption de 1 kW de micro-ondes chauffe la chambre et les parois.
+L'absorption de 200–400 W de micro-ondes chauffe la chambre et les parois.
 Cette chaleur crée :
 
 - **Dilatation thermique** asymétrique → déplacement du centre de masse.
@@ -115,7 +115,7 @@ Le magnétron est activé en **mode pulsé** (quelques secondes ON, pause) :
 Remplacement du plasma par une **charge fantôme** (récipient d'eau) qui
 absorbe autant de puissance micro-onde mais sans créer de plasma :
 
-- Mêmes effets thermiques (absorption de 1 kW).
+- Mêmes effets thermiques (absorption de la puissance RF).
 - Pas de plasma → pas de gradient de phase → pas de force bohmienne.
 - Toute force mesurée avec la charge fantôme est un **artefact thermique**.
 

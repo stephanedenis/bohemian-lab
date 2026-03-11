@@ -235,8 +235,8 @@ puissance mécanique extraite serait :
 $$P_{\text{méc}} = F_Q \cdot v$$
 
 Pour $F_Q = 10\;\mu$N et $v = 1$ m/s : $P_{\text{méc}} = 10\;\mu$W —
-négligeable devant les 1 kW injectés ($\eta_{\text{conversion}} \sim
-10^{-8}$). Il n'y a **aucune** indication de violation de la conservation
+négligeable devant les 200–400 W injectés ($\eta_{\text{conversion}} \sim
+10^{-7}$). Il n'y a **aucune** indication de violation de la conservation
 de l'énergie. Le dispositif est un **consommateur** d'énergie (et un
 consommateur extraordinairement inefficace), pas un producteur.
 
@@ -352,7 +352,7 @@ Un résultat nul n'est **pas un échec** — c'est une **mesure**. Il
 fournit une borne supérieure publiable :
 
 > *« Dans une cavité cylindrique RF ($a = 125$ mm, $d = 250$ mm) excitée
-> à 2,45 GHz (1 kW) contenant un plasma de vapeur d'eau
+> à 2,45 GHz (200–400 W) contenant un plasma de vapeur d'eau
 > ($n_e \sim 7 \times 10^{16}$ m$^{-3}$, $P \approx 3$ mbar), aucune
 > force anomale supérieure à $X\;\mu$N n'a été détectée (IC 95 %) sur
 > un système fermé monté sur pendule de torsion. »*

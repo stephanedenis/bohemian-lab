@@ -14,7 +14,7 @@
 
 | # | Composant | Statut | Notes |
 |:--|:---|:---|:---|
-| 1 | Magnétron 2,45 GHz (1 kW, récupéré d'un micro-ondes) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode |
+| 1 | Magnétron 2,45 GHz (600–700 W, récupéré d'un micro-ondes compact) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode. Fonctionnement à 200–400 W via duty cycle SSR. |
 | 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | ✅ **En stock** | Avec couvercle acrylique 3/4" et joint silicone |
 | 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Mode passif (broches à la masse, pas de câblage) |
 | 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) + socles | ✅ **En stock** | Batteries et socles de charge disponibles |
@@ -96,11 +96,21 @@ entre un faisceau d'électrons et un ensemble de cavités résonantes :
 | Paramètre | Valeur |
 |:---|:---|
 | Fréquence | 2,45 GHz (λ = 12,24 cm) |
-| Puissance RF | ~ 1 000 W (nominale) |
-| Puissance électrique | ~ 1 500 W (entrée) |
+| Puissance RF nominale | ~ 600–700 W (four micro-ondes compact) |
+| Puissance RF de fonctionnement | **200–400 W** (duty cycle SSR ajustable) |
+| Puissance électrique (entrée) | ~ 500–1 100 W (selon duty) |
 | Rendement | ~ 65 % |
 | Tension d'anode | ~ 4 000 V DC |
-| Courant d'anode | ~ 300 mA |
+| Courant d'anode | ~ 200–300 mA |
+
+> ⚠️ **Pourquoi pas 1 kW ?** — Un magnétron de 1 kW produit un champ
+> $E_{\text{peak}} \approx 23$ kV/m dans la cavité (Q ≈ 100), ce qui
+> **sature les tubes Nixie IN-13** (seuil de claquage du néon ≈ 20–50
+> kV/m) et compromet la cartographie du gradient de phase (Objectif 2).
+> À 200 W ($E_{\text{peak}} \approx 10$ kV/m), le plasma H₂O se
+> forme normalement ($E/p$ au-dessus du seuil de maintien) mais les
+> Nixie restent en régime **linéaire**. Voir [§3.5](03_materiel.md#limite-de-puissance-rf--saturation-et-échauffement)
+> et [§2.4](02_theorie.md#température-électronique).
 | Champ magnétique | ~ 0,1 T (aimants permanents) |
 
 ### Fréquence de 2,45 GHz
@@ -847,12 +857,12 @@ rigide + plateau porteur) comprend deux côtés :
 | Composant | Masse (kg) | Côté | Rôle |
 |:---|:---|:---|:---|
 | Chambre inox 3 gal | ~ 5,0 | A | Cavité RF, vide, cage de Faraday |
-| Transformateur HT + magnétron | ~ 3,5 | A | Au-dessus du grillage |
+| Transformateur HT + magnétron | ~ 2,5 | A | Au-dessus du grillage |
 | Batterie Li-ion 18V Makita (BL1850B, 5 Ah) | 0,63 | B | Source d'énergie |
 | Onduleur 120 V AC (300–600 W) | ~ 1,0 | B | Conversion DC→AC |
 | ESP32 (boîtier blindé) | < 0,1 | B | Contrôle PID + télémétrie Wi-Fi |
 | Capteurs (Pirani, coupleur, caméra, thermo.) | < 0,2 | A/B | Asservissement |
-| **Total assemblage suspendu** | **~ 10,4** | | |
+| **Total assemblage suspendu** | **~ 9,4** | | |
 
 #### Bilan énergétique
 
@@ -860,14 +870,16 @@ La batterie Makita BL1850B offre 18 V × 5 Ah = **90 Wh**.
 
 | Mode | Puissance moy. | Autonomie |
 |:---|:---|:---|
-| Magnétron continu (1 kW sortie, ~1,2 kW entrée AC) | 1 400 W (pertes onduleur) | **~ 4 min** |
-| Magnétron pulsé 50 % duty ($f = 1/T_0$) | ~ 700 W | **~ 8 min** |
-| Magnétron pulsé 25 % duty | ~ 350 W | **~ 15 min** |
+| Magnétron continu 400 W (~500 W entrée AC) | 620 W (pertes onduleur) | **~ 9 min** |
+| Magnétron pulsé 50 % (200 W eff.) | ~ 310 W | **~ 17 min** |
+| Magnétron pulsé 25 % (100 W eff.) | ~ 155 W | **~ 35 min** |
 | Veille (ESP32 + capteurs, magnétron off) | ~ 5 W | **~ 18 h** |
 
 Pour une session de mesure de 20 cycles à $T_0 \sim 20$ s :
 $ 20 \times 20 = 400$ s ≈ **7 min** de fonctionnement pulsé → une batterie
-5 Ah suffit en mode 50 % duty.
+5 Ah suffit largement en mode pulsé 50 % à 200 W effectifs (autonomie
+~17 min). Même en mode continu à 400 W, les 9 min d'autonomie couvrent
+la session.
 
 > **Astuce** : utiliser **deux batteries en parallèle** (via adaptateur
 > double Makita) pour doubler l'autonomie à ~15 min en mode 50 %.
@@ -880,7 +892,7 @@ pour alimenter le transformateur HT du magnétron.
 
 | Critère | Exigence |
 |:---|:---|
-| Puissance nominale | ≥ 1 200 W (crête magnétron) |
+| Puissance nominale | ≥ 800 W (crête magnétron 700 W + marge) |
 | Forme d'onde | **Sinusoïdale pure** (recommandé pour le transfo HT) |
 | Masse | < 1,5 kg (embarqué sur le pendule) |
 | Rendement | > 85 % |
@@ -1275,7 +1287,7 @@ Le magnétron est commandé par un [relais statique (SSR)](https://fr.wikipedia.
 
 ### Protection RF du microcontrôleur
 
-À proximité d'un magnétron 1 kW, le microcontrôleur doit être **blindé** :
+À proximité d'un magnétron 700 W, le microcontrôleur doit être **blindé** :
 
 - Boîtier métallique (aluminium ≥ 1 mm) avec passages de câbles via
   filtres feedthrough ou câbles blindés.

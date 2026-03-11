@@ -502,7 +502,7 @@ if __name__ == "__main__":
 
     print("╔════════════════════════════════════════════════════════════╗")
     print("║  Expérience 003 — Profil du plasma et force bohmienne    ║")
-    print("║  Cavité Ø250 mm × 250 mm — Magnétron 2,45 GHz — 1 kW    ║")
+    print("║  Cavité Ø250 mm × 250 mm — Magnétron 2,45 GHz — 200-400 W║")
     print("╚════════════════════════════════════════════════════════════╝\n")
 
     # ── Étape 1 : construction de la grille ─────────────────────────

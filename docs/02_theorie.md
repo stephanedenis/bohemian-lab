@@ -362,14 +362,37 @@ Pour atteindre $n_{e,c}$ :
 - À $T_e > 3$ eV : ionisation excessive → $n_e > n_{e,c}$ → plasma opaque,
   l'onde est réfléchie avant de pénétrer.
 
-$T_e$ est contrôlée principalement par la **puissance absorbée par
-électron**, qui dépend du ratio puissance/pression. Pour 1 kW à 3 mbar
-de vapeur d'eau, les modèles prédisent $T_e \approx 2$ eV — exactement
-le point de fonctionnement visé.
+$T_e$ est contrôlée principalement par le **champ réduit** $E/p$
+(Raizer [13], MacDonald [14]) — le champ électrique RF local divisé
+par la pression de gaz. Dans notre cavité cylindrique (Q $\approx$ 100),
+le champ pic est $E_{\text{peak}} = \sqrt{4PQ/(\omega \varepsilon_0 V_{\text{eff}})}$ :
+
+| $P_{\text{RF}}$ | $E_{\text{peak}}$ | $E/p$ (à 2 mbar) | $E/p$ (à 5 mbar) | $T_e$ estimée |
+|:---|:---|:---|:---|:---|
+| 100 W | 7,2 kV/m | 48 V/(cm·Torr) | 19 V/(cm·Torr) | ≈ 2 eV |
+| **200 W** | **10,1 kV/m** | **68 V/(cm·Torr)** | **27 V/(cm·Torr)** | **≈ 2 eV** |
+| 500 W | 16,0 kV/m | 107 V/(cm·Torr) | 43 V/(cm·Torr) | ≈ 2 eV |
+| 1 000 W | 22,7 kV/m | 151 V/(cm·Torr) | 61 V/(cm·Torr) | ≈ 2 eV |
+
+Le seuil de maintien du plasma H₂O est $E/p \gtrsim 10$ V/(cm·Torr)
+(MacDonald [14]). **Même à 200 W, $E/p$ dépasse largement le seuil**
+(×5–7) — la température électronique $T_e \approx 2$ eV est atteinte.
+De plus, à 200 W le champ $E_{\text{peak}} \approx 10$ kV/m reste
+**sous le seuil de claquage** du néon dans les tubes Nixie IN-13
+(~20–50 kV/m), préservant leur fonction de capteur de gradient
+(voir [§3.5](03_materiel.md#limite-de-puissance-rf--saturation-et-échauffement)).
+
+> 💡 **Pourquoi 200 W suffit alors que 1 kW semble nécessaire ?**
+> Parce que le critère de formation du plasma est le **champ local**,
+> pas la puissance totale. Dans une cavité résonante, le facteur de
+> qualité Q concentre l'énergie. À Q = 100, 200 W produisent un champ
+> $3 \times$ supérieur au seuil de claquage de H₂O. Le magnétron n'a
+> pas besoin de délivrer 1 kW — un four compact de 600–700 W piloté
+> à 200–400 W effectifs (via duty cycle SSR) est optimal.
 
 #### Résumé des conditions optimales
 
-$$\boxed{P \approx 2-5 \; \text{mbar} \qquad T_e \approx 2 \; \text{eV} \qquad n_e \approx 7{,}4 \times 10^{16} \; \text{m}^{-3} \qquad f_p = 2{,}45 \; \text{GHz}}$$
+$$\boxed{P \approx 2-5 \; \text{mbar} \qquad P_{\text{RF}} \approx 200-400 \; \text{W} \qquad T_e \approx 2 \; \text{eV} \qquad n_e \approx 7{,}4 \times 10^{16} \; \text{m}^{-3} \qquad f_p = 2{,}45 \; \text{GHz}}$$
 
 Ces conditions placent le plasma exactement à la **coupure** :
 l'indice de réfraction passe par zéro, créant une zone de transition
@@ -787,6 +810,18 @@ rapport $S/R$ de la décomposition polaire.
 12. **Lieberman, M. A. & Lichtenberg, A. J.** (2005). *Principles of
     Plasma Discharges and Materials Processing*. 2ᵉ édition, Wiley.
     ISBN 978-0-471-72001-0.
+
+### Claquage et décharges micro-ondes
+
+13. **[Raizer, Yu. P.](https://en.wikipedia.org/wiki/Yuri_Raizer)** (1991). *Gas Discharge Physics*. Springer.
+    ISBN 978-3-642-64760-4.
+    — Référence de base sur le champ réduit $E/p$ et les seuils de
+    claquage dans les gaz, utilisée pour valider le fonctionnement
+    à 200 W (§ 2.5).
+
+14. **MacDonald, A. D.** (1966). *Microwave Breakdown in Gases*. Wiley.
+    — Monographie sur le claquage micro-onde spécifiquement, données
+    expérimentales $E_{\text{claq}}(p, f)$ pour H₂O, air, gaz rares.
 
 ---
 

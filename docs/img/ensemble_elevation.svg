@@ -220,7 +220,7 @@
   <circle cx="190" cy="585" r="2" fill="#7f1d1d"/>
   <circle cx="198" cy="585" r="2" fill="#7f1d1d"/>
   <text x="183" y="575" text-anchor="middle" font-size="7" fill="#b91c1c" font-weight="bold">MAGNÉTRON</text>
-  <text x="183" y="600" text-anchor="middle" font-size="6" fill="#b91c1c">1 kW</text>
+  <text x="183" y="600" text-anchor="middle" font-size="6" fill="#b91c1c">200–400 W</text>
 
   <!-- Coupleur directionnel -->
   <rect x="220" y="578" width="40" height="14" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
