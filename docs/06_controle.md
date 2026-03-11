@@ -506,6 +506,7 @@ L'ESP32 communique avec les capteurs et périphériques via 2 bus :
 | **SPI** | MAX31855 | CS = GPIO5 | Thermocouple type K → $T_{\text{paroi}}$ |
 | **SPI** | Carte microSD | CS = GPIO15 | Logging CSV |
 | **I²C** | ADS1115 | 0x48 | ADC 16 bits externe pour Pirani (meilleure résolution) |
+| **I²C** | AS7343 | 0x39 | Capteur spectral 14 canaux — proxy $n_e$ (Hβ) et $T_e$ (Hα/Hβ). Voir [§10](10_capteur_spectral.md) |
 | **ADC interne** | CH0 (GPIO36) | — | $P_r$ (coupleur directionnel) |
 | **ADC interne** | CH4 (GPIO32) | — | $V_{\text{bat}}$ |
 | **ADC interne** | CH5 (GPIO33) | — | NTC température |
@@ -526,6 +527,7 @@ L'ESP32 communique avec les capteurs et périphériques via 2 bus :
   │                                      │
   │  GPIO21 (SDA) ┐                      │
   │  GPIO22 (SCL) ┤─── I²C ──→ ADS1115  │
+  │               │           + AS7343   │
   │                                      │
   │  GPIO18 (SCK) ┐                      │
   │  GPIO19 (MISO)┤─── SPI ──→ MAX31855 │

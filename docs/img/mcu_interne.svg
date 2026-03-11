@@ -1,331 +1,281 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 470"
      font-family="'Segoe UI', Arial, sans-serif" font-size="11">
-  <title>Architecture interne du MCU — Contrôle MIMO du plasma</title>
-  <rect width="820" height="440" fill="#ffffff"/>
+  <title>Architecture interne du MCU — Contrôle MIMO du plasma (symboles IEC 60617)</title>
+  <rect width="860" height="470" fill="#ffffff"/>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- Defs                                                   -->
-  <!-- ══════════════════════════════════════════════════════ -->
   <defs>
-    <marker id="arr" markerWidth="8" markerHeight="6"
-            refX="8" refY="3" orient="auto">
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
     </marker>
-    <marker id="arrR" markerWidth="8" markerHeight="6"
-            refX="8" refY="3" orient="auto">
+    <marker id="arrR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/>
     </marker>
-    <marker id="arrG" markerWidth="8" markerHeight="6"
-            refX="8" refY="3" orient="auto">
+    <marker id="arrG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/>
     </marker>
-    <marker id="arrB" markerWidth="8" markerHeight="6"
-            refX="8" refY="3" orient="auto">
+    <marker id="arrB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
     </marker>
-    <marker id="arrA" markerWidth="8" markerHeight="6"
-            refX="8" refY="3" orient="auto">
+    <marker id="arrA" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <path d="M0,0 L8,3 L0,6 Z" fill="#d97706"/>
     </marker>
+
+    <!-- ══ Nœud sommateur IEC ══ -->
+    <g id="sym-sum">
+      <circle cx="0" cy="0" r="12" fill="#ffffff" stroke="currentColor" stroke-width="2"/>
+      <line x1="-6" y1="0" x2="6" y2="0" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="0" y1="-6" x2="0" y2="6" stroke="currentColor" stroke-width="1.2"/>
+    </g>
+
+    <!-- ══ Point de prélèvement IEC ══ -->
+    <circle id="dot" r="3.5" fill="#334155"/>
+
+    <!-- ══ Capteur IEC : cercle + lettre ══ -->
+    <g id="sym-prf">
+      <circle cx="0" cy="0" r="18" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+      <text x="0" y="1" text-anchor="middle" font-size="11" font-weight="bold" fill="#991b1b">Pᵣ</text>
+    </g>
+    <g id="sym-pres">
+      <circle cx="0" cy="0" r="18" fill="#fefce8" stroke="#ca8a04" stroke-width="2"/>
+      <text x="0" y="5" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">P</text>
+    </g>
+    <g id="sym-lum">
+      <circle cx="0" cy="0" r="18" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+      <!-- Photodiode IEC : flèche oblique entrante -->
+      <line x1="-6" y1="-6" x2="6" y2="6" stroke="#1d4ed8" stroke-width="1.5"/>
+      <line x1="-10" y1="-4" x2="-3" y2="3" stroke="#1d4ed8" stroke-width="1"/>
+      <polygon points="-5,2 -2,-2 1,1" fill="#1d4ed8"/>
+    </g>
+    <g id="sym-temp">
+      <circle cx="0" cy="0" r="18" fill="#ccfbf1" stroke="#14b8a6" stroke-width="2"/>
+      <!-- Thermocouple IEC -->
+      <line x1="-6" y1="8" x2="0" y2="-8" stroke="#0f766e" stroke-width="1.5"/>
+      <line x1="6" y1="8" x2="0" y2="-8" stroke="#0f766e" stroke-width="1.5"/>
+      <circle cx="0" cy="-8" r="2" fill="#0f766e"/>
+    </g>
+
+    <!-- ══ Électrovanne IEC ══ -->
+    <g id="sym-valve">
+      <rect x="-22" y="-18" width="44" height="36" rx="2" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <polygon points="-14,-10 -14,10 -4,0" fill="none" stroke="#15803d" stroke-width="1.3"/>
+      <polygon points="4,-10 4,10 14,0" fill="none" stroke="#15803d" stroke-width="1.3"/>
+      <rect x="-6" y="-16" width="12" height="6" fill="none" stroke="#15803d" stroke-width="1"/>
+    </g>
+
+    <!-- ══ Magnétron IEC (tube) ══ -->
+    <g id="sym-mag-small">
+      <circle cx="0" cy="0" r="18" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+      <!-- Filament W -->
+      <path d="M-6,-2 L-3,4 L0,-2 L3,4 L6,-2" stroke="#f97316" stroke-width="1.5" fill="none"/>
+      <!-- Cavités (3) -->
+      <path d="M-14,-10 A4,4 0 0,1 -8,-14" stroke="#334155" stroke-width="1" fill="none"/>
+      <path d="M8,-14 A4,4 0 0,1 14,-10" stroke="#334155" stroke-width="1" fill="none"/>
+      <path d="M16,4 A4,4 0 0,1 12,10" stroke="#334155" stroke-width="1" fill="none"/>
+    </g>
+
+    <!-- ══ Pompe à vide IEC ══ -->
+    <g id="sym-pump">
+      <rect x="-22" y="-18" width="44" height="36" rx="2" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <!-- Symbole pompe : triangle orienté -->
+      <polygon points="-10,-10 -10,10 10,0" fill="none" stroke="#15803d" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="12" fill="none" stroke="#15803d" stroke-width="1"/>
+    </g>
   </defs>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- Titre                                                  -->
-  <!-- ══════════════════════════════════════════════════════ -->
-  <text x="410" y="22" text-anchor="middle" font-size="14"
-        font-weight="bold" fill="#1e293b">
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- TITRE                                                    -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <text x="430" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">
     Architecture interne du MCU — Contrôle MIMO (4 entrées → 3 sorties)
   </text>
+  <text x="430" y="38" text-anchor="middle" font-size="10" fill="#64748b">
+    Symboles IEC 60617 · Boucles PID emboîtées avec fonctions de transfert
+  </text>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- Enveloppe MCU                                          -->
-  <!-- ══════════════════════════════════════════════════════ -->
-  <rect x="150" y="36" width="520" height="358" rx="10"
-        fill="#f8fafc" stroke="#475569" stroke-width="2.5"
-        stroke-dasharray="8,4"/>
-  <text x="410" y="54" text-anchor="middle" font-size="12"
-        font-weight="bold" fill="#475569">ESP32 — MCU</text>
-  <text x="410" y="67" text-anchor="middle" font-size="9"
-        fill="#94a3b8">ADC 12 bits · 1 kHz · 4 canaux</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- ENVELOPPE MCU                                            -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="168" y="50" width="524" height="370" rx="10"
+        fill="#f8fafc" stroke="#475569" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <!-- Encoche IC -->
+  <path d="M416,50 A14,14 0 0,0 444,50" stroke="#475569" stroke-width="2.5" fill="#f8fafc"/>
+  <text x="430" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">ESP32 — MCU</text>
+  <text x="430" y="83" text-anchor="middle" font-size="9" fill="#94a3b8">ADC 12 bits · 1 kHz · 4 canaux</text>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- COLONNE GAUCHE : 4 Capteurs (entrées ADC)              -->
-  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CAPTEURS IEC (gauche)                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
 
-  <!-- Capteur 1 : Pᵣ RF (signal-clé, rapide)  y=105 -->
-  <rect x="6" y="85" width="120" height="40" rx="4"
-        fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
-  <text x="66" y="102" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#991b1b">Pᵣ RF réfléchie</text>
-  <text x="66" y="115" text-anchor="middle" font-size="8"
-        fill="#dc2626">Coupleur dir. · 0–3,3 V</text>
-  <line x1="126" y1="105" x2="175" y2="105"
-        stroke="#dc2626" stroke-width="2" marker-end="url(#arrR)"/>
+  <!-- Capteur 1 : Pᵣ RF -->
+  <use href="#sym-prf" x="66" y="120"/>
+  <text x="66" y="146" text-anchor="middle" font-size="9" fill="#991b1b" font-weight="bold">Pᵣ RF réfléchie</text>
+  <text x="66" y="158" text-anchor="middle" font-size="8" fill="#dc2626">coupleur dir.</text>
+  <line x1="84" y1="120" x2="188" y2="120" stroke="#dc2626" stroke-width="2" marker-end="url(#arrR)"/>
 
-  <!-- Capteur 2 : Pression  y=175 -->
-  <rect x="6" y="155" width="120" height="40" rx="4"
-        fill="#fefce8" stroke="#ca8a04" stroke-width="2"/>
-  <text x="66" y="172" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#92400e">Pression P</text>
-  <text x="66" y="185" text-anchor="middle" font-size="8"
-        fill="#d97706">Pirani · 0–10 V (÷3)</text>
-  <line x1="126" y1="175" x2="175" y2="175"
-        stroke="#d97706" stroke-width="2" marker-end="url(#arrA)"/>
+  <!-- Capteur 2 : Pression -->
+  <use href="#sym-pres" x="66" y="200"/>
+  <text x="66" y="226" text-anchor="middle" font-size="9" fill="#92400e" font-weight="bold">Pression</text>
+  <text x="66" y="238" text-anchor="middle" font-size="8" fill="#d97706">Pirani</text>
+  <line x1="84" y1="200" x2="188" y2="200" stroke="#d97706" stroke-width="2" marker-end="url(#arrA)"/>
 
-  <!-- Capteur 3 : Luminosité  y=245 -->
-  <rect x="6" y="225" width="120" height="40" rx="4"
-        fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-  <text x="66" y="242" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#1e40af">Luminosité</text>
-  <text x="66" y="255" text-anchor="middle" font-size="8"
-        fill="#2563eb">Photodiode · 0–3,3 V</text>
-  <line x1="126" y1="245" x2="175" y2="245"
-        stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+  <!-- Capteur 3 : Luminosité -->
+  <use href="#sym-lum" x="66" y="280"/>
+  <text x="66" y="306" text-anchor="middle" font-size="9" fill="#1e40af" font-weight="bold">Luminosité</text>
+  <text x="66" y="318" text-anchor="middle" font-size="8" fill="#2563eb">photodiode</text>
+  <line x1="84" y1="280" x2="188" y2="280" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
 
-  <!-- Capteur 4 : Température  y=315 -->
-  <rect x="6" y="295" width="120" height="40" rx="4"
-        fill="#ccfbf1" stroke="#14b8a6" stroke-width="2"/>
-  <text x="66" y="312" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#0f766e">Température T°</text>
-  <text x="66" y="325" text-anchor="middle" font-size="8"
-        fill="#14b8a6">Thermo K · 0–50 mV</text>
-  <line x1="126" y1="315" x2="175" y2="315"
-        stroke="#14b8a6" stroke-width="2" marker-end="url(#arrG)"/>
+  <!-- Capteur 4 : Température -->
+  <use href="#sym-temp" x="66" y="360"/>
+  <text x="66" y="386" text-anchor="middle" font-size="9" fill="#0f766e" font-weight="bold">Température</text>
+  <text x="66" y="398" text-anchor="middle" font-size="8" fill="#14b8a6">thermo K</text>
+  <line x1="84" y1="360" x2="188" y2="360" stroke="#14b8a6" stroke-width="2" marker-end="url(#arrG)"/>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- INTÉRIEUR MCU : Bloc ADC (colonne 1)                   -->
-  <!-- ══════════════════════════════════════════════════════ -->
-  <rect x="177" y="80" width="56" height="260" rx="4"
-        fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
-  <text x="205" y="99" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#334155">ADC</text>
-  <text x="205" y="113" text-anchor="middle" font-size="8"
-        fill="#64748b">12 bits</text>
-  <!-- Canaux -->
-  <text x="205" y="136" text-anchor="middle" font-size="8"
-        fill="#64748b">CH0</text>
-  <line x1="195" y1="143" x2="215" y2="143"
-        stroke="#94a3b8" stroke-width="0.5"/>
-  <text x="205" y="180" text-anchor="middle" font-size="8"
-        fill="#64748b">CH1</text>
-  <line x1="195" y1="187" x2="215" y2="187"
-        stroke="#94a3b8" stroke-width="0.5"/>
-  <text x="205" y="250" text-anchor="middle" font-size="8"
-        fill="#64748b">CH2</text>
-  <line x1="195" y1="257" x2="215" y2="257"
-        stroke="#94a3b8" stroke-width="0.5"/>
-  <text x="205" y="320" text-anchor="middle" font-size="8"
-        fill="#64748b">CH3</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BLOC ADC IEC                                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="190" y="95" width="54" height="284" rx="4" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+  <text x="217" y="114" text-anchor="middle" font-size="10" font-weight="bold" fill="#334155">ADC</text>
+  <text x="217" y="128" text-anchor="middle" font-size="8" fill="#64748b">12 bits</text>
+  <text x="217" y="145" text-anchor="middle" font-size="8" fill="#64748b">CH0</text>
+  <text x="217" y="206" text-anchor="middle" font-size="8" fill="#64748b">CH1</text>
+  <text x="217" y="286" text-anchor="middle" font-size="8" fill="#64748b">CH2</text>
+  <text x="217" y="366" text-anchor="middle" font-size="8" fill="#64748b">CH3</text>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- INTÉRIEUR MCU : 3 boucles PID (colonne 2)              -->
-  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PID₁ — Résonance (rapide · 100 Hz)                       -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- Nœud sommateur IEC -->
+  <use href="#sym-sum" x="274" y="120" style="color: #dc2626"/>
+  <text x="260" y="112" font-size="9" font-weight="bold" fill="#16a34a">+</text>
+  <text x="274" y="142" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">−</text>
+  <!-- ADC → nœud -->
+  <line x1="244" y1="120" x2="260" y2="120" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrR)"/>
+  <!-- e₁(t) → bloc C₁ -->
+  <line x1="286" y1="120" x2="318" y2="120" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrR)"/>
+  <text x="302" y="112" text-anchor="middle" font-size="8" fill="#dc2626" font-style="italic">e₁</text>
+  <!-- Bloc C₁(s) IEC -->
+  <rect x="320" y="100" width="100" height="40" rx="3" fill="#fef2f2" stroke="#dc2626" stroke-width="2.2"/>
+  <text x="370" y="117" text-anchor="middle" font-size="11" font-weight="bold" fill="#991b1b">C₁(s)</text>
+  <text x="370" y="132" text-anchor="middle" font-size="8" fill="#b91c1c">Résonance · 100 Hz</text>
+  <!-- Consigne Pᵣ₀ -->
+  <line x1="274" y1="90" x2="274" y2="108" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="274" y="86" text-anchor="middle" font-size="7" fill="#64748b" font-style="italic">Pᵣ,₀</text>
+  <!-- u₁(t) -->
+  <line x1="420" y1="120" x2="498" y2="120" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrR)"/>
+  <text x="460" y="112" text-anchor="middle" font-size="8" fill="#dc2626" font-style="italic">u₁(t)</text>
 
-  <!-- ─── PID₁ : Boucle de résonance (rapide, 100 Hz) ──── -->
-  <rect x="270" y="80" width="150" height="76" rx="6"
-        fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
-  <text x="345" y="97" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#991b1b">PID₁ — Résonance</text>
-  <text x="345" y="112" text-anchor="middle" font-size="9"
-        fill="#dc2626">e₁ = Pᵣ − Pᵣ,₀</text>
-  <text x="345" y="126" text-anchor="middle" font-size="8"
-        fill="#b91c1c">Boucle rapide · 100 Hz</text>
-  <text x="345" y="140" text-anchor="middle" font-size="8"
-        fill="#64748b" font-style="italic">Consigne : Pᵣ min</text>
-  <!-- ADC → PID₁ (Pᵣ = entrée principale) -->
-  <line x1="233" y1="105" x2="268" y2="105"
-        stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrR)"/>
-  <!-- ADC → PID₁ (Pression = borne) -->
-  <line x1="233" y1="175" x2="252" y2="175"
-        stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
-  <line x1="252" y1="175" x2="252" y2="148"
-        stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
-  <line x1="252" y1="148" x2="268" y2="148"
-        stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"
-        marker-end="url(#arrA)"/>
-  <text x="250" y="163" font-size="7" fill="#d97706"
-        text-anchor="end" font-style="italic">bornes</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PID₂ — Ionisation (moyen · 10 Hz)                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <use href="#sym-sum" x="274" y="240" style="color: #2563eb"/>
+  <text x="260" y="232" font-size="9" font-weight="bold" fill="#16a34a">+</text>
+  <text x="274" y="262" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">−</text>
+  <!-- ADC → nœud (luminosité) -->
+  <line x1="244" y1="280" x2="260" y2="280" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="260" y1="280" x2="260" y2="252" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrB)"/>
+  <!-- e₂(t) → C₂(s) -->
+  <line x1="286" y1="240" x2="318" y2="240" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrB)"/>
+  <text x="302" y="232" text-anchor="middle" font-size="8" fill="#2563eb" font-style="italic">e₂</text>
+  <!-- Bloc C₂(s) -->
+  <rect x="320" y="220" width="100" height="40" rx="3" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2"/>
+  <text x="370" y="237" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">C₂(s)</text>
+  <text x="370" y="252" text-anchor="middle" font-size="8" fill="#1d4ed8">Ionisation · 10 Hz</text>
+  <!-- Consigne nₑ,₀ -->
+  <line x1="274" y1="210" x2="274" y2="228" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="274" y="206" text-anchor="middle" font-size="7" fill="#64748b" font-style="italic">nₑ,₀</text>
+  <!-- u₂(t) -->
+  <line x1="420" y1="240" x2="498" y2="240" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrB)"/>
+  <text x="460" y="232" text-anchor="middle" font-size="8" fill="#2563eb" font-style="italic">u₂(t)</text>
 
-  <!-- ─── PID₂ : Boucle d'ionisation (moyen, 10 Hz) ────── -->
-  <rect x="270" y="178" width="150" height="76" rx="6"
-        fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-  <text x="345" y="195" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#1e40af">PID₂ — Ionisation</text>
-  <text x="345" y="210" text-anchor="middle" font-size="9"
-        fill="#2563eb">e₂ = Lum − Lum₀</text>
-  <text x="345" y="224" text-anchor="middle" font-size="8"
-        fill="#1d4ed8">Boucle moyenne · 10 Hz</text>
-  <text x="345" y="238" text-anchor="middle" font-size="8"
-        fill="#64748b" font-style="italic">Consigne : nₑ cible</text>
-  <!-- ADC → PID₂ (Luminosité) -->
-  <line x1="233" y1="245" x2="252" y2="245"
-        stroke="#2563eb" stroke-width="1.5"/>
-  <line x1="252" y1="245" x2="252" y2="216"
-        stroke="#2563eb" stroke-width="1.5"/>
-  <line x1="252" y1="216" x2="268" y2="216"
-        stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrB)"/>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PID₃ — Pompage (lent · 1 Hz)                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <use href="#sym-sum" x="274" y="350" style="color: #16a34a"/>
+  <text x="260" y="342" font-size="9" font-weight="bold" fill="#16a34a">+</text>
+  <text x="274" y="372" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">−</text>
+  <!-- ADC Pression → nœud(s) -->
+  <line x1="244" y1="200" x2="256" y2="200" stroke="#d97706" stroke-width="1.5"/>
+  <line x1="256" y1="200" x2="256" y2="350" stroke="#d97706" stroke-width="1.5"/>
+  <line x1="256" y1="350" x2="260" y2="350" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrA)"/>
+  <!-- e₃(t) → C₃(s) -->
+  <line x1="286" y1="350" x2="318" y2="350" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrG)"/>
+  <text x="302" y="342" text-anchor="middle" font-size="8" fill="#16a34a" font-style="italic">e₃</text>
+  <!-- Bloc C₃(s) -->
+  <rect x="320" y="330" width="100" height="40" rx="3" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.2"/>
+  <text x="370" y="347" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d">C₃(s)</text>
+  <text x="370" y="362" text-anchor="middle" font-size="8" fill="#15803d">Pompage · 1 Hz</text>
+  <!-- Consigne P₀ -->
+  <line x1="274" y1="322" x2="274" y2="338" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="274" y="318" text-anchor="middle" font-size="7" fill="#64748b" font-style="italic">P₀ (2-5 mbar)</text>
+  <!-- u₃(t) -->
+  <line x1="420" y1="350" x2="498" y2="350" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrG)"/>
+  <text x="460" y="342" text-anchor="middle" font-size="8" fill="#16a34a" font-style="italic">u₃(t)</text>
 
-  <!-- ─── PID₃ : Boucle de pompage (lent, 1 Hz) ────────── -->
-  <rect x="270" y="276" width="150" height="76" rx="6"
-        fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
-  <text x="345" y="293" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#15803d">PID₃ — Pompage</text>
-  <text x="345" y="308" text-anchor="middle" font-size="9"
-        fill="#16a34a">e₃ = P − P₀</text>
-  <text x="345" y="322" text-anchor="middle" font-size="8"
-        fill="#15803d">Boucle lente · 1 Hz</text>
-  <text x="345" y="336" text-anchor="middle" font-size="8"
-        fill="#64748b" font-style="italic">Consigne : 2–5 mbar</text>
-  <!-- ADC → PID₃ (Pression = entrée principale) -->
-  <line x1="233" y1="175" x2="244" y2="175"
-        stroke="#d97706" stroke-width="1.5"/>
-  <line x1="244" y1="175" x2="244" y2="314"
-        stroke="#d97706" stroke-width="1.5"/>
-  <line x1="244" y1="314" x2="268" y2="314"
-        stroke="#d97706" stroke-width="1.5" marker-end="url(#arrA)"/>
-
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- INTÉRIEUR MCU : Sécurité / Watchdog                    -->
-  <!-- ══════════════════════════════════════════════════════ -->
-  <rect x="270" y="364" width="150" height="24" rx="4"
-        fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"
-        stroke-dasharray="4,2"/>
-  <text x="345" y="380" text-anchor="middle" font-size="9"
-        font-weight="bold" fill="#dc2626">🛑 Watchdog Sécurité</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- WATCHDOG SÉCURITÉ                                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="310" y="392" width="120" height="22" rx="4"
+        fill="#fef2f2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="370" y="407" text-anchor="middle" font-size="9" font-weight="bold" fill="#dc2626">🛑 Watchdog</text>
   <!-- T° → Watchdog -->
-  <line x1="233" y1="315" x2="240" y2="315"
-        stroke="#16a34a" stroke-width="1"/>
-  <line x1="240" y1="315" x2="240" y2="376"
-        stroke="#16a34a" stroke-width="1"/>
-  <line x1="240" y1="376" x2="268" y2="376"
-        stroke="#16a34a" stroke-width="1" marker-end="url(#arrG)"/>
-  <text x="238" y="348" font-size="7" fill="#16a34a"
-        text-anchor="end" font-style="italic">T° max?</text>
-  <!-- Watchdog → tous les PID (ligne d'arrêt) -->
-  <line x1="420" y1="376" x2="430" y2="376"
-        stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
-  <line x1="430" y1="376" x2="430" y2="118"
-        stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
-  <text x="438" y="250" font-size="7" fill="#dc2626"
-        writing-mode="tb" text-anchor="middle"
-        font-style="italic">ARRÊT</text>
+  <line x1="244" y1="360" x2="252" y2="360" stroke="#14b8a6" stroke-width="1"/>
+  <line x1="252" y1="360" x2="252" y2="403" stroke="#14b8a6" stroke-width="1"/>
+  <line x1="252" y1="403" x2="308" y2="403" stroke="#14b8a6" stroke-width="1" marker-end="url(#arrG)"/>
+  <text x="280" y="412" font-size="7" fill="#14b8a6" font-style="italic">T° max?</text>
+  <!-- Watchdog → coupe PID -->
+  <line x1="430" y1="403" x2="440" y2="403" stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="440" y1="403" x2="440" y2="130" stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="448" y="270" font-size="7" fill="#dc2626" writing-mode="tb" text-anchor="middle" font-style="italic">ARRÊT</text>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- INTÉRIEUR MCU : Bloc PWM/DAC (colonne 3)               -->
-  <!-- ══════════════════════════════════════════════════════ -->
-  <rect x="480" y="80" width="56" height="260" rx="4"
-        fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
-  <text x="508" y="99" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#334155">PWM</text>
-  <text x="508" y="113" text-anchor="middle" font-size="8"
-        fill="#64748b">DAC</text>
-  <!-- Canaux -->
-  <text x="508" y="136" text-anchor="middle" font-size="8"
-        fill="#64748b">CH0</text>
-  <line x1="498" y1="143" x2="518" y2="143"
-        stroke="#94a3b8" stroke-width="0.5"/>
-  <text x="508" y="222" text-anchor="middle" font-size="8"
-        fill="#64748b">CH1</text>
-  <line x1="498" y1="229" x2="518" y2="229"
-        stroke="#94a3b8" stroke-width="0.5"/>
-  <text x="508" y="320" text-anchor="middle" font-size="8"
-        fill="#64748b">CH2</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BLOC PWM/DAC IEC                                          -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="500" y="95" width="54" height="284" rx="4" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+  <text x="527" y="114" text-anchor="middle" font-size="10" font-weight="bold" fill="#334155">PWM</text>
+  <text x="527" y="128" text-anchor="middle" font-size="8" fill="#64748b">DAC</text>
+  <text x="527" y="145" text-anchor="middle" font-size="8" fill="#64748b">CH0</text>
+  <text x="527" y="246" text-anchor="middle" font-size="8" fill="#64748b">CH1</text>
+  <text x="527" y="356" text-anchor="middle" font-size="8" fill="#64748b">CH2</text>
 
-  <!-- PID₁ → PWM CH0 -->
-  <line x1="420" y1="118" x2="478" y2="118"
-        stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrR)"/>
-  <text x="449" y="112" text-anchor="middle" font-size="8"
-        fill="#dc2626" font-style="italic">u₁(t)</text>
+  <!-- PWM → extérieur MCU -->
+  <line x1="554" y1="120" x2="590" y2="120" stroke="#dc2626" stroke-width="2"/>
+  <line x1="554" y1="240" x2="590" y2="240" stroke="#2563eb" stroke-width="2"/>
+  <line x1="554" y1="350" x2="590" y2="350" stroke="#16a34a" stroke-width="2"/>
 
-  <!-- PID₂ → PWM CH1 -->
-  <line x1="420" y1="216" x2="478" y2="216"
-        stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrB)"/>
-  <text x="449" y="210" text-anchor="middle" font-size="8"
-        fill="#2563eb" font-style="italic">u₂(t)</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- ACTIONNEURS IEC (droite)                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
 
-  <!-- PID₃ → PWM CH2 -->
-  <line x1="420" y1="314" x2="478" y2="314"
-        stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrG)"/>
-  <text x="449" y="308" text-anchor="middle" font-size="8"
-        fill="#16a34a" font-style="italic">u₃(t)</text>
+  <!-- Actionneur 1 : Électrovanne IEC -->
+  <line x1="590" y1="120" x2="720" y2="120" stroke="#dc2626" stroke-width="2" marker-end="url(#arrR)"/>
+  <text x="655" y="112" text-anchor="middle" font-size="8" fill="#dc2626">→ P → nₑ</text>
+  <use href="#sym-valve" x="748" y="120"/>
+  <text x="748" y="150" text-anchor="middle" font-size="9" fill="#15803d" font-weight="bold">Électrovanne</text>
+  <text x="748" y="162" text-anchor="middle" font-size="8" fill="#166534">H₂O admission</text>
 
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- COLONNE DROITE : 3 Actionneurs (sorties)               -->
-  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- Actionneur 2 : Magnétron IEC (tube à vide) -->
+  <line x1="590" y1="240" x2="720" y2="240" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+  <text x="655" y="232" text-anchor="middle" font-size="8" fill="#2563eb">→ Tₑ → kᵢₒₙ</text>
+  <use href="#sym-mag-small" x="748" y="240"/>
+  <text x="748" y="268" text-anchor="middle" font-size="9" fill="#991b1b" font-weight="bold">Magnétron</text>
+  <text x="748" y="280" text-anchor="middle" font-size="8" fill="#b91c1c">PWM puissance</text>
 
-  <!-- Sortie PWM → extérieur MCU -->
-  <line x1="536" y1="118" x2="574" y2="118"
-        stroke="#dc2626" stroke-width="2"/>
-  <line x1="536" y1="216" x2="574" y2="216"
-        stroke="#2563eb" stroke-width="2"/>
-  <line x1="536" y1="314" x2="574" y2="314"
-        stroke="#16a34a" stroke-width="2"/>
+  <!-- Actionneur 3 : Pompe IEC -->
+  <line x1="590" y1="350" x2="720" y2="350" stroke="#16a34a" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="655" y="342" text-anchor="middle" font-size="8" fill="#16a34a">→ pompage</text>
+  <use href="#sym-pump" x="748" y="350"/>
+  <text x="748" y="378" text-anchor="middle" font-size="9" fill="#15803d" font-weight="bold">Pompe à vide</text>
+  <text x="748" y="390" text-anchor="middle" font-size="8" fill="#166534">vitesse pompage</text>
 
-  <!-- Actionneur 1 : Électrovanne H₂O  y=118 -->
-  <rect x="694" y="90" width="120" height="56" rx="4"
-        fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-  <text x="754" y="110" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#15803d">Électrovanne</text>
-  <text x="754" y="124" text-anchor="middle" font-size="9"
-        fill="#166534">H₂O admission</text>
-  <text x="754" y="138" text-anchor="middle" font-size="8"
-        fill="#64748b">PWM 0,1–10 Hz</text>
-  <line x1="574" y1="118" x2="692" y2="118"
-        stroke="#dc2626" stroke-width="2" marker-end="url(#arrR)"/>
-  <text x="633" y="110" text-anchor="middle" font-size="8"
-        fill="#dc2626">→ P → nₑ</text>
-
-  <!-- Actionneur 2 : PWM Magnétron  y=216 -->
-  <rect x="694" y="188" width="120" height="56" rx="4"
-        fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
-  <text x="754" y="208" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#991b1b">Magnétron</text>
-  <text x="754" y="222" text-anchor="middle" font-size="9"
-        fill="#b91c1c">PWM puissance</text>
-  <text x="754" y="236" text-anchor="middle" font-size="8"
-        fill="#64748b">Duty cycle HF</text>
-  <line x1="574" y1="216" x2="692" y2="216"
-        stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
-  <text x="633" y="208" text-anchor="middle" font-size="8"
-        fill="#2563eb">→ Tₑ → kᵢₒₙ</text>
-
-  <!-- Actionneur 3 : Pompe à vide  y=314 -->
-  <rect x="694" y="286" width="120" height="56" rx="4"
-        fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-  <text x="754" y="306" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#15803d">Pompe à vide</text>
-  <text x="754" y="320" text-anchor="middle" font-size="9"
-        fill="#166534">Vitesse pompage</text>
-  <text x="754" y="334" text-anchor="middle" font-size="8"
-        fill="#64748b">Relais / analog.</text>
-  <line x1="574" y1="314" x2="692" y2="314"
-        stroke="#16a34a" stroke-width="2" marker-end="url(#arrG)"/>
-  <text x="633" y="306" text-anchor="middle" font-size="8"
-        fill="#16a34a">→ pompage</text>
-
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- Légende en bas                                         -->
-  <!-- ══════════════════════════════════════════════════════ -->
-  <rect x="10" y="405" width="800" height="28" rx="4"
-        fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
-  <!-- Rapide -->
-  <line x1="24" y1="419" x2="44" y2="419"
-        stroke="#dc2626" stroke-width="2"/>
-  <text x="48" y="423" font-size="9" fill="#991b1b">
-    Boucle rapide (Pᵣ → vanne, 100 Hz)</text>
-  <!-- Moyen -->
-  <line x1="260" y1="419" x2="280" y2="419"
-        stroke="#2563eb" stroke-width="2"/>
-  <text x="284" y="423" font-size="9" fill="#1e40af">
-    Boucle moyenne (Lum → magnétron, 10 Hz)</text>
-  <!-- Lent -->
-  <line x1="530" y1="419" x2="550" y2="419"
-        stroke="#16a34a" stroke-width="2"/>
-  <text x="554" y="423" font-size="9" fill="#15803d">
-    Boucle lente (P → pompe, 1 Hz)</text>
-  <!-- Pointillé -->
-  <line x1="730" y1="419" x2="750" y2="419"
-        stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="754" y="423" font-size="9" fill="#d97706">
-    Contrainte</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- LÉGENDE                                                   -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="10" y="435" width="840" height="28" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <line x1="24" y1="449" x2="44" y2="449" stroke="#dc2626" stroke-width="2"/>
+  <text x="48" y="453" font-size="9" fill="#991b1b">Boucle rapide (Pᵣ → vanne, 100 Hz)</text>
+  <line x1="260" y1="449" x2="280" y2="449" stroke="#2563eb" stroke-width="2"/>
+  <text x="284" y="453" font-size="9" fill="#1e40af">Boucle moyenne (Lum → magnétron, 10 Hz)</text>
+  <line x1="540" y1="449" x2="560" y2="449" stroke="#16a34a" stroke-width="2"/>
+  <text x="564" y="453" font-size="9" fill="#15803d">Boucle lente (P → pompe, 1 Hz)</text>
+  <text x="730" y="453" font-size="9" fill="#64748b">⊕ Sommateur IEC · ○ Capteur IEC</text>
 </svg>

@@ -1,0 +1,3 @@
+architecture,masse_alim_kg,eta_global,autonomie_200w_min,champ_e_200w_kvm,temps_montee_ms,ripple_w
+MOT,3.85,0.470,12.7,1.8,614.6,37.6
+Inverter,1.25,0.598,16.1,1.8,1421.7,1.9

@@ -28,6 +28,7 @@
 | **Thermocouple K** | `#ccfbf1` | `#14b8a6` | `#0f766e` | 🩵 teal |
 | **Jauge Pirani** | `#fefce8` | `#ca8a04` | `#92400e` | 🟨 jaune |
 | **Caméra Wi-Fi** | `#dbeafe` | `#3b82f6` | `#1d4ed8` | 🟦 bleu |
+| **AS7343 (spectral)** | `#fae8ff` | `#a855f7` | `#7c3aed` | 🟪 violet clair |
 | **Vanne DN10** | `#94a3b8` | `#334155` | `white` | 🩶 slate |
 
 ## Infrastructure

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" font-family="'Segoe UI', Arial, sans-serif" font-size="11">
+  <rect width="680" height="420" fill="#ffffff"/>
+  <!-- Titre -->
+  <text x="340" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">Architecture de la boucle — ESP32 embarqué</text>
+  <text x="340" y="40" text-anchor="middle" font-size="11" fill="#64748b">Alimentation : batterie Makita 18V → DC-DC 5V</text>
+
+  <!-- Bloc principal ESP32 -->
+  <rect x="180" y="55" width="320" height="310" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="2.5"/>
+  <text x="340" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#3730a3">MICROCONTRÔLEUR (ESP32)</text>
+
+  <!-- Entrées ADC (gauche) -->
+  <g font-size="10">
+    <!-- ADC0 -->
+    <rect x="15" y="100" width="145" height="28" rx="5" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="87" y="118" text-anchor="middle" fill="#92400e" font-weight="bold">Jauge pression (Pirani)</text>
+    <line x1="160" y1="114" x2="195" y2="114" stroke="#ca8a04" stroke-width="1.5" marker-end="url(#arrIn)"/>
+    <text x="195" y="108" font-size="9" fill="#4f46e5">ADC0</text>
+
+    <!-- ADC1 -->
+    <rect x="15" y="138" width="145" height="28" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="87" y="156" text-anchor="middle" fill="#1d4ed8" font-weight="bold">📷 Caméra (luminosité)</text>
+    <line x1="160" y1="152" x2="195" y2="152" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrIn)"/>
+    <text x="195" y="146" font-size="9" fill="#4f46e5">ADC1</text>
+
+    <!-- ADC2 -->
+    <rect x="15" y="176" width="145" height="28" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="87" y="194" text-anchor="middle" fill="#92400e" font-weight="bold">Coupleur dir. (P réfl.)</text>
+    <line x1="160" y1="190" x2="195" y2="190" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrIn)"/>
+    <text x="195" y="184" font-size="9" fill="#4f46e5">ADC2</text>
+
+    <!-- ADC3 -->
+    <rect x="15" y="214" width="145" height="28" rx="5" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="87" y="232" text-anchor="middle" fill="#0f766e" font-weight="bold">Thermocouple K</text>
+    <line x1="160" y1="228" x2="195" y2="228" stroke="#14b8a6" stroke-width="1.5" marker-end="url(#arrIn)"/>
+    <text x="195" y="222" font-size="9" fill="#4f46e5">ADC3</text>
+
+    <!-- ADC4 -->
+    <rect x="15" y="252" width="145" height="28" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="87" y="270" text-anchor="middle" fill="#991b1b" font-weight="bold">V batterie (diviseur)</text>
+    <line x1="160" y1="266" x2="195" y2="266" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrIn)"/>
+    <text x="195" y="260" font-size="9" fill="#4f46e5">ADC4</text>
+
+    <!-- ADC5 -->
+    <rect x="15" y="290" width="145" height="28" rx="5" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+    <text x="87" y="308" text-anchor="middle" fill="#9d174d" font-weight="bold">NTC temp. batt/ond.</text>
+    <line x1="160" y1="304" x2="195" y2="304" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrIn)"/>
+    <text x="195" y="298" font-size="9" fill="#4f46e5">ADC5</text>
+  </g>
+
+  <!-- Sorties PWM/GPIO (droite) -->
+  <g font-size="10">
+    <!-- PWM0 -->
+    <line x1="485" y1="135" x2="520" y2="135" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrOut)"/>
+    <text x="485" y="128" font-size="9" fill="#4f46e5">PWM0</text>
+    <rect x="520" y="121" width="145" height="28" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="592" y="139" text-anchor="middle" fill="#15803d" font-weight="bold">Électrovanne H₂O</text>
+
+    <!-- PWM1 -->
+    <line x1="485" y1="180" x2="520" y2="180" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrOut)"/>
+    <text x="485" y="173" font-size="9" fill="#4f46e5">PWM1</text>
+    <rect x="520" y="166" width="145" height="28" rx="5" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="592" y="184" text-anchor="middle" fill="#991b1b" font-weight="bold">Magnétron (SSR)</text>
+
+    <!-- GPIO -->
+    <line x1="485" y1="225" x2="520" y2="225" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrOut)"/>
+    <text x="485" y="218" font-size="9" fill="#4f46e5">GPIO</text>
+    <rect x="520" y="211" width="145" height="28" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="592" y="229" text-anchor="middle" fill="#92400e" font-weight="bold">LED / Buzzer alarme</text>
+  </g>
+
+  <!-- Comm (bas droite) -->
+  <g font-size="10">
+    <!-- Wi-Fi -->
+    <rect x="520" y="270" width="145" height="28" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="592" y="288" text-anchor="middle" fill="#4338ca" font-weight="bold">📡 Dashboard MQTT</text>
+    <line x1="485" y1="284" x2="520" y2="284" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrOut)"/>
+    <text x="485" y="277" font-size="9" fill="#4f46e5">Wi-Fi</text>
+
+    <!-- SD -->
+    <rect x="520" y="310" width="145" height="28" rx="5" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="592" y="328" text-anchor="middle" fill="#7e22ce" font-weight="bold">💾 Logging CSV (SD)</text>
+    <line x1="485" y1="324" x2="520" y2="324" stroke="#a855f7" stroke-width="1.5" marker-end="url(#arrOut)"/>
+    <text x="485" y="317" font-size="9" fill="#4f46e5">SPI</text>
+  </g>
+
+  <!-- Labels gauche / droite -->
+  <text x="87" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">CAPTEURS (entrées)</text>
+  <text x="592" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">ACTIONNEURS (sorties)</text>
+
+  <!-- Marqueurs -->
+  <defs>
+    <marker id="arrIn" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#4f46e5"/></marker>
+    <marker id="arrOut" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#4f46e5"/></marker>
+  </defs>
+
+  <!-- Watchdog -->
+  <rect x="240" y="380" width="200" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="340" y="400" text-anchor="middle" font-size="10" font-weight="bold" fill="#991b1b">⚠️ Watchdog autonome — coupe SSR si anomalie</text>
+  <line x1="340" y1="365" x2="340" y2="380" stroke="#dc2626" stroke-width="1.5"/>
+</svg>

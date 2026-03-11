@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280"
+     font-family="'Segoe UI', Arial, sans-serif" font-size="11">
+  <title>Boucle de rétroaction PID — Homéostasie du plasma</title>
+  <rect width="700" height="280" fill="#ffffff"/>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- Defs : marqueurs de flèches                           -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <defs>
+    <marker id="arrFwd" markerWidth="8" markerHeight="6"
+            refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrFb" markerWidth="8" markerHeight="6"
+            refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- Titre                                                  -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="350" y="22" text-anchor="middle" font-size="14"
+        font-weight="bold" fill="#1e293b">
+    Homéostasie du plasma — Boucle de rétroaction PID
+  </text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- Chaîne directe  (y = 90)                               -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <!-- ⓪ Enveloppe MCU (englobe sommation + PID) -->
+  <rect x="48" y="42" width="252" height="100" rx="8"
+        fill="none" stroke="#94a3b8" stroke-width="1.5"
+        stroke-dasharray="6,3"/>
+  <text x="174" y="55" text-anchor="middle" font-size="9"
+        font-weight="bold" fill="#64748b">MCU — ESP32</text>
+
+  <!-- ① Consigne r(t) — simple flèche + label -->
+  <line x1="20" y1="90" x2="68" y2="90"
+        stroke="#334155" stroke-width="2" marker-end="url(#arrFwd)"/>
+  <text x="44" y="82" text-anchor="middle" font-size="10"
+        fill="#1e40af" font-weight="bold">r(t)</text>
+  <text x="44" y="104" text-anchor="middle" font-size="8"
+        fill="#64748b">nₑ = nₑ,c</text>
+
+  <!-- ② Nœud de sommation (cercle ⊕) -->
+  <circle cx="80" cy="90" r="12"
+          fill="#ffffff" stroke="#334155" stroke-width="2"/>
+  <!-- Croix intérieure -->
+  <line x1="74" y1="90" x2="86" y2="90" stroke="#334155" stroke-width="1"/>
+  <line x1="80" y1="84" x2="80" y2="96" stroke="#334155" stroke-width="1"/>
+  <!-- Signes + / − -->
+  <text x="70" y="83" font-size="10" font-weight="bold"
+        fill="#16a34a" text-anchor="middle">+</text>
+  <text x="80" y="113" font-size="12" font-weight="bold"
+        fill="#dc2626" text-anchor="middle">−</text>
+
+  <!-- Flèche sommation → PID  (signal e(t)) -->
+  <line x1="92" y1="90" x2="148" y2="90"
+        stroke="#334155" stroke-width="2" marker-end="url(#arrFwd)"/>
+  <text x="120" y="82" text-anchor="middle" font-size="10"
+        fill="#92400e" font-style="italic">e(t)</text>
+
+  <!-- ③ Contrôleur PID -->
+  <rect x="150" y="62" width="120" height="56" rx="4"
+        fill="#eef2ff" stroke="#4f46e5" stroke-width="2.5"/>
+  <text x="210" y="84" text-anchor="middle" font-size="12"
+        font-weight="bold" fill="#3730a3">Contrôleur PID</text>
+  <text x="210" y="100" text-anchor="middle" font-size="9"
+        fill="#6366f1">Kₚ + Kᵢ∫ + Kd·d/dt</text>
+
+  <!-- Flèche PID → Actionneurs  (signal u(t)) -->
+  <line x1="270" y1="90" x2="328" y2="90"
+        stroke="#334155" stroke-width="2" marker-end="url(#arrFwd)"/>
+  <text x="299" y="82" text-anchor="middle" font-size="10"
+        fill="#92400e" font-style="italic">u(t)</text>
+
+  <!-- ④ Actionneurs -->
+  <rect x="330" y="62" width="130" height="56" rx="4"
+        fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="395" y="82" text-anchor="middle" font-size="12"
+        font-weight="bold" fill="#15803d">Actionneurs</text>
+  <text x="395" y="97" text-anchor="middle" font-size="9"
+        fill="#166534">Électrovanne H₂O</text>
+  <text x="395" y="109" text-anchor="middle" font-size="9"
+        fill="#166534">PWM magnétron</text>
+
+  <!-- Flèche Actionneurs → Plasma -->
+  <line x1="460" y1="90" x2="518" y2="90"
+        stroke="#334155" stroke-width="2" marker-end="url(#arrFwd)"/>
+
+  <!-- ⑤ Processus : Plasma -->
+  <rect x="520" y="60" width="130" height="60" rx="4"
+        fill="#fae8ff" stroke="#a855f7" stroke-width="2.5"/>
+  <text x="585" y="84" text-anchor="middle" font-size="12"
+        font-weight="bold" fill="#7e22ce">Plasma H₂O</text>
+  <text x="585" y="100" text-anchor="middle" font-size="9"
+        fill="#7e22ce">P, Tₑ, nₑ</text>
+  <text x="585" y="112" text-anchor="middle" font-size="8"
+        fill="#94a3b8">Processus G(s)</text>
+
+  <!-- Sortie y(t) -->
+  <line x1="650" y1="90" x2="688" y2="90"
+        stroke="#334155" stroke-width="2" marker-end="url(#arrFwd)"/>
+  <text x="680" y="82" text-anchor="middle" font-size="10"
+        fill="#1e40af" font-weight="bold">y(t)</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- Boucle de rétroaction (feedback)                       -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <!-- Embranchement (point de mesure) -->
+  <circle cx="660" cy="90" r="3" fill="#334155"/>
+
+  <!-- Descente verticale -->
+  <line x1="660" y1="93" x2="660" y2="210"
+        stroke="#dc2626" stroke-width="2"/>
+
+  <!-- Horizontale vers capteurs -->
+  <line x1="660" y1="210" x2="490" y2="210"
+        stroke="#dc2626" stroke-width="2" marker-end="url(#arrFb)"/>
+
+  <!-- ⑥ Capteurs H(s) -->
+  <rect x="340" y="185" width="150" height="50" rx="4"
+        fill="#fefce8" stroke="#ca8a04" stroke-width="2"/>
+  <text x="415" y="205" text-anchor="middle" font-size="11"
+        font-weight="bold" fill="#92400e">Capteurs H(s)</text>
+  <text x="415" y="220" text-anchor="middle" font-size="8"
+        fill="#92400e">Pression · Pᵣ RF · T° · Luminosité</text>
+
+  <!-- Capteurs → vers la gauche -->
+  <line x1="340" y1="210" x2="80" y2="210"
+        stroke="#dc2626" stroke-width="2"/>
+
+  <!-- Montée vers le nœud de sommation -->
+  <line x1="80" y1="210" x2="80" y2="102"
+        stroke="#dc2626" stroke-width="2" marker-end="url(#arrFb)"/>
+
+  <!-- Label signal retour -->
+  <text x="200" y="204" text-anchor="middle" font-size="10"
+        fill="#dc2626" font-style="italic">ŷ(t)</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- Note en bas                                            -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="140" y="248" width="420" height="24" rx="4"
+        fill="#fef2f2" stroke="#dc2626" stroke-width="1"
+        stroke-dasharray="4,2"/>
+  <text x="350" y="264" text-anchor="middle" font-size="10"
+        fill="#991b1b">
+    Signal-clé de rétroaction : puissance RF réfléchie Pᵣ
+    (Pᵣ min → résonance fₚ = f)
+  </text>
+</svg>

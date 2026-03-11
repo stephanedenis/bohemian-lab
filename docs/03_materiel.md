@@ -32,6 +32,7 @@
 | 15 | Laser diode (< 5 mW, classe 3R) | ✅ **En stock** | Pour mesure angulaire PSD |
 | 16 | PSD (Position Sensitive Detector) | ✅ **En stock** | Disponible |
 | 17 | Capteurs : jauge Pirani, coupleur directionnel, caméra Wi-Fi (plasma), thermocouple K + MAX31855, ADS1115 | ✅ **En stock** | Kit capteurs disponible |
+| 17b | Capteur spectral AS7343 14 canaux (SparkFun SEN-23220 Qwiic) | 🔶 À acheter | ~22 $ — proxy $n_e$ (Hβ 486 nm) et $T_e$ (Hα/Hβ). Voir [§10](docs/10_capteur_spectral.md) |
 | 18 | SSR (relais statique) + MOSFET pour électrovanne | ✅ **En stock** | Commande magnétron |
 | 19 | Caméras Wi-Fi (2–3) | ✅ **En stock** | Internes + externes |
 | 20 | Miroir plan (~ 20×20 mm) | ✅ **En stock** | Collé en haut de la tige rigide |

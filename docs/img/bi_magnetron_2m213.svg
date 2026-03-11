@@ -1,201 +1,319 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="'Segoe UI', Arial, sans-serif" font-size="11">
-  <rect width="900" height="700" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 720"
+     font-family="'Segoe UI', Arial, sans-serif" font-size="11">
+  <title>Architecture bi-magnétron 2M213-01TAG — Phase 2 (symboles IEC 60617)</title>
+  <rect width="920" height="720" fill="#ffffff"/>
+
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6" fill="#475569"/>
+      <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
     </marker>
-    <marker id="arrRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6" fill="#dc2626"/>
-    </marker>
-    <marker id="arrOrange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6" fill="#ea580c"/>
-    </marker>
-    <marker id="arrViolet" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6" fill="#7c3aed"/>
+    <marker id="arrV" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/>
     </marker>
     <linearGradient id="plasma" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.2"/>
-      <stop offset="50%" stop-color="#ec4899" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#a855f7" stop-opacity="0.2"/>
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#ec4899" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0.25"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+
+    <!-- Nœud de jonction -->
+    <circle id="dot" r="3.5" fill="#334155"/>
+
+    <!-- ═══ Source AC IEC ═══ -->
+    <g id="sym-ac">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#334155" stroke-width="2"/>
+      <path d="M-10,0 Q-5,-12 0,0 Q5,12 10,0" stroke="#334155" stroke-width="1.8" fill="none"/>
+    </g>
+
+    <!-- ═══ SSR IEC (optocoupleur + triac) ═══ -->
+    <g id="sym-ssr">
+      <rect x="0" y="0" width="56" height="48" fill="none" stroke="#334155" stroke-width="2"/>
+      <!-- LED -->
+      <polygon points="8,14 8,34 20,24" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+      <!-- Flèches photon -->
+      <line x1="18" y1="17" x2="24" y2="13" stroke="#16a34a" stroke-width="0.8"/>
+      <line x1="21" y1="13" x2="24" y2="13" stroke="#16a34a" stroke-width="0.8"/>
+      <line x1="24" y1="13" x2="24" y2="16" stroke="#16a34a" stroke-width="0.8"/>
+      <line x1="18" y1="22" x2="24" y2="18" stroke="#16a34a" stroke-width="0.8"/>
+      <line x1="21" y1="18" x2="24" y2="18" stroke="#16a34a" stroke-width="0.8"/>
+      <line x1="24" y1="18" x2="24" y2="21" stroke="#16a34a" stroke-width="0.8"/>
+      <!-- Triac (2 triangles) -->
+      <polygon points="34,14 34,34 46,24" fill="none" stroke="#334155" stroke-width="1.3"/>
+      <polygon points="46,14 46,34 34,24" fill="none" stroke="#334155" stroke-width="1.3"/>
+      <!-- Barrière isolation -->
+      <line x1="28" y1="8" x2="28" y2="40" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="2,2"/>
+    </g>
+
+    <!-- ═══ Transformateur MOT IEC (bobines + noyau) ═══ -->
+    <g id="sym-mot">
+      <!-- Primaire (4 demi-arcs, gauche) -->
+      <path d="M0,0 A7,7 0 0,1 0,14" stroke="#dc2626" stroke-width="2.2" fill="none"/>
+      <path d="M0,14 A7,7 0 0,1 0,28" stroke="#dc2626" stroke-width="2.2" fill="none"/>
+      <path d="M0,28 A7,7 0 0,1 0,42" stroke="#dc2626" stroke-width="2.2" fill="none"/>
+      <path d="M0,42 A7,7 0 0,1 0,56" stroke="#dc2626" stroke-width="2.2" fill="none"/>
+      <!-- Point de polarité primaire -->
+      <circle cx="-4" cy="5" r="2" fill="#334155"/>
+      <!-- Noyau fer (2 traits) -->
+      <line x1="12" y1="-6" x2="12" y2="62" stroke="#44403c" stroke-width="2.5"/>
+      <line x1="18" y1="-6" x2="18" y2="62" stroke="#44403c" stroke-width="2.5"/>
+      <!-- Secondaire HT (6 demi-arcs, droite) -->
+      <path d="M30,0 A6,6 0 0,0 30,10" stroke="#7c2d12" stroke-width="2.2" fill="none"/>
+      <path d="M30,10 A6,6 0 0,0 30,20" stroke="#7c2d12" stroke-width="2.2" fill="none"/>
+      <path d="M30,20 A6,6 0 0,0 30,30" stroke="#7c2d12" stroke-width="2.2" fill="none"/>
+      <path d="M30,30 A6,6 0 0,0 30,40" stroke="#7c2d12" stroke-width="2.2" fill="none"/>
+      <path d="M30,40 A6,6 0 0,0 30,50" stroke="#7c2d12" stroke-width="2.2" fill="none"/>
+      <path d="M30,50 A6,6 0 0,0 30,60" stroke="#7c2d12" stroke-width="2.2" fill="none"/>
+      <!-- Point de polarité secondaire -->
+      <circle cx="34" cy="5" r="2" fill="#334155"/>
+    </g>
+
+    <!-- ═══ Doubleur Villard IEC (diode + condo) ═══ -->
+    <g id="sym-doubler">
+      <!-- Entrée (noeud haut) -->
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#334155" stroke-width="1.8"/>
+      <!-- Diode IEC -->
+      <polygon points="-9,6 9,6 0,22" fill="none" stroke="#334155" stroke-width="1.8"/>
+      <line x1="-9" y1="22" x2="9" y2="22" stroke="#334155" stroke-width="2.2"/>
+      <line x1="0" y1="22" x2="0" y2="30" stroke="#334155" stroke-width="1.8"/>
+      <!-- Nœud milieu -->
+      <circle cx="0" cy="30" r="2.5" fill="#334155"/>
+      <!-- Condensateur horizontal -->
+      <line x1="0" y1="30" x2="18" y2="30" stroke="#334155" stroke-width="1.8"/>
+      <line x1="18" y1="20" x2="18" y2="40" stroke="#334155" stroke-width="2.2"/>
+      <line x1="24" y1="20" x2="24" y2="40" stroke="#334155" stroke-width="2.2"/>
+      <line x1="24" y1="30" x2="44" y2="30" stroke="#334155" stroke-width="1.8"/>
+      <!-- Nœud sortie : -4 kV -->
+      <circle cx="44" cy="30" r="2.5" fill="#dc2626"/>
+      <!-- Fil bas → masse -->
+      <line x1="0" y1="30" x2="0" y2="50" stroke="#334155" stroke-width="1.8"/>
+      <!-- Terre châssis -->
+      <line x1="-8" y1="50" x2="8" y2="50" stroke="#334155" stroke-width="1.8"/>
+      <line x1="-8" y1="50" x2="-12" y2="58" stroke="#334155" stroke-width="1.3"/>
+      <line x1="-1" y1="50" x2="-5" y2="58" stroke="#334155" stroke-width="1.3"/>
+      <line x1="6" y1="50" x2="2" y2="58" stroke="#334155" stroke-width="1.3"/>
+      <!-- Labels -->
+      <text x="-14" y="18" text-anchor="end" font-size="8" fill="#334155">D</text>
+      <text x="21" y="14" text-anchor="middle" font-size="8" fill="#334155">C</text>
+    </g>
+
+    <!-- ═══ Magnétron IEC (tube à vide) ═══ -->
+    <g id="sym-mag">
+      <circle cx="0" cy="0" r="28" fill="none" stroke="#334155" stroke-width="2.2"/>
+      <!-- Cathode filament -->
+      <path d="M-10,-4 L-5,4 L0,-4 L5,4 L10,-4" stroke="#f97316" stroke-width="1.8" fill="none"/>
+      <!-- Cavités anode (6 arcs) -->
+      <g stroke="#334155" stroke-width="1.3" fill="none">
+        <path d="M-20,-16 A5,5 0 0,1 -12,-22"/>
+        <path d="M-4,-24 A5,5 0 0,1 4,-24"/>
+        <path d="M12,-22 A5,5 0 0,1 20,-16"/>
+        <path d="M24,-4 A5,5 0 0,1 24,4"/>
+        <path d="M20,16 A5,5 0 0,1 12,22"/>
+        <path d="M-12,22 A5,5 0 0,1 -20,16"/>
+      </g>
+      <!-- Champ B -->
+      <path d="M-34,-10 A8,14 0 0,0 -34,10" stroke="#6366f1" stroke-width="1.2" fill="none"/>
+      <path d="M34,-10 A8,14 0 0,1 34,10" stroke="#6366f1" stroke-width="1.2" fill="none"/>
+    </g>
   </defs>
 
-  <!-- Titre -->
-  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">Architecture bi-magnétron 2M213-01TAG — Phase 2</text>
-  <text x="450" y="44" text-anchor="middle" font-size="11" fill="#64748b">2× LG 2M213-01TAG · Un seul actif à la fois · Commutation SSR primaire 120 V AC</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- TITRE                                                    -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <text x="460" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">
+    Architecture bi-magnétron 2M213-01TAG — Phase 2
+  </text>
+  <text x="460" y="44" text-anchor="middle" font-size="11" fill="#64748b">
+    2× LG 2M213-01TAG · Un seul actif à la fois · Symboles IEC 60617
+  </text>
 
-  <!-- ============ SECTEUR 120V AC ============ -->
-  <rect x="20" y="310" width="80" height="50" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
-  <text x="60" y="332" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">120 V</text>
-  <text x="60" y="347" text-anchor="middle" font-size="10" fill="#0369a1">AC 60 Hz</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SOURCE AC                                                -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <use href="#sym-ac" x="55" y="340"/>
+  <text x="55" y="306" text-anchor="middle" font-size="11" font-weight="bold" fill="#0c4a6e">120 V AC</text>
+  <text x="55" y="318" text-anchor="middle" font-size="9" fill="#0369a1">60 Hz</text>
 
-  <!-- Bus d'alimentation -->
-  <line x1="100" y1="325" x2="155" y2="325" stroke="#dc2626" stroke-width="2.5"/>
-  <line x1="100" y1="345" x2="155" y2="345" stroke="#2563eb" stroke-width="2"/>
+  <!-- Bus L / N -->
+  <line x1="55" y1="320" x2="55" y2="170" stroke="#dc2626" stroke-width="2.2"/>
+  <line x1="55" y1="360" x2="55" y2="530" stroke="#dc2626" stroke-width="2.2"/>
+  <line x1="55" y1="170" x2="140" y2="170" stroke="#dc2626" stroke-width="2.2"/>
+  <line x1="55" y1="530" x2="140" y2="530" stroke="#dc2626" stroke-width="2.2"/>
+  <!-- N bus -->
+  <line x1="75" y1="340" x2="100" y2="340" stroke="#2563eb" stroke-width="2"/>
+  <line x1="100" y1="220" x2="100" y2="580" stroke="#2563eb" stroke-width="2"/>
+  <line x1="100" y1="220" x2="200" y2="220" stroke="#2563eb" stroke-width="2"/>
+  <line x1="100" y1="580" x2="200" y2="580" stroke="#2563eb" stroke-width="2"/>
+  <text x="45" y="200" font-size="9" fill="#dc2626" font-weight="bold">L</text>
+  <text x="93" y="260" font-size="9" fill="#2563eb" font-weight="bold">N</text>
 
-  <!-- Bifurcation vers A et B -->
-  <line x1="155" y1="325" x2="155" y2="180" stroke="#dc2626" stroke-width="2"/>
-  <line x1="155" y1="325" x2="155" y2="480" stroke="#dc2626" stroke-width="2"/>
-  <line x1="155" y1="345" x2="155" y2="200" stroke="#2563eb" stroke-width="1.5"/>
-  <line x1="155" y1="345" x2="155" y2="500" stroke="#2563eb" stroke-width="1.5"/>
-
-  <!-- ============================================================ -->
-  <!-- ============ VOIE A — MAGNÉTRON A (HAUT) ============ -->
-  <!-- ============================================================ -->
-  <rect x="125" y="80" width="510" height="195" rx="10" fill="#fefce8" stroke="#ca8a04" stroke-width="2" stroke-dasharray="0"/>
-  <text x="380" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">VOIE A — 2M213-01TAG (A)</text>
-  <text x="560" y="100" font-size="10" fill="#16a34a" font-weight="bold">← Phase 1 ✓</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- VOIE A (haut) — cadre                                    -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="120" y="80" width="540" height="200" rx="8"
+        fill="#fefce8" fill-opacity="0.3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="390" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">
+    VOIE A — 2M213-01TAG (A)
+  </text>
+  <text x="590" y="100" font-size="10" fill="#16a34a" font-weight="bold">Phase 1 ✓</text>
 
   <!-- SSR A -->
-  <line x1="155" y1="180" x2="185" y2="180" stroke="#dc2626" stroke-width="2"/>
-  <rect x="185" y="163" width="60" height="34" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-  <text x="215" y="180" text-anchor="middle" font-size="10" font-weight="bold" fill="#15803d">SSR A</text>
-  <text x="215" y="192" text-anchor="middle" font-size="8" fill="#16a34a">25 A ZC</text>
-  <line x1="245" y1="180" x2="280" y2="180" stroke="#dc2626" stroke-width="2" marker-end="url(#arrRed)"/>
+  <use href="#sym-ssr" x="140" y="146"/>
+  <text x="168" y="140" text-anchor="middle" font-size="9" font-weight="bold" fill="#334155">SSR A</text>
+  <text x="168" y="206" text-anchor="middle" font-size="8" fill="#16a34a">25 A · ZC</text>
+  <line x1="196" y1="170" x2="230" y2="170" stroke="#dc2626" stroke-width="2"/>
 
   <!-- MOT A -->
-  <rect x="285" y="120" width="100" height="110" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
-  <text x="335" y="145" text-anchor="middle" font-size="10" font-weight="bold" fill="#c2410c">MOT A</text>
-  <!-- Symbole transfo simplifié -->
-  <line x1="315" y1="155" x2="315" y2="210" stroke="#44403c" stroke-width="3"/>
-  <line x1="325" y1="155" x2="325" y2="210" stroke="#44403c" stroke-width="3"/>
-  <path d="M295,170 C303,162 313,162 315,170" stroke="#dc2626" stroke-width="2" fill="none"/>
-  <path d="M295,185 C303,177 313,177 315,185" stroke="#dc2626" stroke-width="2" fill="none"/>
-  <path d="M325,170 C333,162 343,162 351,170" stroke="#7c2d12" stroke-width="2" fill="none"/>
-  <path d="M325,185 C333,177 343,177 351,185" stroke="#7c2d12" stroke-width="2" fill="none"/>
-  <path d="M325,200 C333,192 343,192 351,200" stroke="#7c2d12" stroke-width="2" fill="none"/>
-  <text x="335" y="222" text-anchor="middle" font-size="8" fill="#ea580c">2100 V + 3,15 V</text>
-  <!-- Retour N -->
-  <line x1="155" y1="200" x2="295" y2="200" stroke="#2563eb" stroke-width="1.5"/>
+  <use href="#sym-mot" x="240" y="145"/>
+  <text x="255" y="138" text-anchor="middle" font-size="10" font-weight="bold" fill="#c2410c">MOT A</text>
+  <!-- Retour N primaire -->
+  <line x1="200" y1="220" x2="240" y2="220" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="240" y1="201" x2="240" y2="220" stroke="#2563eb" stroke-width="1.5"/>
+  <!-- Sortie HT secondaire -->
+  <line x1="270" y1="145" x2="340" y2="145" stroke="#7c2d12" stroke-width="1.8"/>
 
-  <!-- Doubleur A (simplifié) -->
-  <rect x="410" y="140" width="70" height="70" rx="5" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
-  <text x="445" y="163" text-anchor="middle" font-size="9" font-weight="bold" fill="#991b1b">Doubleur</text>
-  <text x="445" y="178" text-anchor="middle" font-size="8" fill="#dc2626">→ −4 kV</text>
-  <text x="445" y="193" text-anchor="middle" font-size="8" fill="#dc2626">D + C 1µF</text>
-  <line x1="385" y1="175" x2="410" y2="175" stroke="#7c2d12" stroke-width="2" marker-end="url(#arrRed)"/>
+  <!-- Doubleur A -->
+  <use href="#sym-doubler" x="350" y="135"/>
+  <text x="350" y="128" text-anchor="middle" font-size="9" font-weight="bold" fill="#991b1b">Doubleur A</text>
+  <text x="410" y="160" font-size="8" fill="#dc2626">−4 kV</text>
+  <!-- Sortie → magnétron A -->
+  <line x1="394" y1="165" x2="449" y2="165" stroke="#dc2626" stroke-width="2"/>
 
-  <!-- 2M213 A -->
-  <rect x="510" y="125" width="108" height="100" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
-  <ellipse cx="564" cy="160" rx="25" ry="12" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
-  <g fill="#7f1d1d"><circle cx="548" cy="160" r="3"/><circle cx="564" cy="160" r="3"/><circle cx="580" cy="160" r="3"/></g>
-  <text x="564" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#b91c1c">2M213-01TAG (A)</text>
-  <text x="564" y="195" text-anchor="middle" font-size="10" fill="#c2410c" font-weight="bold">~700 W</text>
-  <text x="564" y="210" text-anchor="middle" font-size="9" fill="#c2410c">2,45 GHz</text>
-  <line x1="480" y1="175" x2="510" y2="175" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrRed)"/>
+  <!-- Magnétron A -->
+  <use href="#sym-mag" x="480" y="175"/>
+  <text x="480" y="148" text-anchor="middle" font-size="10" font-weight="bold" fill="#b91c1c">2M213 (A)</text>
+  <text x="480" y="216" text-anchor="middle" font-size="9" fill="#c2410c">~700 W</text>
+  <text x="480" y="228" text-anchor="middle" font-size="8" fill="#c2410c">2,45 GHz</text>
 
-  <!-- Sortie RF A vers iris -->
-  <line x1="618" y1="175" x2="690" y2="175" stroke="#a855f7" stroke-width="3" filter="url(#glow)" marker-end="url(#arrViolet)"/>
-  <text x="654" y="168" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">RF A</text>
+  <!-- Sortie RF A -->
+  <line x1="508" y1="175" x2="570" y2="175" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrV)"/>
+  <text x="540" y="168" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">RF A</text>
 
-  <!-- ============================================================ -->
-  <!-- ============ VOIE B — MAGNÉTRON B (BAS) ============ -->
-  <!-- ============================================================ -->
-  <rect x="125" y="380" width="510" height="195" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" stroke-dasharray="0"/>
-  <text x="380" y="400" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">VOIE B — 2M213-01TAG (B)</text>
-  <text x="565" y="400" font-size="10" fill="#f59e0b" font-weight="bold">← Phase 2 ajouté</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- VOIE B (bas) — cadre                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="120" y="430" width="540" height="200" rx="8"
+        fill="#eff6ff" fill-opacity="0.3" stroke="#3b82f6" stroke-width="2"/>
+  <text x="390" y="450" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">
+    VOIE B — 2M213-01TAG (B)
+  </text>
+  <text x="590" y="450" font-size="10" fill="#f59e0b" font-weight="bold">Phase 2</text>
 
   <!-- SSR B -->
-  <line x1="155" y1="480" x2="185" y2="480" stroke="#dc2626" stroke-width="2"/>
-  <rect x="185" y="463" width="60" height="34" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-  <text x="215" y="480" text-anchor="middle" font-size="10" font-weight="bold" fill="#15803d">SSR B</text>
-  <text x="215" y="492" text-anchor="middle" font-size="8" fill="#16a34a">25 A ZC</text>
-  <line x1="245" y1="480" x2="280" y2="480" stroke="#dc2626" stroke-width="2" marker-end="url(#arrRed)"/>
+  <use href="#sym-ssr" x="140" y="496"/>
+  <text x="168" y="490" text-anchor="middle" font-size="9" font-weight="bold" fill="#334155">SSR B</text>
+  <text x="168" y="556" text-anchor="middle" font-size="8" fill="#16a34a">25 A · ZC</text>
+  <line x1="196" y1="520" x2="230" y2="520" stroke="#dc2626" stroke-width="2"/>
 
   <!-- MOT B -->
-  <rect x="285" y="420" width="100" height="110" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
-  <text x="335" y="445" text-anchor="middle" font-size="10" font-weight="bold" fill="#c2410c">MOT B</text>
-  <line x1="315" y1="455" x2="315" y2="510" stroke="#44403c" stroke-width="3"/>
-  <line x1="325" y1="455" x2="325" y2="510" stroke="#44403c" stroke-width="3"/>
-  <path d="M295,470 C303,462 313,462 315,470" stroke="#dc2626" stroke-width="2" fill="none"/>
-  <path d="M295,485 C303,477 313,477 315,485" stroke="#dc2626" stroke-width="2" fill="none"/>
-  <path d="M325,470 C333,462 343,462 351,470" stroke="#7c2d12" stroke-width="2" fill="none"/>
-  <path d="M325,485 C333,477 343,477 351,485" stroke="#7c2d12" stroke-width="2" fill="none"/>
-  <path d="M325,500 C333,492 343,492 351,500" stroke="#7c2d12" stroke-width="2" fill="none"/>
-  <text x="335" y="522" text-anchor="middle" font-size="8" fill="#ea580c">2100 V + 3,15 V</text>
-  <line x1="155" y1="500" x2="295" y2="500" stroke="#2563eb" stroke-width="1.5"/>
+  <use href="#sym-mot" x="240" y="496"/>
+  <text x="255" y="488" text-anchor="middle" font-size="10" font-weight="bold" fill="#c2410c">MOT B</text>
+  <line x1="200" y1="580" x2="240" y2="580" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="240" y1="552" x2="240" y2="580" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="270" y1="496" x2="340" y2="496" stroke="#7c2d12" stroke-width="1.8"/>
 
   <!-- Doubleur B -->
-  <rect x="410" y="440" width="70" height="70" rx="5" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
-  <text x="445" y="463" text-anchor="middle" font-size="9" font-weight="bold" fill="#991b1b">Doubleur</text>
-  <text x="445" y="478" text-anchor="middle" font-size="8" fill="#dc2626">→ −4 kV</text>
-  <text x="445" y="493" text-anchor="middle" font-size="8" fill="#dc2626">D + C 1µF</text>
-  <line x1="385" y1="475" x2="410" y2="475" stroke="#7c2d12" stroke-width="2" marker-end="url(#arrRed)"/>
+  <use href="#sym-doubler" x="350" y="486"/>
+  <text x="350" y="478" text-anchor="middle" font-size="9" font-weight="bold" fill="#991b1b">Doubleur B</text>
+  <text x="410" y="510" font-size="8" fill="#dc2626">−4 kV</text>
+  <line x1="394" y1="516" x2="449" y2="516" stroke="#dc2626" stroke-width="2"/>
 
-  <!-- 2M213 B -->
-  <rect x="510" y="425" width="108" height="100" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
-  <ellipse cx="564" cy="460" rx="25" ry="12" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
-  <g fill="#1e3a5f"><circle cx="548" cy="460" r="3"/><circle cx="564" cy="460" r="3"/><circle cx="580" cy="460" r="3"/></g>
-  <text x="564" y="448" text-anchor="middle" font-size="11" font-weight="bold" fill="#1d4ed8">2M213-01TAG (B)</text>
-  <text x="564" y="495" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">~700 W</text>
-  <text x="564" y="510" text-anchor="middle" font-size="9" fill="#1e40af">2,45 GHz</text>
-  <line x1="480" y1="475" x2="510" y2="475" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrRed)"/>
+  <!-- Magnétron B -->
+  <use href="#sym-mag" x="480" y="525"/>
+  <text x="480" y="498" text-anchor="middle" font-size="10" font-weight="bold" fill="#1d4ed8">2M213 (B)</text>
+  <text x="480" y="566" text-anchor="middle" font-size="9" fill="#1e40af">~700 W</text>
+  <text x="480" y="578" text-anchor="middle" font-size="8" fill="#1e40af">2,45 GHz</text>
 
-  <!-- Sortie RF B vers iris -->
-  <line x1="618" y1="475" x2="690" y2="475" stroke="#a855f7" stroke-width="3" filter="url(#glow)" marker-end="url(#arrViolet)"/>
-  <text x="654" y="468" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">RF B</text>
+  <!-- Sortie RF B -->
+  <line x1="508" y1="525" x2="570" y2="525" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrV)"/>
+  <text x="540" y="518" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">RF B</text>
 
-  <!-- ============ IRIS + CHAMBRE ============ -->
-  <!-- Volets iris -->
-  <rect x="690" y="140" width="50" height="60" rx="4" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
-  <text x="715" y="165" text-anchor="middle" font-size="9" font-weight="bold" fill="#334155">IRIS</text>
-  <text x="715" y="178" text-anchor="middle" font-size="8" fill="#475569">A ↓</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- IRIS + VOLETS + CHAMBRE                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
 
-  <rect x="690" y="450" width="50" height="60" rx="4" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
-  <text x="715" y="475" text-anchor="middle" font-size="9" font-weight="bold" fill="#334155">IRIS</text>
-  <text x="715" y="488" text-anchor="middle" font-size="8" fill="#475569">B ↓</text>
+  <!-- Iris A (symbole guide d'onde IEC : rectangle hachuré) -->
+  <g transform="translate(690,150)">
+    <rect x="0" y="0" width="40" height="50" fill="none" stroke="#475569" stroke-width="2"/>
+    <!-- Hachures = volet métallique -->
+    <line x1="5" y1="5" x2="35" y2="15" stroke="#475569" stroke-width="1"/>
+    <line x1="5" y1="15" x2="35" y2="25" stroke="#475569" stroke-width="1"/>
+    <line x1="5" y1="25" x2="35" y2="35" stroke="#475569" stroke-width="1"/>
+    <line x1="5" y1="35" x2="35" y2="45" stroke="#475569" stroke-width="1"/>
+    <text x="20" y="-6" text-anchor="middle" font-size="9" font-weight="bold" fill="#334155">IRIS A</text>
+    <text x="20" y="64" text-anchor="middle" font-size="8" fill="#475569">volet servo</text>
+  </g>
+  <line x1="570" y1="175" x2="690" y2="175" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrV)"/>
 
-  <!-- Guides d'onde vers la chambre -->
-  <line x1="715" y1="200" x2="715" y2="280" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrViolet)"/>
-  <line x1="715" y1="510" x2="715" y2="405" stroke="#a855f7" stroke-width="2.5"/>
-  <line x1="715" y1="405" x2="715" y2="380" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrViolet)"/>
+  <!-- Iris B -->
+  <g transform="translate(690,500)">
+    <rect x="0" y="0" width="40" height="50" fill="none" stroke="#475569" stroke-width="2"/>
+    <line x1="5" y1="5" x2="35" y2="15" stroke="#475569" stroke-width="1"/>
+    <line x1="5" y1="15" x2="35" y2="25" stroke="#475569" stroke-width="1"/>
+    <line x1="5" y1="25" x2="35" y2="35" stroke="#475569" stroke-width="1"/>
+    <line x1="5" y1="35" x2="35" y2="45" stroke="#475569" stroke-width="1"/>
+    <text x="20" y="-6" text-anchor="middle" font-size="9" font-weight="bold" fill="#334155">IRIS B</text>
+    <text x="20" y="64" text-anchor="middle" font-size="8" fill="#475569">volet servo</text>
+  </g>
+  <line x1="570" y1="525" x2="690" y2="525" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrV)"/>
 
-  <!-- Chambre -->
-  <rect x="680" y="280" width="70" height="100" rx="8" fill="url(#plasma)" stroke="#7c3aed" stroke-width="2.5"/>
-  <text x="715" y="318" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c3aed">Chambre</text>
-  <text x="715" y="333" text-anchor="middle" font-size="9" fill="#7c3aed">H₂O</text>
-  <text x="715" y="348" text-anchor="middle" font-size="9" fill="#7c3aed">2–5 mbar</text>
-  <text x="715" y="365" text-anchor="middle" font-size="8" fill="#6d28d9">⌀250×250</text>
+  <!-- Guide d'onde A → chambre -->
+  <line x1="730" y1="200" x2="730" y2="300" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrV)"/>
+  <!-- Guide d'onde B → chambre -->
+  <line x1="730" y1="500" x2="730" y2="410" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrV)"/>
 
-  <!-- ============ ESP32 CONTRÔLE ============ -->
-  <rect x="110" y="290" width="100" height="80" rx="6" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
-  <text x="160" y="315" text-anchor="middle" font-size="11" font-weight="bold" fill="#4338ca">ESP32</text>
-  <text x="160" y="330" text-anchor="middle" font-size="9" fill="#6366f1">Contrôleur</text>
-  <text x="160" y="345" text-anchor="middle" font-size="9" fill="#6366f1">PID + interlock</text>
+  <!-- Chambre plasma -->
+  <rect x="695" y="300" width="70" height="110" rx="8" fill="url(#plasma)" stroke="#7c3aed" stroke-width="2.5"/>
+  <text x="730" y="340" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c3aed">Chambre</text>
+  <text x="730" y="355" text-anchor="middle" font-size="9" fill="#7c3aed">H₂O</text>
+  <text x="730" y="370" text-anchor="middle" font-size="9" fill="#7c3aed">2–5 mbar</text>
+  <text x="730" y="385" text-anchor="middle" font-size="8" fill="#6d28d9">⌀250×250</text>
+  <text x="730" y="400" text-anchor="middle" font-size="8" fill="#6d28d9">8× IN-13</text>
 
-  <!-- Lignes commande ESP32 → SSR A et B -->
-  <line x1="160" y1="290" x2="160" y2="180" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <line x1="160" y1="180" x2="185" y2="180" stroke="#6366f1" stroke-width="1.5"/>
-  <text x="168" y="230" font-size="8" fill="#4338ca" writing-mode="tb">GPIO_A</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- ESP32 CONTRÔLE                                           -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="110" y="310" width="90" height="80" rx="6" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <!-- Puce IC IEC (rectangle avec encoche) -->
+  <path d="M125,350 A8,8 0 0,1 125,334" stroke="#4f46e5" stroke-width="1.5" fill="none"/>
+  <text x="155" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="#4338ca">ESP32</text>
+  <text x="155" y="355" text-anchor="middle" font-size="9" fill="#6366f1">Contrôleur</text>
+  <text x="155" y="368" text-anchor="middle" font-size="9" fill="#6366f1">PID + interlock</text>
 
-  <line x1="160" y1="370" x2="160" y2="480" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <line x1="160" y1="480" x2="185" y2="480" stroke="#6366f1" stroke-width="1.5"/>
-  <text x="168" y="420" font-size="8" fill="#4338ca" writing-mode="tb">GPIO_B</text>
+  <!-- GPIO → SSR A -->
+  <line x1="155" y1="310" x2="155" y2="170" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="155" y1="170" x2="140" y2="170" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="163" y="240" font-size="8" fill="#4338ca" writing-mode="tb">GPIO_A</text>
 
-  <!-- ============ INTERLOCK (bas) ============ -->
-  <rect x="20" y="600" width="860" height="80" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
-  <text x="450" y="625" text-anchor="middle" font-size="13" font-weight="bold" fill="#dc2626">⚠️ INTERLOCK MATÉRIEL (ET inversée) — Jamais A et B simultanément</text>
+  <!-- GPIO → SSR B -->
+  <line x1="155" y1="390" x2="155" y2="520" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="155" y1="520" x2="140" y2="520" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="163" y="440" font-size="8" fill="#4338ca" writing-mode="tb">GPIO_B</text>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- INTERLOCK — IEC symboles de sécurité                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="20" y="640" width="880" height="70" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="460" y="662" text-anchor="middle" font-size="13" font-weight="bold" fill="#dc2626">
+    ⚠ INTERLOCK MATÉRIEL (ET inversée) — Jamais A et B simultanément
+  </text>
   <g font-size="10" fill="#991b1b">
-    <text x="50" y="648">1. SSR A ON → attendre 500 ms → SSR B vérifié OFF</text>
-    <text x="50" y="666">2. Transition : SSR A OFF → délai 500 ms → SSR B ON (iris B ouvre, iris A ferme)</text>
-    <text x="500" y="648">3. Watchdog coupe les deux SSR si anomalie détectée</text>
-    <text x="500" y="666">4. Un seul transfo HT sous tension à tout instant</text>
+    <text x="40" y="684">1. SSR_A ON ⇒ SSR_B vérifié OFF</text>
+    <text x="320" y="684">2. Transition : OFF → 500 ms → ON (iris commuté)</text>
+    <text x="650" y="684">3. Watchdog : coupe les deux SSR si anomalie</text>
   </g>
 
-  <!-- ============ ANNOTATION PHASES ============ -->
-  <rect x="770" y="100" width="115" height="130" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="828" y="122" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d">Approche</text>
-  <text x="828" y="137" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d">phasée</text>
-  <line x1="780" y1="145" x2="876" y2="145" stroke="#16a34a" stroke-width="1"/>
-  <text x="828" y="163" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">Phase 1</text>
-  <text x="828" y="178" text-anchor="middle" font-size="9" fill="#166534">Voie A seule</text>
-  <text x="828" y="191" text-anchor="middle" font-size="9" fill="#166534">Détecter force</text>
-  <line x1="780" y1="200" x2="876" y2="200" stroke="#16a34a" stroke-width="0.5"/>
-  <text x="828" y="215" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="bold">Phase 2</text>
-  <text x="828" y="228" text-anchor="middle" font-size="9" fill="#92400e">+ Voie B</text>
-  <text x="828" y="241" text-anchor="middle" font-size="9" fill="#92400e">Corréler direction</text>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- LÉGENDE PHASES                                           -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <rect x="790" y="80" width="115" height="130" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="848" y="102" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d">Approche</text>
+  <text x="848" y="115" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d">phasée</text>
+  <line x1="800" y1="122" x2="896" y2="122" stroke="#16a34a" stroke-width="1"/>
+  <text x="848" y="140" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">Phase 1</text>
+  <text x="848" y="155" text-anchor="middle" font-size="9" fill="#166534">Voie A seule</text>
+  <text x="848" y="168" text-anchor="middle" font-size="9" fill="#166534">Détecter force</text>
+  <line x1="800" y1="176" x2="896" y2="176" stroke="#16a34a" stroke-width="0.5"/>
+  <text x="848" y="192" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="bold">Phase 2</text>
+  <text x="848" y="207" text-anchor="middle" font-size="9" fill="#92400e">+ Voie B</text>
+  <text x="848" y="220" text-anchor="middle" font-size="9" fill="#92400e">Corréler direction</text>
 </svg>
