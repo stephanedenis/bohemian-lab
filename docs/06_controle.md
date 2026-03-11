@@ -138,7 +138,8 @@ référence.
 La caméra regarde le plasma à travers le maillage du grillage et le
 couvercle acrylique. La luminosité globale est un proxy redondant de
 la densité électronique. L'image fournit aussi une **cartographie
-visuelle** du plasma en complément des 8 Nixie IN-13.
+visuelle** du plasma en complément des 8 Nixie IN-13 (mode passif,
+broches à la masse, lecture par caméra).
 
 ### 6.3.4 Température paroi $T_{\text{paroi}}$
 

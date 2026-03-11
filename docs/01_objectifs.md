@@ -123,8 +123,10 @@ rigoureuse dans un régime (cavité RF + plasma) rarement testé
 > rôle du prisme : si un côté est plus dense en électrons, l'onde
 > micro-onde y voyage plus lentement, ce qui crée un « gradient de phase ».
 > Dans la théorie de Bohm, ce gradient dicte la direction de la force.
-> Les 8 tubes Nixie IN-13 servent de carte du gradient : plus la colonne
-> lumineuse est longue, plus le plasma est dense à cet endroit.
+> Les 8 tubes Nixie IN-13 servent de carte du gradient : en mode
+> **passif** (broches à la masse, pas d'alimentation), le néon brille
+> spontanément sous le champ RF — plus la lueur est intense, plus le
+> champ EM local est fort.
 
 ### Énoncé
 
@@ -155,9 +157,13 @@ et par conséquent un gradient de phase.
 ### Méthode de mesure
 
 Les **8 tubes Nixie IN-13**, disposés en octogone sur la paroi interne de
-la chambre (espacés de 45°), servent de capteurs visuels de la luminosité
-du plasma, fournissant une cartographie angulaire du gradient de densité
-$n_e$. La corrélation entre la direction de l'asymétrie Nixie et la
+la chambre (espacés de 45°), fonctionnent en **mode passif** : broches
+court-circuitées à la paroi inox (mise à la masse), aucune alimentation
+extérieure. Le néon s'ionise spontanément sous le champ RF et la brillance
+de chaque tube indique l'intensité du champ EM local. La lecture se fait
+par **caméra Wi-Fi** embarquée (analyse d'image).
+
+La corrélation entre la direction de l'asymétrie Nixie et la
 direction de la force détectée au pendule est le test clé de l'Objectif 2
 (voir la [matrice décisionnelle](04_protocole.md#46-attentes-concrètes--confirmer-ou-infirmer-lhypothèse)).
 

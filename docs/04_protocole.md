@@ -247,7 +247,7 @@ $$f_{\text{pulse}} = \frac{1}{T_0}$$
    et transmises en Wi-Fi).
 4. Enregistrer simultanément (via ESP32 embarqué) : courant du
    magnétron, pression de la chambre, luminosité du plasma (tubes
-   Nixie), température des parois, position du spot laser (PSD).
+   Nixie via caméra), température des parois, position du spot laser (PSD).
 5. Durée minimale : 20 cycles complets ($20 \times T_0$).
 
 ### Étape 5 — Tests de contrôle

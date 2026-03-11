@@ -16,7 +16,7 @@
 |:--|:---|:---|:---|
 | 1 | Magnétron 2,45 GHz (1 kW, récupéré d'un micro-ondes) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode |
 | 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | ✅ **En stock** | Avec couvercle acrylique 3/4" et joint silicone |
-| 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Disponibles |
+| 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Mode passif (broches à la masse, pas de câblage) |
 | 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) + socles | ✅ **En stock** | Batteries et socles de charge disponibles |
 | 5 | Onduleur 120V AC sinus pur (≥ 1200 W) | ✅ **En stock** | < 1,5 kg, entrée 18V DC |
 | 6 | ESP32 (DevKitC ou similaire) | ✅ **En stock** | Boîtier alu blindé requis |
@@ -364,7 +364,7 @@ Vue en coupe du montage complet :
 |:---|:---|:---|
 | **Magnétron** | Au-dessus du grillage (hors cage de Faraday) | Hors vide, hors cage. Antenne ↓ à travers l'iris du grillage puis l'acrylique |
 | **Vanne DN10 + connecteur** | Centre du couvercle acrylique, connecteur au-dessus | Accès direct au volume sous vide pour pompage et injection ; le connecteur permet de brancher/débrancher le tuyau de pompe |
-| **8× Nixie IN-13** | Paroi intérieure (octogone, centrés en hauteur) | Doivent être dans le champ RF pour le mesurer (tubes à décharge, pas d'électronique) |
+| **8× Nixie IN-13** | Paroi intérieure (octogone, centrés en hauteur), broches à la masse | Mode passif : ionisation RF directe du néon, pas de câblage. Lecture par caméra Wi-Fi |
 | **Jauge Pirani** | Ligne de pompage (extérieure) ou feedthrough paroi | Mesure la pression sans être irradiée |
 | **Coupleur directionnel** | Au-dessus du grillage, à côté du magnétron | Hors vide, hors cage — accès facile |
 | **Caméra Wi-Fi (plasma)** | Au-dessus du grillage, regarde à travers le maillage | Hors cage, voit le plasma et les Nixie — image complète + mesure de luminosité |
@@ -374,18 +374,22 @@ Vue en coupe du montage complet :
 > 💡 **Pourquoi les Nixie survivent aux micro-ondes** — Les tubes
 > IN-13 sont des **tubes à décharge gazeuse** (néon + mercure). Ils
 > n'ont aucun circuit intégré, aucun semi-conducteur. Le champ RF
-> modifie leur courant de décharge — c'est précisément ce qu'on
-> veut mesurer. Leurs résistances ballast sont des résistances de
-> puissance (pas de composant actif) et peuvent être placées à
-> l'extérieur de la chambre, connectées par des feedthroughs simples
-> (fils traversant la paroi).
+> à 2,45 GHz traverse le verre et ionise directement le néon — le
+> tube **brille spontanément** sans alimentation. C'est précisément
+> ce qu'on veut : la réponse **passive** du gaz au champ EM local.
+>
+> Les broches (anode + cathode) sont **court-circuitées à la paroi
+> inox** de la chambre. Cela élimine tout effet d'antenne (pas de
+> métal flottant dans la cavité), assure une fixation mécanique
+> simple, et ne perturbe pas le mode TM₃₁₀ (surface des broches
+> négligeable vs. la cavité de 250 mm).
 
 L'**alimentation embarquée** (batterie, onduleur, ESP32) est intégrée
 dans le **contrepoids** (côté B du plateau). Cela simplifie le côté
 chambre et utilise la masse de ces composants comme masse
-d'équilibrage. Les seules traversées de paroi de la chambre sont
-les **fils des 8 Nixie** (16 fils, feedthroughs simples) et le
-**thermocouple**.
+d'équilibrage. La seule traversée de paroi de la chambre est le
+**thermocouple**. Les Nixie sont entièrement à l'intérieur, sans
+câblage — zéro feedthrough pour les capteurs de champ.
 
 ---
 
@@ -471,43 +475,61 @@ indiquerait une contamination par l'azote de l'air (fuite).
 
 ---
 
-## 3.5 Capteurs — Tubes Nixie linéaires (8× IN-13)
+## 3.5 Capteurs — Tubes Nixie linéaires (8× IN-13) — Mode passif
 
 ### Principe de fonctionnement
 
-Les tubes Nixie **linéaires** (IN-9 et IN-13) sont des tubes à décharge
-gazeuse dont la colonne lumineuse a une **longueur proportionnelle au
-courant** qui les traverse :
+Les tubes Nixie **linéaires** IN-13 sont des tubes à décharge gazeuse
+remplis de **néon** avec un peu de mercure (effet Penning). En mode
+actif (alimenté), la colonne lumineuse a une longueur proportionnelle
+au courant (0–100 mm pour 0–5 mA).
 
-- **IN-9** : longueur de colonne 0–30 mm pour 0–10 mA.
-- **IN-13** : longueur de colonne 0–100 mm pour 0–5 mA (plus long,
-  meilleure résolution spatiale).
+Dans cette expérience, les IN-13 sont utilisés en **mode passif** :
 
-Ils sont remplis de néon avec un peu de mercure (effet Penning) et
-fonctionnent à ~ 120–140 V DC. Alimentés par le 120 V AC de
-l'onduleur embarqué via un redresseur/résistance ballast simple.
+- **Aucune alimentation externe** — le champ RF à 2,45 GHz (1 kW)
+  traverse le verre du tube et ionise directement le néon par
+  claquage RF. Le tube brille spontanément.
+- **Broches court-circuitées à la paroi inox** — les deux électrodes
+  (anode + cathode) sont en contact avec la paroi de la chambre
+  (mises à la masse de la cavité). Cela élimine tout effet d'antenne
+  (pas de métal flottant) et supprime la rectification DC parasite
+  qui se produirait avec des broches flottantes.
+- **Aucun câblage, aucun feedthrough** — pas de résistance ballast,
+  pas de fils traversant la paroi, pas de canal ADC sur l'ESP32.
+  Zéro artefact électrique sur le pendule.
 
-### Utilisation comme capteurs de plasma
+### Utilisation comme capteurs passifs de champ RF
 
 Les tubes Nixie sont utilisés de manière non conventionnelle :
 
 - Placés **à l'intérieur de la chambre** (sur la paroi interne,
   **centrés en hauteur** pour être dans la zone de densité plasma
-  maximale), ils agissent comme des **capteurs de rayonnement RF**
-  — le champ électromagnétique modifie le courant de décharge dans
-  le tube.
+  maximale), ils répondent **passivement** au champ EM local.
+- Le néon s'ionise par claquage RF — la **brillance** et
+  l'**étendue** de la lueur sont proportionnelles à l'intensité du
+  champ EM en ce point.
 - Étant des **tubes à décharge** sans composant semi-conducteur,
-  ils résistent aux micro-ondes — c'est justement le champ RF qui
-  module leur décharge, ce qu'on veut mesurer.
-- Leurs **résistances ballast** sont placées **à l'extérieur** de
-  la chambre, connectées par des feedthroughs simples (fils à
-  travers la paroi inox). Aucun composant électronique actif n'est
-  exposé au champ RF.
-- La longueur de la colonne lumineuse donne une **indication visuelle
-  directe** du flux RF en ce point — visible à travers le grillage
-  et le couvercle acrylique.
+  ils résistent aux micro-ondes et ne perturbent pas les modes de
+  la cavité.
+- La brillance de chaque tube fournit une **indication visuelle
+  directe** de l'intensité du champ RF local — visible à travers le
+  grillage et le couvercle acrylique, filmée par la caméra Wi-Fi.
 - En disposant **8 tubes IN-13** autour de la chambre, on obtient une
   **cartographie octogonale** du gradient de champ / densité plasma.
+
+### Pourquoi court-circuiter les broches à la paroi ?
+
+| Configuration | Comportement | Problème |
+|:---|:---|:---|
+| Broches **flottantes** | Les électrodes agissent comme antennes → rectification DC parasite | La brillance ne reflète plus uniquement le champ local |
+| Broches **court-circuitées** (soudées entre elles) | Pas de différence de potentiel → ionisation RF pure | ✅ Mesure propre |
+| Broches **à la paroi inox** | Court-circuit + mise à la masse de la cavité | ✅ **Optimal** : zéro métal flottant, fixation mécanique |
+
+**Fixation recommandée** : un point d'époxy haute température pour
+plaquer le tube contre la paroi, broches en contact direct avec
+l'inox. Aucun risque de court-circuit dommageable (pas de circuit,
+pas d'alimentation). Les broches sont minuscules (~1 mm) par rapport
+à la cavité (250 mm) — perturbation du mode TM₃₁₀ négligeable.
 
 ### Disposition des 8 IN-13 — Cartographie du gradient
 
@@ -549,17 +571,26 @@ Cette disposition permet de mesurer :
 > artefact. Si l'asymétrie Nixie corrèle spatialement avec la force,
 > c'est un indice fort du gradient de phase.
 
-### Lecture des Nixie par l'ESP32
+### Lecture par caméra Wi-Fi
 
-Chaque tube IN-13 est alimenté en série avec une **résistance ballast**
-de précision (± 1 %), placée **à l'extérieur** de la chambre (protégée
-de la RF par la cage inox). Le courant $I_k$ dans chaque tube est
-mesuré par l'ESP32 via un shunt de 10 Ω (→ signal 0–50 mV pour
-0–5 mA, amplifié par un INA219 ou un ADS1115). Les 8 courants sont
-loggés en CSV et transmis en Wi-Fi.
+Une **caméra Wi-Fi** embarquée (au-dessus du grillage Faraday) filme
+les 8 tubes simultanément. L'analyse d'image (luminosité relative
+par zone) fournit la cartographie du gradient de champ :
 
-Alternativement, une **caméra Wi-Fi** embarquée peut photographier les
-8 tubes simultanément pour une lecture visuelle directe.
+- **Brillance relative** entre les 8 tubes → direction du gradient.
+- **Variation temporelle** → corrélation avec l'activation du plasma.
+- Pas de canal ADC nécessaire sur l'ESP32 pour les Nixie.
+- Les données d'image sont transmises en Wi-Fi et analysées
+  en post-traitement (segmentation d'image, extraction de luminosité
+  par tube).
+
+> 💡 **Avantage du mode passif pour le pendule** — En éliminant les
+> 16 fils de feedthrough (2 par tube), les résistances ballast et
+> le circuit de mesure INA219/ADS1115, on supprime toute source
+> d'artefact électrique (forces de Lorentz sur les fils dans le
+> champ magnétique, masse ajoutée asymétrique, courants parasites).
+> Le pendule ne voit que la masse des 8 tubes en verre (~24 g
+> au total) — répartis uniformément en octogone.
 
 ---
 
@@ -674,7 +705,7 @@ rester stable quelle que soit l'orientation du plateau.
 | Plateau porteur horizontal | À la **base de la tige**, dans le **¼ inférieur** du baril |
 | Chambre inox (sur plateau) | **Décentrée** à 200 mm de l'axe (côté A du plateau) |
 | Contrepoids (~ 10 kg, inclut batterie + onduleur + ESP32) | **Côté B** du plateau, à 200 mm de l'axe |
-| 8× Nixie IN-13 | **Intérieur** de la chambre (octogone sur la paroi, centrés en hauteur) |
+| 8× Nixie IN-13 | **Intérieur** de la chambre (octogone sur la paroi, broches à la masse, mode passif) |
 | Miroir de mesure | Collé **en haut de la tige rigide**, près du point d'attache (face au hublot) |
 | Laser + PSD | Fixés à la **paroi interne du baril** (référentiel fixe) |
 | Baril de 205L | **Posé au sol** (référentiel fixe) |
