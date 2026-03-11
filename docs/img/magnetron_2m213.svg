@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 780" font-family="'Segoe UI', Arial, sans-serif" font-size="12">
+  <rect width="700" height="780" fill="#ffffff"/>
+  <defs>
+    <linearGradient id="ferriteGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#57534e"/>
+      <stop offset="50%" stop-color="#78716c"/>
+      <stop offset="100%" stop-color="#57534e"/>
+    </linearGradient>
+    <linearGradient id="cuivreGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="ailettesGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a8a29e"/>
+      <stop offset="100%" stop-color="#78716c"/>
+    </linearGradient>
+    <linearGradient id="ceramGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="50%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Titre -->
+  <text x="350" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Magnétron LG 2M213-01TAG — Vue en élévation cotée</text>
+  <text x="350" y="46" text-anchor="middle" font-size="11" fill="#64748b">~700 W · 2 450 MHz · Rendement ~65 % · Refroidissement par air forcé</text>
+
+  <!-- ========== ANTENNE (dôme céramique) — en haut ========== -->
+  <!-- Dôme céramique (Al₂O₃) -->
+  <ellipse cx="350" cy="100" rx="18" ry="30" fill="url(#ceramGrad)" stroke="#d97706" stroke-width="2"/>
+  <!-- Tige antenne intérieure -->
+  <line x1="350" y1="130" x2="350" y2="165" stroke="#78716c" stroke-width="3"/>
+  <!-- Collerette de sortie -->
+  <rect x="318" y="125" width="64" height="10" rx="2" fill="#a8a29e" stroke="#57534e" stroke-width="1.5"/>
+
+  <!-- Label antenne -->
+  <line x1="370" y1="95" x2="510" y2="80" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="515" y="75" font-size="11" fill="#d97706" font-weight="bold">Antenne (dôme céramique Al₂O₃)</text>
+  <text x="515" y="90" font-size="10" fill="#92400e">Émission RF 2,45 GHz → iris</text>
+
+  <!-- ========== AIMANT SUPÉRIEUR (ferrite annulaire) ========== -->
+  <rect x="288" y="135" width="124" height="30" rx="4" fill="url(#ferriteGrad)" stroke="#44403c" stroke-width="2"/>
+  <text x="350" y="155" text-anchor="middle" font-size="10" fill="#fafaf9" font-weight="bold">AIMANT (ferrite)</text>
+
+  <!-- Label aimant sup. -->
+  <line x1="415" y1="150" x2="510" y2="135" stroke="#57534e" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="515" y="132" font-size="10" fill="#57534e">Aimant permanent (haut)</text>
+  <text x="515" y="145" font-size="10" fill="#57534e">B ≈ 0,1–0,2 T</text>
+
+  <!-- ========== BLOC ANODE (cuivre) avec cavités ========== -->
+  <rect x="268" y="165" width="164" height="140" rx="6" fill="url(#cuivreGrad)" stroke="#92400e" stroke-width="2.5"/>
+
+  <!-- Cavités (cercles foncés dans le bloc anode) — disposition circulaire simplifiée -->
+  <g fill="#7f1d1d" stroke="#451a03" stroke-width="1">
+    <circle cx="310" cy="210" r="8"/>
+    <circle cx="390" cy="210" r="8"/>
+    <circle cx="310" cy="260" r="8"/>
+    <circle cx="390" cy="260" r="8"/>
+    <circle cx="290" cy="235" r="8"/>
+    <circle cx="410" cy="235" r="8"/>
+  </g>
+
+  <!-- Espace d'interaction (centre) -->
+  <circle cx="350" cy="235" r="22" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="350" y="232" text-anchor="middle" font-size="8" fill="#dc2626" font-weight="bold">Espace</text>
+  <text x="350" y="242" text-anchor="middle" font-size="8" fill="#dc2626">d'interaction</text>
+
+  <!-- Cathode (filament au centre) -->
+  <line x1="350" y1="215" x2="350" y2="255" stroke="#ef4444" stroke-width="2.5" filter="url(#glow)"/>
+  <text x="350" y="272" text-anchor="middle" font-size="8" fill="#b91c1c">cathode W+Th</text>
+
+  <!-- Label bloc anode -->
+  <line x1="268" y1="235" x2="140" y2="215" stroke="#92400e" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="25" y="208" font-size="11" fill="#92400e" font-weight="bold">Bloc anode (cuivre)</text>
+  <text x="25" y="222" font-size="10" fill="#92400e">6 cavités résonantes</text>
+  <text x="25" y="236" font-size="10" fill="#92400e">f₀ = 2 450 ± 30 MHz</text>
+
+  <!-- ========== AIMANT INFÉRIEUR ========== -->
+  <rect x="288" y="305" width="124" height="30" rx="4" fill="url(#ferriteGrad)" stroke="#44403c" stroke-width="2"/>
+  <text x="350" y="325" text-anchor="middle" font-size="10" fill="#fafaf9" font-weight="bold">AIMANT (ferrite)</text>
+
+  <!-- Label aimant inf. -->
+  <line x1="415" y1="320" x2="510" y2="330" stroke="#57534e" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="515" y="327" font-size="10" fill="#57534e">Aimant permanent (bas)</text>
+  <text x="515" y="340" font-size="10" fill="#57534e">Champ ∥ axe du tube</text>
+
+  <!-- ========== AILETTES DE REFROIDISSEMENT ========== -->
+  <g fill="url(#ailettesGrad)" stroke="#57534e" stroke-width="1">
+    <rect x="250" y="335" width="200" height="5" rx="1"/>
+    <rect x="250" y="347" width="200" height="5" rx="1"/>
+    <rect x="250" y="359" width="200" height="5" rx="1"/>
+    <rect x="250" y="371" width="200" height="5" rx="1"/>
+    <rect x="250" y="383" width="200" height="5" rx="1"/>
+    <rect x="250" y="395" width="200" height="5" rx="1"/>
+    <rect x="250" y="407" width="200" height="5" rx="1"/>
+    <rect x="250" y="419" width="200" height="5" rx="1"/>
+    <rect x="250" y="431" width="200" height="5" rx="1"/>
+    <rect x="250" y="443" width="200" height="5" rx="1"/>
+    <rect x="250" y="455" width="200" height="5" rx="1"/>
+    <rect x="250" y="467" width="200" height="5" rx="1"/>
+  </g>
+
+  <!-- Corps central entre les ailettes -->
+  <rect x="318" y="335" width="64" height="140" rx="0" fill="#d6d3d1" stroke="#57534e" stroke-width="1.5"/>
+
+  <!-- Label ailettes -->
+  <line x1="455" y1="400" x2="510" y2="400" stroke="#78716c" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="515" y="395" font-size="11" fill="#57534e" font-weight="bold">Ailettes de refroidissement</text>
+  <text x="515" y="410" font-size="10" fill="#57534e">12 ailettes aluminium</text>
+  <text x="515" y="425" font-size="10" fill="#57534e">Ventilateur requis !</text>
+
+  <!-- ========== BOÎTIER BORNES (bas) ========== -->
+  <rect x="308" y="475" width="84" height="40" rx="4" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+  <text x="350" y="495" text-anchor="middle" font-size="10" fill="#334155" font-weight="bold">Boîtier bornes</text>
+  <text x="350" y="508" text-anchor="middle" font-size="9" fill="#475569">scellé sous vide</text>
+
+  <!-- ========== BROCHES FILAMENT ========== -->
+  <line x1="328" y1="515" x2="328" y2="565" stroke="#475569" stroke-width="3"/>
+  <line x1="372" y1="515" x2="372" y2="565" stroke="#475569" stroke-width="3"/>
+  <circle cx="328" cy="570" r="5" fill="#475569" stroke="#1e293b" stroke-width="1.5"/>
+  <circle cx="372" cy="570" r="5" fill="#475569" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Labels broches -->
+  <text x="328" y="590" text-anchor="middle" font-size="10" fill="#334155" font-weight="bold">F</text>
+  <text x="372" y="590" text-anchor="middle" font-size="10" fill="#334155" font-weight="bold">F</text>
+
+  <!-- Annotation broches -->
+  <line x1="390" y1="570" x2="510" y2="555" stroke="#475569" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="515" y="548" font-size="11" fill="#334155" font-weight="bold">2 broches Filament / Cathode</text>
+  <text x="515" y="563" font-size="10" fill="#475569">3,15 V AC @ 10 A (secondaire MOT)</text>
+  <text x="515" y="578" font-size="10" fill="#dc2626" font-weight="bold">⚠ Au potentiel −4 000 V DC !</text>
+
+  <!-- Châssis/masse (patte de fixation) -->
+  <rect x="240" y="160" width="28" height="18" rx="2" fill="#a8a29e" stroke="#57534e" stroke-width="1.5"/>
+  <circle cx="254" cy="169" r="4" fill="#fafaf9" stroke="#57534e" stroke-width="1"/>
+  <rect x="432" y="160" width="28" height="18" rx="2" fill="#a8a29e" stroke="#57534e" stroke-width="1.5"/>
+  <circle cx="446" cy="169" r="4" fill="#fafaf9" stroke="#57534e" stroke-width="1"/>
+
+  <!-- Label fixation -->
+  <line x1="240" y1="169" x2="140" y2="170" stroke="#78716c" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="25" y="165" font-size="10" fill="#57534e">Pattes de fixation (vis M4)</text>
+  <text x="25" y="178" font-size="10" fill="#57534e">→ plaque au-dessus du grillage</text>
+
+  <!-- ========== COTES ========== -->
+  <g stroke="#475569" stroke-width="0.8" fill="#475569" font-size="9">
+    <!-- Hauteur totale antenne → ailettes bas -->
+    <line x1="210" y1="70" x2="210" y2="575" stroke-dasharray="3,2"/>
+    <line x1="205" y1="70" x2="215" y2="70"/>
+    <line x1="205" y1="575" x2="215" y2="575"/>
+    <text x="207" y="330" text-anchor="end" font-weight="bold" writing-mode="tb">~120 mm (total)</text>
+
+    <!-- Hauteur antenne (dôme) -->
+    <line x1="230" y1="70" x2="230" y2="130" stroke-dasharray="3,2"/>
+    <line x1="225" y1="70" x2="235" y2="70"/>
+    <line x1="225" y1="130" x2="235" y2="130"/>
+    <text x="221" y="95" text-anchor="end" font-size="8">~25 mm</text>
+
+    <!-- Diamètre ailettes -->
+    <line x1="250" y1="485" x2="450" y2="485" stroke-dasharray="3,2"/>
+    <line x1="250" y1="480" x2="250" y2="490"/>
+    <line x1="450" y1="480" x2="450" y2="490"/>
+    <text x="350" y="498" text-anchor="middle" font-weight="bold">⌀ ~100 mm (ailettes)</text>
+
+    <!-- Diamètre antenne -->
+    <line x1="332" y1="60" x2="368" y2="60" stroke-dasharray="3,2"/>
+    <line x1="332" y1="55" x2="332" y2="65"/>
+    <line x1="368" y1="55" x2="368" y2="65"/>
+    <text x="350" y="55" text-anchor="middle" font-size="8">⌀ ~36 mm</text>
+
+    <!-- Écartement broches -->
+    <line x1="328" y1="600" x2="372" y2="600" stroke-dasharray="3,2"/>
+    <line x1="328" y1="595" x2="328" y2="605"/>
+    <line x1="372" y1="595" x2="372" y2="605"/>
+    <text x="350" y="615" text-anchor="middle" font-size="8">~20 mm</text>
+  </g>
+
+  <!-- ========== ENCADRÉ SPÉCIFICATIONS ========== -->
+  <rect x="25" y="625" width="650" height="130" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="350" y="648" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">Spécifications — LG 2M213-01TAG</text>
+
+  <!-- Colonne gauche -->
+  <g font-size="10" fill="#334155">
+    <text x="50" y="668" font-weight="bold" fill="#1e293b">Électriques</text>
+    <text x="50" y="683">Puissance RF sortie : ~700 W</text>
+    <text x="50" y="698">Fréquence : 2 450 ± 30 MHz</text>
+    <text x="50" y="713">Tension anode : 4 000–4 200 V DC</text>
+    <text x="50" y="728">Courant anode : ~300 mA (crête)</text>
+    <text x="50" y="743">Filament : 3,15 V AC @ 10–11 A</text>
+  </g>
+
+  <!-- Colonne droite -->
+  <g font-size="10" fill="#334155">
+    <text x="380" y="668" font-weight="bold" fill="#1e293b">Mécaniques</text>
+    <text x="380" y="683">Dimensions : ~100 × 100 × 120 mm</text>
+    <text x="380" y="698">Masse : ~0,9 kg</text>
+    <text x="380" y="713">Refroidissement : air forcé (ventilateur)</text>
+    <text x="380" y="728">Isolant antenne : Al₂O₃ (alumine)</text>
+    <text x="380" y="743">Fixation : 2 vis M4 latérales</text>
+  </g>
+
+  <!-- Ligne séparatrice -->
+  <line x1="365" y1="660" x2="365" y2="748" stroke="#e2e8f0" stroke-width="1"/>
+</svg>

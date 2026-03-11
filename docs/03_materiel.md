@@ -14,8 +14,8 @@
 
 | # | Composant | Statut | Notes |
 |:--|:---|:---|:---|
-| 1 | Magnétron 2,45 GHz (500 W, récupéré d'un micro-ondes bon marché) | 🔶 À récupérer | Inclut transfo HT + condensateur + diode. Phase 1 : un seul magnétron. |
-| 1b | *(Phase 2)* 2ᵉ magnétron 500 W + transfo HT (même modèle) | 🔶 À récupérer | Ajouté en Phase 2 pour commuter la direction du gradient (iris B à 90°). |
+| 1 | Magnétron LG 2M213-01TAG 2,45 GHz (~700 W) + MOT + doubleur HV | 🔶 À récupérer | Inclut transfo HT + condensateur + diode. Phase 1 : un seul magnétron. |
+| 1b | *(Phase 2)* 2ᵉ magnétron LG 2M213-01TAG + transfo HT (même modèle) | 🔶 À récupérer | Ajouté en Phase 2 pour commuter la direction du gradient (iris B à 90°). |
 | 2 | Chambre à vide inox 3 gal (⌀250×250 mm, 0–29 inHg) | ✅ **En stock** | Avec couvercle acrylique 3/4" et joint silicone |
 | 3 | 8× tubes Nixie IN-13 | ✅ **En stock** | Mode passif (broches à la masse, pas de câblage) |
 | 4 | Batterie Makita 18V Li-ion (BL1850B, 5 Ah) + socles | ✅ **En stock** | Batteries et socles de charge disponibles |
@@ -38,7 +38,7 @@
 | 21 | Résistances ballast, shunts, connectique, ruban cuivre | ✅ **En stock** | Consommables disponibles |
 
 > **Stock confirmé** : **17 composants sur 22** sont en stock (✅).
-> Les restants (🔶) sont le(s) magnétron(s) (à récupérer d'un micro-ondes),
+> Les restants (🔶) sont le(s) magnétron(s) LG 2M213-01TAG (à récupérer d'un micro-ondes ou acheter ~15 $),
 > le baril 205L (à trouver) et le fil de torsion — tous facilement
 > sourçables. Le plateau porteur (avec la tige rigide) et le contrepoids
 > sont à fabriquer. Le 2ᵉ magnétron (1b) n'est nécessaire qu'en Phase 2.
@@ -93,19 +93,34 @@ entre un faisceau d'électrons et un ensemble de cavités résonantes :
 5. Un **couplage par antenne** extrait l'énergie micro-onde des cavités
    vers un guide d'onde.
 
+### Modèle retenu : LG 2M213-01TAG
+
+Le **LG 2M213-01TAG** est un magnétron à cavité standard pour fours à
+micro-ondes LG, largement disponible en remplacement (~15 $). C'est une
+variante **~700 W** de la série 2M213. D'autres sous-modèles existent
+(-06, -09B, -21, -240GP) couvrant 700–1 000 W ; le -01TAG est retenu
+pour sa puissance modérée, compatible avec les Nixie sans variac.
+
+> 📐 Voir les diagrammes détaillés :
+> - [Vue en élévation cotée du 2M213-01TAG](img/magnetron_2m213.svg)
+> - [Circuit HV — MOT + doubleur](img/circuit_hv_2m213.svg)
+> - [Architecture bi-magnétron (Phase 2)](img/bi_magnetron_2m213.svg)
+
 ### Spécifications techniques
 
 | Paramètre | Valeur |
 |:---|:---|
-| Fréquence | 2,45 GHz (λ = 12,24 cm) |
-| Magnétron (Phase 1) | **1× 500 W** (micro-ondes domestique bon marché) |
-| Magnétron (Phase 2) | **2× 500 W** (un seul actif à la fois, commutation direction) |
-| Puissance RF nominale (chaque) | ~ 500 W |
+| Modèle | **LG 2M213-01TAG** (~700 W) |
+| Fréquence | 2 450 ± 30 MHz (λ = 12,24 cm) |
+| Magnétron (Phase 1) | **1× LG 2M213-01TAG ~700 W** |
+| Magnétron (Phase 2) | **2× LG 2M213-01TAG ~700 W** (un seul actif à la fois) |
+| Puissance RF nominale (chaque) | ~700 W |
 | Puissance RF de fonctionnement | **200–400 W** (duty cycle SSR ajustable) |
-| Puissance électrique (entrée) | ~ 400–800 W (selon duty) |
-| Rendement | ~ 65 % |
-| Tension d'anode | ~ 3 500–4 000 V DC |
-| Courant d'anode | ~ 150–250 mA |
+| Puissance électrique (entrée) | ~500–1 100 W (selon duty) |
+| Rendement | ~65 % |
+| Tension d'anode | ~4 000–4 200 V DC (doubleur Villard) |
+| Courant d'anode | ~300 mA (crête) |
+| Filament | 3,15 V AC @ 10–11 A (secondaire MOT) |
 | Commutation A/B *(Phase 2)* | Via MCU (SSR + volets iris) |
 
 > ⚠️ **Pourquoi pas 1 kW ?** — Un magnétron de 1 kW produit un champ
@@ -126,20 +141,22 @@ entre un faisceau d'électrons et un ensemble de cavités résonantes :
 > charge la cavité, ce qui verrouille le magnétron sur la résonance
 > (*injection locking*). Durée de vie (~1 000 h) largement suffisante.
 
-> ⚠️ **500 W vs 1 000 W — la puissance nominale compte** — Le champ
+> ⚠️ **Puissance nominale et champ pic** — Le champ
 > pic évolue comme $E_{\text{peak}} = 22{,}7\sqrt{P/1000}$ kV/m. Le duty
 > cycle SSR réduit la puissance *moyenne* mais **pas** $E_{\text{peak}}$ :
 > chaque pulse ON est à pleine puissance nominale.
 >
 > | Magnétron | $E_{\text{peak}}$ | Nixie (seuil ~20 kV/m) | Variac requis ? |
 > |:---|:---|:---|:---|
-> | **500 W** | 16,1 kV/m | ✅ sous le seuil | **Non** — utilisable tel quel |
-> | **1 000 W** | 22,7 kV/m | ❌ sature | **Oui** — variac ou SCR (+2 kg, ~20 $) |
+> | **500 W** | 16,1 kV/m | ✅ bien sous le seuil | **Non** |
+> | **700 W (2M213-01TAG)** | **19,0 kV/m** | ⚠️ juste sous le seuil | **Non** — marge ~5 % |
+> | **1 000 W (2M213-09B)** | 22,7 kV/m | ❌ sature | **Oui** — variac (+2 kg, ~20 $) |
 >
-> **Conclusion** : un magnétron 500 W est le meilleur choix — il fonctionne
-> dans la fenêtre optimale sans aucun accessoire de réduction de tension.
-> Un 1 000 W fonctionne *aussi*, mais nécessite un variac pour descendre
-> $V_{\text{anode}}$ (poids et complexité supplémentaires).
+> **Conclusion** : le **LG 2M213-01TAG ~700 W** ($E_{\text{peak}} = 19{,}0$ kV/m)
+> fonctionne juste sous le seuil Nixie avec ~5 % de marge. C'est suffisant
+> car les Nixie IN-13 ont un seuil de claquage effectif ≈ 20–50 kV/m (large
+> dispersion). Éviter impérativement les variantes -09B (1 000 W) sans
+> variac. En cas de doute, un variac en série ne coûte que ~20 $.
 
 > ⚠️ **Et en dessous de 100 W ?** — Le plasma s'allume dès ~20 W
 > dans la cavité, mais la densité électronique reste très inférieure
@@ -341,7 +358,7 @@ l'alimentation HT et le refroidissement.
 > position angulaire différente pour **corréler la direction de la force
 > avec la direction du gradient** (Objectif 2 — test critique).
 
-Deux magnétrons 500 W identiques sont montés côte à côte au-dessus du
+Deux magnétrons LG 2M213-01TAG (~700 W) identiques sont montés côte à côte au-dessus du
 grillage Faraday, à des **positions angulaires distinctes** :
 
 - **Magnétron A** : iris à ~30° du N₁ (position actuelle)
@@ -1021,7 +1038,7 @@ rigide + plateau porteur) comprend deux côtés :
 | *(Phase 2)* 2ᵉ transfo HT + magnétron | ~ 2,3 | A | 2 | Iris B (Δθ = 90°) |
 | *(Phase 2)* 2× volets iris (servo + tôle) | ~ 0,1 | A | 2 | Isolation RF du magnétron OFF |
 | Batterie Li-ion 18V Makita (BL1850B, 5 Ah) | 0,63 | B | 1 | Source d'énergie |
-| Onduleur 120 V AC (300–600 W) | ~ 1,0 | B | 1 | Conversion DC→AC |
+| Onduleur 120 V AC (600–1 200 W) | ~ 1,0 | B | 1 | Conversion DC→AC |
 | ESP32 (boîtier blindé) | < 0,1 | B | 1 | Contrôle PID + télémétrie Wi-Fi |
 | Capteurs (Pirani, coupleur, caméra, thermo.) | < 0,2 | A/B | 1 | Asservissement |
 | **Total Phase 1** | **~ 9,3** | | | |
@@ -1033,15 +1050,15 @@ La batterie Makita BL1850B offre 18 V × 5 Ah = **90 Wh**.
 
 | Mode | Puissance moy. | Autonomie |
 |:---|:---|:---|
-| Magnétron continu 400 W (~500 W entrée AC) | 620 W (pertes onduleur) | **~ 9 min** |
-| Magnétron pulsé 50 % (200 W eff.) | ~ 310 W | **~ 17 min** |
-| Magnétron pulsé 25 % (100 W eff.) | ~ 155 W | **~ 35 min** |
+| Magnétron continu 400 W RF (~620 W entrée AC) | 730 W (pertes onduleur) | **~ 7 min** |
+| Magnétron pulsé 50 % (200 W RF eff.) | ~ 365 W | **~ 15 min** |
+| Magnétron pulsé 25 % (100 W RF eff.) | ~ 180 W | **~ 30 min** |
 | Veille (ESP32 + capteurs, magnétron off) | ~ 5 W | **~ 18 h** |
 
 Pour une session de mesure de 20 cycles à $T_0 \sim 20$ s :
 $ 20 \times 20 = 400$ s ≈ **7 min** de fonctionnement pulsé → une batterie
 5 Ah suffit largement en mode pulsé 50 % à 200 W effectifs (autonomie
-~17 min). Même en mode continu à 400 W, les 9 min d'autonomie couvrent
+~15 min). Même en mode continu à 400 W, les 7 min d'autonomie couvrent
 la session.
 
 > **Astuce** : utiliser **deux batteries en parallèle** (via adaptateur
@@ -1055,7 +1072,7 @@ pour alimenter le transformateur HT du magnétron.
 
 | Critère | Exigence |
 |:---|:---|
-| Puissance nominale | ≥ 600 W (crête magnétron 500 W + marge) |
+| Puissance nominale | ≥ 900 W (crête magnétron 2M213-01TAG ~700 W + marge + pertes) |
 | Forme d'onde | **Sinusoïdale pure** (recommandé pour le transfo HT) |
 | Masse | < 1,5 kg (embarqué sur le pendule) |
 | Rendement | > 85 % |

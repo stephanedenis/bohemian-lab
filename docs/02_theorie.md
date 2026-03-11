@@ -372,6 +372,7 @@ le champ pic est $E_{\text{peak}} = \sqrt{4PQ/(\omega \varepsilon_0 V_{\text{eff
 | 100 W | 7,2 kV/m | 48 V/(cm·Torr) | 19 V/(cm·Torr) | ≈ 2 eV |
 | **200 W** | **10,1 kV/m** | **68 V/(cm·Torr)** | **27 V/(cm·Torr)** | **≈ 2 eV** |
 | 500 W | 16,0 kV/m | 107 V/(cm·Torr) | 43 V/(cm·Torr) | ≈ 2 eV |
+| **700 W (2M213-01TAG)** | **19,0 kV/m** | **127 V/(cm·Torr)** | **51 V/(cm·Torr)** | **≈ 2 eV** |
 | 1 000 W | 22,7 kV/m | 151 V/(cm·Torr) | 61 V/(cm·Torr) | ≈ 2 eV |
 
 Le seuil de maintien du plasma H₂O est $E/p \gtrsim 10$ V/(cm·Torr)
@@ -387,7 +388,7 @@ De plus, à 200 W le champ $E_{\text{peak}} \approx 10$ kV/m reste
 > pas la puissance totale. Dans une cavité résonante, le facteur de
 > qualité Q concentre l'énergie. À Q = 100, 200 W produisent un champ
 > $3 \times$ supérieur au seuil de claquage de H₂O. Le magnétron n'a
-> pas besoin de délivrer 1 kW — deux magnétrons de 500 W bon marché
+> pas besoin de délivrer 1 kW — deux magnétrons LG 2M213-01TAG (~700 W)
 > (un seul actif à la fois) pilotés à 200–400 W effectifs (via duty
 > cycle SSR) sont optimaux. La commutation entre les deux permet de
 > contrôler la direction du gradient de densité plasma.
