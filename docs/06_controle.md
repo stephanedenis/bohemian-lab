@@ -146,7 +146,7 @@ broches à la masse, lecture par caméra).
 > tridimensionnelle et le pic de densité est à $z \approx 0{,}75d$
 > selon le [modèle 3D](../experiments/009_plasma_3d.py).
 > L'image 2D vue du dessus est une projection qui peut masquer la
-> structure axiale. Voir [data/009_coupe_axiale_plasma.png](../data/009_coupe_axiale_plasma.png).
+> structure axiale. Voir [data/009_coupe_axiale_plasma.png](../data/simulations/009_coupe_axiale_plasma.png).
 
 ### 6.3.4 Température paroi $T_{\text{paroi}}$
 

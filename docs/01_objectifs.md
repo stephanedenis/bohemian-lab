@@ -300,7 +300,7 @@ direction de la force détectée au pendule est le test clé de l'Objectif 2
 > prédit que la direction de $-\nabla Q$ a un angle d'élévation de
 > ≈ −55° (composante verticale dominante). La corrélation Nixie
 > n'est sensible qu'à la **projection horizontale** du gradient. Voir
-> [data/009_decomposition_force.png](../data/009_decomposition_force.png).
+> [data/009_decomposition_force.png](../data/simulations/009_decomposition_force.png).
 
 ---
 
@@ -348,7 +348,7 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho \, (-\nabla Q) \, dV$
 > [009_plasma_3d.py](../experiments/009_plasma_3d.py) la décompose en
 > composantes horizontale/verticale sur 384 000 points de grille
 > ($N_{xy}=80, N_z=60$). Résultats :
-> [data/009_forces_3d.csv](../data/009_forces_3d.csv).
+> [data/009_forces_3d.csv](../data/simulations/009_forces_3d.csv).
 
 ### Bilan de quantité de mouvement en système fermé
 

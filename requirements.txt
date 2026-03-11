@@ -17,3 +17,7 @@ jupyterlab
 
 # Visualisation quantique
 pylatexenc   # rendu LaTeX des circuits Qiskit
+
+# Acquisition empirique (optionnel — requis pour experiments/010 et 011)
+pyserial     # communication série ESP32
+paho-mqtt    # télémétrie Wi-Fi via MQTT

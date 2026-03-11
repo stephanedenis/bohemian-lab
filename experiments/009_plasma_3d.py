@@ -34,7 +34,7 @@ Sorties :
     - Isosurface 3D de n_e (visualisation Matplotlib).
     - Champ de vecteurs F_Q en 3D (quiver).
     - Décomposition F_horizontale vs F_verticale.
-    - Données sauvegardées dans data/009_*.npy et data/009_forces_3d.csv.
+    - Données sauvegardées dans data/simulations/009_*.npy et data/simulations/009_forces_3d.csv.
 
 Références :
     [1] Holland, P.R. (1993). The Quantum Theory of Motion, chap. 3–4.
@@ -957,7 +957,7 @@ if __name__ == "__main__":
     fig_coupes = plot_coupes_transversales(
         grille, n_e,
         z_indices=[z_idx_fond, z_idx_milieu, z_idx_pic, z_idx_haut],
-        sauvegarde="data/009_coupes_transversales.png",
+        sauvegarde="data/simulations/009_coupes_transversales.png",
     )
 
     # ── Étape 4 : coupe axiale (r, z) ──────────────────────────────
@@ -970,7 +970,7 @@ if __name__ == "__main__":
             f"Coupe méridienne du plasma — θ = {np.degrees(THETA_MAGNETRON):.0f}°\n"
             f"Magnétron en haut, injection vers le bas"
         ),
-        sauvegarde="data/009_coupe_axiale_plasma.png",
+        sauvegarde="data/simulations/009_coupe_axiale_plasma.png",
     )
 
     # ── Étape 5 : isosurface 3D ────────────────────────────────────
@@ -978,7 +978,7 @@ if __name__ == "__main__":
     fig_iso = plot_isosurface_plasma(
         grille, n_e,
         niveau=0.5 * N_E_CRITIQUE,
-        sauvegarde="data/009_isosurface_plasma.png",
+        sauvegarde="data/simulations/009_isosurface_plasma.png",
     )
 
     # ── Étape 6 : amplitude et potentiel quantique 3D ──────────────
@@ -997,7 +997,7 @@ if __name__ == "__main__":
         label="Q (unités norm.)",
         cmap="viridis",
         titre="Coupe axiale — Potentiel quantique $Q(r, z)$",
-        sauvegarde="data/009_coupe_axiale_Q.png",
+        sauvegarde="data/simulations/009_coupe_axiale_Q.png",
     )
 
     # ── Étape 7 : gradient 3D et force bohmienne ───────────────────
@@ -1035,14 +1035,14 @@ if __name__ == "__main__":
     print("\n▶ Visualisation du champ de force 3D…")
     fig_force = plot_force_3d(
         grille, grad_Qx, grad_Qy, grad_Qz, masque,
-        sauvegarde="data/009_force_3d.png",
+        sauvegarde="data/simulations/009_force_3d.png",
     )
 
     # ── Étape 9 : décomposition H/V ────────────────────────────────
     print("\n▶ Comparaison F_horizontale vs F_verticale…")
     fig_decomp = plot_decomposition_force(
         resultats, F_rad,
-        sauvegarde="data/009_decomposition_force.png",
+        sauvegarde="data/simulations/009_decomposition_force.png",
     )
 
     # ── Étape 10 : scan paramétrique z_max ──────────────────────────
@@ -1090,13 +1090,13 @@ if __name__ == "__main__":
     ax_s2.grid(True, alpha=0.3)
 
     plt.tight_layout()
-    fig_scan.savefig("data/009_force_vs_zmax.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/009_force_vs_zmax.png")
+    fig_scan.savefig("data/simulations/009_force_vs_zmax.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/009_force_vs_zmax.png")
 
     # ── Étape 11 : sauvegarde des données ───────────────────────────
     print("\n▶ Sauvegarde des données numériques…")
     np.savez_compressed(
-        "data/009_plasma_3d.npz",
+        "data/simulations/009_plasma_3d.npz",
         n_e=n_e,
         Q=Q,
         R_onde=R_onde,
@@ -1107,9 +1107,9 @@ if __name__ == "__main__":
         y1d=grille["y1d"],
         z1d=grille["z1d"],
     )
-    print("  💾 Données 3D compressées → data/009_plasma_3d.npz")
+    print("  💾 Données 3D compressées → data/simulations/009_plasma_3d.npz")
 
-    with open("data/009_forces_3d.csv", "w", newline="", encoding="utf-8") as f:
+    with open("data/simulations/009_forces_3d.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow([
             "grandeur", "valeur_N", "valeur_uN", "description",
@@ -1162,10 +1162,10 @@ if __name__ == "__main__":
             "ratio_HV", f"{resultats['ratio_horiz_vert']:.4f}", "",
             "Ratio F_horiz / F_vert",
         ])
-    print("  💾 Forces 3D → data/009_forces_3d.csv")
+    print("  💾 Forces 3D → data/simulations/009_forces_3d.csv")
 
     # Sauvegarde du scan paramétrique
-    with open("data/009_scan_zmax.csv", "w", newline="", encoding="utf-8") as f:
+    with open("data/simulations/009_scan_zmax.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow([
             "z_max_mm", "F_horiz_uN", "F_vert_uN", "F_total_uN", "ratio_HV",
@@ -1178,7 +1178,7 @@ if __name__ == "__main__":
                 f"{forces_scan['F_total_uN'][i]:.6f}",
                 f"{forces_scan['ratio_HV'][i]:.4f}",
             ])
-    print("  💾 Scan paramétrique → data/009_scan_zmax.csv")
+    print("  💾 Scan paramétrique → data/simulations/009_scan_zmax.csv")
 
     # ── Résumé final ────────────────────────────────────────────────
     print("\n" + "═" * 64)

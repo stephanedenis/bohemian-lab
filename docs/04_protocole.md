@@ -231,11 +231,23 @@ $$\kappa = \frac{4\pi^2 I}{T_0^2}$$
 
 ### Étape 3 — Acquisition de référence
 
+> 🔧 **Script d'acquisition** — Utiliser le script
+> [010_acquisition.py](../experiments/010_acquisition.py) pour lire
+> les données ESP32 et les enregistrer au format CSV dans
+> `data/empirique/`. Voir la spécification complète dans
+> [docs/08_acquisition.md](08_acquisition.md).
+
 1. **Mesure à vide** : enregistrer 10 minutes de signal du pendule
    avec le magnétron éteint → bruit de fond et dérive.
+   ```bash
+   python experiments/010_acquisition.py --port /dev/ttyUSB0 --type reference_vide --duree 600
+   ```
 2. **Mesure avec charge fantôme** : remplacer la vapeur d'eau par
    de l'eau liquide dans un récipient. Activer le magnétron en mode
    pulsé. Enregistrer 10 minutes → artefact thermique de référence.
+   ```bash
+   python experiments/010_acquisition.py --port /dev/ttyUSB0 --type reference_fantome --duree 600
+   ```
 
 ### Étape 4 — Test principal
 
@@ -247,12 +259,19 @@ $$\kappa = \frac{4\pi^2 I}{T_0^2}$$
 
 $$f_{\text{pulse}} = \frac{1}{T_0}$$
 
-3. Enregistrer le déplacement angulaire via le **signal PSD** (laser
-   + photodétecteur fixés au baril, données lues par l'ESP32 embarqué
-   et transmises en Wi-Fi).
+3. Lancer l'acquisition via le script
+   [010_acquisition.py](../experiments/010_acquisition.py) :
+   ```bash
+   python experiments/010_acquisition.py --port /dev/ttyUSB0 --type test_principal --duree 9000
+   ```
+   Le script enregistre le déplacement angulaire via le **signal PSD**
+   (laser + photodétecteur fixés au baril, données lues par l'ESP32
+   embarqué et transmises en Wi-Fi).
 4. Enregistrer simultanément (via ESP32 embarqué) : courant du
    magnétron, pression de la chambre, luminosité du plasma (tubes
-   Nixie via caméra), température des parois, position du spot laser (PSD).
+   Nixie via caméra), température des parois, position du spot laser
+   (PSD). Toutes ces grandeurs sont capturées automatiquement par
+   le script 010 en 12 colonnes CSV.
 5. Durée minimale : 20 cycles complets ($20 \times T_0$).
 
 ### Étape 5 — Tests de contrôle
@@ -316,6 +335,13 @@ $$\text{SNR} = \frac{A_{\text{signal}}}{\sigma_{\text{bruit}}}$$
 > génère un signal synthétique (bruit + dérive + poussée pulsée) et
 > applique le pipeline complet (passe-bande, corrélation croisée, SNR).
 > Résultat : SNR $\approx 12$ pour $F = 3{,}3\;\mu$N — largement au-dessus de 3.
+
+> 🔧 **Analyse empirique** — Le script [011_analyse_empirique.py](../experiments/011_analyse_empirique.py)
+> applique ce même pipeline aux données réelles enregistrées par le
+> script 010. Il calcule $\eta$, compare avec la théorie, soustrait la
+> charge fantôme et vérifie les critères de succès (§ 4.4). En mode
+> `--campagne`, il analyse une session complète (11 fichiers) et
+> produit un rapport de reproductibilité. Voir [docs/08_acquisition.md](08_acquisition.md).
 
 ### Calcul de la force
 

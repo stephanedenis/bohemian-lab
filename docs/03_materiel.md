@@ -521,7 +521,7 @@ Les tubes Nixie sont utilisés de manière non conventionnelle :
 > prédit que le maximum de densité plasma est à $z \approx 0{,}75d = 188$ mm
 > (plus près du magnétron situé au sommet). Les Nixie ne sondent donc pas
 > le pic de $n_e$, mais la zone de transition. Cela affecte l'interprétation
-> de la cartographie octogonale. Voir [data/009_coupe_axiale_plasma.png](../data/009_coupe_axiale_plasma.png).
+> de la cartographie octogonale. Voir [data/009_coupe_axiale_plasma.png](../data/simulations/009_coupe_axiale_plasma.png).
 - Le néon s'ionise par claquage RF — la **brillance** et
   l'**étendue** de la lueur sont proportionnelles à l'intensité du
   champ EM en ce point.
@@ -653,7 +653,7 @@ entre la ligne d'action de $F$ et l'axe de rotation (bras de levier).
 > [modèle 3D](../experiments/009_plasma_3d.py) prédit un ratio
 > $F_H/F_V \approx 0{,}69$ (angle d'élévation ≈ −55°). La force
 > totale est donc $F_{\text{tot}} = F_H / \cos(55°) \approx 1{,}7 \times F_H$.
-> Voir [data/009_decomposition_force.png](../data/009_decomposition_force.png).
+> Voir [data/009_decomposition_force.png](../data/simulations/009_decomposition_force.png).
 
 | Configuration | Bras de levier $d$ | Couple $\tau$ pour $F = 3{,}3~\mu$N |
 |:---|:---|:---|

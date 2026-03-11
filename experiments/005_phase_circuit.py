@@ -36,7 +36,7 @@ Sorties :
     - Sphères de Bloch pour chaque phase.
     - Courbe P(|1⟩) vs φ.
     - Matrices de densité et corrélations.
-    - Données dans data/005_*.csv et .npy.
+    - Données dans data/simulations/005_*.csv et .npy.
 
 Références :
     [1] Nielsen & Chuang (2000). Quantum Computation and Quantum Information.
@@ -535,8 +535,8 @@ if __name__ == "__main__":
         fontsize=13, fontweight="bold",
     )
     plt.tight_layout()
-    fig1.savefig("data/005_phase_unique_bloch.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/005_phase_unique_bloch.png")
+    fig1.savefig("data/simulations/005_phase_unique_bloch.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/005_phase_unique_bloch.png")
 
     # ── Scénario 2 : Balayage de phase ──────────────────────────────
     print("\n▶ Scénario 2 — Balayage de phase (interféromètre de Ramsey)")
@@ -574,8 +574,8 @@ if __name__ == "__main__":
     ax2.set_xlim(0, 2)
     ax2.set_ylim(-0.05, 1.05)
     plt.tight_layout()
-    fig2.savefig("data/005_balayage_phase.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/005_balayage_phase.png")
+    fig2.savefig("data/simulations/005_balayage_phase.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/005_balayage_phase.png")
 
     # ── Scénario 3 : Intrication + phases ───────────────────────────
     print("\n▶ Scénario 3 — Intrication Bell + phases locales")
@@ -613,8 +613,8 @@ if __name__ == "__main__":
     )
     ax3.set_aspect("equal")
     plt.tight_layout()
-    fig3.savefig("data/005_correlations_bell.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/005_correlations_bell.png")
+    fig3.savefig("data/simulations/005_correlations_bell.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/005_correlations_bell.png")
 
     # ── Scénario 4 : Circuit paramétrisé ────────────────────────────
     print("\n▶ Scénario 4 — Paysage de coût (analogie espace pression-puissance)")
@@ -650,8 +650,8 @@ if __name__ == "__main__":
     ax4.clabel(cs, fmt=f"P = {cible:.1f}", fontsize=9)
 
     plt.tight_layout()
-    fig4.savefig("data/005_paysage_parametrise.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/005_paysage_parametrise.png")
+    fig4.savefig("data/simulations/005_paysage_parametrise.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/005_paysage_parametrise.png")
 
     # ── Scénario 5 : Gradient de phase multi-qubit ──────────────────
     print("\n▶ Scénario 5 — Gradient de phase spatial (8 qubits = 8 Nixie)")
@@ -712,15 +712,15 @@ if __name__ == "__main__":
         fontsize=13, fontweight="bold",
     )
     fig5.subplots_adjust(top=0.85, wspace=0.3)
-    fig5.savefig("data/005_gradient_nixie.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/005_gradient_nixie.png")
+    fig5.savefig("data/simulations/005_gradient_nixie.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/005_gradient_nixie.png")
 
     # ── Sauvegarde des données ──────────────────────────────────────
     print("\n▶ Sauvegarde des données numériques…")
     import csv
 
     # Balayage de phase
-    with open("data/005_balayage_phase.csv", "w", newline="", encoding="utf-8") as f:
+    with open("data/simulations/005_balayage_phase.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["phi_rad", "phi_deg", "P1_theorique", "P1_mesuree"])
         for phi, pt, pm in zip(
@@ -730,14 +730,14 @@ if __name__ == "__main__":
         ):
             writer.writerow([f"{phi:.6f}", f"{np.degrees(phi):.2f}",
                              f"{pt:.6f}", f"{pm:.6f}"])
-    print("  💾 Balayage de phase → data/005_balayage_phase.csv")
+    print("  💾 Balayage de phase → data/simulations/005_balayage_phase.csv")
 
     # Corrélations Bell
-    np.save("data/005_correlations_bell.npy", correlations)
-    print("  💾 Corrélations Bell → data/005_correlations_bell.npy")
+    np.save("data/simulations/005_correlations_bell.npy", correlations)
+    print("  💾 Corrélations Bell → data/simulations/005_correlations_bell.npy")
 
     # Gradient Nixie
-    with open("data/005_gradient_nixie.csv", "w", newline="", encoding="utf-8") as f:
+    with open("data/simulations/005_gradient_nixie.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["qubit", "angle_deg", "phase_rad",
                          "P1_theorique", "P1_mesuree"])
@@ -749,11 +749,11 @@ if __name__ == "__main__":
                 f"{gradient['probs_theoriques'][k]:.6f}",
                 f"{gradient['probs_mesurees'][k]:.6f}",
             ])
-    print("  💾 Gradient Nixie → data/005_gradient_nixie.csv")
+    print("  💾 Gradient Nixie → data/simulations/005_gradient_nixie.csv")
 
     # Paysage paramétrisé
-    np.save("data/005_paysage_parametrise.npy", paysage["paysage"])
-    print("  💾 Paysage paramétrisé → data/005_paysage_parametrise.npy")
+    np.save("data/simulations/005_paysage_parametrise.npy", paysage["paysage"])
+    print("  💾 Paysage paramétrisé → data/simulations/005_paysage_parametrise.npy")
 
     # ── Résumé ──────────────────────────────────────────────────────
     print("\n" + "═" * 60)

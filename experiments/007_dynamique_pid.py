@@ -23,8 +23,8 @@ Objectifs :
       moyenne (10 Hz) conformément à la séparation de cadences.
 
 Sorties :
-    - Figures dans data/007_*.png
-    - Données dans data/007_*.csv et .npz
+    - Figures dans data/simulations/007_*.png
+    - Données dans data/simulations/007_*.csv et .npz
 """
 import sys
 from pathlib import Path
@@ -592,8 +592,8 @@ if __name__ == "__main__":
         fontsize=14, fontweight="bold",
     )
     plt.tight_layout()
-    fig1.savefig("data/007_dynamique_pid.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/007_dynamique_pid.png")
+    fig1.savefig("data/simulations/007_dynamique_pid.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/007_dynamique_pid.png")
 
     # ── Étape 3 : Erreurs PID ────────────────────────────────────────
     print("\n▶ Erreurs des boucles PID")
@@ -618,8 +618,8 @@ if __name__ == "__main__":
         fontsize=14, fontweight="bold",
     )
     plt.tight_layout()
-    fig2.savefig("data/007_erreurs_pid.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/007_erreurs_pid.png")
+    fig2.savefig("data/simulations/007_erreurs_pid.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/007_erreurs_pid.png")
 
     # ── Étape 4 : Scan des gains K_p ────────────────────────────────
     print("\n▶ Scan paramétrique des gains K_p (PID₁)")
@@ -653,8 +653,8 @@ if __name__ == "__main__":
         fontsize=14, fontweight="bold",
     )
     plt.tight_layout()
-    fig3.savefig("data/007_scan_kp.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/007_scan_kp.png")
+    fig3.savefig("data/simulations/007_scan_kp.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/007_scan_kp.png")
 
     # ── Étape 5 : Comparaison de tunings ────────────────────────────
     print("\n▶ Comparaison : gains du §6.5 vs Ziegler-Nichols")
@@ -714,15 +714,15 @@ if __name__ == "__main__":
         fontsize=14, fontweight="bold",
     )
     plt.tight_layout()
-    fig4.savefig("data/007_comparaison_tuning.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/007_comparaison_tuning.png")
+    fig4.savefig("data/simulations/007_comparaison_tuning.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/007_comparaison_tuning.png")
 
     # ── Sauvegarde des données ──────────────────────────────────────
     print("\n▶ Sauvegarde des données")
 
     # Sous-échantillonner (factor 100) pour le CSV
     step = 100
-    with open("data/007_dynamique.csv", "w", newline="", encoding="utf-8") as f:
+    with open("data/simulations/007_dynamique.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["t_s", "P_mbar", "n_e_m3", "T_e_eV",
                          "u1_vanne", "u2_magnetron", "Pr_norm", "lum_norm"])
@@ -737,16 +737,16 @@ if __name__ == "__main__":
                 f"{result['Pr'][k]:.6f}",
                 f"{result['lum'][k]:.6f}",
             ])
-    print("  💾 Dynamique → data/007_dynamique.csv")
+    print("  💾 Dynamique → data/simulations/007_dynamique.csv")
 
     np.savez(
-        "data/007_scan_kp.npz",
+        "data/simulations/007_scan_kp.npz",
         kp_values=scan["kp_values"],
         settling_times=scan["settling_times"],
         overshoots=scan["overshoots"],
         erreur_statique=scan["erreur_statique"],
     )
-    print("  💾 Scan K_p → data/007_scan_kp.npz")
+    print("  💾 Scan K_p → data/simulations/007_scan_kp.npz")
 
     # ── Résumé ──────────────────────────────────────────────────────
     # Métriques de stabilisation

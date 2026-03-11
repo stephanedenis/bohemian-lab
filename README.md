@@ -1,22 +1,82 @@
-# Bohemian Lab
+# 🔬 Bohemian Lab
 
-Expérimentations en physique quantique : Propulsion par Guidage d'Onde Pilote (Bohm)
+**Laboratoire d'expérimentation en physique quantique**
+*Propulsion par guidage d'onde pilote (de Broglie–Bohm)*
 
 **Auteur :** Stéphane Denis, Expérimentateur Indépendant
-
 **Date :** Mars 2026
-
-**Sujet :** Étude de la force de réaction issue de la manipulation d'un potentiel quantique via un plasma de vapeur d'eau en cavité RF.
 
 ---
 
-## 1. Objectifs Scientifiques
+## En bref — L'idée en 30 secondes
 
-1. **Démontrer** l'existence d'une force de poussée macroscopique dans un système fermé (chambre à vide inox 3 gallons), sans éjection de masse ni échange avec l'extérieur.
-2. **Quantifier** l'influence d'un gradient de phase asymétrique sur la trajectoire des photons RF (2,45 GHz) traversant un milieu plasma inhomogène.
-3. **Valider** expérimentalement l'interaction entre le potentiel quantique de Bohm ($Q = -\frac{\hbar^2}{2m} \frac{\nabla^2 R}{R}$) et un plasma de vapeur d'eau sous vide, en mesurant un éventuel excès de force au-delà de la pression de radiation classique ($F_{\text{rad}} = P/c \approx 3{,}3 \; \mu\text{N}$ pour 1 kW).
+Imaginez que vous souffliez dans un sifflet : l'air vibre et crée un son
+qui se propage. Ici, le « souffle » est une **onde micro-onde** (identique
+à votre four de cuisine) et le « sifflet » est un **plasma** — un gaz
+ionisé qui brille comme un petit éclair, enfermé dans une boîte en acier
+inoxydable hermétiquement scellée.
 
-> 📖 **[Objectifs — documentation détaillée →](docs/01_objectifs.md)**
+En physique classique, pousser contre les murs d'une boîte fermée ne peut
+pas faire bouger la boîte — les forces internes s'annulent (3ᵉ loi de
+Newton). Mais la **mécanique bohmienne** — une interprétation de la
+physique quantique où les particules suivent de vraies trajectoires guidées
+par une « onde pilote » — prédit qu'un **gradient asymétrique** dans le
+plasma pourrait violer cette symétrie et produire une force nette
+mesurable.
+
+L'expérience ne *présuppose* pas un résultat positif : elle le **teste**.
+Un résultat nul est tout aussi informatif scientifiquement — il fournit
+une borne supérieure publiable sur la force anomale.
+
+### L'analogie de la double fente
+
+Dans l'expérience de la [double fente](https://fr.wikipedia.org/wiki/Fentes_de_Young),
+un photon passe « par les deux fentes à la fois » (du point de vue de l'onde) et
+crée des franges d'interférence. Dans l'interprétation de Bohm, le photon passe
+par **une seule** fente, mais le potentiel quantique $Q$ — créé par l'interférence
+— le **dévie systématiquement** vers les franges claires.
+
+Notre cavité plasma reproduit cet effet à grande échelle : le plasma joue le rôle
+d'une « fente variable » qui replie la fonction d'onde sur elle-même, forçant une
+déviation nette du flux de photons. Cette déviation — une force — est formellement
+identique à ce que produirait une **courbure de l'espace-temps**.
+
+> 📖 L'analogie complète (double fente → cavité → espace-temps courbe) est
+> développée dans **[Objectifs Scientifiques](docs/01_objectifs.md)**.
+
+---
+
+## Ce qu'on trouve dans ce dépôt
+
+| Dossier | Contenu |
+|:--------|:--------|
+| [experiments/](experiments/) | **9 simulations** Python autonomes (Qiskit / PennyLane / NumPy) + **2 scripts d'acquisition/analyse empirique** |
+| [notebooks/](notebooks/) | Notebooks Jupyter exploratoires |
+| [src/](src/) | Modules Python réutilisables (visualisation, utilitaires) |
+| [firmware/](firmware/) | Firmware ESP32 (PlatformIO) — lecture capteurs, PID plasma, émission série/MQTT |
+| [data/](data/) | Résultats organisés en sous-dossiers : [`simulations/`](data/simulations/) (~40 fichiers `.png`, `.csv`, `.npy`, `.npz`) et [`empirique/`](data/empirique/) (données d'acquisition terrain) |
+| [docs/](docs/) | 8 documents de référence : objectifs, théorie, matériel, protocole, sécurité, contrôle PID, implications, acquisition |
+
+---
+
+## Objectifs scientifiques
+
+1. **Force anomale en système fermé** — Mesurer si une force au-delà de
+   la pression de radiation classique existe dans une chambre scellée,
+   sans éjection de masse. Le résultat — positif ou nul — est
+   scientifiquement informatif.
+2. **Gradient de phase asymétrique** — Quantifier comment un plasma
+   inhomogène (plus dense d'un côté que de l'autre) dévie les photons
+   micro-ondes, comme un prisme courbe la lumière. Les 8 tubes Nixie
+   IN-13 en mode passif cartographient ce gradient.
+3. **Interaction potentiel quantique / plasma** — Valider que
+   l'interaction entre $Q = -\frac{\hbar^2}{2m}\frac{\nabla^2 R}{R}$ et
+   un plasma de vapeur d'eau peut produire un effet mécanique mesurable
+   ($F_Q = -\nabla Q$).
+
+> 📖 **[Objectifs — documentation détaillée →](docs/01_objectifs.md)** —
+> vulgarisation complète, analogie double fente → cavité → espace-temps,
+> précédent EmDrive, critères de succès.
 
 ---
 
@@ -38,7 +98,7 @@ L'objectif est de créer un $\nabla Q$ asymétrique via un plasma inhomogène po
 La force mesurée sur le pivot est la résultante de la pression de radiation classique et de la contribution bohmienne :
 $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 
-> � **3D** — L'intégrale volumique $\int \rho(-\nabla Q)\,dV$ est un vecteur 3D. La simulation [009_plasma_3d.py](experiments/009_plasma_3d.py) décompose cette force en composantes horizontale et verticale et montre que le pendule de torsion ne capte que $\sim 41\%$ de la force totale ($\cos 55° \approx 0{,}57$). Voir les résultats dans [data/009_decomposition_force.png](data/009_decomposition_force.png).
+> � **3D** — L'intégrale volumique $\int \rho(-\nabla Q)\,dV$ est un vecteur 3D. La simulation [009_plasma_3d.py](experiments/009_plasma_3d.py) décompose cette force en composantes horizontale et verticale et montre que le pendule de torsion ne capte que $\sim 41\%$ de la force totale ($\cos 55° \approx 0{,}57$). Voir les résultats dans [data/simulations/009_decomposition_force.png](data/simulations/009_decomposition_force.png).
 
 > �📖 **[Cadre théorique — documentation détaillée →](docs/02_theorie.md)** — historique, dérivation complète, application aux photons, références.
 
@@ -112,8 +172,16 @@ Le dossier `experiments/` contient les scripts de simulation autonomes
 | 008 | [008_sensibilite_eta.py](experiments/008_sensibilite_eta.py) | Analyse Monte-Carlo de sensibilité sur $\eta$ et estimation des faux positifs |
 | **009** | [**009_plasma_3d.py**](experiments/009_plasma_3d.py) | **Modèle 3D complet** — $n_e(r,\theta,z)$, champ EM multimode, force bohmienne 3D, décomposition H/V |
 
-> 📊 Les résultats (figures, données) sont dans `data/` — préfixés par
-> le numéro de l'expérience (ex. `data/009_*.png`, `data/009_*.csv`).
+### 🔧 Scripts d'acquisition et d'analyse empirique
+
+| # | Script | Description |
+|:--|:-------|:------------|
+| 010 | [010_acquisition.py](experiments/010_acquisition.py) | **Acquisition terrain** — lecture ESP32 (série/MQTT), écriture CSV dans `data/empirique/`, horodatage, métadonnées |
+| 011 | [011_analyse_empirique.py](experiments/011_analyse_empirique.py) | **Analyse empirique** — filtrage, corrélation croisée, extraction de force, calcul $\eta$, comparaison théorie, mode campagne |
+
+> 📊 Les résultats de simulation sont dans `data/simulations/` — préfixés par
+> le numéro de l'expérience (ex. `data/simulations/009_*.png`, `data/simulations/009_*.csv`).
+> Les données empiriques sont enregistrées dans `data/empirique/` par le script 010.
 
 ---
 
@@ -128,3 +196,4 @@ Le dossier `experiments/` contient les scripts de simulation autonomes
 | 5 | Notes de Sécurité | [docs/05_securite.md](docs/05_securite.md) |
 | 6 | Contrôle et Asservissement | [docs/06_controle.md](docs/06_controle.md) |
 | 7 | Implications d'un Résultat Positif | [docs/07_implications.md](docs/07_implications.md) |
+| 8 | Chaîne d'Acquisition Empirique | [docs/08_acquisition.md](docs/08_acquisition.md) |

@@ -214,7 +214,7 @@ C'est cette force que l'expérience Bohemian Lab cherche à détecter.
 > calcule $\mathbf{F}_Q$ en 3D sur 384 000 points de grille. Résultat
 > clé : la force a une composante verticale dominante (angle
 > d'élévation ≈ −55°) due à la position du magnétron au sommet de la
-> cavité. Voir [data/009_force_3d.png](../data/009_force_3d.png).
+> cavité. Voir [data/009_force_3d.png](../data/simulations/009_force_3d.png).
 
 ### Interprétation géométrique
 
@@ -317,7 +317,7 @@ de guidage.
 > atteint $n_{e,\text{max}} = 9{,}95 \times 10^{16}$ m$^{-3}$, soit
 > $1{,}34 \times n_{e,c}$ — le plasma dépasse la coupure au cœur de
 > la cavité, créant une zone opaque entourée d'une zone de transition
-> abrupte. Voir [data/009_coupes_transversales.png](../data/009_coupes_transversales.png).
+> abrupte. Voir [data/009_coupes_transversales.png](../data/simulations/009_coupes_transversales.png).
 
 ### Paramètres de tuning
 
@@ -568,7 +568,7 @@ Le plasma agit comme un **modulateur de phase non-linéaire** :
 > $n_e(r,\theta,z)$. Le magnétron étant au sommet de la cavité, le
 > maximum de densité se situe à $z \approx 0{,}75d$ (75 % de la
 > hauteur) selon le [modèle 3D](../experiments/009_plasma_3d.py).
-> Voir [data/009_coupe_axiale_plasma.png](../data/009_coupe_axiale_plasma.png).
+> Voir [data/009_coupe_axiale_plasma.png](../data/simulations/009_coupe_axiale_plasma.png).
 C'est le lien fondamental entre la physique des plasmas et
 l'interprétation de de Broglie–Bohm : le plasma inhomogène crée le
 gradient de phase $\nabla S$ nécessaire à la force de guidage
@@ -672,9 +672,9 @@ prédiction de la théorie pour la force nette hypothétique.
 
 > 📐 **Visualisation 3D** — La décomposition de la force en composantes
 > horizontale / verticale est illustrée dans
-> [data/009_decomposition_force.png](../data/009_decomposition_force.png)
+> [data/009_decomposition_force.png](../data/simulations/009_decomposition_force.png)
 > et les données chiffrées dans
-> [data/009_forces_3d.csv](../data/009_forces_3d.csv).
+> [data/009_forces_3d.csv](../data/simulations/009_forces_3d.csv).
 
 L'asymétrie fondamentale de dBB est structurelle : l'onde pilote $\psi$
 viole la 3ᵉ loi de Newton car elle agit **sur** les particules sans

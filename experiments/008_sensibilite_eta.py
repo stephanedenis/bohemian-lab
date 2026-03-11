@@ -25,8 +25,8 @@ Objectifs :
        η > 10    → anomalie, vérification systématique
 
 Sorties :
-    - Figures dans data/008_*.png
-    - Données dans data/008_*.csv et .npz
+    - Figures dans data/simulations/008_*.png
+    - Données dans data/simulations/008_*.csv et .npz
 """
 import sys
 from pathlib import Path
@@ -514,8 +514,8 @@ if __name__ == "__main__":
                      barre.get_height()), ha="center", va="bottom", fontsize=10)
 
     plt.tight_layout()
-    fig1.savefig("data/008_forces_parasites.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/008_forces_parasites.png")
+    fig1.savefig("data/simulations/008_forces_parasites.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/008_forces_parasites.png")
 
     # ── Étape 3 : Budget d'erreur nominal ──────────────────────────
     print("\n▶ Budget d'erreur sur η (θ = 5 µrad)")
@@ -553,8 +553,8 @@ if __name__ == "__main__":
     ax2b.grid(True, alpha=0.3, axis="x")
 
     plt.tight_layout()
-    fig2.savefig("data/008_budget_erreur.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/008_budget_erreur.png")
+    fig2.savefig("data/simulations/008_budget_erreur.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/008_budget_erreur.png")
 
     # ── Étape 4 : Monte Carlo ──────────────────────────────────────
     print("\n▶ Monte Carlo (N = 100 000 tirages)")
@@ -610,8 +610,8 @@ if __name__ == "__main__":
     ax3b.grid(True, alpha=0.3)
 
     plt.tight_layout()
-    fig3.savefig("data/008_monte_carlo.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/008_monte_carlo.png")
+    fig3.savefig("data/simulations/008_monte_carlo.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/008_monte_carlo.png")
 
     # ── Étape 5 : Résolution minimale ──────────────────────────────
     print("\n▶ Résolution minimale pour η > 1 à 3σ")
@@ -683,24 +683,24 @@ if __name__ == "__main__":
     ax4.set_ylim(0.01, 200)
 
     plt.tight_layout()
-    fig4.savefig("data/008_matrice_decision.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/008_matrice_decision.png")
+    fig4.savefig("data/simulations/008_matrice_decision.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/008_matrice_decision.png")
 
     # ── Sauvegarde des données ───────────────────────────────────────
     print("\n▶ Sauvegarde des données")
 
     # MC distribution
     np.savez(
-        "data/008_monte_carlo.npz",
+        "data/simulations/008_monte_carlo.npz",
         eta_values=mc["eta_values"],
         kappas=mc["kappas"],
         thetas=mc["thetas"],
         ps=mc["ps"],
     )
-    print("  💾 Distribution MC → data/008_monte_carlo.npz")
+    print("  💾 Distribution MC → data/simulations/008_monte_carlo.npz")
 
     # Matrice de décision
-    with open("data/008_matrice_decision.csv", "w", newline="",
+    with open("data/simulations/008_matrice_decision.csv", "w", newline="",
               encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["theta_rad", "theta_urad", "eta", "classification"])
@@ -711,10 +711,10 @@ if __name__ == "__main__":
                 f"{matrice['eta_values'][j]:.4f}",
                 matrice["classifications"][j],
             ])
-    print("  💾 Matrice de décision → data/008_matrice_decision.csv")
+    print("  💾 Matrice de décision → data/simulations/008_matrice_decision.csv")
 
     # Forces parasites
-    with open("data/008_forces_parasites.csv", "w", newline="",
+    with open("data/simulations/008_forces_parasites.csv", "w", newline="",
               encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["source", "force_N", "force_uN", "eta_equivalent"])
@@ -728,7 +728,7 @@ if __name__ == "__main__":
             eta_eq = f_val / parasites["f_rad"]
             writer.writerow([nom, f"{f_val:.6e}", f"{f_val*1e6:.4f}",
                             f"{eta_eq:.4f}"])
-    print("  💾 Forces parasites → data/008_forces_parasites.csv")
+    print("  💾 Forces parasites → data/simulations/008_forces_parasites.csv")
 
     # ── Résumé ──────────────────────────────────────────────────────
     classification_nominale = classifier_eta(mc["mean"], mc["std"])

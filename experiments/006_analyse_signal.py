@@ -29,8 +29,8 @@ Paramètres expérimentaux (issus de §3.6 et §4.2) :
     - Bruit : vibrations sismiques ∼ 1 µrad RMS, dérive thermique ∼ 10 µrad/min
 
 Sorties :
-    - Figures dans data/006_*.png
-    - Données dans data/006_*.csv et .npy
+    - Figures dans data/simulations/006_*.png
+    - Données dans data/simulations/006_*.csv et .npy
 """
 import sys
 from pathlib import Path
@@ -512,8 +512,8 @@ if __name__ == "__main__":
         fontsize=14, fontweight="bold",
     )
     plt.tight_layout()
-    fig1.savefig("data/006_signal_composantes.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/006_signal_composantes.png")
+    fig1.savefig("data/simulations/006_signal_composantes.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/006_signal_composantes.png")
 
     # ── Étape 3 : Filtrage passe-bande ──────────────────────────────
     print("\n▶ Filtrage passe-bande autour de f₀")
@@ -554,8 +554,8 @@ if __name__ == "__main__":
         fontsize=14, fontweight="bold",
     )
     plt.tight_layout()
-    fig2.savefig("data/006_filtrage_fft.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/006_filtrage_fft.png")
+    fig2.savefig("data/simulations/006_filtrage_fft.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/006_filtrage_fft.png")
 
     # ── Étape 4 : Corrélation croisée ──────────────────────────────
     print("\n▶ Corrélation croisée θ(t) × M(t)")
@@ -585,8 +585,8 @@ if __name__ == "__main__":
     ax3.legend(fontsize=10)
     ax3.grid(True, alpha=0.3)
     plt.tight_layout()
-    fig3.savefig("data/006_correlation_croisee.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/006_correlation_croisee.png")
+    fig3.savefig("data/simulations/006_correlation_croisee.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/006_correlation_croisee.png")
     print(f"    Pic de corrélation : C = {corr_pic:.3f} à τ = {tau_pic:.1f} s")
 
     # ── Étape 5 : Extraction de la force ────────────────────────────
@@ -634,8 +634,8 @@ if __name__ == "__main__":
     ax4.grid(True, alpha=0.3, which="both")
     ax4.set_xlim(forces_scan[0] * 1e6, forces_scan[-1] * 1e6)
     plt.tight_layout()
-    fig4.savefig("data/006_snr_vs_force.png", dpi=150, bbox_inches="tight")
-    print("  💾 Figure sauvegardée → data/006_snr_vs_force.png")
+    fig4.savefig("data/simulations/006_snr_vs_force.png", dpi=150, bbox_inches="tight")
+    print("  💾 Figure sauvegardée → data/simulations/006_snr_vs_force.png")
 
     if not np.isnan(scan["force_min_3sigma_uN"]):
         print(f"    Force minimale détectable (3σ) : {scan['force_min_3sigma_uN']:.3f} µN")
@@ -644,7 +644,7 @@ if __name__ == "__main__":
     print("\n▶ Sauvegarde des données")
 
     # Signal complet
-    with open("data/006_signal_pendule.csv", "w", newline="", encoding="utf-8") as f:
+    with open("data/simulations/006_signal_pendule.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["t_s", "theta_total_rad", "theta_force_rad",
                          "theta_therm_rad", "theta_bruit_rad", "theta_filtre_rad",
@@ -659,15 +659,15 @@ if __name__ == "__main__":
                 f"{theta_filtre[i]:.10e}",
                 f"{sig['commande'][i]:.0f}",
             ])
-    print("  💾 Signal → data/006_signal_pendule.csv")
+    print("  💾 Signal → data/simulations/006_signal_pendule.csv")
 
     # Scan SNR
     np.savez(
-        "data/006_snr_scan.npz",
+        "data/simulations/006_snr_scan.npz",
         forces_N=scan["forces_N"],
         snrs=scan["snrs"],
     )
-    print("  💾 Scan SNR → data/006_snr_scan.npz")
+    print("  💾 Scan SNR → data/simulations/006_snr_scan.npz")
 
     # ── Résumé ──────────────────────────────────────────────────────
     print("\n" + "═" * 60)
