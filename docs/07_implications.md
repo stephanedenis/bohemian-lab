@@ -143,6 +143,66 @@ pour maintenir le plasma et le champ RF. La masse du véhicule resterait
 > d'amplification ($\eta \gg 1$) — deux possibilités hautement
 > spéculatives à ce stade.
 
+#### Pistes d'amplification de $\eta$
+
+Le facteur d'efficacité bohmien $\eta$ est le ratio entre la force
+mesurée et la pression de radiation classique. Six mécanismes physiques
+pourraient en principe augmenter $\eta$ au-delà de 1 :
+
+| # | Mécanisme | Levier physique | Gain estimé | Difficulté |
+|:--|:----------|:----------------|:------------|:-----------|
+| 1 | **Facteur de qualité de la cavité** | Chaque photon traverse le plasma $Q$ fois → phase cumulée $\times Q$ | $Q = 10^3\text{–}10^4$ (cuivre poli) | Moyenne — usinage de précision |
+| 2 | **Gradient de densité abrupt** | Structures fines (filaments, stries) → grand $\nabla^2 R / R$ | $\times 10\text{–}100$ (instabilités plasma) | Élevée — contrôle des instabilités |
+| 3 | **Résonance exacte à la coupure** | $\omega_p = \omega \Rightarrow n \to 0$, le gradient de phase diverge | Dépend de la précision du PID | Moyenne — asservissement fin |
+| 4 | **Résonance mécanique du pendule** | Détection amplifiée par $Q_{\text{méc}}$ du fil de torsion | $Q_{\text{méc}} = 10^2\text{–}10^4$ (quartz sous vide) | Faible — choix du fil |
+| 5 | **Superposition multimode** | Interférence TM₃₁₀ + TM₁₂₀ + TE₅₁₁ → nœuds/ventres rapprochés | $\times 3\text{–}10$ (3 modes proches) | Faible — largeur spectrale du magnétron |
+| 6 | **Non-équilibre quantique profond** | Pulsation RF ultra-rapide (ns) → $\rho \neq \lvert\psi\rvert^2$ maintenu | Inconnu (théorique) | Très élevée — spéculatif |
+
+**Notes sur chaque mécanisme :**
+
+1. **Cavité à haut Q** — La cavité actuelle (inox brut, $Q \sim 100$)
+   est loin du maximum. Une cavité en cuivre OFE polie atteint
+   $Q \sim 10\,000$. Chaque traversée du plasma accumule de la phase ;
+   le gradient effectif de $S$ est multiplié par $Q$.
+
+2. **Gradient abrupt** — La force $F_Q \propto \nabla(\nabla^2 R / R)$
+   est sensible à la **courbure** de l'amplitude, pas à sa valeur
+   absolue. Un plasma filamentaire (stries de ionisation, instabilité
+   de Rayleigh-Taylor) crée des structures à l'échelle du mm avec des
+   gradients bien plus raides qu'un profil gaussien lisse. Un champ
+   magnétique statique axial ($B \sim 50\text{–}200$ G) pourrait
+   confiner le plasma en colonne et accentuer ces structures.
+
+3. **Coupure plasma** — À $n_e = n_{e,c}$, l'indice $n \to 0$ et
+   $\nabla n$ diverge. Le PID actuel vise déjà ce point de
+   fonctionnement ; un asservissement plus rapide (FPGA à 10 kHz au
+   lieu d'ESP32 à 1 kHz) maintiendrait le plasma plus longtemps à la
+   coupure exacte.
+
+4. **Résonance mécanique** — N'amplifie pas $\eta$ lui-même, mais
+   la **sensibilité de détection**. Un fil de quartz fondu sous vide
+   partiel ($Q_{\text{méc}} \sim 5\,000$) rendrait détectable un
+   $\eta$ aussi faible que $10^{-3}$.
+
+5. **Multimode** — Le magnétron a une largeur spectrale
+   $\Delta f \sim 50$ MHz, suffisante pour exciter 2–3 modes voisins
+   (TM₃₁₀ à 2,44 GHz, TM₁₂₀ à 2,68 GHz). L'interférence crée des
+   variations spatiales rapides de $R$ → grand $\nabla^2 R / R$.
+
+6. **Non-équilibre profond** — Le mécanisme le plus spéculatif. Si le
+   temps de relaxation vers l'équilibre quantique $\tau_{\text{relax}}$
+   est fini et que le plasma est perturbé à $f > 1/\tau_{\text{relax}}$,
+   le système reste en non-équilibre permanent. Des pulsations RF
+   nanoseconde (magnétron pulsé ou source à état solide) pourraient
+   explorer ce régime. Voir Colin & Struyve (2007) pour les modèles
+   de relaxation.
+
+> 📐 **Simulation** — Le script
+> [008_sensibilite_eta.py](../experiments/008_sensibilite_eta.py)
+> explore par Monte-Carlo la sensibilité du résultat à $\eta$ et estime
+> la borne supérieure atteignable pour différentes configurations
+> instrumentales.
+
 ### 2.2 Applications spatiales
 
 Même une poussée modeste (µN) pourrait transformer l'ingénierie spatiale
