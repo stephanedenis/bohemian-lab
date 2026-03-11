@@ -56,12 +56,12 @@ Valentini (1991, 2002) a montré que si $\rho \neq |\psi|^2$ (régime de
 **non-équilibre quantique**), les prédictions de dBB **divergent** de
 celles de la MQ standard. Les conséquences théoriques incluraient :
 
-| Propriété | Équilibre quantique ($\rho = |\psi|^2$) | Non-équilibre ($\rho \neq |\psi|^2$) |
+| Propriété | Équilibre quantique | Non-équilibre |
 |:---|:---|:---|
 | Inégalités de Bell | Violées (comme la MQ standard) | Violées **davantage** |
-| Incertitude de Heisenberg | $\Delta x \cdot \Delta p \geq \hbar/2$ | Peut être **violée** |
+| Incertitude de Heisenberg | Respectée | Peut être **violée** |
 | Signaux supraluminiques | Impossibles (localité des signaux) | **Possibles** en principe |
-| Force en système fermé | $F = 0$ | $F \neq 0$ possible |
+| Force en système fermé | Nulle | **Non nulle** possible |
 
 Un résultat positif constituerait la **première preuve expérimentale**
 du non-équilibre quantique — un état de la matière jamais observé, prédit
