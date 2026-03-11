@@ -111,6 +111,131 @@ C'est un point théoriquement délicat qui nécessiterait des développements
 mathématiques rigoureux. Holland (1993, chap. 12) et Bohm & Hiley
 (1993, chap. 6) discutent les bilans d'énergie en dBB.
 
+### 1.5 Analogie avec la double fente — replier la fonction d'onde
+
+> 💡 **En termes simples** — Dans l'expérience de la
+> [double fente](https://fr.wikipedia.org/wiki/Fentes_de_Young), un
+> photon passe « par les deux fentes à la fois » (du point de vue de
+> l'onde) et crée des franges d'interférence de l'autre côté. Dans
+> l'interprétation de Bohm, le photon passe par **une seule** fente,
+> mais le potentiel quantique $Q$ — créé par l'interférence des deux
+> ondes — le **dévie systématiquement** vers les franges claires.
+>
+> L'idée fondatrice de cette expérience est de reproduire cet effet
+> **à l'intérieur d'une cavité** : le plasma joue le rôle d'une
+> « fente variable » qui replie la fonction d'onde sur elle-même,
+> forçant une déviation nette du flux de photons. Et cette déviation
+> — une force — est formellement identique à ce que produirait une
+> **courbure de l'espace-temps**.
+
+#### La double fente vue par Bohm
+
+Dans la double fente classique, l'onde pilote $\psi$ passe par les deux
+ouvertures et interfère au-delà. Le potentiel quantique résultant :
+
+$$Q = -\frac{\hbar^2}{2m} \frac{\nabla^2 R}{R}$$
+
+possède une structure spatiale très riche : des **crêtes** (aux
+inter-franges sombres, où $R \to 0$ et $\nabla^2 R / R$ diverge) et
+des **vallées** (aux franges brillantes). Les trajectoires bohmiennes
+sont canalisées par ces vallées — comme de l'eau dans des rigoles.
+
+Le point crucial : la déviation est **systématique et déterministe**.
+Les particules passant par la fente du haut sont **toujours** courbées
+vers le haut ; celles du bas, vers le bas. Il n'y a pas de croisement
+(propriété de non-croisement des trajectoires bohmiennes en 2D). Le
+potentiel quantique impose un **aiguillage** — pas un hasard.
+
+> 📐 **Simulation** — Le script
+> [004_trajectoires_bohm.py](../experiments/004_trajectoires_bohm.py)
+> visualise ces trajectoires bohmiennes dans le scénario double fente.
+
+#### La cavité plasma comme « double fente repliée »
+
+L'intuition fondatrice est la suivante : dans une cavité RF, une onde
+stationnaire est un **système de fentes replié sur lui-même**. Les
+nœuds du champ EM jouent le rôle des parois opaques entre les fentes ;
+les ventres jouent le rôle des ouvertures. Le mode TM₃₁₀ (3 nœuds
+azimutaux) crée effectivement **6 « fentes » en anneau** dans la
+cavité.
+
+Le plasma introduit l'**asymétrie** absente de la double fente
+classique. Il modifie l'indice de réfraction de façon inhomogène :
+plus dense d'un côté (près du magnétron) que de l'autre. L'effet est
+de **déformer les fentes** — certaines deviennent plus étroites
+(plasma opaque, $n_e > n_{e,c}$), d'autres restent ouvertes (plasma
+sous-critique). L'interférence résultante n'est plus symétrique :
+
+- Double fente symétrique → diffraction symétrique → force nette = 0
+- « Fentes » asymétriques (plasma) → diffraction asymétrique → $\nabla Q \neq 0$ → **force nette**
+
+C'est le « repliement » de la fonction d'onde : l'onde qui rebondit
+dans la cavité interfère avec elle-même des milliers de fois
+(facteur $Q$), accumulant une asymétrie de phase à chaque passage
+à travers le plasma.
+
+#### Équivalence formelle avec la courbure espace-temps
+
+Holland (1993, chap. 12) a montré que l'équation de Hamilton-Jacobi
+bohmienne :
+
+$$\frac{\partial S}{\partial t} + \frac{(\nabla S)^2}{2m} + V + Q = 0$$
+
+est formellement identique à l'équation des
+[géodésiques](https://fr.wikipedia.org/wiki/G%C3%A9od%C3%A9sique)
+dans un espace-temps dont la métrique serait modifiée par $Q$. Le
+potentiel quantique ne « pousse » pas les particules au sens newtonien
+— il **déforme la géométrie** dans laquelle elles se déplacent.
+
+La comparaison terme à terme :
+
+| Relativité générale | Mécanique bohmienne |
+|:---|:---|
+| Métrique $g_{\mu\nu}$ | Potentiel quantique $Q$ |
+| Courbure de Ricci $R_{\mu\nu}$ | $\nabla^2 R / R$ (courbure de l'amplitude) |
+| Masse-énergie $T_{\mu\nu}$ courbe l'espace | Forme de $\psi$ courbe les trajectoires |
+| Géodésique : ligne droite dans l'espace courbe | Trajectoire bohmienne : « ligne droite » dans l'espace déformé par $Q$ |
+| Force gravitationnelle $F_g = -\nabla \Phi$ | Force quantique $F_Q = -\nabla Q$ |
+
+En relativité générale, la masse-énergie **courbe** l'espace-temps et
+les objets suivent les géodésiques de cet espace courbé — ce qu'on
+interprète comme la « gravité ». Dans dBB, la fonction d'onde $\psi$
+**courbe** l'espace de configuration via $Q$ et les particules suivent
+les « géodésiques » de cet espace déformé — ce qu'on interprète comme
+la « force quantique ».
+
+Le plasma asymétrique joue donc le rôle d'une **distribution de
+masse-énergie** qui courbe l'espace effectif. Détecter une force dans
+la chambre fermée, c'est détecter une **distorsion géométrique
+artificielle** — un « champ gravitationnel » d'origine quantique.
+
+> ⚠️ **Limites de l'analogie** — L'équivalence est **formelle**, pas
+> physique. $Q$ vit dans l'espace de configuration ($3N$ dimensions
+> pour $N$ particules), pas dans l'espace-temps 4D de la RG. Il ne
+> s'agit pas de « créer de la gravité » au sens d'Einstein, mais de
+> créer un effet mécanique qui, du point de vue de la particule guidée,
+> est **indistinguable** d'une courbure géométrique. La distinction
+> deviendrait cruciale pour toute tentative de théorie unifiée
+> Bohm + RG (voir Hiley, 2010 ; Shojai & Shojai, 2004).
+
+#### Résumé conceptuel
+
+```
+Double fente          Cavité plasma         Espace-temps courbe
+═══════════          ══════════════        ═══════════════════
+2 ouvertures    →    Modes TM (6 « fentes »)  →  Distribution de masse
+Interférence    →    Onde stationnaire + plasma →  Courbure métrique
+Q structuré     →    ∇Q asymétrique            →  Champ gravitationnel
+Déviation des   →    Force nette sur           →  Déviation des
+trajectoires         la chambre fermée              géodésiques
+```
+
+Cette chaîne conceptuelle — de Young (1801) à Bohm (1952) à la cavité
+plasma (2026) — est le fil conducteur de l'expérience. La double fente
+montre que $Q$ **peut** dévier des trajectoires. La cavité plasma tente
+de transformer cette déviation en **force macroscopique mesurable** en
+repliant et en asymétrisant la fonction d'onde.
+
 ---
 
 ## 2. Implications Technologiques
@@ -398,6 +523,21 @@ mais attendu.
    relaxation to quantum equilibrium for a class of de Broglie–Bohm-type
    theories ». *New Journal of Physics*, 9, 306.
    [doi:10.1088/1367-2630/9/9/306](https://doi.org/10.1088/1367-2630/9/9/306)
+
+9. **Shojai, A. & Shojai, F.** (2004). « Constraint algebra and
+   equations of motion in the Bohmian interpretation of quantum
+   gravity ». *Classical and Quantum Gravity*, 21(1), 1–9.
+   [doi:10.1088/0264-9381/21/1/001](https://doi.org/10.1088/0264-9381/21/1/001)
+
+10. **Hiley, B. J.** (2010). « Process, Distinction, Groupoids and
+    Clifford Algebras: an Alternative View of the Quantum Formalism ».
+    In *New Structures for Physics*, Lecture Notes in Physics, 813,
+    Springer, pp. 705–752.
+    [doi:10.1007/978-3-642-12821-9_12](https://doi.org/10.1007/978-3-642-12821-9_12)
+
+11. **Young, T.** (1804). « Experiments and Calculations Relative to
+    Physical Optics ». *Philosophical Transactions of the Royal Society*,
+    94, 1–16. (Expérience de la double fente.)
 
 ---
 
