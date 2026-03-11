@@ -195,6 +195,12 @@ $$\mathbf{F}_Q = -\nabla Q$$
 
 C'est cette force que l'expérience Bohemian Lab cherche à détecter.
 
+> 📐 **Modèle 3D** — La simulation [009_plasma_3d.py](../experiments/009_plasma_3d.py)
+> calcule $\mathbf{F}_Q$ en 3D sur 384 000 points de grille. Résultat
+> clé : la force a une composante verticale dominante (angle
+> d'élévation ≈ −55°) due à la position du magnétron au sommet de la
+> cavité. Voir [data/009_force_3d.png](../data/009_force_3d.png).
+
 ### Interprétation géométrique
 
 [Holland](https://en.wikipedia.org/wiki/Peter_R._Holland) (1993) propose une analogie : le potentiel quantique joue un rôle
@@ -291,6 +297,12 @@ $$\boxed{n_{e,c} \approx 7{,}4 \times 10^{16} \; \text{m}^{-3}}$$
 devient **opaque** à l'onde. C'est la **coupure plasma** — le gradient
 de $n$ diverge localement, maximisant le $\nabla S$ et donc la force
 de guidage.
+
+> 📐 **Simulation 3D** — Le [modèle 3D](../experiments/009_plasma_3d.py)
+> atteint $n_{e,\text{max}} = 9{,}95 \times 10^{16}$ m$^{-3}$, soit
+> $1{,}34 \times n_{e,c}$ — le plasma dépasse la coupure au cœur de
+> la cavité, créant une zone opaque entourée d'une zone de transition
+> abrupte. Voir [data/009_coupes_transversales.png](../data/009_coupes_transversales.png).
 
 ### Paramètres de tuning
 
@@ -491,6 +503,11 @@ par la largeur spectrale du magnétron ($\Delta f \sim 50$ MHz),
 créant un champ multimode complexe — favorable à l'inhomogénéité
 de la distribution de champ, et donc au gradient de phase recherché.
 
+> 📐 **Modes 3D** — Le [modèle 3D](../experiments/009_plasma_3d.py)
+> inclut la superposition de modes avec $p \neq 0$ (TM$_{311}$),
+> introduisant une **structure axiale** du champ $E_z(r,\theta,z)$.
+> C'est cette variation en $z$ qui crée le gradient vertical de $Q$.
+
 ---
 
 ## 2.6 Formation et rôle physique du plasma
@@ -516,7 +533,11 @@ Le plasma agit comme un **modulateur de phase non-linéaire** :
   l'onde accumule une phase différente selon sa trajectoire.
 - Ce gradient de phase est l'analogue du $\nabla S$ de la mécanique
   bohmienne.
-
+> 📐 **3D** — En réalité la distribution $n_e$ est tridimensionnelle :
+> $n_e(r,\theta,z)$. Le magnétron étant au sommet de la cavité, le
+> maximum de densité se situe à $z \approx 0{,}75d$ (75 % de la
+> hauteur) selon le [modèle 3D](../experiments/009_plasma_3d.py).
+> Voir [data/009_coupe_axiale_plasma.png](../data/009_coupe_axiale_plasma.png).
 C'est le lien fondamental entre la physique des plasmas et
 l'interprétation de de Broglie–Bohm : le plasma inhomogène crée le
 gradient de phase $\nabla S$ nécessaire à la force de guidage
@@ -587,6 +608,13 @@ rarement testé. Un résultat nul est une borne supérieure publiable.
   synchroniquement avec le plasma.
 - **Directionnalité** : la force doit être orientée selon l'axe du
   gradient de densité plasma.
+
+> 📐 **Prédiction 3D** — Le [modèle 3D](../experiments/009_plasma_3d.py)
+> prédit un angle d'élévation de $\approx -55°$ pour la force
+> résultante. La direction dans le plan horizontal est à $\approx 30°$
+> (opposée au magnétron, à $\theta_{\text{mag}}+180°$).
+> Le pendule de torsion ne détecte que la projection horizontale,
+> soit $\cos(55°) \approx 57\%$ de la norme totale.
 - **Non-réversibilité par rotation** : rotation de 180° du dispositif
   interne → inversion de la direction de la force (et non annulation).
 
@@ -610,6 +638,12 @@ Dans le cadre bohmien, le champ de vitesse dans le plasma est
 $\vec{v} = \nabla S / m$ ; le flux d'énergie (vecteur de Poynting) est
 dévié par le gradient de phase. La direction $-\nabla Q$ est la
 prédiction de la théorie pour la force nette hypothétique.
+
+> 📐 **Visualisation 3D** — La décomposition de la force en composantes
+> horizontale / verticale est illustrée dans
+> [data/009_decomposition_force.png](../data/009_decomposition_force.png)
+> et les données chiffrées dans
+> [data/009_forces_3d.csv](../data/009_forces_3d.csv).
 
 L'asymétrie fondamentale de dBB est structurelle : l'onde pilote $\psi$
 viole la 3ᵉ loi de Newton car elle agit **sur** les particules sans
@@ -644,7 +678,11 @@ que l'expérience teste (Objectif 1).
 Les simulations numériques du projet (dossier `experiments/`) utilisent
 **[Qiskit](https://fr.wikipedia.org/wiki/Qiskit)** et **[PennyLane](https://en.wikipedia.org/wiki/PennyLane_(software))** pour modéliser des aspects du guidage bohmien
 dans un cadre de [circuits quantiques](https://fr.wikipedia.org/wiki/Circuit_quantique) :
-
+> 📐 **Inventaire complet** — Les 9 expériences sont listées dans
+> le [README — Simulations numériques](../README.md#-simulations-numériques).
+> Le [modèle 3D](../experiments/009_plasma_3d.py) dépasse le cadre
+> des circuits quantiques : il simule directement $n_e(r,\theta,z)$,
+> le champ EM multimode et la force bohméenne 3D.
 - **Superposition** → modélise l'onde pilote (amplitude et phase).
 - **Portes de phase** ($R_z$, $P$) → simulent l'accumulation de phase
   dans le plasma.

@@ -253,6 +253,12 @@ Le calcul théorique des modes TM/TE et la table complète des
 **Résultat clé** : le mode **TM$_{310}$** à **2,44 GHz** est quasi
 parfaitement accordé à la fréquence du magnétron (2,45 GHz).
 
+> 📐 **Superposition 3D** — Le [modèle 3D](../experiments/009_plasma_3d.py)
+> superpose 4 modes (TM$_{310}$, TM$_{110}$, TM$_{210}$, TM$_{311}$)
+> avec des poids relatifs et des déphasages. Le mode TM$_{311}$ ($p=1$)
+> introduit une **variation axiale** $\cos(\pi z/d)$ qui structure le
+> champ verticalement — négligée dans les modèles 2D ($p=0$).
+
 ### Couplage du magnétron
 
 Le magnétron est monté **au-dessus du grillage Faraday**, c'est-à-dire
@@ -505,6 +511,13 @@ Les tubes Nixie sont utilisés de manière non conventionnelle :
 - Placés **à l'intérieur de la chambre** (sur la paroi interne,
   **centrés en hauteur** pour être dans la zone de densité plasma
   maximale), ils répondent **passivement** au champ EM local.
+
+> ⚠️ **Attention à la position $z$** — Les Nixie sont centrés en hauteur
+> ($z = d/2 = 125$ mm). Or, le [modèle 3D](../experiments/009_plasma_3d.py)
+> prédit que le maximum de densité plasma est à $z \approx 0{,}75d = 188$ mm
+> (plus près du magnétron situé au sommet). Les Nixie ne sondent donc pas
+> le pic de $n_e$, mais la zone de transition. Cela affecte l'interprétation
+> de la cartographie octogonale. Voir [data/009_coupe_axiale_plasma.png](../data/009_coupe_axiale_plasma.png).
 - Le néon s'ionise par claquage RF — la **brillance** et
   l'**étendue** de la lueur sont proportionnelles à l'intensité du
   champ EM en ce point.
@@ -630,6 +643,13 @@ $$\tau = F \times d$$
 
 où $F$ est la force produite par le plasma et $d$ est la distance
 entre la ligne d'action de $F$ et l'axe de rotation (bras de levier).
+
+> 📐 **Force horizontale seulement** — Le pendule de torsion ne
+> détecte que la composante **horizontale** de la force. Le
+> [modèle 3D](../experiments/009_plasma_3d.py) prédit un ratio
+> $F_H/F_V \approx 0{,}69$ (angle d'élévation ≈ −55°). La force
+> totale est donc $F_{\text{tot}} = F_H / \cos(55°) \approx 1{,}7 \times F_H$.
+> Voir [data/009_decomposition_force.png](../data/009_decomposition_force.png).
 
 | Configuration | Bras de levier $d$ | Couple $\tau$ pour $F = 3{,}3~\mu$N |
 |:---|:---|:---|
@@ -938,6 +958,13 @@ où $\kappa$ est la **constante de torsion** du fil (N·m/rad).
 > et pointe vers l'extérieur de la chambre (zone de bas $Q$). C'est
 > la direction où **la chambre se déplace**.
 
+> 📐 **Direction 3D prédite** — Le [modèle 3D](../experiments/009_plasma_3d.py)
+> montre que la force $-\nabla Q$ pointe principalement **vers le bas**
+> (opposé au magnétron situé au sommet) avec un angle de $\approx 55°$
+> sous l'horizontale et une direction azimutale à $\approx 210°$
+> ($\theta_{\text{mag}} + 180°$). Le pendule ne capte que la
+> composante horizontale de cette force.
+
 ![Comparaison : Fusée (éjection) vs Expérience (gradient Q)](img/fusee_vs_gradient.svg)
 
 <!-- Fallback ASCII
@@ -1008,6 +1035,13 @@ $$\theta = \frac{3{,}3 \times 10^{-6} \times 0{,}20}{10^{-4}} \approx 6{,}6 \tim
 
 Cet angle correspond à un déplacement du spot laser de $\Delta x \approx
 4{,}0$ mm sur le PSD (voir ci-dessus) — largement mesurable.
+
+> 📐 **Estimation 3D** — L'échelle de $3{,}3\;\mu$N est la pression de
+> radiation totale. Si la force bohméenne existe, seule sa composante
+> horizontale ($\approx 57\%$ de la norme totale, d'après le
+> [modèle 3D](../experiments/009_plasma_3d.py)) contribuerait au
+> couple. L'angle effectif serait donc $\approx 0{,}22°$ au lieu de
+> $0{,}38°$ — toujours mesurable ($\Delta x \approx 2{,}3$ mm).
 
 > **Note** — La configuration plateau porteur augmente le moment d'inertie
 > ($I = 0{,}80$ vs $0{,}225$ kg·m²), ce qui allonge la période $T_0$

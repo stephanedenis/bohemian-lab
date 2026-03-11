@@ -141,6 +141,13 @@ la densité électronique. L'image fournit aussi une **cartographie
 visuelle** du plasma en complément des 8 Nixie IN-13 (mode passif,
 broches à la masse, lecture par caméra).
 
+> 📐 **Distribution 3D** — La caméra voit le plasma **par le dessus**
+> (vue intégrée en $z$). Or, la distribution $n_e(r,\theta,z)$ est
+> tridimensionnelle et le pic de densité est à $z \approx 0{,}75d$
+> selon le [modèle 3D](../experiments/009_plasma_3d.py).
+> L'image 2D vue du dessus est une projection qui peut masquer la
+> structure axiale. Voir [data/009_coupe_axiale_plasma.png](../data/009_coupe_axiale_plasma.png).
+
 ### 6.3.4 Température paroi $T_{\text{paroi}}$
 
 | Paramètre | Valeur |

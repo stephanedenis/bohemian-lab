@@ -167,6 +167,12 @@ La corrélation entre la direction de l'asymétrie Nixie et la
 direction de la force détectée au pendule est le test clé de l'Objectif 2
 (voir la [matrice décisionnelle](04_protocole.md#46-attentes-concrètes--confirmer-ou-infirmer-lhypothèse)).
 
+> 📐 **Modèle 3D** — La simulation [009_plasma_3d.py](../experiments/009_plasma_3d.py)
+> prédit que la direction de $-\nabla Q$ a un angle d'élévation de
+> ≈ −55° (composante verticale dominante). La corrélation Nixie
+> n'est sensible qu'à la **projection horizontale** du gradient. Voir
+> [data/009_decomposition_force.png](../data/009_decomposition_force.png).
+
 ---
 
 ## Objectif 3 — Valider l'interaction potentiel quantique / plasma
@@ -205,6 +211,12 @@ classique et de la contribution bohmienne :
 
 $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho \, (-\nabla Q) \, dV$$
 
+> 📐 **3D** — Cette intégrale volumique est un **vecteur 3D**. La simulation
+> [009_plasma_3d.py](../experiments/009_plasma_3d.py) la décompose en
+> composantes horizontale/verticale sur 384 000 points de grille
+> ($N_{xy}=80, N_z=60$). Résultats :
+> [data/009_forces_3d.csv](../data/009_forces_3d.csv).
+
 ### Bilan de quantité de mouvement en système fermé
 
 **Note importante** : la pression de radiation classique $P_{\text{abs}}/c$
@@ -223,6 +235,13 @@ Le pendule de torsion doit être suffisamment sensible pour détecter des
 forces de l'ordre du micro-newton. La sensibilité de l'instrument
 (constante de torsion $\kappa$, longueur du bras, résolution du PSD)
 définit la borne supérieure atteignable.
+
+> 📐 **Composante mesurable** — Le pendule de torsion ne détecte que
+> la composante **horizontale** de la force. Le [modèle 3D](../experiments/009_plasma_3d.py)
+> montre que le ratio $F_H/F_V \approx 0{,}69$ : la force verticale
+> représente ≈ 59 % de la force totale et échappe entièrement à la
+> mesure. La borne supérieure mesurée doit donc être interprétée
+> comme une borne sur $F_H$ seulement, pas sur $F_{\text{totale}}$.
 
 ---
 

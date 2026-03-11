@@ -32,11 +32,15 @@ La force « exotique » est générée par le potentiel quantique, qui dépend d
 $$Q = -\frac{\hbar^2}{2m} \frac{\nabla^2 R}{R}$$
 L'objectif est de créer un $\nabla Q$ asymétrique via un plasma inhomogène pour induire une force mécanique $F_Q = -\nabla Q$.
 
+> 📐 **Modèle 3D** — Le [modèle plasma 3D](experiments/009_plasma_3d.py) montre que $\nabla Q$ possède une composante **verticale** dominante (ratio H/V ≈ 0,69, angle d'élévation ≈ −55°), due à la position du magnétron au sommet de la cavité. Seule la composante horizontale est mesurable par le pendule de torsion.
+
 ### 2.3 Force de Poussée Totale
 La force mesurée sur le pivot est la résultante de la pression de radiation classique et de la contribution bohmienne :
 $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 
-> 📖 **[Cadre théorique — documentation détaillée →](docs/02_theorie.md)** — historique, dérivation complète, application aux photons, références.
+> � **3D** — L'intégrale volumique $\int \rho(-\nabla Q)\,dV$ est un vecteur 3D. La simulation [009_plasma_3d.py](experiments/009_plasma_3d.py) décompose cette force en composantes horizontale et verticale et montre que le pendule de torsion ne capte que $\sim 41\%$ de la force totale ($\cos 55° \approx 0{,}57$). Voir les résultats dans [data/009_decomposition_force.png](data/009_decomposition_force.png).
+
+> �📖 **[Cadre théorique — documentation détaillée →](docs/02_theorie.md)** — historique, dérivation complète, application aux photons, références.
 
 ---
 
@@ -91,7 +95,29 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 
 ---
 
-## 📖 Documentation Détaillée
+## � Simulations Numériques
+
+Le dossier `experiments/` contient les scripts de simulation autonomes
+(un fichier par expérience, exécutable directement) :
+
+| # | Expérience | Description |
+|:--|:-----------|:------------|
+| 001 | [001_superposition.py](experiments/001_superposition.py) | Superposition quantique — circuit Hadamard, sphère de Bloch |
+| 002 | [002_phase_gradient.py](experiments/002_phase_gradient.py) | Gradient de phase — accumulation $\nabla S$ dans un plasma inhomogène |
+| 003 | [003_profil_plasma.py](experiments/003_profil_plasma.py) | Profil plasma 2D — densité $n_e(r,\theta)$, potentiel quantique $Q$, force $F_Q$ |
+| 004 | [004_trajectoires_bohm.py](experiments/004_trajectoires_bohm.py) | Trajectoires bohmiennes — intégration de $\vec{v} = \nabla S / m$ |
+| 005 | [005_modes_cavite.py](experiments/005_modes_cavite.py) | Modes de résonance TM/TE de la cavité cylindrique |
+| 006 | [006_analyse_signal.py](experiments/006_analyse_signal.py) | Analyse de signal — corrélation croisée, filtrage, extraction SNR |
+| 007 | [007_pid_plasma.py](experiments/007_pid_plasma.py) | Contrôle PID du plasma — simulation de la boucle de rétroaction |
+| 008 | [008_monte_carlo_sensibilite.py](experiments/008_monte_carlo_sensibilite.py) | Analyse Monte-Carlo de sensibilité du pendule de torsion |
+| **009** | [**009_plasma_3d.py**](experiments/009_plasma_3d.py) | **Modèle 3D complet** — $n_e(r,\theta,z)$, champ EM multimode, force bohmienne 3D, décomposition H/V |
+
+> 📊 Les résultats (figures, données) sont dans `data/` — préfixés par
+> le numéro de l'expérience (ex. `data/009_*.png`, `data/009_*.csv`).
+
+---
+
+## �📖 Documentation Détaillée
 
 | # | Section | Fichier |
 |:--|:--------|:--------|

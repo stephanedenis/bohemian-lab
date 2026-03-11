@@ -329,7 +329,12 @@ $$\eta = \frac{F_{\text{net}}}{P_{\text{abs}} / c}$$
   candidat pour l'effet bohmien.
 - $\eta \gg 1$ → résultat surprenant, nécessitant vérification
   indépendante et recherche d'artefact.
-
+> 📐 **Distinction $\eta_H$ vs $\eta_{\text{total}}$** — Le pendule ne
+> détecte que la composante horizontale de la force. Le
+> [modèle 3D](../experiments/009_plasma_3d.py) prédit que $F_H \approx
+> 0{,}57 \times F_{\text{total}}$ (angle d'élévation ≈ −55°). Ainsi,
+> $\eta_H = \eta_{\text{total}} \times \cos(55°)$. Un $\eta_H = 1$
+> correspondrait en réalité à $\eta_{\text{total}} \approx 1{,}7$.
 ---
 
 ## 4.4 Critères de succès
@@ -406,6 +411,12 @@ classique (~3,3 µN pour 1 kW).
 3. **Le gradient Nixie corrèle** avec la force : la direction de
    l'asymétrie sur les 8 IN-13 pointe vers la direction de la force
    mesurée par le pendule.
+
+> 📐 **Angle prédit** — Le [modèle 3D](../experiments/009_plasma_3d.py)
+> prédit une direction azimutale de $-\nabla Q$ à $\approx 210°$
+> (opposé au magnétron à $30°$), entre les tubes N$_5$ ($180°$) et
+> N$_6$ ($225°$). L'asymétrie Nixie devrait montrer les tubes N$_1$/N$_2$
+> (côté magnétron) plus brillants que N$_5$/N$_6$.
 4. **Le test au gaz noble (argon) est négatif** : $\eta_{\text{Ar}} < 0{,}3$.
    L'argon produit un plasma symétrique (pas de dissociation),
    donc pas de gradient de phase.
