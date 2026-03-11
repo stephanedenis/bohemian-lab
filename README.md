@@ -108,7 +108,7 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 
 | Composant | Description Technique | Rôle |
 | :--- | :--- | :--- |
-| **Source** | Magnétron à cavité de 600–700 W (2,45 GHz, rendement ~ 65 %), fonctionnement à **200–400 W** via duty cycle SSR | Générateur de l'onde pilote (mode pulsé à $f = 1/T_0$) |
+| **Source** | 2× Magnétrons à cavité de 500 W (2,45 GHz, rendement ~ 65 %), un seul actif à la fois, fonctionnement à **200–400 W** via duty cycle SSR | Générateur de l'onde pilote (mode pulsé à $f = 1/T_0$), commutation A/B pour contrôle de la direction du gradient |
 | **Enceinte / Chambre** | Chambre à vide inox 3 gal (Ø250×250 mm, 0–29 inHg) + couvercle acrylique 3/4" + grillage | Cage de Faraday, cavité RF, système isolé |
 | **Enceinte pendule** | Baril de 205 L (acier, posé au sol) | Enceinte du pendule, double Faraday, rétention éclats, coupe-vent |
 | **Médium** | Vapeur d'eau sous vide (1–5 mbar) → Plasma H-OH | Modulateur de phase non-linéaire |

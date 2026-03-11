@@ -387,8 +387,10 @@ De plus, à 200 W le champ $E_{\text{peak}} \approx 10$ kV/m reste
 > pas la puissance totale. Dans une cavité résonante, le facteur de
 > qualité Q concentre l'énergie. À Q = 100, 200 W produisent un champ
 > $3 \times$ supérieur au seuil de claquage de H₂O. Le magnétron n'a
-> pas besoin de délivrer 1 kW — un four compact de 600–700 W piloté
-> à 200–400 W effectifs (via duty cycle SSR) est optimal.
+> pas besoin de délivrer 1 kW — deux magnétrons de 500 W bon marché
+> (un seul actif à la fois) pilotés à 200–400 W effectifs (via duty
+> cycle SSR) sont optimaux. La commutation entre les deux permet de
+> contrôler la direction du gradient de densité plasma.
 
 #### Résumé des conditions optimales
 

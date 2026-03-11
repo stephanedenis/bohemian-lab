@@ -13,9 +13,9 @@
  *
  * Documentation : docs/06_controle.md, docs/08_acquisition.md
  *
- * ⚠️  SÉCURITÉ — Ce firmware contrôle un magnétron 600–700 W / 4 000 V
- *     (fonctionnement à 200–400 W effectifs via duty cycle SSR).
- *     Le watchdog matériel coupe le SSR si le firmware plante.
+ * ⚠️  SÉCURITÉ — Ce firmware contrôle 2× magnétrons 500 W / 4 000 V
+ *     (un seul actif à la fois, 200–400 W effectifs via duty cycle SSR).
+ *     Le watchdog matériel coupe les SSR si le firmware plante.
  *     Ne JAMAIS désactiver le watchdog.
  *
  * @author  Stéphane Denis

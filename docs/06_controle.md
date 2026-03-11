@@ -547,7 +547,7 @@ L'ESP32 communique avec les capteurs et périphériques via 2 bus :
 
 ## 6.10 Protection RF du microcontrôleur
 
-À proximité d'un magnétron 700 W à 2,45 GHz, l'ESP32 subirait des
+À proximité d'un magnétron 500 W à 2,45 GHz, l'ESP32 subirait des
 interférences fatales sans protection. Mesures obligatoires :
 
 | Mesure | Détail |
