@@ -127,3 +127,4 @@ Le dossier `experiments/` contient les scripts de simulation autonomes
 | 4 | Protocole de Validation | [docs/04_protocole.md](docs/04_protocole.md) |
 | 5 | Notes de Sécurité | [docs/05_securite.md](docs/05_securite.md) |
 | 6 | Contrôle et Asservissement | [docs/06_controle.md](docs/06_controle.md) |
+| 7 | Implications d'un Résultat Positif | [docs/07_implications.md](docs/07_implications.md) |
