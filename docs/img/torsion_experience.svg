@@ -130,7 +130,7 @@
     <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
 
     <!-- Chambre (cercle r=20, centre sur le bras côté A) -->
-    <circle cx="60" cy="200" r="20" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="60" cy="200" r="20" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
     <text x="60" y="226" text-anchor="middle" font-size="7" fill="#475569" font-weight="bold">Chambre</text>
 
     <!-- Magnétron : cercle avec cavités, DANS la chambre, décentré ⊥ au bras.
@@ -174,7 +174,7 @@
     <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
 
     <!-- Chambre pivotée — centre à (64, 221) -->
-    <circle cx="64" cy="221" r="20" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="64" cy="221" r="20" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
     <!-- Plasma H₂O remplissant la chambre (r=19, clipé r=19 → pas de débordement).
          Cercle centré sur la chambre ; le gradient plasmaGrad2 a son point focal
          décalé vers le magnétron (61,212) pour l'asymétrie de densité. -->
@@ -228,7 +228,7 @@
     <circle cx="120" cy="200" r="4" fill="#a16207" stroke="#854d0e" stroke-width="1.5"/>
 
     <!-- Chambre pivotée — centre à (64, 179) -->
-    <circle cx="64" cy="179" r="20" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="64" cy="179" r="20" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
     <!-- Plasma H₂O remplissant la chambre (r=19, clipé r=19 → pas de débordement).
          Cercle centré sur la chambre ; le gradient plasmaGrad3 a son point focal
          décalé vers le magnétron (61,188) pour l'asymétrie de densité. -->

@@ -11,9 +11,9 @@
   <!-- Entrées ADC (gauche) -->
   <g font-size="10">
     <!-- ADC0 -->
-    <rect x="15" y="100" width="145" height="28" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="87" y="118" text-anchor="middle" fill="#1e40af" font-weight="bold">Jauge pression (Pirani)</text>
-    <line x1="160" y1="114" x2="195" y2="114" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrIn)"/>
+    <rect x="15" y="100" width="145" height="28" rx="5" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="87" y="118" text-anchor="middle" fill="#92400e" font-weight="bold">Jauge pression (Pirani)</text>
+    <line x1="160" y1="114" x2="195" y2="114" stroke="#ca8a04" stroke-width="1.5" marker-end="url(#arrIn)"/>
     <text x="195" y="108" font-size="9" fill="#4f46e5">ADC0</text>
 
     <!-- ADC1 -->

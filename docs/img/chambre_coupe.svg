@@ -90,7 +90,7 @@
   <text x="350" y="170" text-anchor="middle" font-size="10" fill="#0c4a6e" font-weight="bold">ACRYLIQUE 3/4" (19 mm)</text>
 
   <!-- Vanne DN10 au centre du couvercle -->
-  <rect x="253" y="148" width="54" height="38" rx="4" fill="#64748b" stroke="#334155" stroke-width="2"/>
+  <rect x="253" y="148" width="54" height="38" rx="4" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
   <text x="280" y="165" text-anchor="middle" font-size="9" fill="white" font-weight="bold">VANNE</text>
   <text x="280" y="177" text-anchor="middle" font-size="9" fill="white">DN10</text>
 
@@ -104,7 +104,7 @@
   <text x="465" y="190" font-size="10" fill="#ea580c">← Joint silicone</text>
 
   <!-- ============ ZONE 4 : CHAMBRE INOX (⌀250×250 mm → carré 300×300 px) ============ -->
-  <text x="280" y="200" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="bold">↑ Ouverture en haut ↑</text>
+  <text x="280" y="200" text-anchor="middle" font-size="10" fill="#475569" font-weight="bold">↑ Ouverture en haut ↑</text>
 
   <!-- Parois inox (chambre carrée : 300×300 px pour ⌀250×250 mm) -->
   <rect x="130" y="205" width="300" height="300" rx="7" fill="none" stroke="#475569" stroke-width="4"/>

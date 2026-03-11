@@ -32,10 +32,10 @@
   <text x="300" y="194" text-anchor="middle" font-size="7" fill="white">●</text>
 
   <!-- Chambre inox (gauche) -->
-  <rect x="120" y="120" width="130" height="130" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-  <text x="185" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Chambre</text>
-  <text x="185" y="185" text-anchor="middle" font-size="11" fill="#1e40af">inox</text>
-  <text x="185" y="200" text-anchor="middle" font-size="10" fill="#1e40af">⌀ 250 mm</text>
+  <rect x="120" y="120" width="130" height="130" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="2.5"/>
+  <text x="185" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">Chambre</text>
+  <text x="185" y="185" text-anchor="middle" font-size="11" fill="#475569">inox</text>
+  <text x="185" y="200" text-anchor="middle" font-size="10" fill="#475569">⌀ 250 mm</text>
 
   <!-- Contrepoids (droite) -->
   <rect x="370" y="135" width="110" height="110" rx="8" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>

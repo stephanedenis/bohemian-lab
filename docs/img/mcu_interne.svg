@@ -84,13 +84,13 @@
 
   <!-- Capteur 4 : Température  y=315 -->
   <rect x="6" y="295" width="120" height="40" rx="4"
-        fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+        fill="#ccfbf1" stroke="#14b8a6" stroke-width="2"/>
   <text x="66" y="312" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#15803d">Température T°</text>
+        font-weight="bold" fill="#0f766e">Température T°</text>
   <text x="66" y="325" text-anchor="middle" font-size="8"
-        fill="#16a34a">Thermo K · 0–50 mV</text>
+        fill="#14b8a6">Thermo K · 0–50 mV</text>
   <line x1="126" y1="315" x2="175" y2="315"
-        stroke="#16a34a" stroke-width="2" marker-end="url(#arrG)"/>
+        stroke="#14b8a6" stroke-width="2" marker-end="url(#arrG)"/>
 
   <!-- ══════════════════════════════════════════════════════ -->
   <!-- INTÉRIEUR MCU : Bloc ADC (colonne 1)                   -->
@@ -277,11 +277,11 @@
 
   <!-- Actionneur 2 : PWM Magnétron  y=216 -->
   <rect x="694" y="188" width="120" height="56" rx="4"
-        fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
   <text x="754" y="208" text-anchor="middle" font-size="10"
-        font-weight="bold" fill="#15803d">Magnétron</text>
+        font-weight="bold" fill="#991b1b">Magnétron</text>
   <text x="754" y="222" text-anchor="middle" font-size="9"
-        fill="#166534">PWM puissance</text>
+        fill="#b91c1c">PWM puissance</text>
   <text x="754" y="236" text-anchor="middle" font-size="8"
         fill="#64748b">Duty cycle HF</text>
   <line x1="574" y1="216" x2="692" y2="216"

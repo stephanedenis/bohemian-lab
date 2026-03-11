@@ -103,11 +103,11 @@
 
     <!-- Magnétron (à gauche = source MW = haut Q) -->
     <rect x="32" y="55" width="22" height="40" rx="3"
-          fill="#fbbf24" stroke="#92400e" stroke-width="1.5"/>
+          fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
     <text x="43" y="72" text-anchor="middle" font-size="8"
-          fill="#92400e" font-weight="bold">MW</text>
+          fill="white" font-weight="bold">MAG</text>
     <text x="43" y="82" text-anchor="middle" font-size="7"
-          fill="#92400e">magn.</text>
+          fill="#fecaca">1 kW</text>
 
     <!-- Annotation haut Q / bas Q -->
     <text x="60" y="35" font-size="10" fill="#7c3aed"
