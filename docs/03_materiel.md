@@ -364,7 +364,7 @@ Vue en coupe du montage complet :
 
 | Zone | Contenu | Pression | RF |
 |:---|:---|:---|:---|
-| **Intérieur chambre** (sous le grillage) | Plasma H₂O, 8× Nixie IN-13 | Vide (2–5 mbar) | ⚠️ Exposé 1 kW |
+| **Intérieur chambre** (sous le grillage) | Plasma H₂O, 8× Nixie IN-13 | Vide (2–5 mbar) | ⚠️ Exposé RF (200–300 W recommandé — voir [§3.5](#limite-de-puissance-rf--saturation-et-échauffement)) |
 | **Au-dessus du grillage** | Magnétron + coupleur directionnel + caméra Wi-Fi | Atmosphérique | ⚠️ Hors cage (émetteur) |
 | **Contrepoids** (côté B du plateau) | Batterie, onduleur, ESP32 (blindé) | Atmosphérique | ✅ Éloigné |
 
@@ -496,9 +496,11 @@ au courant (0–100 mm pour 0–5 mA).
 
 Dans cette expérience, les IN-13 sont utilisés en **mode passif** :
 
-- **Aucune alimentation externe** — le champ RF à 2,45 GHz (1 kW)
-  traverse le verre du tube et ionise directement le néon par
-  claquage RF. Le tube brille spontanément.
+- **Aucune alimentation externe** — le champ RF à 2,45 GHz
+  (200–300 W recommandé — voir [§3.5](#limite-de-puissance-rf--saturation-et-échauffement))
+  traverse le verre du tube et ionise le néon par couplage RF.
+  Le tube brille spontanément, avec une intensité proportionnelle
+  au champ local.
 - **Broches court-circuitées à la paroi inox** — les deux électrodes
   (anode + cathode) sont en contact avec la paroi de la chambre
   (mises à la masse de la cavité). Cela élimine tout effet d'antenne
@@ -608,6 +610,56 @@ par zone) fournit la cartographie du gradient de champ :
 > champ magnétique, masse ajoutée asymétrique, courants parasites).
 > Le pendule ne voit que la masse des 8 tubes en verre (~24 g
 > au total) — répartis uniformément en octogone.
+
+### Limite de puissance RF — Saturation et échauffement
+
+> ⚠️ **1 kW est excessif pour les Nixie !** — À puissance nominale
+> du magnétron (1 kW), le champ électrique pic dans la cavité
+> atteint $E_{\text{peak}} \approx 23$ kV/m (pour Q ≈ 100), ce qui
+> est **au seuil de claquage** du néon dans les IN-13 (~20–50 kV/m
+> à 2,45 GHz). À ce niveau, les 8 tubes sont en **ionisation
+> saturée** : ils brillent tous à fond, sans proportionnalité avec
+> le champ local. La fonction de capteur de gradient est **perdue**.
+
+Le tableau ci-dessous résume les régimes de fonctionnement :
+
+| $P_{\text{RF}}$ | $E_{\text{peak}}$ (Q=100) | P absorbée / tube | Régime Nixie | Fonction gradient |
+|:---|:---|:---|:---|:---|
+| 100 W | 7,2 kV/m | 0,27 W | Lueur faible, proportionnelle | ✅ Excellent |
+| 200 W | 10,1 kV/m | 0,54 W | Lueur modérée, **linéaire** | ✅ **Optimal** |
+| 300 W | 12,4 kV/m | 0,81 W | Lueur vive, début de compression | ⚠️ Acceptable |
+| 500 W | 16,0 kV/m | 1,36 W | Ionisation forte | ⚠️ Compression visible |
+| 1 000 W | 22,7 kV/m | 2,72 W | **Saturation**, claquage violent | ❌ **Perdue** |
+
+**Risques à 1 kW** :
+
+1. **Saturation des capteurs** — les 8 tubes brillent uniformément
+   → impossible de distinguer le gradient azimutal $\nabla n_e$.
+   L'Objectif 2 (cartographie du gradient de phase) est compromis.
+2. **Échauffement localisé** — chaque tube absorbe ~2,7 W. Les
+   soudures verre-métal (kovar) des IN-13 sont limitées à
+   ~300–400 °C. En tir continu (> 30 s), risque de fissure
+   thermique ou de dégazage du mercure.
+3. **Perte de linéarité** — au-delà du seuil de claquage, la
+   brillance ne code plus le champ local mais seulement
+   l'énergie injectée (constante pour tous les tubes).
+
+**Recommandation** :
+
+$$P_{\text{RF}} \leq 200{-}300 \; \text{W}$$
+
+À 200 W, le champ pic (~10 kV/m) est **sous le claquage** : le néon
+subit une ionisation douce où la brillance est proportionnelle à
+$|E|^2$ local → capteur de gradient fonctionnel. La force de
+radiation correspondante ($F_{\text{rad}} \approx 0{,}43\;\mu$N) reste
+mesurable par le pendule ($\Delta x \approx 0{,}5$ mm sur le PSD,
+résolution ~1 µm).
+
+Le mode **pulsé** du magnétron (duty cycle 25–50 %) réduit la
+puissance *moyenne* mais pas les pics. Pour protéger les Nixie,
+il faut réduire la puissance *crête* — soit en utilisant un
+magnétron moins puissant (four micro-ondes compact 600–700 W), soit
+en atténuant via un coupleur variable ou un iris calibré.
 
 ---
 
