@@ -145,6 +145,10 @@ pour maintenir le plasma et le champ RF. La masse du véhicule resterait
 
 #### Pistes d'amplification de $\eta$
 
+> 📖 **Document détaillé** : chaque piste ci-dessous est développée
+> avec calculs, protocoles et coûts dans
+> [11_pistes_optimisation.md](11_pistes_optimisation.md).
+
 Le facteur d'efficacité bohmien $\eta$ est le ratio entre la force
 mesurée et la pression de radiation classique. Six mécanismes physiques
 pourraient en principe augmenter $\eta$ au-delà de 1 :
