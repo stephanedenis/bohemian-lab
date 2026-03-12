@@ -22,9 +22,9 @@
 
     <!-- ══ Nœud sommateur IEC ══ -->
     <g id="sym-sum">
-      <circle cx="0" cy="0" r="12" fill="#ffffff" stroke="currentColor" stroke-width="2"/>
-      <line x1="-6" y1="0" x2="6" y2="0" stroke="currentColor" stroke-width="1.2"/>
-      <line x1="0" y1="-6" x2="0" y2="6" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="0" cy="0" r="12" fill="#ffffff" stroke="#222" stroke-width="2"/>
+      <line x1="-6" y1="0" x2="6" y2="0" stroke="#222" stroke-width="1.2"/>
+      <line x1="0" y1="-6" x2="0" y2="6" stroke="#222" stroke-width="1.2"/>
     </g>
 
     <!-- ══ Point de prélèvement IEC ══ -->

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 800" font-family="'Segoe UI', system-ui, sans-serif" font-size="11">
+  <rect width="100%" height="100%" fill="white"/>
+  <title>Séquence opérationnelle — préparation de la chambre (phases A→F)</title>
+  <style>
+    text     { fill: #222; }
+    .phase   { fill: none; stroke: #222; stroke-width: 1.5; rx: 8; }
+    .arrow   { stroke: #222; stroke-width: 2; fill: none; }
+    .head    { fill: #222; }
+    .title   { font-size: 13px; font-weight: 700; }
+    .ptitle  { font-size: 12px; font-weight: 700; }
+    .lbl     { font-size: 10px; opacity: 0.65; }
+    .step    { font-size: 10.5px; }
+    .dur     { font-size: 10px; font-style: italic; fill: #555; opacity: 0.6; }
+  </style>
+
+  <!-- Titre -->
+  <text x="260" y="22" text-anchor="middle" class="title">Séquence opérationnelle — préparation</text>
+
+  <!-- ═══════ A. POMPAGE ═══════ -->
+  <rect class="phase" x="40" y="38" width="440" height="106"/>
+  <text x="60" y="58" class="ptitle">A. POMPAGE</text>
+  <text x="440" y="58" text-anchor="end" class="dur">~8 min</text>
+  <text x="60" y="74" class="step">1. V₁ (pompe) : OUVERTE</text>
+  <text x="60" y="88" class="step">2. V₂ (chambre) : OUVERTE</text>
+  <text x="60" y="102" class="step">3. Pompe : ACTIVÉE → pomper jusqu'à P &lt; 0,5 mbar</text>
+  <text x="60" y="116" class="step">4. Vérifier débit de fuite (fermer V₂, chrono remontée)</text>
+  <text x="60" y="130" class="step">5. Rouvrir V₂ pour la suite</text>
+
+  <!-- Flèche A→B -->
+  <line class="arrow" x1="260" y1="144" x2="260" y2="168"/>
+  <polygon class="head" points="255,164 260,174 265,164"/>
+
+  <!-- ═══════ B. ISOLER LA POMPE ═══════ -->
+  <rect class="phase" x="40" y="176" width="440" height="76"/>
+  <text x="60" y="196" class="ptitle">B. ISOLER LA POMPE</text>
+  <text x="440" y="196" text-anchor="end" class="dur">~15 s</text>
+  <text x="60" y="214" class="step">1. Pompe : ARRÊTÉE</text>
+  <text x="60" y="228" class="step">2. V₁ (pompe) : FERMÉE</text>
+  <text x="60" y="242" class="step">   (V₂ reste OUVERTE — le sas communique avec la chambre)</text>
+
+  <!-- Flèche B→C -->
+  <line class="arrow" x1="260" y1="252" x2="260" y2="278"/>
+  <polygon class="head" points="255,274 260,284 265,274"/>
+
+  <!-- ═══════ C. INJECTION ═══════ -->
+  <rect class="phase" x="40" y="286" width="440" height="112"/>
+  <text x="60" y="306" class="ptitle">C. INJECTION H₂O</text>
+  <text x="440" y="306" text-anchor="end" class="dur">~15 s</text>
+  <text x="60" y="324" class="step">1. Aspirer 25 µL d'eau distillée (table §1)</text>
+  <text x="60" y="338" class="step">2. Piquer le septum dans le tube (entre V₁ et V₂)</text>
+  <text x="60" y="352" class="step">3. Injecter lentement (1–2 s)</text>
+  <text x="60" y="366" class="step">4. Retirer l'aiguille (septum se referme)</text>
+  <text x="60" y="380" class="step">5. → Flash-évaporation → vapeur via V₂ ouverte → P ≈ 3 mbar</text>
+
+  <!-- Flèche C→D -->
+  <line class="arrow" x1="260" y1="398" x2="260" y2="422"/>
+  <polygon class="head" points="255,418 260,428 265,418"/>
+
+  <!-- ═══════ D. SCELLER + VÉRIF ═══════ -->
+  <rect class="phase" x="40" y="430" width="440" height="100"/>
+  <text x="60" y="450" class="ptitle">D. SCELLER LA CHAMBRE + VÉRIFICATION</text>
+  <text x="440" y="450" text-anchor="end" class="dur">~30 s</text>
+  <text x="60" y="468" class="step">1. V₂ (chambre) : FERMÉE → chambre hermétique</text>
+  <text x="60" y="482" class="step">2. Ouvrir brièvement V₁ → Pirani voit le sas</text>
+  <text x="60" y="496" class="step">3. Lire P_Pirani × 1,43 → P_réelle</text>
+  <text x="60" y="510" class="step">4. Si P trop basse → re-piquer septum + µL</text>
+  <text x="60" y="524" class="step">5. Si P trop haute → rouvrir V₁+V₂, pomper brièvement</text>
+
+  <!-- Flèche D→E -->
+  <line class="arrow" x1="260" y1="530" x2="260" y2="554"/>
+  <polygon class="head" points="255,550 260,560 265,550"/>
+
+  <!-- ═══════ E. LIBÉRATION ═══════ -->
+  <rect class="phase" x="40" y="562" width="440" height="100"/>
+  <text x="60" y="582" class="ptitle">E. LIBÉRATION</text>
+  <text x="440" y="582" text-anchor="end" class="dur">~1 min</text>
+  <text x="60" y="600" class="step">1. V₂ : FERMÉE (chambre scellée)</text>
+  <text x="60" y="614" class="step">2. Déconnecter le tuyau de pompe (raccord rapide)</text>
+  <text x="60" y="628" class="step">3. Vérifier : aucun lien mécanique chambre ↔ baril</text>
+  <text x="60" y="642" class="step">4. Libérer la bride mécanique</text>
+  <text x="60" y="656" class="step">5. Fermer le baril</text>
+
+  <!-- Flèche E→F -->
+  <line class="arrow" x1="260" y1="662" x2="260" y2="686"/>
+  <polygon class="head" points="255,682 260,692 265,682"/>
+
+  <!-- ═══════ F. MESURE ═══════ -->
+  <rect class="phase" x="40" y="694" width="440" height="82"/>
+  <text x="60" y="714" class="ptitle">F. MESURE</text>
+  <text x="440" y="714" text-anchor="end" class="dur">~15–45 min</text>
+  <text x="60" y="732" class="step">Chambre libre, pendule de torsion</text>
+  <text x="60" y="746" class="step">PID₂ seul : puissance magnétron (SSR) en mode pulsé f₀ = 1/T₀</text>
+  <text x="60" y="760" class="step">Tenue du vide : ΔP ≈ +0,08 mbar / 15 min (OK)</text>
+</svg>

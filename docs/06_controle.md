@@ -178,12 +178,19 @@ Ils alimentent uniquement le **watchdog de sécurité** (§6.7).
 
 ### 6.4.1 Électrovanne d'admission H₂O
 
-| Paramètre | Valeur |
-|:---|:---|
-| Type | Proportionnelle (ou tout-ou-rien + PWM BF) |
-| Commande | PWM 0,1–10 Hz via MOSFET |
-| Canal | PWM0 |
-| Effet | Contrôle $\dot{m}_{\text{in}}$ → pression $P$ → $n_e$ |
+> ⚠️ **Supprimée** — L'injection de vapeur d'eau se fait désormais par
+> **septum + microseringue** (injection manuelle ponctuelle avant la
+> mesure). L'électrovanne est retirée de l'architecture embarquée.
+> Voir [12_controle_vapeur.md](12_controle_vapeur.md) §2 et §10 pour
+> la justification complète (risque RF, couple parasite, complexité
+> inutile). Le canal PWM0 / GPIO25 est **libéré** pour un usage futur.
+
+~~| Paramètre | Valeur |~~
+~~|:---|:---|~~
+~~| Type | Proportionnelle (ou tout-ou-rien + PWM BF) |~~
+~~| Commande | PWM 0,1–10 Hz via MOSFET |~~
+~~| Canal | PWM0 |~~
+~~| Effet | Contrôle $\dot{m}_{\text{in}}$ → pression $P$ → $n_e$ |~~
 
 La dynamique de pression dans la chambre suit :
 
@@ -237,13 +244,23 @@ boucle lente gère la pression de fond.
 
 ### 6.5.1 PID₁ — Boucle de résonance (rapide, 100 Hz)
 
+> ⚠️ **Boucle suspendue** — Le PID₁ contrôlait la résonance en
+> ajustant la pression via l'électrovanne (PWM0). L'électrovanne
+> étant supprimée (injection manuelle par septum), PID₁ n'a plus
+> d'actionneur. En pratique, la pression est injectée manuellement
+> à ~3 mbar et dérive de < 0,08 mbar/15 min — suffisamment stable.
+> Le PID₂ (puissance magnétron) compense la lente dérive de $n_e$.
+> Si un actuateur de pression non-métallique non-perturbant est
+> identifié à l'avenir (ex. micro-doseur piézo), PID₁ pourra être
+> réactivé. Voir [12_controle_vapeur.md](12_controle_vapeur.md) §10.
+
 | Paramètre | Valeur |
 |:---|:---|
 | Entrée principale | $P_r$ (puissance RF réfléchie) — CH0 |
 | Entrée secondaire | $P$ (pression, comme borne de sécurité) |
 | Erreur | $e_1(t) = P_r(t) - P_{r,0}$ |
 | Consigne | $P_{r,0}$ = minimum de réflexion (résonance) |
-| Sortie | $u_1(t)$ → électrovanne H₂O (PWM0) |
+| Sortie | ~~$u_1(t)$ → électrovanne H₂O (PWM0)~~ — **sans actionneur** |
 | Cadence | **100 Hz** (période 10 ms) |
 
 **Loi de commande** :

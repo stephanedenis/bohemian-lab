@@ -68,3 +68,12 @@ L'agent doit maîtriser les concepts suivants pour aider efficacement :
 - Si une expérience échoue à l'import Qiskit, prévoir un **fallback PennyLane** (cf. modèle de `001_superposition.py`).
 - Utiliser `src/viz.py` pour les visualisations réutilisables ; ne pas dupliquer le code.
 - Écrire les résultats de données dans `data/` au format NumPy (`.npy`) ou CSV.
+
+## Conventions de diagrammes
+
+- **Tous les diagrammes** (coupes, P&ID, schémas de câblage, vues du dessus, flowcharts…) doivent être produits en **SVG** et placés dans `docs/img/`.
+- Référencer les SVG en Markdown via `![légende](img/nom.svg)`.
+- Un **fallback ASCII** est conservé en commentaire HTML (`<!-- Fallback ASCII … -->`) pour le rendu dans les terminaux et diffs Git, mais le SVG est l'image de référence.
+- Les SVG doivent avoir un **fond blanc** (`<rect width="100%" height="100%" fill="white"/>` en premier élément enfant du `<svg>`) pour garantir la lisibilité sur GitHub, dans les previews Markdown et en impression.
+- Les traits, textes et bordures utilisent `currentColor` ou des couleurs foncées explicites (ex. `#222`) pour conserver le contraste sur fond blanc.
+- Ne **jamais** utiliser de diagramme ASCII seul sans SVG correspondant dans un document finalisé.

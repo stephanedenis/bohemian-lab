@@ -198,14 +198,21 @@ L'expérience se déroule **en extérieur**. Avant de commencer :
 1. Assembler la chambre à vide avec l'alimentation embarquée
    (batterie Makita + onduleur + transfo HT). Vérifier l'étanchéité
    du joint silicone sur le couvercle acrylique.
-2. Ouvrir la vanne d'isolement. Connecter le tuyau de la pompe à vide.
-   La chambre est **bridée mécaniquement** (calage, pas de rotation).
-3. Pomper jusqu'à $P < 1$ mbar. Vérifier l'absence de fuites
+2. Ouvrir V₁ (pompe) et V₂ (chambre). Connecter le tuyau de la
+   pompe à vide. La chambre est **bridée mécaniquement** (calage,
+   pas de rotation).
+3. Pomper jusqu'à $P < 0{,}5$ mbar. Vérifier l'absence de fuites
    ($< 10^{-3}$ mbar·L/s).
-4. **Injection capillaire** de vapeur d'eau : ouvrir le micro-doseur
-   pour atteindre $P \approx 2-5$ mbar.
-5. **Fermer la vanne d'isolement** (quart de tour).
-6. **Déconnecter le tuyau** de la pompe.
+4. Arrêter la pompe. **Fermer V₁** (côté pompe) — V₂ reste ouverte.
+5. **Injection par septum** : à l'aide d'une microseringue (50 µL),
+   piquer l'aiguille 30G dans le **septum silicone** situé dans le
+   tube de pompage (entre V₁ et V₂, accessible de l'extérieur).
+   Injecter ~25 µL d'eau distillée → flash-évaporation → la vapeur
+   se répand dans la chambre via V₂ ouverte → $P \approx 3$ mbar.
+   Voir [12_controle_vapeur.md](12_controle_vapeur.md) pour les
+   détails et la table volume–pression.
+6. **Fermer V₂** (côté chambre) → la chambre est scellée.
+7. **Déconnecter le tuyau** de la pompe (raccord rapide).
 7. Vérifier qu'il n'y a **aucun lien mécanique** entre la chambre
    et le baril (hormis le fil de torsion).
 8. Mettre sous tension l'ESP32 embarqué. Vérifier la connexion Wi-Fi

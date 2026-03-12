@@ -33,8 +33,11 @@
 | 16 | PSD (Position Sensitive Detector) | ✅ **En stock** | Disponible |
 | 17 | Capteurs : jauge Pirani, coupleur directionnel, caméra Wi-Fi (plasma), thermocouple K + MAX31855, ADS1115 | ✅ **En stock** | Kit capteurs disponible |
 | 17b | Capteur spectral AS7343 14 canaux (SparkFun SEN-23220 Qwiic) | 🔶 À acheter | ~22 $ — proxy $n_e$ (Hβ 486 nm) et $T_e$ (Hα/Hβ). Voir [§10](docs/10_capteur_spectral.md) |
-| 18 | SSR (relais statique) + MOSFET pour électrovanne | ✅ **En stock** | Commande magnétron |
-| 19 | Caméras Wi-Fi (2–3) | ✅ **En stock** | Internes + externes |
+| 18 | ~~SSR (relais statique) + MOSFET pour électrovanne~~ SSR pour magnétron | ✅ **En stock** | Commande magnétron |
+| 19 | Septum silicone (⌀ 10–12 mm, standard GC) | 🔶 À commander | Injection H₂O, dans le tube de pompage ([doc 12](12_controle_vapeur.md)) |
+| 20 | Microseringue 50 µL (aiguille 30G) | 🔶 À commander | Dosage H₂O ([doc 12](12_controle_vapeur.md)) |
+| 21 | 2ᵉ vanne DN10 (¼ tour) — V₁ côté pompe | 🔶 À acheter | Sas d'injection entre V₁ et V₂ ([doc 12](12_controle_vapeur.md)) |
+| 22 | Caméras Wi-Fi (2–3) | ✅ **En stock** | Internes + externes |
 | 20 | Miroir plan (~ 20×20 mm) | ✅ **En stock** | Collé en haut de la tige rigide |
 | 21 | Résistances ballast, shunts, connectique, ruban cuivre | ✅ **En stock** | Consommables disponibles |
 
@@ -262,8 +265,8 @@ haut :
 
 1. **Couvercle acrylique 3/4"** — posé sur la bride inox de la
    chambre (joint silicone). Percé en son **centre** pour la vanne
-   DN10 (pompage + injection H₂O). L'acrylique assure la rigidité
-   structurelle et la transparence visuelle.
+   V₂ (DN10, isolement de la chambre). L'acrylique assure la
+   rigidité structurelle et la transparence visuelle.
 2. **Grillage métallique** (cuivre ou inox) — posé **directement
    sur l'acrylique**. Maille < $\lambda/10 = 12$ mm. **Contact
    galvanique** avec la bride inox (ruban de cuivre, pinces ou
@@ -463,8 +466,8 @@ Vue en coupe du montage complet :
     ╔══════════╪═══════════════════════╗
     ║  ACRYLIQUE 3/4" (19 mm)          ║ ← Couvercle transparent RF
     ║                   ┌──────┐       ║
-    ║                   │Vanne │ ← DN10 percée au centre
-    ║                   │DN10  │   (pompage + injection H₂O)
+    ║                   │Vanne │ ← V₂ (DN10) au centre
+    ║                   │ V₂   │   (isolement chambre)
     ║                   └──┬───┘       ║
     ╚══════════╪═══════════════════════╝
     ── Joint silicone ─────┼────────────
@@ -511,7 +514,7 @@ Vue en coupe du montage complet :
 | **Magnétron A** (500 W) | Au-dessus du grillage, iris à ~30° de N₁ | Hors vide, hors cage. Antenne ↓ à travers iris A + acrylique |
 | *(Phase 2)* **Magnétron B** (500 W) | Au-dessus du grillage, iris à ~120° de N₁ | Idem, Δθ = 90° → changement de direction du gradient |
 | *(Phase 2)* **Volets iris A/B** | Sur le grillage, commandés par micro-servos | Isolation RF du magnétron OFF (> 30 dB) |
-| **Vanne DN10 + connecteur** | Centre du couvercle acrylique, connecteur au-dessus | Accès direct au volume sous vide pour pompage et injection ; le connecteur permet de brancher/débrancher le tuyau de pompe |
+| **Vanne V₂** (DN10) | Centre du couvercle acrylique, connecteur au-dessus | Isolement de la chambre ; connectée au tube de pompage contenant le septum et V₁. Voir [doc 12](12_controle_vapeur.md) §2 |
 | **8× Nixie IN-13** | Paroi intérieure (octogone, centrés en hauteur), broches à la masse | Mode passif : ionisation RF directe du néon, pas de câblage. Lecture par caméra Wi-Fi |
 | **Jauge Pirani** | Ligne de pompage (extérieure) ou feedthrough paroi | Mesure la pression sans être irradiée |
 | **Coupleur directionnel** | Au-dessus du grillage, à côté du magnétron | Hors vide, hors cage — accès facile |
@@ -1126,13 +1129,15 @@ Elle est connectée uniquement pendant la phase de préparation, puis
 déconnectée via la **vanne d'isolement** (quart de tour, DN10) montée
 sur la chambre.
 
-| Phase | Pompe | Tuyau | Chambre |
+| Phase | V₁ (pompe) | V₂ (chambre) | Action |
 |:---|:---|:---|:---|
-| 1. Pompage + injection | Active | Connecté | **Bridée** |
-| 2. Fermeture vanne | Arrêtée | Connecté | Bridée |
-| 3. Déconnexion tuyau | Off | **Déconnecté** | **Libre** |
-| 4. Amortissement (~30 min) | Off | Aucun | Libre (repos) |
-| 5. Mesure | Off | Aucun | Libre |
+| 1. Pompage | Ouverte | Ouverte | Pompe active, chambre **bridée** |
+| 2. Isoler pompe | **Fermée** | Ouverte | Pompe arrêtée |
+| 3. Injection H₂O | Fermée | Ouverte | Piquer septum (tube), injecter 25 µL |
+| 4. Sceller chambre | Fermée | **Fermée** | Chambre hermétique |
+| 5. Déconnexion | — | Fermée | Tuyau **déconnecté**, chambre **libre** |
+| 6. Amortissement | — | Fermée | Repos (~30 min) |
+| 7. Mesure | — | Fermée | Pendule libre |
 
 > **Tenue du vide** — À 2–5 mbar, un débit de fuite de $10^{-3}$
 > mbar·L/s donne une remontée de ~ 0,005 mbar/min dans 11,4 L
@@ -1433,9 +1438,15 @@ thermique et de couper le magnétron si $T_{\text{paroi}} > T_{\text{max}}$
 
 #### Électrovanne d'admission
 
-Électrovanne proportionnelle (ou tout-ou-rien commandée en PWM basse
-fréquence, ~ 1 Hz) sur la ligne d'injection de vapeur d'eau. Le duty
-cycle contrôle le débit moyen $\dot{m}$ et donc la pression $P$ :
+> ⚠️ **Supprimée** — Remplacée par un **septum silicone + microseringue**
+> (injection manuelle ponctuelle). L'électrovanne métallique posait des
+> problèmes de couplage RF (antenne parasite), de couple mécanique sur
+> le pendule et de complexité firmware inutile. Voir
+> [12_controle_vapeur.md](12_controle_vapeur.md) pour l'architecture
+> simplifiée.
+
+~~Électrovanne proportionnelle (ou tout-ou-rien commandée en PWM basse
+fréquence, ~ 1 Hz) sur la ligne d'injection de vapeur d'eau.~~
 
 $$\frac{dP}{dt} = \frac{1}{V}(\dot{m}_{\text{in}} - S_p \cdot P)$$
 
