@@ -11,12 +11,12 @@ par guidage d'onde pilote dans un plasma de vapeur d'eau.
 
 | Couche | Outils |
 |---|---|
-| Langage | Python 3.11+ |
-| Simulation quantique | **Qiskit** (IBM), **PennyLane** (Xanadu) |
-| Calcul scientifique | NumPy, SciPy, SymPy |
-| Visualisation | Matplotlib, Qiskit Visualization |
-| Notebooks | Jupyter / JupyterLab |
-| Environnement | venv (`.venv/`) |
+| **Simulations quantiques** | Python 3.11+, Qiskit (IBM), PennyLane (Xanadu) |
+| **Calcul scientifique** | NumPy, SciPy, SymPy |
+| **Visualisation** | Matplotlib, JupyterLab, Qiskit Visualization |
+| **Firmware / Hardware** | C/C++ (C++11/14), ESP32 (Arduino Core via PlatformIO), FreeRTOS |
+| **Capteurs (I²C / SPI)** | AS7343 + AS7331 (Spectral), ADS1115 + ZJ-52T (Vide), MAX31855 (Température) |
+| **Télémétrie** | WiFi, MQTT, carte SD |
 
 ## Structure du dépôt
 
@@ -24,56 +24,51 @@ par guidage d'onde pilote dans un plasma de vapeur d'eau.
 bohemian-lab/
 ├── experiments/     # Scripts Python exécutables (un fichier par expérience)
 │                    #   Convention : NNN_nom.py  (ex: 001_superposition.py)
+├── firmware/        # Code embarqué ESP32 (PlatformIO)
+│   ├── src/         # Main et tâches FreeRTOS (.cpp)
+│   └── platformio.ini # Configuration matérielle et dépendances
 ├── notebooks/       # Jupyter Notebooks exploratoires
 ├── src/             # Modules Python réutilisables (viz, utils, etc.)
 ├── data/            # Données brutes et résultats (.npy, .csv, .json)
-├── docs/            # Documentation, notes, schémas
-├── requirements.txt # Dépendances pip
+├── docs/            # Documentation technique et physique détaillée
+├── requirements.txt # Dépendances pip (Python)
 └── README.md        # Protocole expérimental principal
 ```
 
 ## Conventions de code
 
-- **Langue** : le code, les commentaires, les docstrings et les messages de commit sont en **français**.
+**Règle générale :**
+- **Langue** : le code, les commentaires, les docstrings et les messages de commit sont en **français** ou en anglais technique selon le standard du langage.
+- Les interfaces utilisateurs, les logs séries et la documentation restent en français.
+
+**Python (Simulation & Data) :**
 - **Style** : PEP 8, largeur max 88 colonnes (Black-compatible).
 - **Docstrings** : Google-style, en français.
 - **Typage** : annotations de type systématiques (Python 3.11+ syntax : `list[int]`, `tuple[float, …]`).
-- **Imports** : stdlib → tiers → locaux, séparés par des lignes vides.
-- **Expériences** :
-  - Chaque fichier dans `experiments/` est un script autonome exécutable (`if __name__ == "__main__"`).
-  - Nommage séquentiel : `NNN_nom_court.py`.
-  - Docstring d'en-tête obligatoire décrivant l'objectif de l'expérience.
-- **Modules `src/`** : ne contiennent que des fonctions et classes réutilisables, jamais de `__main__`.
+- **Expériences** : Chaque fichier dans `experiments/` est un script autonome (`if __name__ == "__main__"`).
+
+**C++ / Firmware (ESP32) :**
+- **Architecture** : Utiliser **FreeRTOS** (`xTaskCreate`, `vTaskDelay`, `xQueueSend`).
+- Ne **jamais** utiliser la fonction bloquante `delay()` dans les boucles principales.
+- Organiser le code en séparant les tâches de manière logique (Acquisition I²C, Contrôle PID, Communication MQTT).
+- Gérer explicitement les échecs de communication capteur (bus I²C défaillant) sans faire crasher l'OS complet.
 
 ## Contexte scientifique
 
 L'agent doit maîtriser les concepts suivants pour aider efficacement :
 
-1. **Interprétation de de Broglie–Bohm** : loi de guidage $\vec{v} = \nabla S / m$, potentiel quantique $Q = -\frac{\hbar^2}{2m}\frac{\nabla^2 R}{R}$.
-2. **Circuits quantiques** : portes (H, X, Y, Z, CNOT, Rz, …), mesures, simulateurs.
-3. **Qiskit** : `QuantumCircuit`, `AerSimulator`, `Statevector`, visualisation Bloch.
-4. **PennyLane** : `qml.device`, `@qml.qnode`, différentiation automatique de circuits.
-5. **Physique expérimentale** : micro-ondes 2,45 GHz, plasmas basse-pression, pendules de torsion, cavités RF.
+1. **La Théorie de de Broglie–Bohm** : loi de guidage $\vec{v} = \nabla S / m$, violant potentiellement le théorème d'action-réaction en état de **non-équilibre quantique**.
+2. **Physique des plasmas** : Coupure résonante 2,45 GHz à $n_{e,c} \approx 7,4 \times 10^{16} \, \text{m}^{-3}$, créant la "falaise d'indice de réfraction" ($n \to 0$).
+3. **Contrôle temps réel** : La nécessité absolue d'asservir la pression de vapeur d'eau et le magnétron via des boucles PID stabilisant l'émission optique (ratios H$\alpha$/H$\beta$ et présence de OH·).
+4. **Qiskit & PennyLane** : `QuantumCircuit`, `AerSimulator`, différentiation automatique pour l'émulation du phénomène.
 
 ## Règles de sécurité
 
-- Ne **jamais** minimiser les risques électriques (4 000 V), RF ou d'implosion décrits dans le README.
-- Toute suggestion liée au matériel doit rappeler les précautions de sécurité pertinentes.
+- Ne **jamais** minimiser les risques électriques (4 000 V), RF (micro-ondes) ou d'implosion associés aux protocoles.
+- Toute suggestion liée au matériel (câblage relai, firmware de puissance) doit appeler à des précautions de conception logicielle (Fail-safe, Watchdog).
 
 ## Comportement attendu de l'agent
 
-- Privilégier les **explications physiques** accompagnées des équations ($\LaTeX$ inline).
-- Proposer du code **exécutable immédiatement** dans l'environnement du projet.
-- Quand un résultat numérique est produit (simulation), toujours proposer une **visualisation** (plot ou Bloch).
-- Si une expérience échoue à l'import Qiskit, prévoir un **fallback PennyLane** (cf. modèle de `001_superposition.py`).
-- Utiliser `src/viz.py` pour les visualisations réutilisables ; ne pas dupliquer le code.
-- Écrire les résultats de données dans `data/` au format NumPy (`.npy`) ou CSV.
-
-## Conventions de diagrammes
-
-- **Tous les diagrammes** (coupes, P&ID, schémas de câblage, vues du dessus, flowcharts…) doivent être produits en **SVG** et placés dans `docs/img/`.
-- Référencer les SVG en Markdown via `![légende](img/nom.svg)`.
-- Un **fallback ASCII** est conservé en commentaire HTML (`<!-- Fallback ASCII … -->`) pour le rendu dans les terminaux et diffs Git, mais le SVG est l'image de référence.
-- Les SVG doivent avoir un **fond blanc** (`<rect width="100%" height="100%" fill="white"/>` en premier élément enfant du `<svg>`) pour garantir la lisibilité sur GitHub, dans les previews Markdown et en impression.
-- Les traits, textes et bordures utilisent `currentColor` ou des couleurs foncées explicites (ex. `#222`) pour conserver le contraste sur fond blanc.
-- Ne **jamais** utiliser de diagramme ASCII seul sans SVG correspondant dans un document finalisé.
+- Quand le contexte est "Python", agir comme un chercheur en physique : proposer des explications basées sur $\LaTeX$ et des graphiques.
+- Quand le contexte est `firmware/` ou "C++", agir comme un Ingénieur en Système Embarqué : optimiser les cycles I²C, respecter les timings FreeRTOS, et garantir la robustesse temporelle des boucles PID.
+- Tous les diagrammes doivent être gérés en SVG (dans `docs/img/`) et inclus en tant qu'images, avec de simples fallbacks ASCII en commentaires HTML.
