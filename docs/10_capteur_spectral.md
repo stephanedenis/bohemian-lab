@@ -1,4 +1,4 @@
-# 🌈 Capteur Spectral — AS7343
+# 🌈 Capteurs Spectraux — AS7343 & AS7331
 
 [← Retour au README](../README.md) · [← Contrôle et Asservissement](06_controle.md)
 
@@ -7,17 +7,16 @@
 ## Résumé exécutif
 
 Le diagnostic du plasma H₂O nécessite une **mesure spectrale embarquée**
-pour alimenter les boucles PID en proxy de $n_e$ et $T_e$. Après
-évaluation systématique de la gamme ams-OSRAM (AS7262, AS7263, AS7341,
-AS7343) et d'alternatives (AH-300, Hamamatsu C12880MA), le capteur
-retenu est :
+pour alimenter les boucles PID en proxy de $n_e$ et $T_e$, et vérifier la
+dissociation de la molécule d'eau (radicaux OH·). Après évaluation 
+systématique de la gamme ams-OSRAM, la solution retenue est un tandem :
 
-$$\boxed{\textbf{AS7343} \;\text{— 14 canaux multi-spectraux, 380–1000 nm, I²C}}$$
+$$\boxed{\textbf{AS7343} \;\text{(VIS/NIR)} + \textbf{AS7331} \;\text{(UV)} \;\text{sur le même bus I²C}}$$
 
-**Un seul capteur suffit.** L'AS7343 couvre les deux raies critiques
-(Hβ 486 nm, Hα 656 nm) avec un gain allant jusqu'à 2048× — adapté
-aux émissions faibles d'un plasma basse-pression. L'ajout d'un
-capteur UV (AS7331) n'est pas nécessaire en Phase 1.
+- **L'AS7343** couvre les raies visibles critiques (Hβ 486 nm, Hα 656 nm) avec un gain massif de 2048×, idéal pour la dynamique fine.
+- **L'AS7331** couvre la bande UVB/UVA pour surveiller la raie OH· (309 nm), confirmant que l'eau se dissocie correctement et validant l'absence de fuite d'air (N₂).
+
+Les deux capteurs cohabitent nativement sans conflit d'adresse I²C.
 
 ---
 
@@ -110,11 +109,10 @@ canaux du capteur et les raies d'émission du plasma H₂O :
 | AS7341 | Limite basse ~350 nm, pas de canal dédié | ❌ |
 | **AS7343** | Limite basse ~380 nm | ❌ **Hors plage** |
 
-> 💡 **OH· n'est pas bloquant** — La présence de OH· est déjà
-> confirmée **visuellement** par la couleur cyan du plasma (caméra
-> Wi-Fi). Pour le PID, les ratios Hα/Hβ suffisent. En Phase 2, un
-> capteur UV dédié (AS7331, ~8 $, I²C 0x74) pourra être ajouté si
-> un diagnostic quantitatif de OH· est souhaité.
+> 💡 **OH· dans l'UV** — Pour combler ce vide spectral sous 380 nm,
+> un capteur UV dédié (**AS7331**, I²C 0x74) lui est adjoint. Il détecte la raie 309 nm pour
+> prouver la dissociation de l'eau ($H_2O \rightarrow H + OH$) et permet
+> de détecter d'éventuelles micro-fuites d'air grâce aux raies de l'azote ($N_2$).
 
 ### 2.3 Tableau de synthèse
 
@@ -135,28 +133,17 @@ canaux du capteur et les raies d'émission du plasma H₂O :
 
 ---
 
-## 3. Solution retenue : AS7343 seul
+## 3. Solution retenue : Duo AS7343 + AS7331
 
-### 3.1 Fiche technique
+### 3.1 Fiche technique conjointe
 
-| Paramètre | Valeur |
-|:---|:---|
-| **Modèle** | ams-OSRAM AS7343 |
-| **Breakout** | SparkFun SEN-23220 (Qwiic) |
-| **Prix** | ~22 $ US |
-| **Canaux spectraux** | 11 (F1–F8 + FZ + FY + FXL) |
-| **Canaux auxiliaires** | Clear, NIR, Flicker |
-| **Plage spectrale** | 380–1000 nm |
-| **FWHM typique** | ~25 nm |
-| **Gain programmable** | 0,5× à **2048×** (log₂, 13 paliers) |
-| **ADC** | 16 bits par canal |
-| **Temps d'intégration** | 2,78 µs – 182 ms (programmable) |
-| **Interface** | I²C, adresse **0x39** |
-| **Tension** | 1,8 V (régulateur sur le breakout Qwiic) |
-| **Courant** | ~210 µA (actif), ~350 µA (veille) |
-| **Boîtier** | LGA 3,1 × 2,0 × 1,0 mm |
-| **LED intégrée** | Driver programmable 4–258 mA |
-| **AutoSmux** | 3 cycles pour lire les 14 canaux |
+| Paramètre | **AS7343** (Visible / NIR) | **AS7331** (UV) |
+|:---|:---|:---|
+| **Rôle** | Proxy $n_e$ et $T_e$ via les raies Balmer | Mesure de dissociation OH· |
+| **Plage spectrale** | 380–1000 nm | 315-410 (UVA), 280-315 (UVB), 250-280 (UVC) |
+| **Interface** | I²C, adresse **0x39** | I²C, adresse **0x74** (Compatible bus commun) |
+| **Gain max** | **2048×** (log₂, 13 paliers) | Très haute sensibilité |
+| **Temps d'intégration** | 2,78 µs – 182 ms (programmable) | Programmable |
 
 ### 3.2 Carte des canaux
 
@@ -216,15 +203,16 @@ Le canal F8 (745 nm) capte la **queue** de la raie O I 777 nm via
 son FWHM (~25 nm). C'est un indicateur qualitatif, pas quantitatif.
 Suffisant pour détecter une variation de la dissociation de H₂O.
 
-### 3.4 Pourquoi l'AS7331 (UV) n'est pas nécessaire
+### 3.4 L'ajout de l'AS7331 (UV)
 
-| Argument | Détail |
+Alors que l'AS7343 gère le spectre visible/NIR pour les boucles d'asservissement,
+l'AS7331 (Adresse I²C 0x74) lui est couplé sur le même bus physique pour surveiller l'ultraviolet.
+
+| Rôle cible | Détail d'implémentation |
 |:---|:---|
-| OH· n'est pas dans le PID | Les boucles PID (§6.5) utilisent $P_r$, luminosité et $T_{\text{paroi}}$ — pas OH· |
-| Détection qualitative par caméra | La couleur cyan du plasma (caméra Wi-Fi) confirme la présence de OH· |
-| Hα/Hβ suffisent pour $T_e$ | Le ratio de Boltzmann donne $T_e$ sans raie UV |
-| Coût et complexité | Un seul capteur = un seul driver, une seule adresse I²C, un seul budget courant |
-| Phase 2 optionnelle | Si un diagnostic UV quantitatif est souhaité plus tard, l'AS7331 (I²C 0x74) s'ajoute sans conflit |
+| **Dissociation OH·** | Le radical OH· (preuve du claquage de l'eau) émet à 309 nm. Le canal UVB (280-315 nm) de l'AS7331 est parfait pour la capter. |
+| **Détection Fuite N₂** | L'air (azote) perturbateur émet en UVA (337 et 357 nm). Le canal UVA (315-410 nm) sert de drapeau rouge pour la contamination. |
+| **Cohabitation bus** | Adresse 0x74 distincte de 0x39. Peut être chêné (Daisy-chain) via un câble Qwiic/Stemma sans pin GPIO supplémentaire. |
 
 ---
 
@@ -262,9 +250,10 @@ périphériques existants :
 
 | Périphérique | Bus | Adresse |
 |:---|:---|:---|
-| ADS1115 (ADC Pirani) | I²C | 0x48 |
-| **AS7343** (spectral) | **I²C** | **0x39** |
-| MAX31855 (thermocouple) | SPI | CS=GPIO5 |
+| ADS1115 (ADC Pirani ZJ-52T) | I²C | 0x48 |
+| **AS7343** (spectral visible) | **I²C** | **0x39** |
+| **AS7331** (spectral UV) | **I²C** | **0x74** |
+| MAX31855 (thermocouple paroi) | SPI | CS=GPIO5 |
 | Carte SD | SPI | CS=GPIO15 |
 
 ### 4.3 Architecture firmware — Tâche FreeRTOS
@@ -468,38 +457,36 @@ void loop() {
 
 ## 9. Récapitulatif de la solution
 
-```
-                    ┌──────────────────────┐
-                    │   AS7343 (SparkFun)   │
-                    │   14 canaux           │
-                    │   I²C 0x39            │
-                    │   Gain 2048×          │
-                    │   ~22 $               │
-                    └────────┬─────────────┘
-                             │ I²C (SDA/SCL)
-                    ┌────────▼─────────────┐
-                    │      ESP32            │
-                    │  ┌─────────────────┐  │
-                    │  │ spectral_task   │  │
-                    │  │ 10 Hz           │  │
-                    │  │ proxy_ne (Hβ)   │──┼──→ PID₂ (ionisation)
-                    │  │ ratio_Te (Hα/β) │──┼──→ PID₄ (optionnel)
-                    │  │ indicateur O I  │──┼──→ Logger SD + MQTT
-                    │  └─────────────────┘  │
-                    └───────────────────────┘
+```text
+                    ┌──────────────────────┐   ┌──────────────────────┐
+                    │  AS7331 (UV)         │   │  AS7343 (SparkFun)   │
+                    │  UVA/B/C             │   │  14 canaux           │
+                    │  I²C 0x74            ├───┤  I²C 0x39            │
+                    │  OH· + N₂            │   │  Gain 2048×          │
+                    └────────┬─────────────┘   └────────┬─────────────┘
+                             │                          │
+                             └──────────┬───────────────┘
+                                        │ I²C Daisy-chain (Qwiic SDA/SCL)
+                    ┌───────────────────▼──────────────────┐
+                    │               ESP32                  │
+                    │  ┌────────────────────────────────┐  │
+                    │  │ spectral_task (10 Hz)          │  │
+                    │  │ proxy_ne (Hβ visible)          │──┼──→ PID₂ (ionisation)
+                    │  │ ratio_Te (Hα/β visible)        │──┼──→ PID₄ (optionnel)
+                    │  │ indicateur O I                 │──┼──→ Logger SD + MQTT
+                    │  │ alarme_fuite (UVA N₂)          │──┼──→ Watchdog
+                    │  │ validation_OH (UVB 309 nm)     │──┼──→ Logger SD + MQTT
+                    │  └────────────────────────────────┘  │
+                    └──────────────────────────────────────┘
 ```
 
 | Élément | Valeur |
 |:---|:---|
-| **Capteur unique** | AS7343 (SparkFun SEN-23220) |
-| **Prix total** | **~22 $ US** |
-| **Raies couvertes** | Hβ (486 nm) ✅, Hα (656 nm) ✅, O I (777 nm) ⚠️ partiel |
-| **Raies non couvertes** | OH· (309 nm) — diagnostic visuel par caméra |
-| **Bus** | I²C 0x39 (Qwiic, câble 4 fils) |
-| **Gain** | 2048× — adapté aux émissions faibles |
-| **Cadence** | 10 Hz (3 cycles AutoSmux × 30 ms) |
-| **Masse** | < 5 g (breakout Qwiic) |
-| **Évolution Phase 2** | + AS7331 (UV, 0x74, ~8 $) si diagnostic OH· quantitatif souhaité |
+| **Duo de capteurs** | AS7343 (SEN-23220) + AS7331 (UV) |
+| **Raies couvertes** | Hβ (486 nm) ✅, Hα (656 nm) ✅, OH· (309 nm) ✅, N₂ (337/357 nm) ✅ |
+| **Bus** | I²C partagé (0x39 et 0x74), câble Qwiic commun |
+| **Cadence** | 10 Hz |
+| **Masse** | < 10 g pour les deux cartes combinées |
 
 ---
 

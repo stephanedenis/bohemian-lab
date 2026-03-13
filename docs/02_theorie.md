@@ -271,7 +271,7 @@ champ. L'analogie pertinente est la suivante :
 - Le [vecteur de Poynting](https://fr.wikipedia.org/wiki/Vecteur_de_Poynting) $\vec{\mathcal{S}} = \vec{E} \times \vec{H}$
   joue le rôle du courant de probabilité.
 - Le flux d'énergie est « guidé » par le gradient de phase de l'onde.
-
+> ℹ️ **Pour aller plus loin** : Consulter le document [13_justification_medium.md](13_justification_medium.md) pour une analyse comparative des médiums possibles (Cristaux, BEC, Métamatériaux) et la justification théorique détaillée du choix du **plasma à 2,45 GHz** (conditions de Valentini, auto-façonnage, asymétries de phase aux densités de coupure).
 Dans un milieu plasma avec un indice de réfraction $n(\mathbf{r})$ :
 
 $$n(\mathbf{r}) = \sqrt{1 - \frac{\omega_p^2(\mathbf{r})}{\omega^2}}$$

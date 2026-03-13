@@ -269,79 +269,73 @@ $\dot{Q} = V \cdot \Delta P / \Delta t$.
 
 ---
 
-## 4. Capteur de pression — jauge Pirani
+## 4. Capteur de pression — Jauge Thermocouple (ZJ-52T)
 
 ### Principe
 
-La [jauge Pirani](https://fr.wikipedia.org/wiki/Jauge_de_Pirani) mesure
-la pression par la conductivité thermique du gaz résiduel. Un filament
-chauffé perd de la chaleur proportionnellement à la pression → sa
-résistance change → signal électrique.
+La jauge thermocouple (modèle ZJ-52T) mesure la pression par la conductivité
+thermique du gaz résiduel, similairement à une jauge Pirani traditionnelle.
+Un filament chauffé par un courant constant perd de la chaleur de façon
+proportionnelle à la pression ; un thermocouple soudé ou adjacent à ce filament
+mesure sa température et génère une tension millivolt analogique.
 
 ### Spécifications
 
 | Paramètre | Valeur |
 |:---|:---|
-| Plage | $10^{-3}$ – 100 mbar |
-| Sortie | 0–10 V analogique |
-| Interface ESP32 | ADS1115 (ADC I²C 16 bits, adresse 0x48) + diviseur résistif |
-| Cadence | 100 Hz (canal CH1) |
-| Position | **Ligne de pompage** (extérieure à la chambre, protégée de la RF) |
+| Modèle | **ZJ-52T** (Tube métal robuste) |
+| Plage | $10^{-1}$ à $10^3$ Pa ($10^{-3}$ à $10\text{ mbar}$) — Idéal pour H₂O |
+| Sortie | 0–10 mV (différentiel) |
+| Courant de chauffe | $\sim 25–30$ mA constant (via module type LM317) |
+| Interface ESP32 | ADS1115 (ADC I²C 16 bits, gain max 16×, mode différentiel) |
+| Cadence | 100 Hz (via queue série / MQTT) |
+| Position | **Ligne de pompage** (extérieure à la chambre, protégée de la RF par câble blindé) |
 
 ### Calibration pour H₂O
 
-> ⚠️ **Attention** — La jauge Pirani est **calibrée pour l'azote** (N₂)
-> ou l'air par défaut. La conductivité thermique de H₂O diffère de
-> celle de N₂ :
+> ⚠️ **Attention** — Les jauges thermiques (Pirani et Thermocouple) réagissent
+> différemment selon la nature du gaz. La conductivité thermique de H₂O diffère
+> de celle de N₂ (gaz de calibration par défaut des abaques usines) :
 
-| Gaz | $\lambda$ (mW/m·K) à 300 K | Facteur correctif / air |
+| Gaz | $\lambda$ (mW/m·K) à 300 K | Facteur d'échelle typique |
 |:---|:---|:---|
 | Air (N₂) | 26,4 | 1,00 |
 | **H₂O** | **18,6** | **0,70** |
 | Ar | 17,7 | 0,67 |
 
-La jauge **sous-estime** la pression réelle d'un facteur ~1,4 quand
-le gaz est de la vapeur d'eau pure. Deux approches :
+La jauge **sous-estimant** la pression réelle de l'eau, on évite les
+abaques d'usine génériques pour procéder à une **calibration in situ**.
 
-1. **Correction logicielle** : appliquer un facteur ×1,43 dans le
-   firmware (`P_reel = P_lu × 1.43`). Simple, mais suppose 100 % H₂O.
-2. **Calibration in situ** : injecter un volume connu avec la
-   microseringue (pression théorique = table §1) et comparer à la
-   lecture Pirani → tracer $P_{\text{réelle}} = f(V_{\text{Pirani}})$.
+> 💡 **Calibration absolue "gratuite"** : L'injection par microseringue offre
+> une calibration parfaite. Le volume injecté donne la pression théorique
+> exacte ($PV = nRT$ d'après la table §1), qu'on relie directement aux millivolts
+> mesurés par le ZJ-52T. C'est un étalon primaire sans aucun instrument complexe.
 
-> 💡 L'injection par microseringue offre une **calibration gratuite** :
-> le volume injecté donne la pression théorique exacte ($PV = nRT$),
-> qu'on compare directement à la lecture Pirani. C'est un étalon
-> primaire sans aucun instrument supplémentaire.
+### Implémentation électronique et firmware
 
-### Implémentation firmware
+Le conditionnement du ZJ-52T et la lecture via l'ADS1115 (PGA très élevé) :
 
-Le driver ADS1115 est **à implémenter** (actuellement un placeholder
-dans le firmware). La lecture se fait via le bus I²C :
-
-```
-ADS1115 (0x48) ←I²C→ ESP32
-  CH0 : coupleur directionnel (P_r)
-  CH1 : jauge Pirani (P)
+```text
+Alimentation 12V → [Source Courant Constant ~27mA] → Filament ZJ-52T
+Thermocouple ZJ-52T (+ et -) → [Entrées Différentielles A0-A1] → ADS1115 (0x48) ←I²C→ ESP32
 ```
 
 Voir [08_acquisition.md](08_acquisition.md) pour le format de données.
 
 ### Rôle pendant l'injection
 
-La jauge Pirani est lue **pendant l'injection** (phase 4, chambre
+La jauge thermocouple est lue **pendant l'injection** (phase 4, chambre
 bridée, pompe déjà déconnectée) pour :
 
-1. **Confirmer le vide** avant injection (P < 0,5 mbar ?)
-2. **Vérifier la pression** après injection (P ≈ cible ?)
-3. Si trop basse → re-piquer le septum et ajouter quelques µL
+1. **Confirmer le vide de base** avant injection (P < 0,5 mbar)
+2. **Vérifier le saut de pression** après évaporation de l'eau
+3. Compléter par de nouvelles piqûres si nécessaire.
 
 > ⚠️ La jauge est sur la **ligne de pompage**, côté extérieur de V₂.
-> Quand V₂ est fermée, la jauge ne voit pas
-> l'intérieur de la chambre. Pour lire la pression après injection :
-> ouvrir brièvement la vanne DN10 (sans pompe connectée), lire la
-> Pirani, et refermer. Ou monter la jauge sur un port séparé
-> communiquant avec la chambre.
+> Quand V₂ est fermée pour la phase de mesure libre, la jauge ne "voit" plus
+> l'intérieur de la chambre. Pour lire la pression sans perte :
+> on se fie à l'étanchéité mécanique de V₂ une fois la bonne pression
+> confirmée pendant l'injection.
 
 ---
 
