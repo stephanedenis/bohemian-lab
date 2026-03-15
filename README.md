@@ -116,6 +116,7 @@ $$F_{\text{totale}} = \frac{P_{\text{abs}}}{c} + \int \rho (-\nabla Q) \, dV$$
 | **Mesure** | Balance de torsion sur fléau (Cavendish, $d = 200$ mm) + laser/PSD | Détection de la force de réaction |
 | **Alimentation** | Batterie Li-ion Makita 18V (5 Ah) + onduleur 120V sinus pur | Alimentation embarquée — zéro câble |
 | **Pompage** | Pompe à vide (palettes ou membrane) + vanne d'isolement DN10 | Cycle pump-seal-disconnect |
+| **Protection RF** | Firmware soft-start SSR (rampe duty 3 % → 43 %) — magnétron consommable (~15 $) | Protection amorçage sans masse ajoutée. [§14](docs/14_adaptation_rf.md) |
 | **Contrôle** | ESP32 embarqué + capteurs + Wi-Fi (PID, logging, télémétrie) | Homéostasie plasma autonome |
 | **Observation** | Caméras sans fil (Wi-Fi) — fixes + mobiles | Vérification indépendante |
 
@@ -197,3 +198,9 @@ Le dossier `experiments/` contient les scripts de simulation autonomes
 | 6 | Contrôle et Asservissement | [docs/06_controle.md](docs/06_controle.md) |
 | 7 | Implications d'un Résultat Positif | [docs/07_implications.md](docs/07_implications.md) |
 | 8 | Chaîne d'Acquisition Empirique | [docs/08_acquisition.md](docs/08_acquisition.md) |
+| 9 | Hypothèse Inverter | [docs/09_hypothese_inverter.md](docs/09_hypothese_inverter.md) |
+| 10 | Capteur Spectral AS7343 | [docs/10_capteur_spectral.md](docs/10_capteur_spectral.md) |
+| 11 | Pistes d'Optimisation Plasma | [docs/11_pistes_optimisation.md](docs/11_pistes_optimisation.md) |
+| 12 | Contrôle de la Vapeur d'Eau | [docs/12_controle_vapeur.md](docs/12_controle_vapeur.md) |
+| 13 | Justification du Médium | [docs/13_justification_medium.md](docs/13_justification_medium.md) |
+| **14** | **Adaptation RF et Amorçage** | **[docs/14_adaptation_rf.md](docs/14_adaptation_rf.md)** |

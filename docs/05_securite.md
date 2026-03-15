@@ -404,11 +404,70 @@ L'ESP32 embarqué doit monitorer en continu :
 
 ---
 
-## 5.6 Récapitulatif des équipements de sécurité
+## 5.6 Risque RF pendant l'amorçage — Puissance réfléchie
+
+> 💡 **Retenez** — Avant la formation du plasma, **~90 % de la
+> puissance micro-onde revient dans le magnétron**. Sans protection,
+> c'est 630 W qui chauffent l'anode au lieu d'ioniser le gaz.
+> **Le firmware soft-start SSR est la protection principale.**
+
+### Nature du danger
+
+Lorsque le magnétron est allumé et qu'il n'y a pas encore de plasma
+(ou que le plasma se perd transitoirement), la cavité présente une
+impédance fortement désadaptée. La puissance réfléchie :
+
+- **Échauffe l'anode** du magnétron → réduit sa durée de vie.
+- Provoque du ***mode jumping*** → fréquence instable, couplage
+  erratique, possible arc interne destructeur.
+- **Stress le condensateur HT** (courant réduit → tension monte).
+
+Ce problème se produit à **chaque allumage** (transition POMPAGE →
+PLASMA) et à chaque perte transitoire du plasma pendant la mesure.
+
+### Mesure de protection — Firmware soft-start SSR
+
+La protection du magnétron repose sur le **firmware** : une rampe
+progressive du duty cycle SSR (3 % → 5 % → 10 % → 20 % → 43 %)
+minimise l'énergie réfléchie par pulse pendant la phase d'amorçage.
+Le magnétron domestique LG 2M213-01TAG (~15 $) est traité comme un
+**consommable** dont la durée de vie réduite par le VSWR est un
+compromis acceptable face à la préservation de la sensibilité du
+pendule de torsion.
+
+| Paramètre | Valeur |
+|:---|:---|
+| Stratégie | Rampe progressive duty SSR (soft-start) |
+| Masse ajoutée | **0 kg** |
+| Coût | **0 $** (firmware uniquement) |
+| Durée de vie magnétron estimée | ~2 000 h (vs 10 000 h nominal) |
+| Coût magnétron de remplacement | ~15 $ |
+| Statut | 🔶 **À implémenter** dans le firmware |
+
+> 💡 **Pourquoi pas de circulateur ?** — Un circulateur ferrite WR-340
+> ajouterait **3–6 kg** sur le bras du pendule (circulateur + charge
+> à eau + plomberie), ce qui est incompatible avec un système de
+> torsion conçu pour détecter des micro-newtons.
+
+Voir [§14 — Adaptation RF et Amorçage](14_adaptation_rf.md) pour
+les spécifications complètes, l'algorithme d'amorçage et la
+justification de l'approche « consommable ».
+
+### Séquence d'amorçage firmware
+
+Le firmware doit implémenter un **nouvel état AMORÇAGE** avec une
+rampe progressive de puissance et des seuils de watchdog adaptatifs.
+Voir [§14 §5](14_adaptation_rf.md#5-solution--séquence-damorçage-firmware-soft-start-ssr)
+et [§6.6](06_controle.md#66-machine-détat-du-firmware).
+
+---
+
+## 5.7 Récapitulatif des équipements de sécurité
 
 | Équipement | Obligatoire | Usage |
 |:---|:---|:---|
 | SSR + watchdog ESP32 (coupure magnétron) | ✅ | Protection électrique embarquée |
+| Firmware soft-start SSR (rampe d'amorçage) | ✅ | Protection magnétron contre puissance réfléchie (VSWR amorçage). [§14](14_adaptation_rf.md) |
 | Perche de décharge HT | ✅ | Décharge du condensateur |
 | Multimètre (CAT III/IV) | ✅ | Vérification d'absence de tension |
 | Détecteur de fuites micro-ondes | ✅ | Contrôle du blindage RF |
@@ -424,7 +483,7 @@ L'ESP32 embarqué doit monitorer en continu :
 
 ---
 
-## 5.7 Checklist pré-expérience
+## 5.8 Checklist pré-expérience
 
 Avant **chaque session**, vérifier :
 
@@ -439,7 +498,7 @@ Avant **chaque session**, vérifier :
       (perche + multimètre)
 - [ ] Interrupteur d'urgence / SSR fonctionnel et accessible
 
-**Chambre et confinement :**
+**Chaîne RF et confinement :**
 - [ ] Joint silicone de la chambre en bon état, bien serré
 - [ ] Couvercle acrylique inspecté (pas de fissure, pas de jaunissement)
 - [ ] Grillage de protection en place sur le couvercle (Faraday + éclats)

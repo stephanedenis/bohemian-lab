@@ -43,9 +43,11 @@
 
 > **Stock confirmé** : **17 composants sur 22** sont en stock (✅).
 > Les restants (🔶) sont le(s) magnétron(s) LG 2M213-01TAG (à récupérer d'un micro-ondes ou acheter ~15 $),
-> le baril 205L (à trouver) et le fil de torsion — tous facilement
-> sourçables. Le plateau porteur (avec la tige rigide) et le contrepoids
+> le baril 205L (à trouver), le fil de torsion
+> — tous facilement sourçables. Le plateau porteur (avec la tige rigide) et le contrepoids
 > sont à fabriquer. Le 2ᵉ magnétron (1b) n'est nécessaire qu'en Phase 2.
+> La protection du magnétron contre la puissance réfléchie est assurée par le
+> **firmware soft-start SSR** (aucun composant additionnel). Voir [§14](14_adaptation_rf.md).
 
 ---
 
@@ -347,6 +349,17 @@ préférentiellement le mode TM$_{310}$. Le magnétron étant au-dessus
 du grillage, il est **hors du volume sous vide** et **hors de la
 cage de Faraday** — à pression atmosphérique — ce qui simplifie
 l'alimentation HT et le refroidissement.
+
+> ⚠️ **Adaptation d'impédance et amorçage** — Avant la formation du
+> plasma, la cavité renvoie ~85–90 % de la puissance injectée
+> (VSWR > 10). La protection du magnétron est assurée par le
+> **firmware soft-start SSR** : une rampe progressive du duty cycle
+> (3 % → 43 %) minimise l'énergie réfléchie pendant l'amorçage.
+> Le magnétron domestique LG 2M213-01TAG (~15 $) est traité comme un
+> **consommable** — aucun circulateur n'est nécessaire (masse
+> incompatible avec le pendule de torsion). Voir
+> [§14 — Adaptation RF et Amorçage](14_adaptation_rf.md) pour la
+> séquence d'amorçage firmware et la justification complète.
 
 > 💡 **Avantage clé** — Le magnétron n'est ni dans le vide, ni dans
 > la cage. Pas besoin de feedthrough HT (4 000 V). Il est accessible

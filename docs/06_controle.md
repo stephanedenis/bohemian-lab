@@ -367,29 +367,38 @@ comme « instantanée » du point de vue de la boucle lente.
 
 ## 6.6 Machine d'état du firmware
 
-Le firmware s'organise en une **machine d'état finie** avec 5 états :
+Le firmware s'organise en une **machine d'état finie** avec 6 états :
 
 ```
-  ┌──────────┐   démarrage   ┌──────────┐   vide atteint   ┌──────────┐
-  │   INIT   │──────────────▶│  POMPAGE  │────────────────▶│  PLASMA  │
-  │          │               │  PID₃ ON  │                 │ PID₁+₂ ON│
-  └──────────┘               └──────────┘                 └──────────┘
-       │                          │                            │
-       │                          │ anomalie                   │ vanne fermée
-       │                          ▼                            ▼ pompe déconnectée
-       │                    ┌──────────┐                 ┌──────────┐
-       │                    │  ERREUR  │◀────────────────│  MESURE  │
-       │                    │ SSR OFF  │   anomalie      │ PID₁+₂ ON│
-       │                    └──────────┘                 │ PID₃ OFF │
-       │                          ▲                      └──────────┘
-       └──────────────────────────┘                            │
-                  watchdog timeout                             │
-                                                               ▼
-                                                         ┌──────────┐
-                                                         │   FIN    │
-                                                         │ SSR OFF  │
-                                                         │ log flush│
-                                                         └──────────┘
+  ┌──────────┐  démarrage  ┌──────────┐  vide atteint  ┌───────────┐
+  │   INIT   │────────────▶│  POMPAGE  │───────────────▶│ AMORÇAGE  │
+  │          │             │  PID₃ ON  │                │ rampe SSR │
+  └──────────┘             └──────────┘                └───────────┘
+       │                        │                            │
+       │                        │ anomalie            claquage confirmé
+       │                        ▼                      (P_r chute)
+       │                  ┌──────────┐                      │
+       │                  │  ERREUR  │                      ▼
+       │                  │ SSR OFF  │                ┌──────────┐
+       │                  └──────────┘                │  PLASMA  │
+       │                        ▲                     │ PID₂ ON  │
+       │                        │ anomalie            └──────────┘
+       │                        │                          │
+       │                        │                     vanne fermée
+       │                        │                     pompe déconnectée
+       │                        │                          ▼
+       │                        │                    ┌──────────┐
+       │                        ├────────────────────│  MESURE  │
+       │                        │                    │ PID₂ ON  │
+       │                        │                    │ PID₃ OFF │
+       │                        │                    └──────────┘
+       │                        │                          │
+       │                        │                          ▼
+       │                        │                    ┌──────────┐
+       └────────────────────────┘                    │   FIN    │
+                 watchdog timeout                    │ SSR OFF  │
+                                                     │ log flush│
+                                                     └──────────┘
 ```
 
 ### Détail des états
@@ -398,7 +407,8 @@ Le firmware s'organise en une **machine d'état finie** avec 5 états :
 |:---|:---|:---|:---|:---|:---|:---|
 | **INIT** | ✘ | ✘ | ✘ | OFF | Connexion | Auto-test ADC, calibration zéros, connexion dashboard |
 | **POMPAGE** | ✘ | ✘ | ✔ | OFF | Actif | Pompe active, ajustement pression vers $P_0$ |
-| **PLASMA** | ✔ | ✔ | ✔ | **ON** | Actif | Magnétron allumé, 3 boucles actives, tuning des PID |
+| **AMORÇAGE** | ✘ | ✘ | ✘ | **ON (rampe)** | Actif | Rampe progressive du duty SSR (5 % → cible). Watchdog $P_r$ **adaptatif** : attend la chute de $P_r$ au lieu de couper sur seuil haut. Le soft-start SSR minimise l'énergie réfléchie par pulse pendant l'amorçage. Timeout 5 s → ERREUR si pas de claquage. Voir [§14](14_adaptation_rf.md#5-solution--séquence-damorçage-firmware-soft-start-ssr). |
+| **PLASMA** | ✔ | ✔ | ✔ | **ON** | Actif | Magnétron allumé, PID actifs, tuning. Seuil watchdog $P_r$ normal rétabli. |
 | **MESURE** | ✔ | ✔ | ✘ | ON | Actif | Vanne fermée, pompe déconnectée, acquisition données |
 | **ERREUR** | ✘ | ✘ | ✘ | **OFF** | Alerte | Anomalie détectée — magnétron coupé, LED+buzzer |
 | **FIN** | ✘ | ✘ | ✘ | OFF | Log flush | Session terminée, écriture finale SD, extinction |
@@ -408,7 +418,9 @@ Le firmware s'organise en une **machine d'état finie** avec 5 états :
 | De → Vers | Condition | Action |
 |:---|:---|:---|
 | INIT → POMPAGE | Auto-test OK + Wi-Fi connecté | Activer PID₃, démarrer logging |
-| POMPAGE → PLASMA | $P < P_0 + 0{,}5$ mbar (vide atteint) | Activer SSR, démarrer PID₁+PID₂ |
+| POMPAGE → AMORÇAGE | $P < P_0 + 0{,}5$ mbar (vide atteint) + injection H₂O confirmée | Pré-chauffe filament (2 s), puis rampe SSR à 5 %. Watchdog $P_r$ en mode **adaptatif** (attend chute, ne coupe pas). |
+| AMORÇAGE → PLASMA | $P_r(t) < 0{,}50 \times P_r(t_0)$ (claquage confirmé) | Rampe progressive du duty SSR → cible. Activer PID₂. Rétablir seuil watchdog $P_r$ normal. |
+| AMORÇAGE → ERREUR | Timeout 5 s sans chute de $P_r$ | Diagnostic : pression incorrecte, pas de gaz, fuite. SSR OFF. |
 | PLASMA → MESURE | Opérateur envoie commande « fermer vanne » | Désactiver PID₃ |
 | MESURE → FIN | Opérateur envoie « arrêt » ou $V_{\text{bat}} < 16$ V | Couper SSR, flush SD |
 | * → ERREUR | Watchdog (voir §6.7) | **Couper SSR immédiatement** |
@@ -428,7 +440,7 @@ pour le contexte de sécurité.
 
 | Condition | Seuil | Tempo | Action |
 |:---|:---|:---|:---|
-| $P_r > P_{r,\text{max}}$ | Découplage total (onde non absorbée) | 100 ms | SSR OFF + alerte |
+| $P_r > P_{r,\text{max}}$ | Découplage total (onde non absorbée). **Désactivé** en état AMORÇAGE (VSWR élevé attendu, le soft-start SSR minimise l'énergie par pulse — voir [§14](14_adaptation_rf.md)) | 100 ms | SSR OFF + alerte |
 | $T_{\text{paroi}} > T_{\text{max}}$ | 150 °C | 1 s | SSR OFF + alerte |
 | Perte signal pression | Capteur déconnecté ($V_{\text{ADC}} < 10$ mV) | 500 ms | SSR OFF + alerte |
 | $V_{\text{bat}} < 15$ V | Surdécharge Li-ion | Immédiat | SSR OFF + extinction |
@@ -599,8 +611,9 @@ Voici la procédure complète de mise en route du système de contrôle :
 | 6 | Connecter pompe + ouvrir vanne d'isolement | Pression affichée | INIT → POMPAGE |
 | 7 | Pomper jusqu'à $P < P_0 + 0{,}5$ mbar | Dashboard : $P$ ≈ 3 mbar | POMPAGE |
 | 8 | Injecter vapeur d'eau (si nécessaire) | $P$ stabilisée | POMPAGE |
-| 9 | Démarrer magnétron (commande dashboard) | $P_r$ chute → résonance | POMPAGE → PLASMA |
-| 10 | Attendre stabilisation PID₁+PID₂ (~10 s) | $e_1, e_2 < $ seuils | PLASMA |
+| 9 | Démarrer magnétron (commande dashboard) | Rampe SSR 5 % → filament chauffe 2 s | POMPAGE → **AMORÇAGE** |
+| 9b | Attendre claquage RF ($P_r$ chute > 50 %) | $P_r$ chute confirmée (< 5 s) | **AMORÇAGE** → PLASMA |
+| 10 | Attendre stabilisation PID₂ (~10 s) | $e_2 < $ seuil | PLASMA |
 | 11 | Fermer vanne + déconnecter pompe | Vanne fermée, tuyau retiré | PLASMA → MESURE |
 | 12 | Attendre amortissement du pendule (~30 min) | Oscillations amorties | MESURE |
 | 13 | Début de l'acquisition de données | Log CSV actif | MESURE |

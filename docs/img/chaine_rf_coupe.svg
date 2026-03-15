@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" font-family="'Segoe UI', Arial, sans-serif" font-size="11">
+  <title>Chaîne RF simplifiée — Vue en coupe (plan horizontal)</title>
+
+  <!-- Fond -->
+  <rect width="700" height="340" fill="#ffffff"/>
+
+  <!-- Titre -->
+  <text x="350" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Chaîne RF — Vue en coupe (plan horizontal)</text>
+  <text x="350" y="40" text-anchor="middle" font-size="10" fill="#64748b">Sans circulateur — Magnétron consommable + soft-start SSR</text>
+
+  <!-- Zone ATMOSPHÈRE (gauche) -->
+  <rect x="20" y="55" width="340" height="230" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="190" y="72" text-anchor="middle" font-size="10" fill="#64748b" font-weight="bold">PRESSION ATMOSPHÉRIQUE</text>
+
+  <!-- Zone VIDE (droite) -->
+  <rect x="400" y="55" width="280" height="230" rx="8" fill="#faf5ff" stroke="#a855f7" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="540" y="72" text-anchor="middle" font-size="10" fill="#7c3aed" font-weight="bold">VIDE (2–5 mbar)</text>
+
+  <!-- 1. MAGNÉTRON -->
+  <rect x="40" y="100" width="140" height="60" rx="6" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <text x="110" y="125" text-anchor="middle" font-weight="bold" fill="white" font-size="12">MAGNÉTRON</text>
+  <text x="110" y="140" text-anchor="middle" fill="#fecaca" font-size="9">LG 2M213-01TAG ~700 W</text>
+  <text x="110" y="152" text-anchor="middle" fill="#fecaca" font-size="8">consommable (~15 $)</text>
+
+  <!-- Flèche Magnétron → Coupleur -->
+  <line x1="180" y1="130" x2="205" y2="130" stroke="#b91c1c" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <text x="193" y="122" text-anchor="middle" font-size="8" fill="#b91c1c">P_i</text>
+
+  <!-- 2. COUPLEUR DIRECTIONNEL -->
+  <rect x="210" y="100" width="130" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="275" y="120" text-anchor="middle" font-weight="bold" fill="#92400e" font-size="11">COUPLEUR</text>
+  <text x="275" y="134" text-anchor="middle" fill="#92400e" font-size="9">DIRECTIONNEL</text>
+  <text x="275" y="148" text-anchor="middle" fill="#92400e" font-size="9">−20 dB</text>
+
+  <!-- Sortie coupleur vers ESP32 (bas) -->
+  <line x1="275" y1="160" x2="275" y2="195" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <rect x="230" y="195" width="90" height="35" rx="4" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="275" y="210" text-anchor="middle" font-weight="bold" fill="#3730a3" font-size="9">ESP32 ADC</text>
+  <text x="275" y="222" text-anchor="middle" fill="#3730a3" font-size="8">P_r → détection</text>
+
+  <!-- Flèche Coupleur → Iris -->
+  <line x1="340" y1="130" x2="403" y2="130" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowAmber)"/>
+
+  <!-- 3. IRIS / GRILLAGE (frontière) -->
+  <rect x="403" y="85" width="20" height="90" rx="2" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+  <text x="413" y="80" text-anchor="middle" font-weight="bold" fill="#475569" font-size="9">IRIS</text>
+
+  <!-- Flèche Iris → Cavité -->
+  <line x1="423" y1="130" x2="460" y2="130" stroke="#a855f7" stroke-width="2" marker-end="url(#arrowViolet)"/>
+
+  <!-- 4. CAVITÉ PLASMA -->
+  <ellipse cx="560" cy="155" rx="100" ry="85" fill="url(#plasmaGradient)" stroke="#a855f7" stroke-width="2"/>
+  <text x="560" y="140" text-anchor="middle" font-weight="bold" fill="#7c3aed" font-size="12">CAVITÉ PLASMA</text>
+  <text x="560" y="156" text-anchor="middle" fill="#7c3aed" font-size="9">Chambre inox ⌀250×250</text>
+  <text x="560" y="170" text-anchor="middle" fill="#7c3aed" font-size="9">H₂O ionisée (2–5 mbar)</text>
+
+  <!-- Puissance réfléchie (retour) -->
+  <line x1="260" y1="170" x2="140" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowRedDash)"/>
+  <text x="200" y="183" text-anchor="middle" font-size="8" fill="#dc2626">P_r (réfléchie) → anode magnétron</text>
+  <text x="200" y="193" text-anchor="middle" font-size="7" fill="#dc2626" font-style="italic">dissipée en chaleur (consommable)</text>
+
+  <!-- Annotation soft-start -->
+  <rect x="35" y="240" width="320" height="35" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="195" y="254" text-anchor="middle" font-size="9" fill="#14532d" font-weight="bold">💡 Protection : rampe duty SSR (3 % → 43 %)</text>
+  <text x="195" y="266" text-anchor="middle" font-size="8" fill="#14532d">Pas de circulateur — 0 kg, 0 $ — magnétron = consommable 15 $</text>
+
+  <!-- Légende numérotée -->
+  <text x="110" y="92" text-anchor="middle" font-size="9" fill="#b91c1c" font-weight="bold">①</text>
+  <text x="275" y="92" text-anchor="middle" font-size="9" fill="#92400e" font-weight="bold">②</text>
+  <text x="413" y="260" text-anchor="middle" font-size="9" fill="#475569" font-weight="bold">③</text>
+  <text x="560" y="250" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">④</text>
+
+  <!-- Sous-titre bas -->
+  <text x="350" y="310" text-anchor="middle" font-size="9" fill="#64748b">① Magnétron → ② Coupleur directionnel → ③ Iris (grillage) → ④ Cavité plasma</text>
+  <text x="350" y="325" text-anchor="middle" font-size="8" fill="#94a3b8">Chaîne RF simplifiée — 2 composants entre source et cavité</text>
+
+  <!-- Defs -->
+  <defs>
+    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#b91c1c"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrowViolet" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#a855f7"/>
+    </marker>
+    <marker id="arrowRedDash" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#dc2626"/>
+    </marker>
+    <radialGradient id="plasmaGradient" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#e9d5ff" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#c084fc" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#faf5ff" stop-opacity="0.1"/>
+    </radialGradient>
+  </defs>
+</svg>
