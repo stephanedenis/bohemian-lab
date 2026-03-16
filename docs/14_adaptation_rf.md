@@ -64,7 +64,7 @@ $$\text{VSWR} = \frac{1 + |\Gamma|}{1 - |\Gamma|}
 \qquad \text{où} \quad
 \Gamma = \frac{Z_L - Z_0}{Z_L + Z_0}$$
 
-| Situation | $|\Gamma|$ | VSWR | $P_r / P_i$ | Commentaire |
+| Situation | $\lvert\Gamma\rvert$ | VSWR | $P_r / P_i$ | Commentaire |
 |:---|:---|:---|:---|:---|
 | **Charge parfaite** (plasma résonant) | 0 | 1,0 | 0 % | État cible |
 | Légère désadaptation | 0,2 | 1,5 | 4 % | Fonctionnement normal |
@@ -106,7 +106,7 @@ une phase transitoire de forte réflexion.
 
 ### Séquence temporelle détaillée
 
-| Phase | Temps | Contenu cavité | $Z_L$ vue par le magnétron | $|\Gamma|$ | $P_r$ (pour 700 W) |
+| Phase | Temps | Contenu cavité | $Z_L$ vue par le magnétron | $\lvert\Gamma\rvert$ | $P_r$ (pour 700 W) |
 |:---|:---|:---|:---|:---|:---|
 | **A** — Vide résiduel | $t < 0$ | < 0,5 mbar, pas de gaz | Court-circuit / circuit ouvert (modes propres vides) | ~0,95 | **~630 W** |
 | **B** — Après injection H₂O | $t = 0$ | 3 mbar H₂O, vapeur froide | Cavité + gaz neutre (faible $\varepsilon_r$) | ~0,85 | **~505 W** |
@@ -258,10 +258,10 @@ par cycle et la puissance **moyenne** dissipée dans l'anode :
 
 | Duty SSR | Puissance crête | Puissance moyenne | $P_r$ réfléchie moy. | État cavité |
 |:---|:---|:---|:---|:---|
-| 3 % | 700 W | 21 W | ~18 W | Vide, $|\Gamma| \approx 0{,}85$ |
+| 3 % | 700 W | 21 W | ~18 W | Vide, $\lvert\Gamma\rvert \approx 0{,}85$ |
 | 5 % | 700 W | 35 W | ~30 W | Début ionisation |
 | 10 % | 700 W | 70 W | ~60 W | Plasma instable |
-| 20 % | 700 W | 140 W | ↘ rapide | Plasma établi, $|\Gamma|$ baisse |
+| 20 % | 700 W | 140 W | ↘ rapide | Plasma établi, $\lvert\Gamma\rvert$ baisse |
 | 43 % | 700 W | 300 W | < 15 W | Régime nominal |
 
 **Pendant les premières secondes** (3–5 % duty) :

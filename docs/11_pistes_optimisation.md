@@ -153,7 +153,7 @@ suffisante pour accrocher le magnétron. Voir Pozar [1], chap. 12.
 #### Verdict
 
 $$\boxed{Q \approx 280 \;\xrightarrow{\text{feuille cuivre 35 µm}}\;
-Q \approx 1\,280 \quad (+350\%) \quad \text{pour ~10 \$ et 1 h de travail}}$$
+Q \approx 1\,280 \quad (+350\,\%) \quad \text{pour} \sim 10\;\text{CAD et 1 h de travail}}$$
 
 **C'est l'optimisation au meilleur rapport coût/impact du projet.**
 Réversible, non destructive, compatible vide et plasma. À faire
