@@ -8,41 +8,72 @@
 
 ---
 
-## En bref — L'idée en 30 secondes
+## L'objectif en une phrase
 
-Imaginez que vous souffliez dans un sifflet : l'air vibre et crée un son
-qui se propage. Ici, le « souffle » est une **onde micro-onde** (identique
-à votre four de cuisine) et le « sifflet » est un **plasma** — un gaz
-ionisé qui brille comme un petit éclair, enfermé dans une boîte en acier
-inoxydable hermétiquement scellée.
+> **Peut-on créer une force nette à l'intérieur d'une boîte fermée
+> — sans rien éjecter ?**
 
-En physique classique, pousser contre les murs d'une boîte fermée ne peut
-pas faire bouger la boîte — les forces internes s'annulent (3ᵉ loi de
-Newton). Mais la **mécanique bohmienne** — une interprétation de la
-physique quantique où les particules suivent de vraies trajectoires guidées
-par une « onde pilote » — prédit qu'un **gradient asymétrique** dans le
-plasma pourrait violer cette symétrie et produire une force nette
-mesurable.
+La physique classique dit non. La mécanique quantique standard aussi.
+L'interprétation de **de Broglie–Bohm** dit : *peut-être, si le
+gradient quantique est asymétrique*. Cette expérience le **teste**.
 
-L'expérience ne *présuppose* pas un résultat positif : elle le **teste**.
-Un résultat nul est tout aussi informatif scientifiquement — il fournit
-une borne supérieure publiable sur la force anomale.
+---
 
-### L'analogie de la double fente
+## Pourquoi c'est important
 
-Dans l'expérience de la [double fente](https://fr.wikipedia.org/wiki/Fentes_de_Young),
-un photon passe « par les deux fentes à la fois » (du point de vue de l'onde) et
-crée des franges d'interférence. Dans l'interprétation de Bohm, le photon passe
-par **une seule** fente, mais le potentiel quantique $Q$ — créé par l'interférence
-— le **dévie systématiquement** vers les franges claires.
+![Résultat nul vs positif — dans les deux cas, le résultat est publiable](docs/img/resultats_dual.svg)
 
-Notre cavité plasma reproduit cet effet à grande échelle : le plasma joue le rôle
-d'une « fente variable » qui replie la fonction d'onde sur elle-même, forçant une
-déviation nette du flux de photons. Cette déviation — une force — est formellement
-identique à ce que produirait une **courbure de l'espace-temps**.
+<!-- Fallback texte si le SVG ne s'affiche pas :
+     • Résultat nul → borne supérieure publiable, contrainte pour la communauté
+     • Résultat positif → violation 3ᵉ loi Newton, propulsion sans éjection -->
 
-> 📖 L'analogie complète (double fente → cavité → espace-temps courbe) est
-> développée dans **[Objectifs Scientifiques](docs/01_objectifs.md)**.
+L'expérience ne *présuppose* pas un résultat positif :
+elle le met à l'épreuve.
+
+> 📖 L'analyse complète des implications est dans
+> **[Implications d'un résultat positif](docs/07_implications.md)**.
+
+---
+
+## Comment ça marche — en 60 secondes
+
+### 🌊 L'analogie de la vague
+
+Imaginez une piscine fermée avec une machine à vagues à une extrémité.
+Les vagues rebondissent contre les murs, créant des **interférences** —
+des zones calmes et des zones agitées. Normalement, la piscine ne bouge
+pas : les forces se compensent de tous les côtés.
+
+Maintenant, placez un **obstacle asymétrique** dans la piscine — un
+rocher en pente douce d'un côté et abrupt de l'autre. Les vagues sont
+déviées : elles « poussent » plus fort d'un côté que de l'autre.
+
+Dans notre expérience :
+- La **piscine** → une chambre à vide en acier inoxydable
+- Les **vagues** → des micro-ondes à 2,45 GHz (identiques à un four de cuisine)
+- Le **rocher asymétrique** → un **plasma** de vapeur d'eau, plus dense
+  d'un côté que de l'autre
+
+![Schéma de l'expérience — chambre plasma, pendule de torsion, gradient asymétrique](docs/img/schema_experience.svg)
+
+<!-- Fallback : Magnétron (700 W, 2,45 GHz) → ondes RF → plasma H₂O asymétrique
+     dans chambre inox ⌀250mm, sur pendule de torsion dans baril 205 L. -->
+
+### 🔬 La physique derrière
+
+La **mécanique de de Broglie–Bohm** (1927/1952) prédit que chaque
+photon suit une trajectoire **réelle**, guidée par une « onde pilote ».
+Cette onde crée un **potentiel quantique** :
+
+$$Q = -\frac{\hbar^2}{2m}\frac{\nabla^2 R}{R}$$
+
+Si le plasma rend ce potentiel **asymétrique** ($\nabla Q \neq 0$),
+une force nette apparaît — même à l'intérieur d'une boîte fermée.
+C'est exactement ce que le pendule de torsion cherche à mesurer.
+
+> 📖 L'analogie complète (double fente → cavité plasma → espace-temps
+> courbe) est développée dans **[Objectifs Scientifiques](docs/01_objectifs.md)**.
+> Le cadre mathématique est dans **[Cadre théorique](docs/02_theorie.md)**.
 
 ---
 
@@ -61,18 +92,11 @@ identique à ce que produirait une **courbure de l'espace-temps**.
 
 ## Objectifs scientifiques
 
-1. **Force anomale en système fermé** — Mesurer si une force au-delà de
-   la pression de radiation classique existe dans une chambre scellée,
-   sans éjection de masse. Le résultat — positif ou nul — est
-   scientifiquement informatif.
-2. **Gradient de phase asymétrique** — Quantifier comment un plasma
-   inhomogène (plus dense d'un côté que de l'autre) dévie les photons
-   micro-ondes, comme un prisme courbe la lumière. Les 8 tubes Nixie
-   IN-13 en mode passif cartographient ce gradient.
-3. **Interaction potentiel quantique / plasma** — Valider que
-   l'interaction entre $Q = -\frac{\hbar^2}{2m}\frac{\nabla^2 R}{R}$ et
-   un plasma de vapeur d'eau peut produire un effet mécanique mesurable
-   ($F_Q = -\nabla Q$).
+| # | Objectif | Ce qu'on mesure |
+|:--|:---------|:----------------|
+| 1 | **Force anomale en système fermé** | Existe-t-il une force au-delà de la pression de radiation classique ($P/c$) dans une chambre scellée ? Résultat positif ou nul → publiable. |
+| 2 | **Gradient de phase asymétrique** | Comment un plasma inhomogène dévie les photons micro-ondes (comme un prisme courbe la lumière). Cartographié par les 8 tubes Nixie IN-13. |
+| 3 | **Potentiel quantique mesurable** | Le potentiel quantique $Q = -\frac{\hbar^2}{2m}\frac{\nabla^2 R}{R}$ peut-il produire un effet mécanique ($F_Q = -\nabla Q$) détectable au pendule ? |
 
 > 📖 **[Objectifs — documentation détaillée →](docs/01_objectifs.md)** —
 > vulgarisation complète, analogie double fente → cavité → espace-temps,

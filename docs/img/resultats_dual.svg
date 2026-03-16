@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" font-family="'Segoe UI', Arial, sans-serif">
+  <title>Pourquoi c'est important — Résultat nul vs positif</title>
+
+  <defs>
+    <linearGradient id="gradNull" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#eff6ff"/>
+    </linearGradient>
+    <linearGradient id="gradPositif" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d1fae5"/>
+      <stop offset="100%" stop-color="#ecfdf5"/>
+    </linearGradient>
+    <linearGradient id="gradCentre" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fffbeb"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Fond -->
+  <rect width="820" height="300" fill="#ffffff" rx="12"/>
+
+  <!-- Bandeau titre -->
+  <rect x="0" y="0" width="820" height="42" rx="12" fill="#1e293b"/>
+  <rect x="0" y="20" width="820" height="22" fill="#1e293b"/>
+  <text x="410" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">DANS LES DEUX CAS, LE RÉSULTAT EST PUBLIABLE</text>
+
+  <!-- ═══ Carte gauche : Résultat nul ═══ -->
+  <rect x="30" y="60" width="310" height="220" rx="10" fill="url(#gradNull)" stroke="#93c5fd" stroke-width="2" filter="url(#shadow)"/>
+
+  <!-- Icône ❌ stylisée -->
+  <circle cx="68" cy="90" r="16" fill="#3b82f6" opacity="0.15"/>
+  <text x="68" y="97" text-anchor="middle" font-size="22">🔬</text>
+
+  <text x="92" y="96" font-size="14" font-weight="bold" fill="#1e40af">Résultat nul</text>
+  <text x="92" y="112" font-size="10" fill="#3b82f6">Le pendule ne détecte aucune force anomale</text>
+
+  <line x1="50" y1="122" x2="320" y2="122" stroke="#93c5fd" stroke-width="1"/>
+
+  <text x="50" y="144" font-size="11" fill="#1e3a5f" font-weight="bold">Ce que ça prouve :</text>
+  <text x="50" y="162" font-size="10.5" fill="#334155">• Borne supérieure publiable sur la force</text>
+  <text x="50" y="178" font-size="10.5" fill="#334155">  bohmienne — contrainte pour la communauté</text>
+  <text x="50" y="198" font-size="10.5" fill="#334155">• Validation du protocole et des contrôles</text>
+  <text x="50" y="218" font-size="10.5" fill="#334155">• Données de référence pour réplication</text>
+
+  <rect x="50" y="240" width="270" height="26" rx="5" fill="#1e40af" opacity="0.08"/>
+  <text x="185" y="258" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">→ Contribution à la physique fondamentale</text>
+
+  <!-- ═══ Carte centre : Point commun ═══ -->
+  <rect x="355" y="90" width="110" height="120" rx="55" fill="url(#gradCentre)" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+  <text x="410" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">EXPÉRIENCE</text>
+  <text x="410" y="152" text-anchor="middle" font-size="26">⚖️</text>
+  <text x="410" y="180" text-anchor="middle" font-size="10" fill="#92400e">Le test tranche.</text>
+  <text x="410" y="194" text-anchor="middle" font-size="9" fill="#b45309">Pas de présupposé.</text>
+
+  <!-- Flèches centre → cartes -->
+  <path d="M355,150 L345,150" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <path d="M465,150 L475,150" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- ═══ Carte droite : Résultat positif ═══ -->
+  <rect x="480" y="60" width="310" height="220" rx="10" fill="url(#gradPositif)" stroke="#6ee7b7" stroke-width="2" filter="url(#shadow)"/>
+
+  <!-- Icône ✅ stylisée -->
+  <circle cx="518" cy="90" r="16" fill="#059669" opacity="0.15"/>
+  <text x="518" y="97" text-anchor="middle" font-size="22">⚡</text>
+
+  <text x="542" y="96" font-size="14" font-weight="bold" fill="#065f46">Résultat positif</text>
+  <text x="542" y="112" font-size="10" fill="#059669">Force reproductible détectée (SNR > 3)</text>
+
+  <line x1="500" y1="122" x2="770" y2="122" stroke="#6ee7b7" stroke-width="1"/>
+
+  <text x="500" y="144" font-size="11" fill="#1e3a5f" font-weight="bold">Ce que ça implique :</text>
+  <text x="500" y="162" font-size="10.5" fill="#334155">• Première violation observée de la 3ᵉ loi</text>
+  <text x="500" y="178" font-size="10.5" fill="#334155">  de Newton en système fermé</text>
+  <text x="500" y="198" font-size="10.5" fill="#334155">• Propulsion sans éjection de masse</text>
+  <text x="500" y="218" font-size="10.5" fill="#334155">• Nouveau chapitre en physique quantique</text>
+
+  <rect x="500" y="240" width="270" height="26" rx="5" fill="#065f46" opacity="0.08"/>
+  <text x="635" y="258" text-anchor="middle" font-size="10" fill="#065f46" font-weight="bold">→ Révolution en physique fondamentale</text>
+
+  <!-- Markers -->
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#059669"/>
+    </marker>
+  </defs>
+</svg>

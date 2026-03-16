@@ -71,10 +71,13 @@ $$\text{VSWR} = \frac{1 + |\Gamma|}{1 - |\Gamma|}
 | **Vapeur froide** (non ionisée) | 0,8–0,9 | 9–19 | **64–81 %** | ⚠️ Amorçage |
 | **Cavité vide** (vide pur) | ~0,95 | ~39 | **~90 %** | ❌ Dangereux |
 
-> 💡 **En termes simples** — Imaginez un amplificateur audio connecté
-> à un haut-parleur : si le haut-parleur est débranché (circuit ouvert),
-> l'énergie revient dans l'amplificateur et le grille. Un magnétron
-> sans charge absorbante, c'est la même chose — en 700 watts.
+> 💡 **En termes simples** — Imaginez une vague qui arrive sur une
+> **plage** en pente douce : l'énergie se dissipe progressivement dans
+> le sable — c'est le cas « plasma stable ». Maintenant, remplacez la
+> plage par une **falaise verticale** : la vague rebondit violemment
+> vers le large avec presque toute son énergie. Un magnétron qui
+> envoie 700 W dans une cavité sans plasma, c'est la vague contre la
+> falaise — l'énergie revient à la source et la détruit.
 
 ### Conséquences sur le magnétron
 

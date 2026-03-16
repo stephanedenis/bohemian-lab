@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 480" font-family="'Segoe UI', Arial, sans-serif">
+  <title>Schéma de l'expérience — Chambre plasma et pendule de torsion</title>
+
+  <defs>
+    <linearGradient id="inoxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <radialGradient id="plasmaGrad" cx="65%" cy="50%" r="45%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#a855f7" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#7c3aed" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#faf5ff" stop-opacity="0.05"/>
+    </radialGradient>
+    <radialGradient id="rfGrad" cx="0%" cy="50%" r="100%">
+      <stop offset="0%" stop-color="#fca5a5" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fca5a5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="barilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="sh2">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrRF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrForce" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <path d="M0,0 L12,4 L0,8" fill="#059669"/>
+    </marker>
+    <marker id="arrGrad" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <!-- Fond -->
+  <rect width="820" height="480" fill="#ffffff" rx="12"/>
+
+  <!-- Titre -->
+  <text x="410" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">L'EXPÉRIENCE — VUE D'ENSEMBLE</text>
+  <text x="410" y="44" text-anchor="middle" font-size="10" fill="#64748b">Chambre à vide sur pendule de torsion, confinée dans un baril blindé</text>
+
+  <!-- ═══ BARIL DE 205 L (enceinte extérieure) ═══ -->
+  <rect x="80" y="62" width="660" height="340" rx="16" fill="none" stroke="url(#barilGrad)" stroke-width="3" stroke-dasharray="12,4"/>
+  <text x="730" y="80" text-anchor="end" font-size="9" fill="#64748b" font-style="italic">Baril 205 L (acier)</text>
+  <text x="730" y="93" text-anchor="end" font-size="8" fill="#94a3b8">Double Faraday · coupe-vent</text>
+  <text x="730" y="106" text-anchor="end" font-size="8" fill="#94a3b8">rétention éclats</text>
+
+  <!-- ═══ CHAMBRE INOX ═══ -->
+  <rect x="160" y="100" width="420" height="240" rx="12" fill="url(#inoxGrad)" stroke="#475569" stroke-width="2.5" filter="url(#sh2)"/>
+
+  <!-- Étiquette chambre -->
+  <text x="370" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">CHAMBRE À VIDE (INOX)</text>
+  <text x="370" y="140" text-anchor="middle" font-size="9" fill="#64748b">⌀250 × 250 mm · 2–5 mbar · système fermé hermétique</text>
+
+  <!-- Grillage Faraday (couvercle) -->
+  <rect x="160" y="100" width="420" height="14" rx="3" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/>
+  <line x1="175" y1="107" x2="565" y2="107" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="370" y="96" text-anchor="middle" font-size="8" fill="#475569">▬ grillage Faraday (iris) ▬</text>
+
+  <!-- ═══ MAGNÉTRON ═══ -->
+  <rect x="170" y="160" width="120" height="65" rx="8" fill="#ef4444" stroke="#b91c1c" stroke-width="2" filter="url(#sh2)"/>
+  <text x="230" y="182" text-anchor="middle" font-weight="bold" fill="white" font-size="12">MAGNÉTRON</text>
+  <text x="230" y="197" text-anchor="middle" fill="#fecaca" font-size="9">2,45 GHz · 700 W</text>
+  <text x="230" y="210" text-anchor="middle" fill="#fecaca" font-size="8">consommable ~15 $</text>
+
+  <!-- Ondes RF (sinusoïdes) -->
+  <path d="M295,192 Q310,178 325,192 Q340,206 355,192 Q370,178 385,192 Q400,206 415,192" stroke="#ef4444" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <path d="M295,185 Q310,171 325,185 Q340,199 355,185 Q370,171 385,185 Q400,199 415,185" stroke="#ef4444" stroke-width="1.2" fill="none" opacity="0.35"/>
+  <path d="M295,199 Q310,185 325,199 Q340,213 355,199 Q370,185 385,199 Q400,213 415,199" stroke="#ef4444" stroke-width="1.2" fill="none" opacity="0.35"/>
+  <text x="355" y="170" text-anchor="middle" font-size="8" fill="#dc2626">micro-ondes 2,45 GHz →</text>
+
+  <!-- ═══ PLASMA (gradient asymétrique) ═══ -->
+  <ellipse cx="470" cy="230" rx="80" ry="75" fill="url(#plasmaGrad)" filter="url(#glow)"/>
+  <ellipse cx="470" cy="230" rx="80" ry="75" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- Gradient de densité → barres progressives -->
+  <rect x="415" y="205" width="8" height="50" rx="2" fill="#c084fc" opacity="0.25"/>
+  <rect x="428" y="200" width="8" height="60" rx="2" fill="#a855f7" opacity="0.35"/>
+  <rect x="441" y="195" width="8" height="70" rx="2" fill="#8b5cf6" opacity="0.50"/>
+  <rect x="454" y="190" width="10" height="80" rx="2" fill="#7c3aed" opacity="0.65"/>
+  <rect x="469" y="185" width="10" height="90" rx="2" fill="#6d28d9" opacity="0.75"/>
+  <rect x="484" y="182" width="12" height="96" rx="2" fill="#5b21b6" opacity="0.85"/>
+  <rect x="501" y="180" width="12" height="100" rx="2" fill="#4c1d95" opacity="0.90"/>
+
+  <text x="470" y="300" text-anchor="middle" font-weight="bold" fill="#7c3aed" font-size="11">PLASMA H₂O</text>
+  <text x="470" y="314" text-anchor="middle" fill="#7c3aed" font-size="8.5">gradient de densité asymétrique</text>
+
+  <!-- Flèche gradient -->
+  <line x1="415" y1="325" x2="513" y2="325" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrGrad)"/>
+  <text x="420" y="338" font-size="8" fill="#7c3aed">nₑ faible</text>
+  <text x="490" y="338" font-size="8" fill="#4c1d95" font-weight="bold">nₑ fort</text>
+
+  <!-- 8 tubes Nixie (octogone simplifié) -->
+  <g opacity="0.7">
+    <circle cx="470" cy="158" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+    <circle cx="520" cy="175" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+    <circle cx="540" cy="220" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+    <circle cx="525" cy="268" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+    <circle cx="470" cy="288" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+    <circle cx="420" cy="268" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+    <circle cx="400" cy="220" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+    <circle cx="420" cy="175" r="4" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+  </g>
+  <text x="552" y="158" font-size="7.5" fill="#d97706">8× Nixie IN-13</text>
+  <text x="552" y="169" font-size="7.5" fill="#d97706">(carte de gradient)</text>
+
+  <!-- ═══ PENDULE DE TORSION ═══ -->
+  <!-- Fil de torsion -->
+  <line x1="370" y1="350" x2="370" y2="400" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="370" cy="350" r="3" fill="#475569"/>
+
+  <!-- Fléau -->
+  <rect x="250" y="395" width="240" height="12" rx="4" fill="#475569" stroke="#334155" stroke-width="1.5" filter="url(#sh2)"/>
+  <text x="370" y="385" text-anchor="middle" font-size="9" fill="#334155" font-weight="bold">PENDULE DE TORSION (CAVENDISH)</text>
+  <text x="370" y="375" text-anchor="middle" font-size="8" fill="#64748b">fil de torsion · d = 200 mm</text>
+
+  <!-- Chambre sur le fléau -->
+  <rect x="310" y="389" width="28" height="8" rx="2" fill="#94a3b8"/>
+  <text x="324" y="420" text-anchor="middle" font-size="7" fill="#475569">chambre</text>
+
+  <!-- Contrepoids -->
+  <rect x="430" y="389" width="28" height="8" rx="2" fill="#334155"/>
+  <text x="444" y="420" text-anchor="middle" font-size="7" fill="#475569">contrepoids</text>
+
+  <!-- ═══ FORCE ANOMALE (la question) ═══ -->
+  <line x1="200" y1="401" x2="148" y2="401" stroke="#059669" stroke-width="2.5" marker-end="url(#arrForce)"/>
+  <text x="110" y="397" text-anchor="start" font-size="10" font-weight="bold" fill="#059669">F = ?</text>
+
+  <line x1="540" y1="401" x2="590" y2="401" stroke="#059669" stroke-width="2.5" marker-end="url(#arrForce)"/>
+
+  <!-- Encadré question -->
+  <rect x="595" y="385" width="145" height="35" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="667" y="400" text-anchor="middle" font-size="9" font-weight="bold" fill="#065f46">Force nette F ≠ 0 ?</text>
+  <text x="667" y="413" text-anchor="middle" font-size="8" fill="#059669">→ laser + PSD mesure</text>
+
+  <!-- ═══ LÉGENDE ═══ -->
+  <rect x="100" y="440" width="620" height="30" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="130" cy="455" r="5" fill="#ef4444"/><text x="140" y="459" font-size="8.5" fill="#334155">Magnétron (source RF)</text>
+  <circle cx="280" cy="455" r="5" fill="#a855f7"/><text x="290" y="459" font-size="8.5" fill="#334155">Plasma H₂O (gradient ∇nₑ)</text>
+  <circle cx="450" cy="455" r="5" fill="#f59e0b"/><text x="460" y="459" font-size="8.5" fill="#334155">Nixie IN-13 (diagnostic)</text>
+  <circle cx="610" cy="455" r="5" fill="#059669"/><text x="620" y="459" font-size="8.5" fill="#334155">Force mesurée</text>
+</svg>
